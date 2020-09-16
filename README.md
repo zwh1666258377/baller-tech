@@ -17,7 +17,7 @@ $ yarn start
 Start the backend dev server
 
 ```bash
-$ node server.js
+$ node server/app.js
 ```
 
 Open localhost:7001

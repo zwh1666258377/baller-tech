@@ -1,16 +1,17 @@
 const Koa = require('koa');
 const compress = require('koa-compress');
 const mount = require('koa-mount');
+const { postTranslate } = require('./lib/translation');
+const bodyParser = require('koa-bodyparser');
 const cors = require('koa2-cors');
 const { join, extname } = require('path');
 const { parseCookie, parseNavLang } = require('./serverHelper');
-
 const isDev = process.env.NODE_ENV === 'development';
-
-const root = join(__dirname, 'dist');
+const root = join(__dirname, '../dist');
 
 const app = new Koa();
-// app.use(cors());
+app.use(cors());
+app.use(bodyParser());
 app.use(
   compress({
     threshold: 2048,
@@ -18,15 +19,26 @@ app.use(
   }),
 );
 
+app.use(async (ctx, next) => {
+  if (ctx.request.path === '/translate') {
+    const { str } = ctx.request.body;
+    const res = await postTranslate(str);
+    ctx.body = res;
+  } else {
+    await next();
+  }
+});
+
 let render;
 app.use(async (ctx, next) => {
   global._cookies = parseCookie(ctx);
   global._navigatorLang = parseNavLang(ctx);
 
   const ext = extname(ctx.request.path);
+
   if (!ext) {
     if (!render) {
-      render = require('./dist/umi.server');
+      render = require('../dist/umi.server');
     }
     ctx.type = 'text/html';
     ctx.status = 200;
@@ -45,26 +57,6 @@ app.use(async (ctx, next) => {
   } else {
     await next();
   }
-});
-
-app.use(async(ctx)=>{
-    // 从request 中接收get请求
-    let url = ctx.url;
-    let request = ctx.request;
-    let req_query = request.query;
-    let req_queryString = request.querystring;
-
-    // 从上下文中ctx 直接获取get请求
-    let ctx_query = ctx.query;
-    let ctx_querystring = ctx.querystring;
-
-    ctx.body = {
-        url,
-        req_query,
-        req_queryString,
-        ctx_query,
-        ctx_querystring,
-    }
 });
 
 app.use(mount('/', require('koa-static')(root)));
