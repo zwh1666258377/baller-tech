@@ -21,8 +21,8 @@ app.use(
 
 app.use(async (ctx, next) => {
   if (ctx.request.path === '/translate') {
-    const { str } = ctx.request.body;
-    const res = await postTranslate(str);
+    const { str, language } = ctx.request.body;
+    const res = await postTranslate({ str, language });
     ctx.body = res;
   } else {
     await next();
