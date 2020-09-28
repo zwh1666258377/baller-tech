@@ -9,6 +9,7 @@
 
 # production
 /dist
+/server-dist
 
 # misc
 .DS_Store
