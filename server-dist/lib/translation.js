@@ -1,5 +1,12 @@
-import request from 'request';
-import md5 from 'md5';
+'use strict';
+var __importDefault =
+  (this && this.__importDefault) ||
+  function(mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, '__esModule', { value: true });
+const request_1 = __importDefault(require('request'));
+const md5_1 = __importDefault(require('md5'));
 const { v4: uuidv4 } = require('uuid');
 function getGMTdate() {
   const timezone = 0;
@@ -31,7 +38,7 @@ function postTranslate(args) {
       request_id: uuidv4(),
       language,
     });
-    request(
+    request_1.default(
       {
         url: 'http://api.baller-tech.com/v1/service/v1/mt',
         method: 'POST',
@@ -40,7 +47,7 @@ function postTranslate(args) {
           'B-AppId': app_id,
           'B-CurTime': date,
           'B-Param': BParam,
-          'B-CheckSum': md5(`${app_key}${date}${BParam}`),
+          'B-CheckSum': md5_1.default(`${app_key}${date}${BParam}`),
         },
         body: JSON.stringify(str),
       },
@@ -54,14 +61,14 @@ function postTranslate(args) {
               const BParam = generateBase64Params({
                 request_id,
               });
-              request(
+              request_1.default(
                 {
                   url: 'http://api.baller-tech.com/v1/service/v1/mt',
                   headers: {
                     'B-AppId': app_id,
                     'B-CurTime': date,
                     'B-Param': BParam,
-                    'B-CheckSum': md5(`${app_key}${date}${BParam}`),
+                    'B-CheckSum': md5_1.default(`${app_key}${date}${BParam}`),
                   },
                 },
                 function(error, response, body) {
@@ -82,4 +89,3 @@ function postTranslate(args) {
 module.exports = {
   postTranslate,
 };
-//# sourceMappingURL=translation.js.map

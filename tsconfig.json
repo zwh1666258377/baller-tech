@@ -7,7 +7,6 @@
     "jsx": "react",
     "esModuleInterop": true,
     "sourceMap": true,
-    "outDir": "server-dist",
     "baseUrl": "./",
     "strict": true,
     "paths": {
@@ -19,7 +18,6 @@
   },
   "include": [
     "mock/**/*",
-    "server/**/*",
     "src/**/*",
     "config/**/*",
     ".umirc.ts",

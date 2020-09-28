@@ -1,4 +1,7 @@
-export function setAccessControlAllowHeaders(app) {
+'use strict';
+Object.defineProperty(exports, '__esModule', { value: true });
+exports.setAccessControlAllowHeaders = void 0;
+function setAccessControlAllowHeaders(app) {
   app.all('*', function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Credentials', 'true');
@@ -8,4 +11,4 @@ export function setAccessControlAllowHeaders(app) {
     next();
   });
 }
-//# sourceMappingURL=accessControlAllowOrigin.js.map
+exports.setAccessControlAllowHeaders = setAccessControlAllowHeaders;

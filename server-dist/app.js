@@ -1,23 +1,30 @@
-import mongoose from 'mongoose';
-import express from 'express';
-import createError from 'http-errors';
-import cookieParser from 'cookie-parser';
-import logger from 'morgan';
-import bodyParser from 'body-parser';
+'use strict';
+var __importDefault =
+  (this && this.__importDefault) ||
+  function(mod) {
+    return mod && mod.__esModule ? mod : { default: mod };
+  };
+Object.defineProperty(exports, '__esModule', { value: true });
+const mongoose_1 = __importDefault(require('mongoose'));
+const express_1 = __importDefault(require('express'));
+const http_errors_1 = __importDefault(require('http-errors'));
+const cookie_parser_1 = __importDefault(require('cookie-parser'));
+const morgan_1 = __importDefault(require('morgan'));
+const body_parser_1 = __importDefault(require('body-parser'));
 // import Schema from './schema';
-import session from 'express-session';
-import connectMongo from 'connect-mongo';
+const express_session_1 = __importDefault(require('express-session'));
+const connect_mongo_1 = __importDefault(require('connect-mongo'));
 // import { WhiteList } from './auth/auth';
-import { setAccessControlAllowHeaders } from './lib/accessControlAllowOrigin';
-import path from 'path';
-const MongoStore = connectMongo(session);
+const accessControlAllowOrigin_1 = require('./lib/accessControlAllowOrigin');
+const path_1 = __importDefault(require('path'));
+const MongoStore = connect_mongo_1.default(express_session_1.default);
 class App {
   constructor() {
-    this.app = express();
+    this.app = express_1.default();
     this.catchWarning = () => {
       // catch 404 and forward to error handler
       this.app.use(function(req, res, next) {
-        next(createError(404));
+        next(http_errors_1.default(404));
       });
       // error handler
       this.app.use(function(err, req, res, next) {
@@ -31,28 +38,32 @@ class App {
     };
     this.setStatic = () => {
       // 后端静态文件目录
-      this.app.use(express.static(path.join(__dirname, '../../public')));
+      this.app.use(
+        express_1.default.static(
+          path_1.default.join(__dirname, '../../public'),
+        ),
+      );
     };
     this.setMiddleWares = () => {
-      this.app.use(logger('dev'));
-      this.app.use(cookieParser());
-      this.app.use(bodyParser.json({ limit: '10mb' }));
+      this.app.use(morgan_1.default('dev'));
+      this.app.use(cookie_parser_1.default());
+      this.app.use(body_parser_1.default.json({ limit: '10mb' }));
       this.app.use(
-        bodyParser.urlencoded({
+        body_parser_1.default.urlencoded({
           limit: '10mb',
           extended: true,
           parameterLimit: 50000,
         }),
       );
       this.app.use(
-        session({
+        express_session_1.default({
           secret: 'superPotatoes',
           resave: true,
           saveUninitialized: true,
           rolling: true,
           cookie: { maxAge: 1000 * 60 * 60 * 24 * 365 },
           store: new MongoStore({
-            mongooseConnection: mongoose.connection,
+            mongooseConnection: mongoose_1.default.connection,
           }),
         }),
       );
@@ -89,7 +100,7 @@ class App {
       // }));
     };
     this.connectDb = () => {
-      mongoose
+      mongoose_1.default
         .connect('mongodb://root:123456@localhost/eatSaas?authSource=admin', {
           useCreateIndex: true,
           useNewUrlParser: true,
@@ -100,7 +111,7 @@ class App {
     // connect db
     this.connectDb();
     // 设置允许跨域
-    setAccessControlAllowHeaders(this.app);
+    accessControlAllowOrigin_1.setAccessControlAllowHeaders(this.app);
     // set middle ware
     this.setMiddleWares();
     // set routes
@@ -111,5 +122,4 @@ class App {
     this.catchWarning();
   }
 }
-export default new App().app;
-//# sourceMappingURL=app.js.map
+exports.default = new App().app;
