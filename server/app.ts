@@ -116,6 +116,7 @@ class App {
       .connect('mongodb://root:123456@localhost/eatSaas?authSource=admin', {
         useCreateIndex: true,
         useNewUrlParser: true,
+        useUnifiedTopology: true,
       })
       .then(() => console.log('MongoDB connected, compile Successed!'))
       .catch(err => console.log(err));

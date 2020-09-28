@@ -8,6 +8,9 @@ export default defineConfig({
   ssr: {
     devServerRender: false,
   },
+  polyfill: {
+    imports: [],
+  },
   locale: {
     default: 'zh-CN',
     antd: false,

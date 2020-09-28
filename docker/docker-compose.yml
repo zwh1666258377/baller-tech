@@ -7,7 +7,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - /usr/local/db:/data/db
+      - ${DB_DATA_PATH}
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: 123456

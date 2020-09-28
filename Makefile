@@ -1,5 +1,8 @@
-run:
+run server:
 	npx nodemon
+
+run client:
+	npm start
 
 initmongodata:
 	sudo mkdir /usr/local/mongodb
