@@ -30,6 +30,7 @@ app.use(async (ctx, next) => {
     }
     ctx.type = 'text/html';
     ctx.status = 200;
+
     const { html, error } = await render({
       path: ctx.request.url,
       mode: 'stream',

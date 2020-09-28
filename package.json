@@ -1,8 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "start": "concurrently \"npx umi dev\" \"node client-server.js\"",
-    "build": "umi build",
+    "dev": "cross-env UMI_UI=none concurrently \"npx umi dev\" \"node client-server.js\"",
+    "start": "npx umi build && npx umi start",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
@@ -40,6 +40,7 @@
     "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.5",
     "core-js": "^3.6.5",
+    "cross-env": "^7.0.2",
     "express": "^4.17.1",
     "express-graphql": "^0.11.0",
     "express-session": "^1.17.1",

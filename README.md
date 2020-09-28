@@ -2,7 +2,16 @@
 
 ## Getting Started
 
-Install dependencies,
+Open the database
+
+```bash
+$ pushd docker > null
+$ echo DB_DATA_PATH=[data path]:/data/db > .env
+$ docker-compose up -d
+$ popd > null
+```
+
+In the root directory install dependencies
 
 ```bash
 $ yarn
@@ -11,13 +20,13 @@ $ yarn
 Start the frontend dev server
 
 ```bash
-$ yarn start
+$ yarn dev/start
 ```
 
 Start the backend dev server
 
 ```bash
-$ node server/app.js
+$ npx nodemon
 ```
 
 Open localhost:7001
