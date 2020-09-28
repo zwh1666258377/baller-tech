@@ -7,16 +7,19 @@
     "jsx": "react",
     "esModuleInterop": true,
     "sourceMap": true,
+    "outDir": "server-dist",
     "baseUrl": "./",
     "strict": true,
     "paths": {
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"]
     },
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false
   },
   "include": [
     "mock/**/*",
+    "server/**/*",
     "src/**/*",
     "config/**/*",
     ".umirc.ts",

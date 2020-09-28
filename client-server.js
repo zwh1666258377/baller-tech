@@ -1,13 +1,11 @@
 const Koa = require('koa');
 const compress = require('koa-compress');
 const mount = require('koa-mount');
-const { postTranslate } = require('./lib/translation');
 const bodyParser = require('koa-bodyparser');
 const cors = require('koa2-cors');
 const { join, extname } = require('path');
-const { parseCookie, parseNavLang } = require('./serverHelper');
 const isDev = process.env.NODE_ENV === 'development';
-const root = join(__dirname, '../dist');
+const root = join(__dirname, './dist');
 
 const app = new Koa();
 app.use(cors());
@@ -19,16 +17,6 @@ app.use(
   }),
 );
 
-app.use(async (ctx, next) => {
-  if (ctx.request.path === '/translate') {
-    const { str, language } = ctx.request.body;
-    const res = await postTranslate({ str, language });
-    ctx.body = res;
-  } else {
-    await next();
-  }
-});
-
 let render;
 app.use(async (ctx, next) => {
   global._cookies = parseCookie(ctx);
@@ -38,7 +26,7 @@ app.use(async (ctx, next) => {
 
   if (!ext) {
     if (!render) {
-      render = require('../dist/umi.server');
+      render = require('./dist/umi.server');
     }
     ctx.type = 'text/html';
     ctx.status = 200;
@@ -61,7 +49,36 @@ app.use(async (ctx, next) => {
 
 app.use(mount('/', require('koa-static')(root)));
 
-app.listen(7001);
-console.log('http://localhost:7001');
+app.listen(7001, () => {
+  console.log('http://localhost:7001');
+});
+
+const parseCookie = ctx => {
+  let cookies = ctx.get('cookie');
+  if (!cookies) {
+    return [];
+  }
+  cookies = cookies.split(';');
+  const res = {};
+  for (const item of cookies) {
+    const kv = item.split('=');
+    if (kv && kv.length > 0) {
+      res[kv[0].trim()] = decodeURIComponent(kv[1]);
+    }
+  }
+  return res;
+};
+
+const parseNavLang = ctx => {
+  // 服务端无法获取navigator.language，所以只能通过Accept-Language来判断浏览器语言。
+  let navigatorLang;
+  const clientLang = ctx.get('Accept-Language');
+  if (clientLang.startsWith('zh')) {
+    navigatorLang = 'zh-CN';
+  } else if (clientLang.startsWith('en')) {
+    navigatorLang = 'en-US';
+  }
+  return navigatorLang;
+};
 
 module.exports = app.callback();

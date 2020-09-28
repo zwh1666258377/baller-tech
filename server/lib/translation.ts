@@ -1,5 +1,6 @@
-const request = require('request');
-const md5 = require('md5');
+import request from 'request';
+import md5 from 'md5';
+
 const { v4: uuidv4 } = require('uuid');
 
 function getGMTdate() {
@@ -24,7 +25,7 @@ const app_id = '1195647985144299542';
 const app_key = '96fc9324d6b855eb81a912a3c51f7ebb';
 
 function generateBase64Params(obj) {
-  return new Buffer.from(JSON.stringify(obj)).toString('base64');
+  return Buffer.from(JSON.stringify(obj)).toString('base64');
 }
 
 function postTranslate(args) {
