@@ -4,7 +4,7 @@
     "module": "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */,
     "lib": ["esnext.asynciterable"],
     "sourceMap": false /* Generates corresponding '.map' file. */,
-    "outDir": "../server-dist" /* Redirect output structure to the directory. */,
+    "outDir": "./dist" /* Redirect output structure to the directory. */,
     "composite": true /* Enable project compilation */,
     "strict": true /* Enable all strict type-checking options. */,
     "noImplicitAny": false /* Raise error on expressions and declarations with an implied 'any' type. */,
@@ -20,5 +20,5 @@
     "types": []
   },
   "include": ["./**/*"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }

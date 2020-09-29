@@ -1,6 +1,6 @@
 module.exports = function(grunt) {
   grunt.registerTask('clean_dist', function() {
-    grunt.file.delete('server-dist');
+    grunt.file.delete('/server/dist');
   });
 
   grunt.registerTask('clean_logs', function() {

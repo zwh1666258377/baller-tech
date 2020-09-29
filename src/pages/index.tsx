@@ -56,16 +56,12 @@ export default () => {
 
   return (
     <div>
-      <p style={{ textAlign: 'center' }}>
-        <Title>
-          {originStr}:{loading ? '翻译中...' : translationStr}
-        </Title>
-        <div style={{ marginBottom: '8px' }}>
-          <Button onClick={() => translate('chs-tib')}>
-            把‘您好’翻译为藏文
-          </Button>
-        </div>
-      </p>
+      <Title>
+        {originStr}:{loading ? '翻译中...' : translationStr}
+      </Title>
+      <div style={{ marginBottom: '8px' }}>
+        <Button onClick={() => translate('chs-tib')}>把‘您好’翻译为藏文</Button>
+      </div>
     </div>
   );
 };
