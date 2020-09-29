@@ -29,5 +29,5 @@ Start the backend dev server
 $ yarn server
 ```
 
-Open localhost:7001
+Open localhost:8000!
 
