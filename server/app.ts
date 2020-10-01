@@ -1,4 +1,3 @@
-import graphqlHTTP from 'express-graphql';
 import mongoose from 'mongoose';
 import express from 'express';
 import createError from 'http-errors';
@@ -11,6 +10,7 @@ import connectMongo from 'connect-mongo';
 // import { WhiteList } from './auth/auth';
 import { setAccessControlAllowHeaders } from './lib/accessControlAllowOrigin';
 import path from 'path';
+import { test } from './api/test';
 const MongoStore = connectMongo(session);
 
 class App {
@@ -94,21 +94,7 @@ class App {
   };
 
   setRoutes = () => {
-    // this.app.use('/api/graphiql', graphqlHTTP((req: any, res: any) => {
-    //     const { permission } = req.session
-    //     const query = req.query.query || req.body.query;
-    //     if (query && query.length > 2000) {
-    //         throw new Error('Query too large.');
-    //     }
-    //     return {
-    //         schema: Schema,
-    //         graphiql: (isArray(permission) ? permission : []).includes('root'),
-    //         rootValue: {
-    //             req,
-    //             res
-    //         }
-    //     }
-    // }));
+    test(this.app);
   };
 
   connectDb = () => {

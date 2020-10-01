@@ -17,6 +17,7 @@ const connect_mongo_1 = __importDefault(require('connect-mongo'));
 // import { WhiteList } from './auth/auth';
 const accessControlAllowOrigin_1 = require('./lib/accessControlAllowOrigin');
 const path_1 = __importDefault(require('path'));
+const test_1 = require('./api/test');
 const MongoStore = connect_mongo_1.default(express_session_1.default);
 class App {
   constructor() {
@@ -83,21 +84,7 @@ class App {
       // })
     };
     this.setRoutes = () => {
-      // this.app.use('/api/graphiql', graphqlHTTP((req: any, res: any) => {
-      //     const { permission } = req.session
-      //     const query = req.query.query || req.body.query;
-      //     if (query && query.length > 2000) {
-      //         throw new Error('Query too large.');
-      //     }
-      //     return {
-      //         schema: Schema,
-      //         graphiql: (isArray(permission) ? permission : []).includes('root'),
-      //         rootValue: {
-      //             req,
-      //             res
-      //         }
-      //     }
-      // }));
+      test_1.test(this.app);
     };
     this.connectDb = () => {
       mongoose_1.default
