@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import { Button, Spin, Typography } from 'antd';
 const { Title } = Typography;
 
@@ -21,7 +21,7 @@ const { Title } = Typography;
 //   { label: "中文翻译为韩文", language: "chs-kor" },
 // ]
 
-export default () => {
+export default ({ children }) => {
   const originStr = '您好';
   const [translationStr, setTranslationStr] = React.useState('');
   const [loading, setLoading] = React.useState(false);
@@ -55,13 +55,15 @@ export default () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ border: '1px solid blue' }}>
       <Title>
         {originStr}:{loading ? '翻译中...' : translationStr}
       </Title>
       <div style={{ marginBottom: '8px' }}>
         <Button onClick={() => translate('chs-tib')}>把‘您好’翻译为藏文</Button>
       </div>
+      <br />
+      {children}
     </div>
   );
 };

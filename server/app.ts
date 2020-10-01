@@ -1,16 +1,18 @@
-import graphqlHTTP from 'express-graphql';
 import mongoose from 'mongoose';
 import express from 'express';
 import createError from 'http-errors';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
+import { resolve } from 'path';
 // import Schema from './schema';
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
 // import { WhiteList } from './auth/auth';
 import { setAccessControlAllowHeaders } from './lib/accessControlAllowOrigin';
 import path from 'path';
+import { updateModule } from './api/update-module';
+import { getModule } from './api/get-module';
 const MongoStore = connectMongo(session);
 
 class App {
@@ -93,22 +95,16 @@ class App {
     // })
   };
 
+  setViewsDir = () => {
+    // 设置模版引擎跟目录
+    this.app.set('views', resolve('./views'));
+    // 设置模版引擎类型
+    this.app.set('view engine', 'ejs');
+  };
+
   setRoutes = () => {
-    // this.app.use('/api/graphiql', graphqlHTTP((req: any, res: any) => {
-    //     const { permission } = req.session
-    //     const query = req.query.query || req.body.query;
-    //     if (query && query.length > 2000) {
-    //         throw new Error('Query too large.');
-    //     }
-    //     return {
-    //         schema: Schema,
-    //         graphiql: (isArray(permission) ? permission : []).includes('root'),
-    //         rootValue: {
-    //             req,
-    //             res
-    //         }
-    //     }
-    // }));
+    updateModule(this.app);
+    getModule(this.app);
   };
 
   connectDb = () => {
@@ -118,7 +114,10 @@ class App {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       })
-      .then(() => console.log('MongoDB connected, compile Successed!'))
+      .then(() => {
+        console.log('MongoDB connected, compile Successed!');
+        // modify uer password with env!!!
+      })
       .catch(err => console.log(err));
   };
 }
