@@ -114,7 +114,10 @@ class App {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       })
-      .then(() => console.log('MongoDB connected, compile Successed!'))
+      .then(() => {
+        console.log('MongoDB connected, compile Successed!');
+        // modify uer password with env!!!
+      })
       .catch(err => console.log(err));
   };
 }
