@@ -4,6 +4,7 @@ import createError from 'http-errors';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
+import { resolve } from 'path';
 // import Schema from './schema';
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
@@ -11,6 +12,7 @@ import connectMongo from 'connect-mongo';
 import { setAccessControlAllowHeaders } from './lib/accessControlAllowOrigin';
 import path from 'path';
 import { test } from './api/test';
+import { test2 } from './api/test2';
 const MongoStore = connectMongo(session);
 
 class App {
@@ -93,8 +95,16 @@ class App {
     // })
   };
 
+  setViewsDir = () => {
+    // 设置模版引擎跟目录
+    this.app.set('views', resolve('./views'));
+    // 设置模版引擎类型
+    this.app.set('view engine', 'ejs');
+  };
+
   setRoutes = () => {
     test(this.app);
+    test2(this.app);
   };
 
   connectDb = () => {
