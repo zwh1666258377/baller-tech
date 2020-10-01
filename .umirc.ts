@@ -7,6 +7,10 @@ export default defineConfig({
   },
   routes: [
     {
+      path: '/admin',
+      component: '@/pages/admin/index',
+    },
+    {
       path: '/',
       component: '@/pages/index',
       routes: [{ path: '/test', component: '@/pages/api-test' }],
