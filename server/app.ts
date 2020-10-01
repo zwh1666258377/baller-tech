@@ -11,8 +11,8 @@ import connectMongo from 'connect-mongo';
 // import { WhiteList } from './auth/auth';
 import { setAccessControlAllowHeaders } from './lib/accessControlAllowOrigin';
 import path from 'path';
-import { test } from './api/test';
-import { test2 } from './api/test2';
+import { updateModule } from './api/update-module';
+import { getModule } from './api/get-module';
 const MongoStore = connectMongo(session);
 
 class App {
@@ -103,8 +103,8 @@ class App {
   };
 
   setRoutes = () => {
-    test(this.app);
-    test2(this.app);
+    updateModule(this.app);
+    getModule(this.app);
   };
 
   connectDb = () => {

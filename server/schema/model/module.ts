@@ -24,6 +24,10 @@ interface Module {
     };
   };
   usageScenarios: {
+    title: {
+      cn: string;
+      en: string;
+    };
     imgUrls: string[];
   };
 }
