@@ -6,7 +6,7 @@ Open the database
 
 ```bash
 $ pushd docker > null
-$ echo DB_DATA_PATH=[data path]:/data/db > .env # set your local database data path
+$ echo DB_DATA_PATH=[本地数据库路径例如 /user/local/data (请确保目录存在)]:/data/db > .env # set your local database data path
 $ docker-compose up -d
 $ popd > null
 ```
@@ -29,5 +29,5 @@ Start the backend dev server
 $ yarn server
 ```
 
-Open localhost:7001
+Open localhost:8000!
 
