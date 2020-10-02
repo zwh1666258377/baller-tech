@@ -2,17 +2,25 @@ import mongoose from 'mongoose';
 import express from 'express';
 import createError from 'http-errors';
 import cookieParser from 'cookie-parser';
+import { sha1 } from 'utility';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
 import { resolve } from 'path';
-// import Schema from './schema';
+import { WhiteList } from './auth';
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
-// import { WhiteList } from './auth/auth';
 import { setAccessControlAllowHeaders } from './lib/accessControlAllowOrigin';
 import path from 'path';
 import { updateModule } from './api/update-module';
 import { getModule } from './api/get-module';
+import dotenv from 'dotenv';
+import { UserSchema } from './schema/model/user';
+import { login } from './api/login';
+import { logout } from './api/logout';
+import { authCheck } from './api/check';
+
+dotenv.config('../.env' as any);
+
 const MongoStore = connectMongo(session);
 
 class App {
@@ -68,7 +76,7 @@ class App {
     );
     this.app.use(
       session({
-        secret: 'superPotatoes', //加密字符串也可以写数组
+        secret: 'ballerTech', //加密字符串也可以写数组
         resave: true, //强制保存session 建议设置成false
         saveUninitialized: true, //强制保存未初始化的内容
         rolling: true, //动态刷新页面cookie存放时间
@@ -78,21 +86,19 @@ class App {
         }),
       }),
     );
-    // this.app.use((req, res, next) => {
-    //     const Req = req as any;
+    this.app.use((req, res, next) => {
+      const Req = req as any;
 
-    //     if (!!Req.session.sessionId || WhiteList(req.path)) {
-    //         next()
-    //     } else {
-    //         res.json({
-    //             data: {
-    //                 status: 'error',
-    //                 subKind: 'not_logged_in',
-    //                 msg: "抱歉，您尚未登录，暂无访问权限。"
-    //             }
-    //         })
-    //     }
-    // })
+      if (!!Req.session.sessionId || WhiteList(req.path)) {
+        next();
+      } else {
+        res.json({
+          status: 'error',
+          subKind: 'not_logged_in',
+          msg: '抱歉，您尚未登录，暂无访问权限。',
+        });
+      }
+    });
   };
 
   setViewsDir = () => {
@@ -105,18 +111,42 @@ class App {
   setRoutes = () => {
     updateModule(this.app);
     getModule(this.app);
+    login(this.app);
+    logout(this.app);
+    authCheck(this.app);
   };
 
   connectDb = () => {
     mongoose
-      .connect('mongodb://root:123456@localhost/eatSaas?authSource=admin', {
+      .connect('mongodb://root:123456@localhost/ballerTech?authSource=admin', {
         useCreateIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true,
       })
-      .then(() => {
-        console.log('MongoDB connected, compile Successed!');
-        // modify uer password with env!!!
+      .then(async r => {
+        console.log('MongoDB connected, compile successed!');
+        const user = {
+          account: 'root',
+          password: '123456',
+        };
+        if (!!process.env?.USER_ACCOUNT && !!process.env?.USER_PASSWORD) {
+          user.account = process.env?.USER_ACCOUNT;
+          user.password = process.env?.USER_PASSWORD;
+        }
+        const count = await UserSchema.countDocuments({});
+
+        if (count > 0) {
+          await r.connection.db.dropCollection('users');
+        }
+
+        await UserSchema.create({
+          account: user.account,
+          password: sha1(user.password),
+        });
+
+        console.log('User init successed!');
+        console.log(`Account:${user.account}`);
+        console.log(`Password:${user.password}`);
       })
       .catch(err => console.log(err));
   };

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Layout, Menu } from 'antd';
+import { Button, Layout, Menu } from 'antd';
 import { Link, useHistory, useParams } from 'umi';
 
 const { Header, Content, Sider } = Layout;
@@ -30,8 +30,25 @@ export default ({ children }) => {
 
   return (
     <Layout style={{ height: '100vh' }}>
-      <Header>
+      <Header
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
         <div style={{ color: '#fff' }}>Baller Tech</div>
+        <Button
+          type="link"
+          onClick={() =>
+            fetch('/api/logout', { method: 'POST' }).then(() =>
+              location.reload(),
+            )
+          }
+        >
+          退出登录
+        </Button>
       </Header>
       <Layout style={{ display: 'flex', flexDirection: 'row' }}>
         <Sider width={200}>

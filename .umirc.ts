@@ -14,22 +14,17 @@ export default defineConfig({
   },
   routes: [
     {
+      path: '/admin/login',
+      component: '@/pages/admin/login',
+    },
+    {
       path: '/admin',
       component: '@/pages/admin/index',
+      wrappers: ['@/pages/auth/check'],
       routes: [
         {
           path: '/admin/jqfy',
           component: '@/pages/admin/jqfy',
-        },
-      ],
-    },
-    {
-      path: '/',
-      component: '@/pages/index',
-      routes: [
-        {
-          path: '/test',
-          component: '@/pages/api-test',
         },
       ],
     },
