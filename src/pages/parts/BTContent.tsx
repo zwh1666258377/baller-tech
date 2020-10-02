@@ -3,6 +3,7 @@ import React from 'react';
 import { useHistory } from 'umi';
 import { Module } from '../common/Module';
 import ProductIntro from '../modules/ProductIntro';
+import Translator from '../modules/Translator';
 import UsageScenarios from '../modules/UsageScenarios';
 
 const Content = Layout.Content;
@@ -19,7 +20,7 @@ const BTContent = (props: Props) => {
   React.useEffect(() => {}, []);
 
   return (
-    <div style={{ padding: 24 }}>
+    <div style={{ padding: '90px 180px 100px 70px' }}>
       {
         // module?.poductIntroduction &&
         <ProductIntro />
@@ -28,6 +29,7 @@ const BTContent = (props: Props) => {
         // module?.usageScenarios &&
         <UsageScenarios style={{ marginTop: 115 }} />
       }
+      {<Translator />}
     </div>
   );
 };

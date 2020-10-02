@@ -51,7 +51,10 @@ const BTFooter = () => {
               { label: '文字识别', url: '' },
               { label: '图像识别和目标检测', url: '' },
             ].map(d => (
-              <span style={{ marginRight: 110, whiteSpace: 'nowrap' }}>
+              <span
+                key={d.label}
+                style={{ marginRight: 110, whiteSpace: 'nowrap' }}
+              >
                 {d.label}
               </span>
             ))}
@@ -65,7 +68,10 @@ const BTFooter = () => {
               { label: '荣誉资质', url: '' },
               { label: '联系我们', url: '' },
             ].map(d => (
-              <span style={{ marginRight: 110, whiteSpace: 'nowrap' }}>
+              <span
+                key={d.label}
+                style={{ marginRight: 110, whiteSpace: 'nowrap' }}
+              >
                 {d.label}
               </span>
             ))}
