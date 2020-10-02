@@ -1,6 +1,7 @@
 const filterList = [
   '/api/login',
   '/api/get-module',
+  '/api/auth/check',
   '/api/img/list',
   '/static',
 ];

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, Input, Button, Checkbox, message } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { useHistory } from 'umi';
 
 const layout = {
