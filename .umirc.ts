@@ -26,6 +26,10 @@ export default defineConfig({
           path: '/admin/jqfy',
           component: '@/pages/admin/jqfy',
         },
+        {
+          path: '/admin/resources',
+          component: '@/pages/admin/resources',
+        },
       ],
     },
   ],

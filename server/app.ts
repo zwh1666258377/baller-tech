@@ -14,10 +14,14 @@ import path from 'path';
 import { updateModule } from './api/update-module';
 import { getModule } from './api/get-module';
 import dotenv from 'dotenv';
+import { authCheck } from './api/check';
+import { uploadImg } from './api/upload-img';
+import { imgList } from './api/img-list';
 import { UserSchema } from './schema/model/user';
 import { login } from './api/login';
 import { logout } from './api/logout';
-import { authCheck } from './api/check';
+import { getFile } from './api/get-file';
+import { removeImg } from './api/remove-img';
 
 dotenv.config('../.env' as any);
 
@@ -60,7 +64,7 @@ class App {
 
   setStatic = () => {
     // 后端静态文件目录
-    this.app.use(express.static(path.join(__dirname, '../../public')));
+    this.app.use('/static', express.static(path.resolve('static')));
   };
 
   setMiddleWares = () => {
@@ -113,7 +117,11 @@ class App {
     getModule(this.app);
     login(this.app);
     logout(this.app);
+    getFile(this.app);
+    removeImg(this.app);
     authCheck(this.app);
+    uploadImg(this.app);
+    imgList(this.app);
   };
 
   connectDb = () => {

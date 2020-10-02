@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Button, Layout, Menu } from 'antd';
-import { Link, useHistory, useParams } from 'umi';
+import { Link, useHistory, useLocation, useParams } from 'umi';
 
 const { Header, Content, Sider } = Layout;
 
@@ -8,6 +8,10 @@ const siders = [
   {
     key: 'jqfy',
     name: '机器翻译',
+  },
+  {
+    key: 'resources',
+    name: '资源管理',
   },
 ];
 
@@ -19,14 +23,22 @@ const generateSiderPath = (siderKey: string) => {
 
 export default ({ children }) => {
   const defaultTab = siders[0].key;
-  const { tab } = useParams<{ tab: string }>();
   const history = useHistory();
+  const location = useLocation();
+  const [tabKey, setTabKey] = React.useState('');
 
   React.useEffect(() => {
-    if (!tab || !siders.map(({ key }) => key).includes(tab)) {
-      history.push(generateSiderPath(defaultTab));
+    const matchSider = siders.find(({ key }) => {
+      return location.pathname.startsWith(generateSiderPath(key));
+    });
+
+    if (!matchSider) {
+      setTabKey(tabKey);
+      history.push(generateSiderPath(tabKey));
+    } else {
+      setTabKey(matchSider.key);
     }
-  }, [tab]);
+  }, [location.pathname]);
 
   return (
     <Layout style={{ height: '100vh' }}>
@@ -42,9 +54,9 @@ export default ({ children }) => {
         <Button
           type="link"
           onClick={() =>
-            fetch('/api/logout', { method: 'POST' }).then(() =>
-              location.reload(),
-            )
+            fetch('/api/logout', { method: 'POST' }).then(() => {
+              window?.location.reload();
+            })
           }
         >
           退出登录
@@ -54,7 +66,7 @@ export default ({ children }) => {
         <Sider width={200}>
           <Menu
             mode="inline"
-            defaultSelectedKeys={[tab || siders[0].key]}
+            selectedKeys={[tabKey]}
             style={{ height: '100%', borderRight: 0 }}
           >
             {siders.map(({ key, name }) => {
