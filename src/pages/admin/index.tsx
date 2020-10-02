@@ -4,7 +4,7 @@ import { Link, useHistory, useLocation, useParams } from 'umi';
 
 const { Header, Content, Sider } = Layout;
 
-const siders = [
+export const siders = [
   {
     key: 'jqfy',
     name: '机器翻译',
