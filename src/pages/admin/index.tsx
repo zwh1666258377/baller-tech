@@ -10,8 +10,32 @@ export const siders = [
     name: '机器翻译',
   },
   {
+    key: 'yysb',
+    name: '语音识别',
+  },
+  {
+    key: 'yyhc',
+    name: '语音合成',
+  },
+  {
+    key: 'wzsb',
+    name: '文字识别',
+  },
+  {
+    key: 'txsb',
+    name: '图像识别',
+  },
+  {
+    key: 'ljwm',
+    name: '了解我们',
+  },
+  {
     key: 'resources',
     name: '资源管理',
+  },
+  {
+    key: 'website',
+    name: '网站配置',
   },
 ];
 

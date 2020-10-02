@@ -22,6 +22,8 @@ import { login } from './api/login';
 import { logout } from './api/logout';
 import { getFile } from './api/get-file';
 import { removeImg } from './api/remove-img';
+import { getWebsite } from './api/get-website';
+import { updateWebsite } from './api/update-website';
 
 dotenv.config('../.env' as any);
 
@@ -122,6 +124,8 @@ class App {
     authCheck(this.app);
     uploadImg(this.app);
     imgList(this.app);
+    getWebsite(this.app);
+    updateWebsite(this.app);
   };
 
   connectDb = () => {

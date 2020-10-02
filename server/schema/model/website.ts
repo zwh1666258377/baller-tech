@@ -4,15 +4,13 @@ const Schema = mongoose.Schema;
 const Types = Schema.Types;
 
 interface Website {
+  kind: string;
   icon: string;
   companyName: {
     cn: string;
     en: string;
   };
-  info: Array<{
-    label: string;
-    value: string;
-  }>;
+  info: string[];
   icp: string;
   slogan: {
     main: string;
@@ -29,6 +27,9 @@ interface Website {
 }
 
 const websiteSchema = new Schema({
+  kind: {
+    type: Types.String,
+  },
   icon: {
     type: Types.String,
   },
@@ -39,12 +40,7 @@ const websiteSchema = new Schema({
     },
   },
   info: {
-    type: [
-      {
-        label: Types.String,
-        value: Types.String,
-      },
-    ],
+    type: [Types.String],
   },
   icp: {
     type: Types.String,
