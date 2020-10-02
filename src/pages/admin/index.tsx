@@ -30,12 +30,12 @@ export const siders = [
     name: '了解我们',
   },
   {
-    key: 'resources',
-    name: '资源管理',
-  },
-  {
     key: 'website',
     name: '网站配置',
+  },
+  {
+    key: 'resources',
+    name: '资源管理',
   },
 ];
 
