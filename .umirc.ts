@@ -14,8 +14,13 @@ export default defineConfig({
   },
   routes: [
     {
+      path: '/admin/login',
+      component: '@/pages/admin/login',
+    },
+    {
       path: '/admin',
       component: '@/pages/admin/index',
+      wrappers: ['@/pages/auth/check'],
       routes: [
         {
           path: '/admin/jqfy',
@@ -39,8 +44,8 @@ export default defineConfig({
       component: '@/pages/index',
       routes: [
         {
-          path: '/test',
-          component: '@/pages/api-test',
+          path: '/admin/resources',
+          component: '@/pages/admin/resources',
         },
       ],
     },
