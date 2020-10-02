@@ -1,5 +1,4 @@
 import React from 'react';
-import { Col, Row } from 'antd';
 import BTFooter from './parts/BTFooter';
 import { useHistory, IGetInitialProps } from 'umi';
 import BTContent from './parts/BTContent';
@@ -12,40 +11,38 @@ interface Props {
 
 const Details = (props: Props) => {
   const h = useHistory();
-
+  const kind = props.kind || '';
   return (
-    <Row>
-      <Col span={6}>
-        <div
-          style={{
-            overflow: 'auto',
-            height: '100vh',
-            backgroundColor: Colors.btBackground,
+    <div style={{ minWidth: 1200, display: 'flex', flexDirection: 'row' }}>
+      <div
+        style={{
+          overflow: 'auto',
+          height: '100vh',
+          backgroundColor: Colors.btColor,
+          width: '20%',
+          minWidth: 210,
+        }}
+      >
+        <BTSider
+          kind={props.kind}
+          onTabChange={kind => {
+            h.push(`/d/${kind}`);
           }}
-        >
-          <BTSider
-            kind={props.kind}
-            onTabChange={kind => {
-              h.push(`/d/${kind}`);
-            }}
-          />
-        </div>
-      </Col>
-      <Col span={18}>
-        <div style={{ overflow: 'auto', height: '100vh' }}>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-            }}
-          >
-            <BTContent kind={props.kind} />
-            <BTFooter />
-          </div>
-        </div>
-      </Col>
-    </Row>
+        />
+      </div>
+      <div style={{ width: '80%', overflow: 'auto', height: '100vh' }}>
+        {/* <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}
+        > */}
+        <BTContent kind={props.kind} />
+        <BTFooter />
+        {/* </div> */}
+      </div>
+    </div>
   );
 };
 

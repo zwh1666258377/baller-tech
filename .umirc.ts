@@ -24,36 +24,23 @@ export default defineConfig({
       ],
     },
     {
+      path: '/d',
+      routes: [
+        { path: '/d/jqfy', component: '@/pages/Details' },
+        { path: '/d/yysb', component: '@/pages/Details' },
+        { path: '/d/yyhc', component: '@/pages/Details' },
+        { path: '/d/wzsb', component: '@/pages/Details' },
+        { path: '/d/txsbhmbjc', component: '@/pages/Details' },
+        { path: '/d/ljwm', component: '@/pages/Details' },
+      ],
+    },
+    {
       path: '/',
       component: '@/pages/index',
       routes: [
         {
           path: '/test',
           component: '@/pages/api-test',
-        },
-        {
-          path: '/d/jqfy',
-          component: '@/pages/Details',
-        },
-        {
-          path: '/d/yysb',
-          component: '@/pages/Details',
-        },
-        {
-          path: '/d/yyhc',
-          component: '@/pages/Details',
-        },
-        {
-          path: '/d/wzsb',
-          component: '@/pages/Details',
-        },
-        {
-          path: '/d/txsbhmbjc',
-          component: '@/pages/Details',
-        },
-        {
-          path: '/d/ljwm',
-          component: '@/pages/Details',
         },
       ],
     },
