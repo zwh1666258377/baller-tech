@@ -2,8 +2,9 @@ import { Layout } from 'antd';
 import React from 'react';
 import { useHistory } from 'umi';
 import { Module } from '../common/Module';
+import ImageTranslator from '../modules/ImageTranslator';
 import ProductIntro from '../modules/ProductIntro';
-import Translator from '../modules/Translator';
+import Translator from '../modules/TextTranslator';
 import UsageScenarios from '../modules/UsageScenarios';
 
 const Content = Layout.Content;
@@ -30,6 +31,8 @@ const BTContent = (props: Props) => {
         <UsageScenarios style={{ marginTop: 115 }} />
       }
       {<Translator />}
+      <br />
+      {<ImageTranslator />}
     </div>
   );
 };
