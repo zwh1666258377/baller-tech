@@ -45,6 +45,7 @@ const BTSider = (props: Props) => {
             const active = props.kind === t.kind;
             return (
               <div
+                key={t.kind}
                 style={{
                   cursor: 'pointer',
                   display: 'flex',
