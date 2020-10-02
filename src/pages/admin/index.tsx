@@ -22,7 +22,6 @@ const generateSiderPath = (siderKey: string) => {
 };
 
 export default ({ children }) => {
-  const defaultTab = siders[0].key;
   const history = useHistory();
   const location = useLocation();
   const [tabKey, setTabKey] = React.useState('');
