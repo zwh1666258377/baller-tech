@@ -9,7 +9,7 @@ import { resolve } from 'path';
 import { WhiteList } from './auth';
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
-import { setAccessControlAllowHeaders } from './lib/accessControlAllowOrigin';
+import { setAccessControlAllowHeaders } from './lib/access-control-allow-origin';
 import path from 'path';
 import { updateModule } from './api/update-module';
 import { getModule } from './api/get-module';
@@ -22,6 +22,9 @@ import { login } from './api/login';
 import { logout } from './api/logout';
 import { getFile } from './api/get-file';
 import { removeImg } from './api/remove-img';
+import { getWebsite } from './api/get-website';
+import { updateWebsite } from './api/update-website';
+import { ballerTechJQFY } from './api/baller-tech-jqfy';
 
 dotenv.config('../.env' as any);
 
@@ -122,6 +125,10 @@ class App {
     authCheck(this.app);
     uploadImg(this.app);
     imgList(this.app);
+    getWebsite(this.app);
+    updateWebsite(this.app);
+    // Baller Tech API
+    ballerTechJQFY(this.app);
   };
 
   connectDb = () => {

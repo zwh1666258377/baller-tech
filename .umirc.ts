@@ -26,6 +26,34 @@ export default defineConfig({
           path: '/admin/jqfy',
           component: '@/pages/admin/jqfy',
         },
+        {
+          path: '/admin/yysb',
+          component: '@/pages/admin/yysb',
+        },
+        {
+          path: '/admin/yyhc',
+          component: '@/pages/admin/yyhc',
+        },
+        {
+          path: '/admin/wzsb',
+          component: '@/pages/admin/wzsb',
+        },
+        {
+          path: '/admin/txsb',
+          component: '@/pages/admin/txsb',
+        },
+        {
+          path: '/admin/ljwm',
+          component: '@/pages/admin/ljwm',
+        },
+        {
+          path: '/admin/resources',
+          component: '@/pages/admin/resources',
+        },
+        {
+          path: '/admin/website',
+          component: '@/pages/admin/website',
+        },
       ],
     },
     {
@@ -37,16 +65,6 @@ export default defineConfig({
         { path: '/d/wzsb', component: '@/pages/Details' },
         { path: '/d/txsbhmbjc', component: '@/pages/Details' },
         { path: '/d/ljwm', component: '@/pages/Details' },
-      ],
-    },
-    {
-      path: '/',
-      component: '@/pages/index',
-      routes: [
-        {
-          path: '/admin/resources',
-          component: '@/pages/admin/resources',
-        },
       ],
     },
   ],

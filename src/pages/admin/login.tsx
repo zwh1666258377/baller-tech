@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { Form, Input, Button, Checkbox, message } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { useHistory } from 'umi';
+import { siders } from './index';
 
 const layout = {
   labelCol: { span: 8 },
@@ -24,12 +25,11 @@ const Index = () => {
     })
       .then(r => r.json())
       .then(r => {
-        console.log(r);
         if (r?.status === 'error') {
           message.error(r?.msg);
         } else if (r?.status === 'ok') {
           message.success(r?.msg);
-          history.push('/admin');
+          history.push(`/admin/${siders[0]?.key}`);
         }
       });
   };

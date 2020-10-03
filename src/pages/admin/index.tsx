@@ -4,10 +4,34 @@ import { Link, useHistory, useLocation, useParams } from 'umi';
 
 const { Header, Content, Sider } = Layout;
 
-const siders = [
+export const siders = [
   {
     key: 'jqfy',
     name: '机器翻译',
+  },
+  {
+    key: 'yysb',
+    name: '语音识别',
+  },
+  {
+    key: 'yyhc',
+    name: '语音合成',
+  },
+  {
+    key: 'wzsb',
+    name: '文字识别',
+  },
+  {
+    key: 'txsb',
+    name: '图像识别',
+  },
+  {
+    key: 'ljwm',
+    name: '了解我们',
+  },
+  {
+    key: 'website',
+    name: '网站配置',
   },
   {
     key: 'resources',
@@ -22,7 +46,6 @@ const generateSiderPath = (siderKey: string) => {
 };
 
 export default ({ children }) => {
-  const defaultTab = siders[0].key;
   const history = useHistory();
   const location = useLocation();
   const [tabKey, setTabKey] = React.useState('');
