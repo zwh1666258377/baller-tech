@@ -7,15 +7,15 @@ const { Title, Text } = Typography;
 
 const Index = () => {
   const [form] = Form.useForm();
-  const [usageScenariosImgUrls, setUsageScenariosImgUrls] = React.useState<
-    string[]
-  >([]);
+  const [honor, setHonor] = React.useState<string[]>([]);
+  const [partne, setPartne] = React.useState<string[]>([]);
+  const [contact, setContact] = React.useState<string[]>([]);
   const [loading, setLoading] = React.useState(true);
 
   const submit = value => {
     setLoading(true);
     const data = {
-      kind: 'jqfy',
+      kind: 'ljwm',
       name: {
         cn: value['name-cn'],
         en: value['name-en'],
@@ -25,19 +25,28 @@ const Index = () => {
           cn: value['poduct-introduction-name-cn'],
           en: value['poduct-introduction-name-en'],
         },
-        imgUrl: value['poduct-introduction-img-url'],
         content: value['poduct-introduction-content'],
-        button: {
-          text: value['poduct-introduction-button-text'],
-          url: value['poduct-introduction-button-link'],
-        },
       },
-      usageScenarios: {
+      honor: {
+        title: {
+          cn: value['honor-name-cn'],
+          en: value['honor-name-en'],
+        },
+        imgUrls: honor,
+      },
+      partne: {
         title: {
           cn: value['usage-scenarios-name-cn'],
           en: value['usage-scenarios-name-en'],
         },
-        imgUrls: usageScenariosImgUrls,
+        imgUrls: partne,
+      },
+      contact: {
+        title: {
+          cn: value['usage-scenarios-name-cn'],
+          en: value['usage-scenarios-name-en'],
+        },
+        imgUrls: contact,
       },
     };
 
@@ -62,7 +71,7 @@ const Index = () => {
     fetch('/api/get-module', {
       method: 'POST',
       body: JSON.stringify({
-        kind: 'jqfy',
+        kind: 'ljwm',
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -75,15 +84,12 @@ const Index = () => {
           'name-en': r?.name?.en,
           'poduct-introduction-name-cn': r?.poductIntroduction?.title?.cn,
           'poduct-introduction-name-en': r?.poductIntroduction?.title?.cn,
-          'poduct-introduction-img-url': r?.poductIntroduction?.imgUrl,
           'poduct-introduction-content': r?.poductIntroduction?.content,
-          'poduct-introduction-button-text':
-            r?.poductIntroduction?.button?.text,
-          'poduct-introduction-button-link': r?.poductIntroduction?.button?.url,
-          'usage-scenarios-name-cn': r?.usageScenarios?.title?.cn,
-          'usage-scenarios-name-en': r?.usageScenarios?.title?.en,
         });
-        setUsageScenariosImgUrls(r?.usageScenarios?.imgUrls);
+
+        setHonor(r?.honor?.imgUrls);
+        setPartne(r?.partne?.imgUrls);
+        setContact(r?.contact?.imgUrls);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -109,26 +115,13 @@ const Index = () => {
         <Form.Item name="poduct-introduction-name-en" label="英文Title">
           <Input />
         </Form.Item>
-        <Form.Item name="poduct-introduction-img-url" label="图片">
-          <Input />
-        </Form.Item>
+
         <Form.Item name="poduct-introduction-content" label="内容">
           <TextArea />
         </Form.Item>
-        <Form.Item name="poduct-introduction-button-text" label="按钮文案">
-          <Input />
-        </Form.Item>
-        <Form.Item name="poduct-introduction-button-link" label="按钮链接">
-          <Input />
-        </Form.Item>
-        <Title level={3}>使用场景</Title>
-        <Form.Item name="usage-scenarios-name-cn" label="中文Title">
-          <Input />
-        </Form.Item>
-        <Form.Item name="usage-scenarios-name-en" label="英文Title">
-          <Input />
-        </Form.Item>
-        {usageScenariosImgUrls?.map((url, idx) => {
+
+        <Title level={3}>荣誉资质</Title>
+        {honor?.map((url, idx) => {
           return (
             <div key={idx} style={{ textAlign: 'center' }}>
               <Text key={idx} type="success">
@@ -136,7 +129,7 @@ const Index = () => {
               </Text>
               <DeleteOutlined
                 onClick={() => {
-                  setUsageScenariosImgUrls((urls = []) => {
+                  setHonor((urls = []) => {
                     return urls?.filter(i => i !== url);
                   });
                 }}
@@ -145,22 +138,110 @@ const Index = () => {
           );
         })}
         <div>
-          <Form.Item name="usage-scenarios-img-urls" label="展示图片链接">
+          <Form.Item name="honor-img-urls" label="展示图片链接">
             <Input
               suffix={
                 <Button
                   onClick={() => {
                     const currentInputUrl = form.getFieldValue(
-                      'usage-scenarios-img-urls',
+                      'honor-img-urls',
                     );
                     if (!currentInputUrl) {
                       return;
                     }
-                    setUsageScenariosImgUrls((urls = []) => {
+                    setHonor((urls = []) => {
                       return [...urls, currentInputUrl];
                     });
                     form.setFieldsValue({
-                      'usage-scenarios-img-urls': '',
+                      'honor-img-urls': '',
+                    });
+                  }}
+                >
+                  增加
+                </Button>
+              }
+            />
+          </Form.Item>
+        </div>
+
+        <Title level={3}>合作伙伴</Title>
+        {partne?.map((url, idx) => {
+          return (
+            <div key={idx} style={{ textAlign: 'center' }}>
+              <Text key={idx} type="success">
+                {url}
+              </Text>
+              <DeleteOutlined
+                onClick={() => {
+                  setPartne((urls = []) => {
+                    return urls?.filter(i => i !== url);
+                  });
+                }}
+              />
+            </div>
+          );
+        })}
+        <div>
+          <Form.Item name="partne-img-urls" label="展示图片链接">
+            <Input
+              suffix={
+                <Button
+                  onClick={() => {
+                    const currentInputUrl = form.getFieldValue(
+                      'partne-img-urls',
+                    );
+                    if (!currentInputUrl) {
+                      return;
+                    }
+                    setPartne((urls = []) => {
+                      return [...urls, currentInputUrl];
+                    });
+                    form.setFieldsValue({
+                      'partne-img-urls': '',
+                    });
+                  }}
+                >
+                  增加
+                </Button>
+              }
+            />
+          </Form.Item>
+        </div>
+
+        <Title level={3}>联系我们</Title>
+        {contact?.map((url, idx) => {
+          return (
+            <div key={idx} style={{ textAlign: 'center' }}>
+              <Text key={idx} type="success">
+                {url}
+              </Text>
+              <DeleteOutlined
+                onClick={() => {
+                  setContact((urls = []) => {
+                    return urls?.filter(i => i !== url);
+                  });
+                }}
+              />
+            </div>
+          );
+        })}
+        <div>
+          <Form.Item name="contact-img-urls" label="展示图片链接">
+            <Input
+              suffix={
+                <Button
+                  onClick={() => {
+                    const currentInputUrl = form.getFieldValue(
+                      'contact-img-urls',
+                    );
+                    if (!currentInputUrl) {
+                      return;
+                    }
+                    setContact((urls = []) => {
+                      return [...urls, currentInputUrl];
+                    });
+                    form.setFieldsValue({
+                      'contact-img-urls': '',
                     });
                   }}
                 >

@@ -11,6 +11,34 @@ interface Module {
     cn: string;
     en: string;
   };
+  companyIntroduction: {
+    title: {
+      cn: string;
+      en: string;
+    };
+    content: string;
+  };
+  honor: {
+    title: {
+      cn: string;
+      en: string;
+    };
+    imgUrls: string[];
+  };
+  partne: {
+    title: {
+      cn: string;
+      en: string;
+    };
+    imgUrls: string[];
+  };
+  contact: {
+    title: {
+      cn: string;
+      en: string;
+    };
+    imgUrls: string[];
+  };
   poductIntroduction: {
     title: {
       cn: string;
@@ -43,6 +71,42 @@ const moduleSchema = new Schema({
       en: Types.String,
     },
     required: true,
+  },
+  honor: {
+    type: {
+      title: {
+        cn: Types.String,
+        en: Types.String,
+      },
+      imgUrls: [Types.String],
+    },
+  },
+  contact: {
+    type: {
+      title: {
+        cn: Types.String,
+        en: Types.String,
+      },
+      imgUrls: [Types.String],
+    },
+  },
+  partne: {
+    type: {
+      title: {
+        cn: Types.String,
+        en: Types.String,
+      },
+      imgUrls: [Types.String],
+    },
+  },
+  companyIntroduction: {
+    type: {
+      title: {
+        cn: Types.String,
+        en: Types.String,
+      },
+      content: Types.String,
+    },
   },
   poductIntroduction: {
     type: {

@@ -1,8 +1,10 @@
 import * as React from 'react';
 
-import { Upload, Modal, Spin } from 'antd';
+import { Upload, Modal, Spin, Typography } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { UploadFile } from 'antd/lib/upload/interface';
+
+const { Paragraph } = Typography;
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -83,6 +85,9 @@ export default () => {
         onPreview={handlePreview}
         onChange={handleChange}
         onRemove={handleRemove}
+        iconRender={() => {
+          return <div>111</div>;
+        }}
         name="img"
       >
         {fileList.length >= 8 ? null : uploadButton}
@@ -94,6 +99,9 @@ export default () => {
         onCancel={handleCancel}
       >
         <img alt="example" style={{ width: '100%' }} src={previewImage} />
+        <Paragraph type="warning" copyable={{ text: previewImage }}>
+          点击右侧复制：{previewImage}
+        </Paragraph>
       </Modal>
     </Spin>
   );

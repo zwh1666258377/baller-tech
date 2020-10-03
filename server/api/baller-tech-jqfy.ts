@@ -1,7 +1,17 @@
 import request from 'request';
 import md5 from 'md5';
+import express from 'express';
+import { v4 as uuidv4 } from 'uuid';
+import { app_id, app_key } from '../lib/baller-tech-env';
 
-const { v4: uuidv4 } = require('uuid');
+export function ballerTechJQFY(app: ReturnType<typeof express>) {
+  app.post('/api/jqfy', async (req, res) => {
+    res.json({ a: '1' });
+    // const { str, language } = req.body;
+    // console.log(str, language)
+    // res.end();
+  });
+}
 
 function getGMTdate() {
   const timezone = 0;
@@ -19,10 +29,6 @@ function getGMTdate() {
   const dateStr = `${week}, ${day} ${month} ${year} ${date} GMT`;
   return dateStr;
 }
-
-const org_id = '1178599239699136513';
-const app_id = '1195647985144299542';
-const app_key = '96fc9324d6b855eb81a912a3c51f7ebb';
 
 function generateBase64Params(obj) {
   return Buffer.from(JSON.stringify(obj)).toString('base64');
@@ -86,6 +92,3 @@ function postTranslate(args) {
     );
   });
 }
-module.exports = {
-  postTranslate,
-};

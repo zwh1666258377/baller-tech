@@ -15,7 +15,7 @@ const Index = () => {
   const submit = value => {
     setLoading(true);
     const data = {
-      kind: 'jqfy',
+      kind: 'txsb',
       name: {
         cn: value['name-cn'],
         en: value['name-en'],
@@ -62,7 +62,7 @@ const Index = () => {
     fetch('/api/get-module', {
       method: 'POST',
       body: JSON.stringify({
-        kind: 'jqfy',
+        kind: 'txsb',
       }),
       headers: {
         'Content-Type': 'application/json',
