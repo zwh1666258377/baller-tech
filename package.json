@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "umi dev",
+    "start": "HTTPS=1 umi dev",
     "build": "umi build",
     "server": "nodemon",
     "postinstall": "umi generate tmp",
