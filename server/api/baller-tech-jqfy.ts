@@ -6,10 +6,25 @@ import { app_id, app_key } from '../lib/baller-tech-env';
 
 export function ballerTechJQFY(app: ReturnType<typeof express>) {
   app.post('/api/jqfy', async (req, res) => {
-    res.json({ a: '1' });
-    // const { str, language } = req.body;
-    // console.log(str, language)
-    // res.end();
+    const { str, language } = req.body;
+    if (!str) {
+      res.json({
+        status: 'error',
+        msg: '翻译内容不得为空',
+      });
+    }
+    if (!language) {
+      res.json({
+        status: 'error',
+        msg: '目标语言不得为空',
+      });
+    }
+    const result = await postTranslate({ str, language });
+
+    res.json({
+      status: 'ok',
+      data: result,
+    });
   });
 }
 
