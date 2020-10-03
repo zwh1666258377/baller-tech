@@ -1,6 +1,6 @@
 import { Input, Select } from 'antd';
 import React from 'react';
-import { Colors } from '../common/Styles';
+import { Colors, Styles } from '../common/Styles';
 import MTitle from '../parts/MTitle';
 
 const Option = Select.Option;
@@ -86,15 +86,7 @@ const Translator = () => {
   return (
     <div>
       <MTitle label={{ cn: '产品体验', en: 'Product Experience' }} />
-      <div
-        style={{
-          marginTop: 52,
-          boxShadow: '0px 2px 6px 0px rgba(0, 0, 0, 0.4)',
-          backgroundColor: '#FFF',
-          width: '100%',
-          padding: 60,
-        }}
-      >
+      <div style={{ ...Styles.shadowCard, marginTop: 52 }}>
         <div
           style={{
             whiteSpace: 'nowrap',
