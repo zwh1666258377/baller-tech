@@ -1,7 +1,8 @@
 import { Select, Upload } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
 import React from 'react';
-import { rec } from '../common/Recorder';
+import { DynamicRec } from '../common/DynamicRec';
+import { Rec } from '../common/Recorder';
 import { Colors, Styles } from '../common/Styles';
 import MTitle from '../parts/MTitle';
 
@@ -26,13 +27,16 @@ const opts = [
 ];
 
 const AudioTranslator = () => {
+  const [rec, setRec] = React.useState<Rec>();
   const [fileList, setFileList] = React.useState<UploadFile[]>([]);
   const [lan, setLan] = React.useState(opts[0].key);
   const [audioSrc, setAudioSrc] = React.useState<string>();
+  const [audioBlob, setAudioBlob] = React.useState<Blob>();
   const [recording, setRecording] = React.useState<boolean>(false);
 
   return (
     <div>
+      <DynamicRec recRef={rec => setRec(rec)} />
       <MTitle label={{ cn: '产品体验', en: 'Product Experience' }} />
       <div
         style={{
@@ -78,15 +82,7 @@ const AudioTranslator = () => {
           >
             {!recording ? '录音识别' : '停止录音'}
           </div>
-          <Upload
-            accept=".mp3,.wav"
-            action=""
-            fileList={fileList}
-            showUploadList={{ showRemoveIcon: false }}
-            onChange={info => {
-              setFileList([info.file]);
-            }}
-          >
+          {audioSrc ? (
             <div
               style={{
                 fontSize: 16,
@@ -98,11 +94,38 @@ const AudioTranslator = () => {
                 marginTop: 8,
                 marginRight: 20,
               }}
-              onClick={() => {}}
+              onClick={() => {
+                alert('上传刚录的音频');
+              }}
             >
               上传音频
             </div>
-          </Upload>
+          ) : (
+            <Upload
+              accept=".mp3,.wav"
+              action=""
+              fileList={fileList}
+              showUploadList={{ showRemoveIcon: false }}
+              onChange={info => {
+                setFileList([info.file]);
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 16,
+                  color: '#FFF',
+                  backgroundColor: Colors.btColor,
+                  cursor: 'pointer',
+                  borderRadius: 25,
+                  padding: '8px 50px',
+                  marginTop: 8,
+                  marginRight: 20,
+                }}
+              >
+                上传音频
+              </div>
+            </Upload>
+          )}
           <div
             style={{
               fontSize: 16,
@@ -115,7 +138,11 @@ const AudioTranslator = () => {
               marginTop: 8,
               marginRight: 20,
             }}
-            onClick={() => {}}
+            onClick={() => {
+              rec?.stop();
+              setAudioBlob(undefined);
+              setAudioSrc(undefined);
+            }}
           >
             清除
           </div>
@@ -145,18 +172,13 @@ const AudioTranslator = () => {
 
   function handleRecord() {
     if (!recording) {
-      rec.open(() => {
-        rec.start();
+      rec?.open(() => {
+        rec?.start();
         setRecording(true);
       });
     } else {
-      rec.stop((blob, duration) => {
-        console.log(
-          '---',
-          blob,
-          (window.URL || webkitURL).createObjectURL(blob),
-          '时长:' + duration + 'ms',
-        );
+      rec?.stop(blob => {
+        setAudioBlob(blob);
         setAudioSrc((window.URL || webkitURL).createObjectURL(blob));
         setRecording(false);
       });
