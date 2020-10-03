@@ -8,10 +8,12 @@ export function getFile(app: ReturnType<typeof express>) {
     const doc = await ResourceSchema.findById(id);
     if (!!doc?.path) {
       const buff = fs.readFileSync(doc?.path);
-      res.set(
-        'Content-Disposition',
-        `attachment;filename=${doc?.originalname}`,
-      );
+
+      res.attachment(doc?.originalname);
+      // res.set(
+      //   'Content-Disposition',
+      //   `attachment;filename=${doc?.originalname}`,
+      // );
       res.end(buff);
     } else {
       res.end();
