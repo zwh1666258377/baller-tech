@@ -25,7 +25,6 @@ const Index = () => {
     })
       .then(r => r.json())
       .then(r => {
-        console.log(r);
         if (r?.status === 'error') {
           message.error(r?.msg);
         } else if (r?.status === 'ok') {

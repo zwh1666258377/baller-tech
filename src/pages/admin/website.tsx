@@ -65,7 +65,6 @@ const Index = () => {
     })
       .then(r => r.json())
       .then(r => {
-        console.log(r);
         form.setFieldsValue({
           icon: r?.icon,
           'company-name-cn': r?.companyName?.cn,
