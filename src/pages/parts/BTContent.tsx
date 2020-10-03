@@ -2,6 +2,7 @@ import { Layout } from 'antd';
 import React from 'react';
 import { useHistory } from 'umi';
 import { Module } from '../common/Module';
+import AudioTranslator from '../modules/AudioTranslator';
 import ImageTranslator from '../modules/ImageTranslator';
 import ProductIntro from '../modules/ProductIntro';
 import Translator from '../modules/TextTranslator';
@@ -22,6 +23,7 @@ const BTContent = (props: Props) => {
 
   return (
     <div style={{ padding: '90px 180px 100px 70px' }}>
+      {<AudioTranslator />}
       {
         // module?.poductIntroduction &&
         <ProductIntro />
