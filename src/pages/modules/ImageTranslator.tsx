@@ -2,6 +2,7 @@ import { Select, Upload } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
 import React from 'react';
 import { Colors, Styles } from '../common/Styles';
+import { useViewport } from '../common/ViewportContext';
 import MTitle from '../parts/MTitle';
 
 const Option = Select.Option;
@@ -20,10 +21,138 @@ const opts = [
 ];
 
 const ImageTranslator = () => {
+  const { width } = useViewport();
   const [lan, setLan] = React.useState(opts[0].key);
   const [fileList, setFileList] = React.useState<UploadFile[]>([]);
   const [preview, setPreview] = React.useState<string>();
   const [output, setOutput] = React.useState<string>();
+
+  if (width < 768) {
+    return (
+      <div>
+        <MTitle label={{ cn: '产品体验', en: 'Product Experience' }} />
+        <div
+          style={{
+            ...Styles.shadowCard,
+            display: 'flex',
+            flexDirection: 'column',
+            padding: 25,
+            marginTop: 30,
+          }}
+        >
+          <Select
+            size="large"
+            style={{ width: '100%' }}
+            value={lan}
+            onSelect={val => {
+              setLan(val);
+            }}
+          >
+            {opts.map(o => (
+              <Option key={o.key} value={o.key}>
+                {o.label}
+              </Option>
+            ))}
+          </Select>
+          <div
+            style={{
+              marginTop: 15,
+              overflow: 'auto',
+              color: '#888',
+              border: '1px solid #BBB',
+              height: 150,
+            }}
+          >
+            {!preview ? (
+              '请上传图片格式为 jpg、jpeg、bmp、png、gif、tif、tiff 的图片'
+            ) : (
+              <img
+                src={preview}
+                style={{ width: '100%', objectFit: 'contain' }}
+              />
+            )}
+          </div>
+          {output && (
+            <div
+              style={{
+                marginTop: 15,
+                overflow: 'auto',
+                color: '#888',
+                padding: 10,
+                border: '1px solid #BBB',
+                height: 150,
+              }}
+            >
+              {!output ? (
+                '识别内容显示区'
+              ) : (
+                <div style={{ color: '#333' }}>{output}</div>
+              )}
+            </div>
+          )}
+          <div
+            style={{
+              marginTop: 30,
+              display: 'flex',
+              justifyContent: 'space-between',
+            }}
+          >
+            <Upload
+              accept=".jpg,.jpeg,.bmp,.png,.gif,.tif,.tiff"
+              action=""
+              fileList={fileList}
+              showUploadList={false}
+              onChange={info => {
+                const file = info.file;
+                if (file.originFileObj) {
+                  setFileList([file]);
+                  getBase64(file.originFileObj).then(data => setPreview(data));
+                }
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer',
+                  height: 40,
+                  width: 130,
+                  borderRadius: 20,
+                  backgroundColor: Colors.btColor,
+                  color: '#FFF',
+                  marginRight: 15,
+                }}
+              >
+                上传图像
+              </div>
+            </Upload>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                height: 40,
+                width: 130,
+                borderRadius: 20,
+                backgroundColor: '#FFF',
+                color: '#333',
+                border: '1px solid #BBB',
+                marginLeft: 15,
+              }}
+              onClick={() => {
+                setFileList([]);
+                setPreview(undefined);
+              }}
+            >
+              清除
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -54,7 +183,7 @@ const ImageTranslator = () => {
             accept=".jpg,.jpeg,.bmp,.png,.gif,.tif,.tiff"
             action=""
             fileList={fileList}
-            showUploadList={{ showRemoveIcon: false }}
+            showUploadList={false}
             onChange={info => {
               const file = info.file;
               if (file.originFileObj) {
@@ -104,7 +233,6 @@ const ImageTranslator = () => {
             maxHeight: 250,
             overflow: 'auto',
             flex: 1,
-            padding: 10,
             color: '#888',
             border: '1px solid #BBB',
             margin: '0px 20px',

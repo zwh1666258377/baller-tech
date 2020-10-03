@@ -73,7 +73,7 @@ rules.forEach(r => {
   }
 });
 
-const Translator = () => {
+const TextTranslator = () => {
   const [inputVal, setInputVal] = React.useState<string>();
   const [outputVal, setOutputVal] = React.useState<string>();
   const [fromVal, setFromVal] = React.useState<string>(rules[0].from.key);
@@ -209,4 +209,4 @@ const Translator = () => {
   }
 };
 
-export default Translator;
+export default TextTranslator;

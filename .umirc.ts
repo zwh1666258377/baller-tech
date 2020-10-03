@@ -68,5 +68,16 @@ export default defineConfig({
         { path: '/d/ljwm', component: '@/pages/Details' },
       ],
     },
+    {
+      path: '/d-m',
+      routes: [
+        { path: '/d-m/jqfy', component: '@/pages/MDetails' },
+        { path: '/d-m/yysb', component: '@/pages/MDetails' },
+        { path: '/d-m/yyhc', component: '@/pages/MDetails' },
+        { path: '/d-m/wzsb', component: '@/pages/MDetails' },
+        { path: '/d-m/txsbhmbjc', component: '@/pages/MDetails' },
+        { path: '/d-m/ljwm', component: '@/pages/MDetails' },
+      ],
+    },
   ],
 });
