@@ -3,6 +3,7 @@ const filterList = [
   '/api/get-module',
   '/api/auth/check',
   '/api/img/list',
+  '/api/jqfy',
   '/static',
 ];
 
