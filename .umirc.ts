@@ -7,6 +7,7 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
+  headScripts: [`http://localhost:8080/static/recorder.mp3.min.js`],
   proxy: {
     '/api': {
       target: 'http://localhost:8080',

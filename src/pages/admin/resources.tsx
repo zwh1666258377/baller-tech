@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { Upload, Modal, Spin, Typography } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { Upload, Modal, Spin, Typography, Button } from 'antd';
+import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { UploadFile } from 'antd/lib/upload/interface';
 
-const { Paragraph } = Typography;
+const { Paragraph, Title, Text } = Typography;
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -19,7 +19,9 @@ export default () => {
   const [previewVisible, setPreviewVisible] = React.useState<boolean>(false);
   const [previewImage, setPreviewImage] = React.useState<string | undefined>();
   const [previewTitle, setPreviewTitle] = React.useState<string | undefined>();
-  const [fileList, setFileList] = React.useState<UploadFile<any>[]>([]);
+  const [imgList, setImgList] = React.useState<UploadFile<any>[]>([]);
+  const [mp3List, setMp3List] = React.useState<UploadFile<any>[]>([]);
+  const [mp4List, setMp4List] = React.useState<UploadFile<any>[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
   const handleCancel = () => setPreviewVisible(false);
   const uploadButton = (
@@ -40,8 +42,6 @@ export default () => {
     );
   };
 
-  const handleChange = ({ fileList }) => setFileList(fileList);
-
   React.useEffect(() => {
     reload();
   }, []);
@@ -51,7 +51,39 @@ export default () => {
     fetch('/api/img/list', { method: 'GET' })
       .then(r => r.json())
       .then(r => {
-        setFileList(
+        setImgList(
+          r?.map(item => ({
+            uid: item?._id,
+            name: item?.originalname,
+            status: 'done',
+            url: `/api/get/file?id=${item?._id}`,
+          })),
+        );
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+
+    fetch('/api/mp3/list', { method: 'GET' })
+      .then(r => r.json())
+      .then(r => {
+        setMp3List(
+          r?.map(item => ({
+            uid: item?._id,
+            name: item?.originalname,
+            status: 'done',
+            url: `/api/get/file?id=${item?._id}`,
+          })),
+        );
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+
+    fetch('/api/mp4/list', { method: 'GET' })
+      .then(r => r.json())
+      .then(r => {
+        setMp4List(
           r?.map(item => ({
             uid: item?._id,
             name: item?.originalname,
@@ -65,7 +97,7 @@ export default () => {
       });
   };
 
-  const handleRemove = (file: UploadFile<any>) => {
+  const removeImg = (file: UploadFile<any>) => {
     setLoading(true);
     fetch('/api/remove/img', {
       method: 'POST',
@@ -73,24 +105,62 @@ export default () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ id: file.uid }),
-    }).finally(() => setLoading(false));
+    }).finally(() => {
+      setLoading(false);
+      reload();
+    });
+  };
+
+  const removeMp3 = (file: UploadFile<any>) => {
+    setLoading(true);
+    fetch('/api/remove/mp3', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: file.uid }),
+    }).finally(() => {
+      setLoading(false);
+      reload();
+    });
+  };
+
+  const removeMp4 = (file: UploadFile<any>) => {
+    setLoading(true);
+    fetch('/api/remove/mp4', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: file.uid }),
+    }).finally(() => {
+      setLoading(false);
+      reload();
+    });
   };
 
   return (
     <Spin spinning={loading}>
+      <Title level={3}>图片</Title>
       <Upload
         action="/api/upload/img"
         listType="picture-card"
-        fileList={fileList}
+        fileList={imgList}
+        beforeUpload={f => {
+          return f?.type?.startsWith('image/');
+        }}
         onPreview={handlePreview}
-        onChange={handleChange}
-        onRemove={handleRemove}
+        onChange={({ fileList, event }) => {
+          console.log(event);
+          setImgList(fileList);
+        }}
+        onRemove={removeImg}
         iconRender={() => {
           return <div>111</div>;
         }}
         name="img"
       >
-        {fileList.length >= 8 ? null : uploadButton}
+        {imgList.length >= 8 ? null : uploadButton}
       </Upload>
       <Modal
         visible={previewVisible}
@@ -103,6 +173,66 @@ export default () => {
           点击右侧复制：{previewImage}
         </Paragraph>
       </Modal>
+      <Title level={3}>音频</Title>
+      <Upload
+        action="/api/upload/mp3"
+        fileList={[]}
+        beforeUpload={f => {
+          return f?.type?.startsWith('audio/');
+        }}
+        onChange={({ fileList }) => setMp3List(fileList)}
+        name="mp3"
+      >
+        <Button icon={<UploadOutlined />}>Upload</Button>
+      </Upload>
+      {mp3List?.map((item, idx) => {
+        const { name, url } = item;
+        return (
+          <div key={idx}>
+            <Text>{name}</Text>
+            <Text copyable={{ text: url }} />
+            <Text type="danger">
+              <span
+                style={{ cursor: 'pointer' }}
+                onClick={() => removeMp3(item)}
+              >
+                （删除）
+              </span>
+            </Text>
+          </div>
+        );
+      })}
+
+      <Title level={3}>视频</Title>
+      <Upload
+        action="/api/upload/mp4"
+        fileList={[]}
+        beforeUpload={f => {
+          return f?.type?.startsWith('video/');
+        }}
+        onChange={({ fileList }) => setMp4List(fileList)}
+        onRemove={removeMp4}
+        name="mp4"
+      >
+        <Button icon={<UploadOutlined />}>Upload</Button>
+      </Upload>
+      {mp4List?.map((item, idx) => {
+        const { name, url } = item;
+        return (
+          <div key={idx}>
+            <Text>{name}</Text>
+            <Text copyable={{ text: url }} />
+            <Text type="danger">
+              <span
+                style={{ cursor: 'pointer' }}
+                onClick={() => removeMp4(item)}
+              >
+                （删除）
+              </span>
+            </Text>
+          </div>
+        );
+      })}
     </Spin>
   );
 };

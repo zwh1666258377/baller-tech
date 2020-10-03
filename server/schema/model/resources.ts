@@ -11,10 +11,15 @@ interface Resources {
   destination: string;
   filename: string;
   path: string;
+  kind: string;
   size: number;
 }
 
 const resourcesSchema = new Schema({
+  kind: {
+    type: Types.String,
+    required: true,
+  },
   filename: {
     type: Types.String,
     required: true,

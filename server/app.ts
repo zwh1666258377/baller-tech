@@ -15,13 +15,13 @@ import { updateModule } from './api/update-module';
 import { getModule } from './api/get-module';
 import dotenv from 'dotenv';
 import { authCheck } from './api/check';
-import { uploadImg } from './api/upload-img';
-import { imgList } from './api/img-list';
+import { uploadImg, uploadMp3, uploadMp4 } from './api/upload-files';
+import { imgList, mp4List, mp3List } from './api/file-list';
 import { UserSchema } from './schema/model/user';
 import { login } from './api/login';
 import { logout } from './api/logout';
 import { getFile } from './api/get-file';
-import { removeImg } from './api/remove-img';
+import { removeImg, removeMp3, removeMp4 } from './api/remove-file';
 import { getWebsite } from './api/get-website';
 import { updateWebsite } from './api/update-website';
 import { ballerTechJQFY } from './api/baller-tech-jqfy';
@@ -121,10 +121,20 @@ class App {
     login(this.app);
     logout(this.app);
     getFile(this.app);
-    removeImg(this.app);
     authCheck(this.app);
+
+    removeImg(this.app);
+    removeMp3(this.app);
+    removeMp4(this.app);
+
     uploadImg(this.app);
+    uploadMp3(this.app);
+    uploadMp4(this.app);
+
     imgList(this.app);
+    mp3List(this.app);
+    mp4List(this.app);
+
     getWebsite(this.app);
     updateWebsite(this.app);
     // Baller Tech API
