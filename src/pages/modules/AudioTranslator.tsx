@@ -1,8 +1,7 @@
 import { Select, Upload } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
 import React from 'react';
-// import { DynamicRec } from '../common/DynamicRec';
-import { Rec } from '../common/Recorder';
+import { DynamicRec } from '../common/DynamicRec';
 import { Colors, Styles } from '../common/Styles';
 import MTitle from '../parts/MTitle';
 
@@ -27,7 +26,7 @@ const opts = [
 ];
 
 const AudioTranslator = () => {
-  const [rec, setRec] = React.useState<Rec>();
+  const [rec, setRec] = React.useState<any>();
   const [fileList, setFileList] = React.useState<UploadFile[]>([]);
   const [lan, setLan] = React.useState(opts[0].key);
   const [audioSrc, setAudioSrc] = React.useState<string>();
@@ -36,7 +35,7 @@ const AudioTranslator = () => {
 
   return (
     <div>
-      {/* <DynamicRec recRef={rec => setRec(rec)} /> */}
+      <DynamicRec recRef={rec => setRec(rec)} />
       <MTitle label={{ cn: '产品体验', en: 'Product Experience' }} />
       <div
         style={{
