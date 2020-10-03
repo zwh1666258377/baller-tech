@@ -75,7 +75,7 @@ function postTranslate(args) {
         if (!error && response.statusCode == 200) {
           const res = JSON.parse(body);
           if (!!res && res.code == 0) {
-            setTimeout(() => {
+            const timer = setTimeout(() => {
               const { request_id } = res;
               const date = getGMTdate();
               const BParam = generateBase64Params({
@@ -94,11 +94,12 @@ function postTranslate(args) {
                 },
                 function(error, response, body) {
                   if (!error && response.statusCode == 200) {
-                    resolve(body);
+                    resolve(unescape(body.replace(/\\u/g, '%u')));
                   }
+                  clearTimeout(timer);
                 },
               );
-            }, 2000);
+            }, 1000);
           } else {
             resolve(body);
           }
