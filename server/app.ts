@@ -25,6 +25,7 @@ import { removeImg, removeMp3, removeMp4 } from './api/remove-file';
 import { getWebsite } from './api/get-website';
 import { updateWebsite } from './api/update-website';
 import { ballerTechJQFY } from './api/baller-tech-jqfy';
+import { ballerTechYYSB } from './api/baller-tech-yysb';
 
 dotenv.config('../.env' as any);
 
@@ -116,12 +117,13 @@ class App {
   };
 
   setRoutes = () => {
-    updateModule(this.app);
-    getModule(this.app);
     login(this.app);
     logout(this.app);
-    getFile(this.app);
     authCheck(this.app);
+
+    getFile(this.app);
+    getModule(this.app);
+    updateModule(this.app);
 
     removeImg(this.app);
     removeMp3(this.app);
@@ -137,8 +139,10 @@ class App {
 
     getWebsite(this.app);
     updateWebsite(this.app);
+
     // Baller Tech API
     ballerTechJQFY(this.app);
+    ballerTechYYSB(this.app);
   };
 
   connectDb = () => {
