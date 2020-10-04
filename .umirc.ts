@@ -58,18 +58,21 @@ export default defineConfig({
       ],
     },
     {
-      path: '/d-m',
+      path: '/m',
+      component: '@/pages/h5/layout',
       routes: [
-        { path: '/d-m/jqfy', component: '@/pages/MDetails' },
-        { path: '/d-m/yysb', component: '@/pages/MDetails' },
-        { path: '/d-m/yyhc', component: '@/pages/MDetails' },
-        { path: '/d-m/wzsb', component: '@/pages/MDetails' },
-        { path: '/d-m/txsbhmbjc', component: '@/pages/MDetails' },
-        { path: '/d-m/ljwm', component: '@/pages/MDetails' },
+        { path: '/m/jqfy', component: '@/pages/h5/jqfy' },
+        { path: '/m/yysb', component: '@/pages/h5/yysb' },
+        { path: '/m/yyhc', component: '@/pages/h5/yyhc' },
+        { path: '/m/wzsb', component: '@/pages/h5/wzsb' },
+        { path: '/m/txsbhmbjc', component: '@/pages/h5/txsbhmbjc' },
+        { path: '/m/ljwm', component: '@/pages/h5/ljwm' },
+        { path: '/m', component: '@/pages/h5/home' },
       ],
     },
     {
       path: '/',
+      component: '@/pages/pc/layout',
       routes: [
         { path: '/jqfy', component: '@/pages/pc/JQFY' },
         { path: '/yysb', component: '@/pages/pc/YYSB' },
