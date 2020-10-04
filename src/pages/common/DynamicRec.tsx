@@ -45,7 +45,7 @@ export const DynamicRec: any = ({ recRef }: { recRef: (ref: any) => void }) => {
   React.useEffect(() => {
     recRef(rec);
     return () => {
-      rec.rec.close();
+      rec?.rec?.close();
     };
   }, []);
 
