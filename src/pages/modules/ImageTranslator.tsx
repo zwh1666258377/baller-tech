@@ -2,7 +2,6 @@ import { Select, Upload } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
 import React, { CSSProperties } from 'react';
 import { Colors, Styles } from '../common/Styles';
-import { useViewport } from '../common/ViewportContext';
 import MTitle from '../parts/MTitle';
 
 const Option = Select.Option;
@@ -22,16 +21,16 @@ const opts = [
 
 interface Props {
   style?: CSSProperties;
+  h5?: boolean;
 }
 
 const ImageTranslator = (props: Props) => {
-  const { width } = useViewport();
   const [lan, setLan] = React.useState(opts[0].key);
   const [fileList, setFileList] = React.useState<UploadFile[]>([]);
   const [preview, setPreview] = React.useState<string>();
   const [output, setOutput] = React.useState<string>();
 
-  if (width < 768) {
+  if (props?.h5) {
     return (
       <div style={props.style}>
         <MTitle
