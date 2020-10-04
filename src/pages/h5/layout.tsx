@@ -7,7 +7,7 @@ configResponsive({
 });
 
 export default ({ children }) => {
-  const { isPC } = useResponsive();
+  const isPC = useResponsive()?.isPC;
   const { push } = useHistory();
 
   React.useEffect(() => {
