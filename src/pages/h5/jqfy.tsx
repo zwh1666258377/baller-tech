@@ -6,7 +6,7 @@ import MTitle from '../parts/MTitle';
 const { Content } = Layout;
 const { Paragraph } = Typography;
 
-const MDetails = () => {
+const Index = () => {
   return (
     <div style={{ paddingBottom: '75px' }}>
       <div style={{ padding: '21px 16px' }}>
@@ -81,4 +81,4 @@ const MDetails = () => {
   );
 };
 
-export default MDetails;
+export default Index;
