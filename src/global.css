@@ -1,0 +1,22 @@
+.home_btn:hover {
+  box-shadow: 1px 1px 8px 0px rgba(200, 223, 247, 60);
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(50%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+.home_slogan {
+  font-size: 36px;
+  animation: 1s ease-in-out alternate slidein;
+}
+
+.home_sub_slogan {
+  font-size: 20px;
+  animation: 2s linear reverse both alternate slidein;
+}

@@ -7,13 +7,14 @@ interface Props {
     cn: string;
     en: string;
   };
+  color?: string;
 }
 
-const MTitle = ({ style = {}, label }: Props) => {
+const MTitle = ({ style = {}, label, color }: Props) => {
   return (
     <div style={{ fontSize: 22, ...style }}>
-      <span style={{ color: Colors.btColor }}>{`${label.cn} / `}</span>
-      <span style={{ color: '#C2C7CC' }}>{label.en}</span>
+      <span style={{ color: color || Colors.btColor }}>{`${label.cn} / `}</span>
+      <span style={{ color: color || '#C2C7CC' }}>{label.en}</span>
     </div>
   );
 };
