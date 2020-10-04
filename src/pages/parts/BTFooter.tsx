@@ -1,10 +1,11 @@
-import React from 'react';
-import { Layout } from 'antd';
+import React, { CSSProperties } from 'react';
 import { Colors } from '../common/Styles';
 
-const Footer = Layout.Footer;
+interface Props {
+  style?: CSSProperties;
+}
 
-const BTFooter = () => {
+const BTFooter = (props: Props) => {
   return (
     <div
       style={{
@@ -15,6 +16,7 @@ const BTFooter = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
+        ...props.style,
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
