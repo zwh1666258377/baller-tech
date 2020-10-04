@@ -59,7 +59,7 @@ const BTSider = (props: Props) => {
               >
                 <div
                   style={{
-                    fontSize: 18,
+                    fontSize: active ? 20 : 18,
                     padding: 20,
                     color: active ? '#FFF' : '#A4CCF7',
                   }}
@@ -106,7 +106,7 @@ async function fetchDashboard() {
     },
     {
       label: '图像识别和目标检测',
-      kind: 'txsbhmbjc',
+      kind: 'txsbmbjc',
     },
     {
       label: '了解我们',
