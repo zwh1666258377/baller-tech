@@ -92,10 +92,10 @@ const TextTranslator = (props: Props) => {
     return (
       <div style={props.style}>
         <MTitle
-          style={{ marginBottom: '20px' }}
+          style={{ marginBottom: '10px' }}
           label={{ cn: '产品体验', en: 'Product Experience' }}
         />
-        <div style={{ marginTop: 52 }}>
+        <div style={{ ...h5Styles.shadowCard, marginTop: 30 }}>
           <div
             style={{
               whiteSpace: 'nowrap',
@@ -131,52 +131,14 @@ const TextTranslator = (props: Props) => {
                 </Option>
               ))}
             </Select>
-            {/* <div style={{ display: 'flex', marginLeft: 48 }}>
-              <div
-                style={{
-                  fontSize: 16,
-                  color: '#FFF',
-                  backgroundColor: Colors.btColor,
-                  cursor: 'pointer',
-                  borderRadius: 25,
-                  padding: '8px 50px',
-                }}
-                onClick={() => {
-                  if (!allowKeys.includes(uploadKey)) {
-                    alert('暂时不支持' + uploadKey);
-                    return;
-                  }
-                  fetchTranslation().then(v => setOutputVal(v));
-                }}
-              >
-                翻译
-              </div>
-              <div
-                style={{
-                  marginLeft: 30,
-                  fontSize: 16,
-                  color: '#333',
-                  backgroundColor: '#FFF',
-                  cursor: 'pointer',
-                  borderRadius: 25,
-                  padding: '8px 50px',
-                  border: '1px solid #BBB',
-                }}
-                onClick={() => {
-                  setInputVal('');
-                  setOutputVal('');
-                }}
-              >
-                清除
-              </div>
-            </div> */}
           </div>
-          {/* <div style={{ marginTop: 48, display: 'flex' }}>
+          <div
+            style={{ marginTop: 24, display: 'flex', flexDirection: 'column' }}
+          >
             <div
               style={{
-                marginRight: 10,
                 flex: 1,
-                height: 168,
+                height: 128,
                 border: '1px solid #BBB',
               }}
             >
@@ -198,17 +160,66 @@ const TextTranslator = (props: Props) => {
             </div>
             <div
               style={{
+                flex: 1,
+                height: 128,
+                border: '1px solid #BBB',
                 fontSize: 16,
                 padding: 8,
-                marginLeft: 10,
-                flex: 1,
-                height: 168,
-                border: '1px solid #BBB',
+                marginTop: '16px',
               }}
             >
-              {outputVal || <span style={{ color: '#878787' }}>翻译结果</span>}
+              <div style={{ flex: 1, height: 128 }}>
+                {outputVal || (
+                  <span style={{ color: '#878787' }}>翻译结果</span>
+                )}
+              </div>
             </div>
-          </div> */}
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingTop: '20px',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 16,
+                  color: '#FFF',
+                  backgroundColor: Colors.btColor,
+                  cursor: 'pointer',
+                  borderRadius: 25,
+                  padding: '8px 60px',
+                }}
+                onClick={() => {
+                  if (!allowKeys.includes(uploadKey)) {
+                    alert('暂时不支持' + uploadKey);
+                    return;
+                  }
+                  fetchTranslation().then(v => setOutputVal(v));
+                }}
+              >
+                翻译
+              </div>
+              <div
+                style={{
+                  fontSize: 16,
+                  color: '#333',
+                  backgroundColor: '#FFF',
+                  cursor: 'pointer',
+                  borderRadius: 25,
+                  padding: '8px 60px',
+                  border: '1px solid #BBB',
+                }}
+                onClick={() => {
+                  setInputVal('');
+                  setOutputVal('');
+                }}
+              >
+                清除
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     );

@@ -8,7 +8,7 @@ const { Paragraph } = Typography;
 
 const MDetails = () => {
   return (
-    <div>
+    <div style={{ paddingBottom: '75px' }}>
       <div style={{ padding: '21px 16px' }}>
         <div
           style={{
@@ -21,7 +21,7 @@ const MDetails = () => {
         </div>
       </div>
       <Content style={{ padding: '0px 15px' }}>
-        <TextTranslator style={{ marginBottom: '64px' }} />
+        <TextTranslator h5 style={{ marginBottom: '64px' }} />
         <MTitle
           style={{ marginBottom: '20px' }}
           label={{ cn: '产品介绍', en: 'Product introduction' }}
