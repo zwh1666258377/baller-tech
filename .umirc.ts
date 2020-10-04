@@ -58,17 +58,6 @@ export default defineConfig({
       ],
     },
     {
-      path: '/d',
-      routes: [
-        { path: '/d/jqfy', component: '@/pages/pc/JQFY' },
-        { path: '/d/yysb', component: '@/pages/pc/YYSB' },
-        { path: '/d/yyhc', component: '@/pages/pc/YYHC' },
-        { path: '/d/wzsb', component: '@/pages/pc/WZSB' },
-        { path: '/d/txsbmbjc', component: '@/pages/pc/TXSBMBJC' },
-        { path: '/d/ljwm', component: '@/pages/pc/LJWM' },
-      ],
-    },
-    {
       path: '/d-m',
       component: '@/pages/h5/layout',
       routes: [
@@ -78,6 +67,18 @@ export default defineConfig({
         { path: '/d-m/wzsb', component: '@/pages/h5/wzsb' },
         { path: '/d-m/txsbhmbjc', component: '@/pages/h5/txsbhmbjc' },
         { path: '/d-m/ljwm', component: '@/pages/h5/ljwm' },
+      ],
+    },
+    {
+      path: '/',
+      routes: [
+        { path: '/jqfy', component: '@/pages/pc/JQFY' },
+        { path: '/yysb', component: '@/pages/pc/YYSB' },
+        { path: '/yyhc', component: '@/pages/pc/YYHC' },
+        { path: '/wzsb', component: '@/pages/pc/WZSB' },
+        { path: '/txsbmbjc', component: '@/pages/pc/TXSBMBJC' },
+        { path: '/ljwm', component: '@/pages/pc/LJWM' },
+        { path: '/', component: '@/pages/pc/Home' },
       ],
     },
   ],
