@@ -34,16 +34,11 @@ const ImageTranslator = (props: Props) => {
   if (width < 768) {
     return (
       <div style={props.style}>
-        <MTitle label={{ cn: '产品体验', en: 'Product Experience' }} />
-        <div
-          style={{
-            ...Styles.shadowCard,
-            display: 'flex',
-            flexDirection: 'column',
-            padding: 25,
-            marginTop: 30,
-          }}
-        >
+        <MTitle
+          style={{ marginBottom: '20px' }}
+          label={{ cn: '产品体验', en: 'Product Experience' }}
+        />
+        <div style={{ ...Styles.shadowCard, padding: '23px 25px' }}>
           <Select
             size="large"
             style={{ width: '100%' }}
@@ -58,7 +53,7 @@ const ImageTranslator = (props: Props) => {
               </Option>
             ))}
           </Select>
-          <div
+          {/* <div
             style={{
               marginTop: 15,
               overflow: 'auto',
@@ -93,8 +88,8 @@ const ImageTranslator = (props: Props) => {
                 <div style={{ color: '#333' }}>{output}</div>
               )}
             </div>
-          )}
-          <div
+          )} */}
+          {/* <div
             style={{
               marginTop: 30,
               display: 'flex',
@@ -152,7 +147,7 @@ const ImageTranslator = (props: Props) => {
             >
               清除
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     );
