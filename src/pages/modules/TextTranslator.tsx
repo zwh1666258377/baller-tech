@@ -1,7 +1,6 @@
 import { Input, Select } from 'antd';
 import React, { CSSProperties } from 'react';
 import { Colors, h5Styles, Styles } from '../common/Styles';
-import { useViewport } from '../common/ViewportContext';
 import MTitle from '../parts/MTitle';
 
 const Option = Select.Option;
@@ -76,10 +75,10 @@ rules.forEach(r => {
 
 interface Props {
   style?: CSSProperties;
+  h5?: boolean;
 }
 
 const TextTranslator = (props: Props) => {
-  const { width } = useViewport();
   const [inputVal, setInputVal] = React.useState<string>();
   const [outputVal, setOutputVal] = React.useState<string>();
   const [fromVal, setFromVal] = React.useState<string>(rules[0].from.key);
@@ -89,7 +88,7 @@ const TextTranslator = (props: Props) => {
     toVal,
   ]);
 
-  if (width < 768) {
+  if (props?.h5) {
     return (
       <div style={props.style}>
         <MTitle

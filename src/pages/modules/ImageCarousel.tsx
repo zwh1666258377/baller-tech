@@ -1,6 +1,5 @@
 import { Carousel, Col, Row } from 'antd';
 import React, { CSSProperties } from 'react';
-import { useViewport } from '../common/ViewportContext';
 import MTitle from '../parts/MTitle';
 
 const res = [
@@ -63,9 +62,7 @@ interface Props {
 }
 
 const ImageCarousel = (props: Props) => {
-  const { width } = useViewport();
-  const pageSize =
-    width < 1400 ? props.pageSize?.small || 2 : props.pageSize?.normal || 3;
+  const pageSize = props.pageSize?.normal || 3;
   const list = imgList(pageSize);
 
   return (
