@@ -78,15 +78,23 @@ const ImageCarousel = (props: Props) => {
           {list.map((l, i) => {
             return (
               <div key={i}>
-                <Row gutter={30}>
-                  {l.map(d => (
-                    <Col key={d.key} span={Math.floor(24 / pageSize)}>
-                      <img
-                        style={{ width: '100%', height: 'auto' }}
-                        src={d.url}
-                      />
-                    </Col>
-                  ))}
+                <Row>
+                  <div style={{ display: 'flex' }}>
+                    {l.map((d, i) => (
+                      <div
+                        key={d.key}
+                        style={{
+                          width: `${100 / pageSize}%`,
+                          marginRight: i != l.length - 1 ? 20 : 0,
+                        }}
+                      >
+                        <img
+                          style={{ width: '100%', height: 'auto' }}
+                          src={d.url}
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </Row>
               </div>
             );
