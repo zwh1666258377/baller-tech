@@ -1,8 +1,9 @@
 import { Select, Upload } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useRef } from 'react';
 import { Colors, Styles } from '../common/Styles';
 import MTitle from '../parts/MTitle';
+import { useSize } from 'ahooks';
 
 const Option = Select.Option;
 
@@ -29,10 +30,12 @@ const ImageTranslator = (props: Props) => {
   const [fileList, setFileList] = React.useState<UploadFile[]>([]);
   const [preview, setPreview] = React.useState<string>();
   const [output, setOutput] = React.useState<string>();
+  const btnContainer = useRef<any>();
+  const { width } = useSize(btnContainer.current);
 
   if (props?.h5) {
     return (
-      <div style={props.style}>
+      <div style={props.style} ref={btnContainer}>
         <MTitle
           style={{ marginBottom: '20px' }}
           label={{ cn: '产品体验', en: 'Product Experience' }}
@@ -52,13 +55,15 @@ const ImageTranslator = (props: Props) => {
               </Option>
             ))}
           </Select>
-          {/* <div
+          <div
             style={{
               marginTop: 15,
               overflow: 'auto',
               color: '#888',
               border: '1px solid #BBB',
               height: 150,
+              padding: '8px',
+              fontSize: '16px',
             }}
           >
             {!preview ? (
@@ -87,8 +92,8 @@ const ImageTranslator = (props: Props) => {
                 <div style={{ color: '#333' }}>{output}</div>
               )}
             </div>
-          )} */}
-          {/* <div
+          )}
+          <div
             style={{
               marginTop: 30,
               display: 'flex',
@@ -110,16 +115,17 @@ const ImageTranslator = (props: Props) => {
             >
               <div
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  display: 'inline-block',
                   cursor: 'pointer',
                   height: 40,
-                  width: 130,
+                  width: '130px',
+                  textAlign: 'center',
                   borderRadius: 20,
+                  lineHeight: '40px',
                   backgroundColor: Colors.btColor,
                   color: '#FFF',
-                  marginRight: 15,
+                  marginRight: 20,
+                  fontSize: '16px',
                 }}
               >
                 上传图像
@@ -127,17 +133,17 @@ const ImageTranslator = (props: Props) => {
             </Upload>
             <div
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                display: 'inline-block',
                 cursor: 'pointer',
                 height: 40,
-                width: 130,
+                width: '130px',
                 borderRadius: 20,
                 backgroundColor: '#FFF',
+                lineHeight: '40px',
+                textAlign: 'center',
                 color: '#333',
                 border: '1px solid #BBB',
-                marginLeft: 15,
+                fontSize: '16px',
               }}
               onClick={() => {
                 setFileList([]);
@@ -146,7 +152,7 @@ const ImageTranslator = (props: Props) => {
             >
               清除
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     );

@@ -23,6 +23,7 @@ export default () => {
   const [mp3List, setMp3List] = React.useState<UploadFile<any>[]>([]);
   const [mp4List, setMp4List] = React.useState<UploadFile<any>[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
+
   const handleCancel = () => setPreviewVisible(false);
   const uploadButton = (
     <div>
@@ -48,53 +49,46 @@ export default () => {
 
   const reload = () => {
     setLoading(true);
-    fetch('/api/img/list', { method: 'GET' })
-      .then(r => r.json())
-      .then(r => {
-        setImgList(
-          r?.map(item => ({
-            uid: item?._id,
-            name: item?.originalname,
-            status: 'done',
-            url: `/api/get/file?id=${item?._id}`,
-          })),
-        );
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-
-    fetch('/api/mp3/list', { method: 'GET' })
-      .then(r => r.json())
-      .then(r => {
-        setMp3List(
-          r?.map(item => ({
-            uid: item?._id,
-            name: item?.originalname,
-            status: 'done',
-            url: `/api/get/file?id=${item?._id}`,
-          })),
-        );
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-
-    fetch('/api/mp4/list', { method: 'GET' })
-      .then(r => r.json())
-      .then(r => {
-        setMp4List(
-          r?.map(item => ({
-            uid: item?._id,
-            name: item?.originalname,
-            status: 'done',
-            url: `/api/get/file?id=${item?._id}`,
-          })),
-        );
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    return Promise.all([
+      fetch('/api/img/list', { method: 'GET' })
+        .then(r => r.json())
+        .then(r => {
+          setImgList(
+            r?.map(item => ({
+              uid: item?._id,
+              name: item?.originalname,
+              status: 'done',
+              url: `/api/get/file?id=${item?._id}`,
+            })),
+          );
+        }),
+      fetch('/api/mp3/list', { method: 'GET' })
+        .then(r => r.json())
+        .then(r => {
+          setMp3List(
+            r?.map(item => ({
+              uid: item?._id,
+              name: item?.originalname,
+              status: 'done',
+              url: `/api/get/file?id=${item?._id}`,
+            })),
+          );
+        }),
+      fetch('/api/mp4/list', { method: 'GET' })
+        .then(r => r.json())
+        .then(r => {
+          setMp4List(
+            r?.map(item => ({
+              uid: item?._id,
+              name: item?.originalname,
+              status: 'done',
+              url: `/api/get/file?id=${item?._id}`,
+            })),
+          );
+        }),
+    ]).finally(() => {
+      setLoading(false);
+    });
   };
 
   const removeImg = (file: UploadFile<any>) => {
@@ -150,9 +144,10 @@ export default () => {
           return f?.type?.startsWith('image/');
         }}
         onPreview={handlePreview}
-        onChange={({ fileList, event }) => {
-          console.log(event);
-          setImgList(fileList);
+        onChange={({ event }) => {
+          if (event?.percent == 100) {
+            reload();
+          }
         }}
         onRemove={removeImg}
         iconRender={() => {
@@ -180,7 +175,11 @@ export default () => {
         beforeUpload={f => {
           return f?.type?.startsWith('audio/');
         }}
-        onChange={({ fileList }) => setMp3List(fileList)}
+        onChange={({ event }) => {
+          if (event?.percent == 100) {
+            reload();
+          }
+        }}
         name="mp3"
       >
         <Button icon={<UploadOutlined />}>Upload</Button>
@@ -210,7 +209,11 @@ export default () => {
         beforeUpload={f => {
           return f?.type?.startsWith('video/');
         }}
-        onChange={({ fileList }) => setMp4List(fileList)}
+        onChange={({ fileList, event }) => {
+          if (event?.percent == 100) {
+            reload();
+          }
+        }}
         onRemove={removeMp4}
         name="mp4"
       >

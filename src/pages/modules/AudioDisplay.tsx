@@ -18,9 +18,31 @@ const audioList = [
 
 interface Props {
   style?: CSSProperties;
+  h5?: boolean;
 }
 
 const AudioDisplay = (props: Props) => {
+  if (!!props.h5) {
+    return (
+      <div style={props.style}>
+        <MTitle label={{ cn: '产品展示', en: 'Product Display' }} />
+        <div style={{ marginTop: 24 }}>
+          <Row gutter={[30, 30]}>
+            {audioList.map(a => (
+              <Col key={a.label} span={24}>
+                <div style={{ marginLeft: 16, marginBottom: 8 }}>{a.label}</div>
+                <audio
+                  controls
+                  style={{ width: '100%', borderRadius: 0 }}
+                  src={a.url}
+                />
+              </Col>
+            ))}
+          </Row>
+        </div>
+      </div>
+    );
+  }
   return (
     <div style={props.style}>
       <MTitle label={{ cn: '产品展示', en: 'Product Display' }} />

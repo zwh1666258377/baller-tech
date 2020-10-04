@@ -10,9 +10,28 @@ const audioList = [
 
 interface Props {
   style?: CSSProperties;
+  h5?: boolean;
 }
 
 const VideoDisplay = (props: Props) => {
+  if (props?.h5) {
+    return (
+      <div style={props.style}>
+        <MTitle label={{ cn: '产品展示', en: 'Product Display' }} />
+        <div style={{ marginTop: 52 }}>
+          <Row gutter={[100, 35]}>
+            {audioList.map(a => (
+              <Col key={a.label} sm={24} xl={12}>
+                <video controls style={{ width: '100%', borderRadius: 0 }}>
+                  <source src={a.url} type="video/mp4" />
+                </video>
+              </Col>
+            ))}
+          </Row>
+        </div>
+      </div>
+    );
+  }
   return (
     <div style={props.style}>
       <MTitle label={{ cn: '产品展示', en: 'Product Display' }} />
