@@ -1,33 +1,35 @@
 import React from 'react';
+import { isBrowser } from 'umi';
 
-const viewportContext = React.createContext<{ width: number; height: number }>({
+const viewportContext = React.createContext<{ width: number }>({
   width: 0,
-  height: 0,
 });
 
+const defaultWidth = isBrowser() ? window.innerWidth : 1920;
+
 export const ViewportProvider = ({ children }) => {
-  // 顺带监听下高度，备用
-  const [width, setWidth] = React.useState(window.innerWidth);
-  const [height, setHeight] = React.useState(window.innerHeight);
+  const [width, setWidth] = React.useState(defaultWidth);
 
   const handleWindowResize = () => {
     setWidth(window.innerWidth);
-    setHeight(window.innerHeight);
   };
 
   React.useEffect(() => {
+    if (!isBrowser()) {
+      return;
+    }
     window.addEventListener('resize', handleWindowResize);
     return () => window.removeEventListener('resize', handleWindowResize);
   }, []);
 
   return (
-    <viewportContext.Provider value={{ width, height }}>
+    <viewportContext.Provider value={{ width }}>
       {children}
     </viewportContext.Provider>
   );
 };
 
 export const useViewport = () => {
-  const { width, height } = React.useContext(viewportContext);
-  return { width, height };
+  const { width } = React.useContext(viewportContext);
+  return { width };
 };

@@ -1,5 +1,5 @@
 import { Col, Row } from 'antd';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import MTitle from '../parts/MTitle';
 
 const audioList = [
@@ -16,12 +16,16 @@ const audioList = [
   { label: '蒙古语样音11', url: '' },
 ];
 
-const AudioDisplay = () => {
+interface Props {
+  style?: CSSProperties;
+}
+
+const AudioDisplay = (props: Props) => {
   return (
-    <div>
+    <div style={props.style}>
       <MTitle label={{ cn: '产品展示', en: 'Product Display' }} />
       <div style={{ marginTop: 52 }}>
-        <Row gutter={[10, 10]}>
+        <Row gutter={[30, 30]}>
           {audioList.map(a => (
             <Col key={a.label} sm={12} xl={8}>
               <div style={{ marginLeft: 16 }}>{a.label}</div>

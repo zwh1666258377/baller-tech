@@ -1,5 +1,5 @@
 import { Input, Select } from 'antd';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { Colors, Styles } from '../common/Styles';
 import MTitle from '../parts/MTitle';
 
@@ -73,7 +73,11 @@ rules.forEach(r => {
   }
 });
 
-const TextTranslator = () => {
+interface Props {
+  style?: CSSProperties;
+}
+
+const TextTranslator = (props: Props) => {
   const [inputVal, setInputVal] = React.useState<string>();
   const [outputVal, setOutputVal] = React.useState<string>();
   const [fromVal, setFromVal] = React.useState<string>(rules[0].from.key);
@@ -84,7 +88,7 @@ const TextTranslator = () => {
   ]);
 
   return (
-    <div>
+    <div style={props.style}>
       <MTitle label={{ cn: '产品体验', en: 'Product Experience' }} />
       <div style={{ ...Styles.shadowCard, marginTop: 52 }}>
         <div

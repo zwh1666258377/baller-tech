@@ -1,5 +1,5 @@
 import { Col, Row } from 'antd';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import MTitle from '../parts/MTitle';
 
 const imgList = [
@@ -20,10 +20,15 @@ const imgList = [
   },
 ];
 
-const ImageDisplay = () => {
+interface Props {
+  style?: CSSProperties;
+  label: { cn: string; en: string };
+}
+
+const ImageDisplay = (props: Props) => {
   return (
-    <div>
-      <MTitle label={{ cn: '产品展示', en: 'Product Display' }} />
+    <div style={props.style}>
+      <MTitle label={props.label} />
       <div style={{ marginTop: 52 }}>
         <Row gutter={[110, 55]}>
           {imgList.map(a => (

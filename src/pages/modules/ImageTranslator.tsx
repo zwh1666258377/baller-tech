@@ -1,6 +1,6 @@
 import { Select, Upload } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { Colors, Styles } from '../common/Styles';
 import { useViewport } from '../common/ViewportContext';
 import MTitle from '../parts/MTitle';
@@ -20,7 +20,11 @@ const opts = [
   { key: 'kaz', label: '哈萨克文' },
 ];
 
-const ImageTranslator = () => {
+interface Props {
+  style?: CSSProperties;
+}
+
+const ImageTranslator = (props: Props) => {
   const { width } = useViewport();
   const [lan, setLan] = React.useState(opts[0].key);
   const [fileList, setFileList] = React.useState<UploadFile[]>([]);
@@ -29,7 +33,7 @@ const ImageTranslator = () => {
 
   if (width < 768) {
     return (
-      <div>
+      <div style={props.style}>
         <MTitle label={{ cn: '产品体验', en: 'Product Experience' }} />
         <div
           style={{
@@ -155,7 +159,7 @@ const ImageTranslator = () => {
   }
 
   return (
-    <div>
+    <div style={props.style}>
       <MTitle label={{ cn: '产品体验', en: 'Product Experience' }} />
       <div style={{ display: 'flex', ...Styles.shadowCard, marginTop: 52 }}>
         <div style={{ width: 200, marginRight: 50 }}>
