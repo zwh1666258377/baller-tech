@@ -4,6 +4,7 @@ const filterList = [
   '/api/auth/check',
   '/api/img/list',
   '/api/jqfy',
+  '/api/yysb',
   '/static',
 ];
 

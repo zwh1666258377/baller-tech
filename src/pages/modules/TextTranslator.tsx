@@ -1,6 +1,6 @@
 import { Input, Select } from 'antd';
 import React, { CSSProperties } from 'react';
-import { Colors, Styles } from '../common/Styles';
+import { Colors, h5Styles, Styles } from '../common/Styles';
 import MTitle from '../parts/MTitle';
 
 const Option = Select.Option;
@@ -75,6 +75,7 @@ rules.forEach(r => {
 
 interface Props {
   style?: CSSProperties;
+  h5?: boolean;
 }
 
 const TextTranslator = (props: Props) => {
@@ -86,6 +87,143 @@ const TextTranslator = (props: Props) => {
     fromVal,
     toVal,
   ]);
+
+  if (props?.h5) {
+    return (
+      <div style={props.style}>
+        <MTitle
+          style={{ marginBottom: '10px' }}
+          label={{ cn: '产品体验', en: 'Product Experience' }}
+        />
+        <div style={{ ...h5Styles.shadowCard, marginTop: 30 }}>
+          <div
+            style={{
+              whiteSpace: 'nowrap',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Select
+              size="large"
+              style={{ width: 200 }}
+              value={fromVal}
+              onSelect={val => {
+                setFromVal(val);
+              }}
+            >
+              {opts.map(o => (
+                <Option key={o.key} value={o.key}>
+                  {o.label}
+                </Option>
+              ))}
+            </Select>
+            <Select
+              size="large"
+              style={{ width: 200, marginLeft: 34 }}
+              value={toVal}
+              onSelect={val => {
+                setToVal(val);
+              }}
+            >
+              {opts.map(o => (
+                <Option key={o.key} value={o.key}>
+                  {o.label}
+                </Option>
+              ))}
+            </Select>
+          </div>
+          <div
+            style={{ marginTop: 24, display: 'flex', flexDirection: 'column' }}
+          >
+            <div
+              style={{
+                flex: 1,
+                height: 128,
+                border: '1px solid #BBB',
+              }}
+            >
+              <textarea
+                style={{
+                  fontSize: 16,
+                  padding: 8,
+                  width: '100%',
+                  height: '100%',
+                  resize: 'none',
+                  border: 'none',
+                }}
+                placeholder="输入要翻译的文字"
+                value={inputVal}
+                onChange={t => {
+                  setInputVal(t.target.value);
+                }}
+              />
+            </div>
+            <div
+              style={{
+                flex: 1,
+                height: 128,
+                border: '1px solid #BBB',
+                fontSize: 16,
+                padding: 8,
+                marginTop: '16px',
+              }}
+            >
+              <div style={{ flex: 1, height: 128 }}>
+                {outputVal || (
+                  <span style={{ color: '#878787' }}>翻译结果</span>
+                )}
+              </div>
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingTop: '20px',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 16,
+                  color: '#FFF',
+                  backgroundColor: Colors.btColor,
+                  cursor: 'pointer',
+                  borderRadius: 25,
+                  padding: '8px 60px',
+                }}
+                onClick={() => {
+                  if (!allowKeys.includes(uploadKey)) {
+                    alert('暂时不支持' + uploadKey);
+                    return;
+                  }
+                  fetchTranslation().then(v => setOutputVal(v));
+                }}
+              >
+                翻译
+              </div>
+              <div
+                style={{
+                  fontSize: 16,
+                  color: '#333',
+                  backgroundColor: '#FFF',
+                  cursor: 'pointer',
+                  borderRadius: 25,
+                  padding: '8px 60px',
+                  border: '1px solid #BBB',
+                }}
+                onClick={() => {
+                  setInputVal('');
+                  setOutputVal('');
+                }}
+              >
+                清除
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={props.style}>

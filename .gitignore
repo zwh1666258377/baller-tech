@@ -6,6 +6,7 @@
 # dependencies
 /node_modules
 /static/uploads/**/*
+/static/baller-tech/**/*
 /npm-debug.log*
 /yarn-error.log
 /yarn.lock

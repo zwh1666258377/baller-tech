@@ -12,3 +12,12 @@ export const Styles = {
     padding: 60,
   },
 };
+
+export const h5Styles = {
+  shadowCard: {
+    boxShadow: '0px 2px 6px 0px rgba(0, 0, 0, 0.4)',
+    backgroundColor: '#FFF',
+    width: '100%',
+    padding: '23px 25px',
+  },
+};

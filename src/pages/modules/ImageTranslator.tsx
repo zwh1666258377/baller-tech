@@ -2,7 +2,6 @@ import { Select, Upload } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
 import React, { CSSProperties } from 'react';
 import { Colors, Styles } from '../common/Styles';
-import { useViewport } from '../common/ViewportContext';
 import MTitle from '../parts/MTitle';
 
 const Option = Select.Option;
@@ -22,28 +21,23 @@ const opts = [
 
 interface Props {
   style?: CSSProperties;
+  h5?: boolean;
 }
 
 const ImageTranslator = (props: Props) => {
-  const { width } = useViewport();
   const [lan, setLan] = React.useState(opts[0].key);
   const [fileList, setFileList] = React.useState<UploadFile[]>([]);
   const [preview, setPreview] = React.useState<string>();
   const [output, setOutput] = React.useState<string>();
 
-  if (width < 768) {
+  if (props?.h5) {
     return (
       <div style={props.style}>
-        <MTitle label={{ cn: '产品体验', en: 'Product Experience' }} />
-        <div
-          style={{
-            ...Styles.shadowCard,
-            display: 'flex',
-            flexDirection: 'column',
-            padding: 25,
-            marginTop: 30,
-          }}
-        >
+        <MTitle
+          style={{ marginBottom: '20px' }}
+          label={{ cn: '产品体验', en: 'Product Experience' }}
+        />
+        <div style={{ ...Styles.shadowCard, padding: '23px 25px' }}>
           <Select
             size="large"
             style={{ width: '100%' }}
@@ -58,7 +52,7 @@ const ImageTranslator = (props: Props) => {
               </Option>
             ))}
           </Select>
-          <div
+          {/* <div
             style={{
               marginTop: 15,
               overflow: 'auto',
@@ -93,8 +87,8 @@ const ImageTranslator = (props: Props) => {
                 <div style={{ color: '#333' }}>{output}</div>
               )}
             </div>
-          )}
-          <div
+          )} */}
+          {/* <div
             style={{
               marginTop: 30,
               display: 'flex',
@@ -152,7 +146,7 @@ const ImageTranslator = (props: Props) => {
             >
               清除
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     );
