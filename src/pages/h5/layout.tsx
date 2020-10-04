@@ -107,27 +107,35 @@ export default ({ children }) => {
           <div
             style={{
               backgroundColor: '#041a2f',
-              padding: '18px 23px 65px',
+              padding: '18px 23px 0px',
               color: '#fff',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
             }}
           >
-            <div
-              style={{
-                fontSize: '16px',
-                marginBottom: '16px',
-                fontWeight: 500,
-              }}
-            >
-              北京大牛儿科技发展有限公司（Baller Tech）
-            </div>
-            <div style={{ fontSize: '12px', marginBottom: '6px' }}>
-              地址：北京市朝阳区三元桥时间国际8号楼
-            </div>
-            <div style={{ fontSize: '12px', marginBottom: '6px' }}>
-              电话：010-00000000
-            </div>
-            <div style={{ fontSize: '12px', marginBottom: '6px' }}>
-              邮箱：support@modao.cc
+            <section>
+              <div
+                style={{
+                  fontSize: '16px',
+                  marginBottom: '16px',
+                  fontWeight: 500,
+                }}
+              >
+                北京大牛儿科技发展有限公司（Baller Tech）
+              </div>
+              <div style={{ fontSize: '12px', marginBottom: '6px' }}>
+                地址：北京市朝阳区三元桥时间国际8号楼
+              </div>
+              <div style={{ fontSize: '12px', marginBottom: '6px' }}>
+                电话：010-00000000
+              </div>
+              <div style={{ fontSize: '12px', marginBottom: '6px' }}>
+                邮箱：support@modao.cc
+              </div>
+            </section>
+            <div style={{ textAlign: 'center', padding: '29px 0 16px' }}>
+              京备
             </div>
           </div>
         </>
