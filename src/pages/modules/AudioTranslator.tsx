@@ -1,8 +1,9 @@
 import { Select, Upload } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
-import React, { CSSProperties } from 'react';
+import React, { CSSProperties, useRef } from 'react';
 import { DynamicRec } from '../common/DynamicRec';
-import { Colors, Styles } from '../common/Styles';
+import { Colors, h5Styles, Styles } from '../common/Styles';
+import { useSize } from 'ahooks';
 import MTitle from '../parts/MTitle';
 
 const Option = Select.Option;
@@ -27,6 +28,7 @@ const opts = [
 
 interface Props {
   style?: CSSProperties;
+  h5?: boolean;
 }
 
 const AudioTranslator = (props: Props) => {
@@ -36,6 +38,153 @@ const AudioTranslator = (props: Props) => {
   const [audioSrc, setAudioSrc] = React.useState<string>();
   const [audioBlob, setAudioBlob] = React.useState<Blob>();
   const [recording, setRecording] = React.useState<boolean>(false);
+  const btnContainer = useRef<any>();
+  const { width } = useSize(btnContainer.current);
+
+  if (props?.h5) {
+    return (
+      <div style={props.style}>
+        <DynamicRec recRef={rec => setRec(rec)} />
+        <MTitle label={{ cn: '产品体验', en: 'Product Experience' }} />
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            ...h5Styles.shadowCard,
+            marginTop: 52,
+          }}
+        >
+          <Select
+            size="large"
+            style={{ marginTop: 8, width: '100%' }}
+            value={lan}
+            onSelect={val => {
+              setLan(val);
+            }}
+          >
+            {opts.map(o => (
+              <Option key={o.key} value={o.key}>
+                {o.label}
+              </Option>
+            ))}
+          </Select>
+          {audioSrc && (
+            <audio
+              controls
+              style={{ marginTop: 10, outline: 'none' }}
+              src={audioSrc}
+            />
+          )}
+          <div
+            style={{
+              height: 160,
+              overflow: 'auto',
+              padding: 10,
+              color: '#888',
+              border: '1px solid #BBB',
+              marginTop: 30,
+            }}
+          >
+            上传的音频格式仅支持（MP3、wav）
+          </div>
+          <div
+            ref={r => (btnContainer.current = r)}
+            style={{ marginTop: '28px' }}
+          >
+            {!!width && (
+              <>
+                <div
+                  style={{
+                    fontSize: 16,
+                    color: '#FFF',
+                    backgroundColor: Colors.btColor,
+                    cursor: 'pointer',
+                    borderRadius: 25,
+                    padding: '8px 0',
+                    width: width / 2 - 10,
+                    textAlign: 'center',
+                    marginTop: 8,
+                    marginRight: 20,
+                    display: 'inline-block',
+                  }}
+                  onClick={handleRecord}
+                >
+                  {!recording ? '录音识别' : '停止录音'}
+                </div>
+                {audioSrc ? (
+                  <div
+                    style={{
+                      fontSize: 16,
+                      color: '#FFF',
+                      backgroundColor: Colors.btColor,
+                      cursor: 'pointer',
+                      borderRadius: 25,
+                      padding: '8px 0',
+                      width: width / 2 - 10,
+                      textAlign: 'center',
+                      marginTop: 8,
+                      marginRight: 20,
+                    }}
+                    onClick={() => {
+                      alert('上传刚录的音频');
+                    }}
+                  >
+                    上传音频
+                  </div>
+                ) : (
+                  <Upload
+                    accept=".mp3,.wav"
+                    action=""
+                    fileList={fileList}
+                    showUploadList={{ showRemoveIcon: false }}
+                    onChange={info => {
+                      setFileList([info.file]);
+                    }}
+                  >
+                    <div
+                      style={{
+                        fontSize: 16,
+                        color: '#FFF',
+                        backgroundColor: Colors.btColor,
+                        borderRadius: 25,
+                        padding: '8px 0',
+                        textAlign: 'center',
+                        marginTop: 8,
+                        width: width / 2 - 10,
+                      }}
+                    >
+                      上传音频
+                    </div>
+                  </Upload>
+                )}
+              </>
+            )}
+          </div>
+
+          <div
+            style={{
+              fontSize: 16,
+              color: '#333',
+              backgroundColor: '#FFF',
+              cursor: 'pointer',
+              borderRadius: 25,
+              padding: '8px 50px',
+              border: '1px solid #BBB',
+              marginTop: 28,
+              textAlign: 'center',
+            }}
+            onClick={() => {
+              rec?.stop();
+              setAudioBlob(undefined);
+              setAudioSrc(undefined);
+            }}
+          >
+            清除
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={props.style}>

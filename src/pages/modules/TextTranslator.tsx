@@ -189,7 +189,9 @@ const TextTranslator = (props: Props) => {
                   backgroundColor: Colors.btColor,
                   cursor: 'pointer',
                   borderRadius: 25,
-                  padding: '8px 60px',
+                  textAlign: 'center',
+                  padding: '8px 0',
+                  width: '48%',
                 }}
                 onClick={() => {
                   if (!allowKeys.includes(uploadKey)) {
@@ -207,8 +209,10 @@ const TextTranslator = (props: Props) => {
                   color: '#333',
                   backgroundColor: '#FFF',
                   cursor: 'pointer',
+                  padding: '8px 0',
                   borderRadius: 25,
-                  padding: '8px 60px',
+                  width: '48%',
+                  textAlign: 'center',
                   border: '1px solid #BBB',
                 }}
                 onClick={() => {

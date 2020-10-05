@@ -89,19 +89,13 @@ function postTranslate(args) {
       request_id: uuidv4(),
       language,
       sample_format: 'audio/L16;rate=16000',
-      audio_format: 'raw',
+      audio_format: 'mp3',
       input_mode: 'once',
       service_type: 'sentence',
-      dynamic_correction: 'on',
-      vad: 'off',
+      dynamic_correction: 'off',
+      vad: 'on',
     });
-    console.log({
-      'content-type': 'application/octet-stream',
-      'B-AppId': app_id,
-      'B-CurTime': date,
-      'B-Param': BParam,
-      'B-CheckSum': md5(`${app_key}${date}${BParam}`),
-    });
+
     request(
       {
         url: 'http://api.baller-tech.com/v1/service/v1/asr',
@@ -119,19 +113,14 @@ function postTranslate(args) {
         if (!error && response.statusCode == 200) {
           const res = JSON.parse(body);
           if (!!res && res.code == 0) {
-            const val: any[] = [];
+            let val = '';
             const timer = setInterval(() => {
               const { request_id } = res;
               const date = getGMTdate();
               const BParam = generateBase64Params({
                 request_id,
               });
-              console.log({
-                'B-AppId': app_id,
-                'B-CurTime': date,
-                'B-Param': BParam,
-                'B-CheckSum': md5(`${app_key}${date}${BParam}`),
-              });
+
               request(
                 {
                   url: 'http://api.baller-tech.com/v1/service/v1/asr',
@@ -145,13 +134,16 @@ function postTranslate(args) {
                 function(error, response, body) {
                   if (!error && response.statusCode == 200) {
                     if (JSON.parse(body)?.is_end === 1) {
-                      val.push(JSON.parse(body));
+                      val += unescape(
+                        JSON.parse(body)?.data.replace(/\\u/g, '%u'),
+                      );
                       clearInterval(timer);
                       resolve(val);
                     } else {
-                      val.push(JSON.parse(body));
+                      val += unescape(
+                        JSON.parse(body)?.data.replace(/\\u/g, '%u'),
+                      );
                     }
-                    // resolve(unescape(body.replace(/\\u/g, '%u')));
                   }
                 },
               );
