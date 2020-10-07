@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'umi';
 import { Colors } from '../common/Styles';
 
 interface Props {
@@ -24,14 +25,20 @@ const BTSider = (props: Props) => {
     >
       <div
         style={{
-          width: '100%',
           height: 84,
-          border: '1px solid #FFF',
           marginTop: 40,
           color: '#FFF',
+          marginLeft: '5%',
+          marginRight: '5%',
         }}
       >
-        大牛儿科技LOGO
+        <Link to="/">
+          <img
+            style={{ width: '100%', minWidth: 200, height: 'auto' }}
+            src={'/api/get/file?id=5f79753aaf9a795f27dd23f3'}
+            alt=""
+          />
+        </Link>
       </div>
       <div style={{ marginTop: 100, width: '100%' }}>
         <div

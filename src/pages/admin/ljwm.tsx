@@ -98,7 +98,7 @@ const Index = () => {
     <Spin spinning={loading}>
       <Form
         form={form}
-        labelCol={{ span: 8 }}
+        labelCol={{ span: 3 }}
         wrapperCol={{ span: 16 }}
         onFinish={submit}
       >

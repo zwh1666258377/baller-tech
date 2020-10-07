@@ -1,4 +1,4 @@
-import { Carousel, Col, Row } from 'antd';
+import { Carousel, Col, Image, Row } from 'antd';
 import React, { CSSProperties } from 'react';
 import MTitle from '../parts/MTitle';
 
@@ -85,7 +85,7 @@ const ImageCarousel = (props: Props) => {
                           marginRight: i != l.length - 1 ? 20 : 0,
                         }}
                       >
-                        <img
+                        <Image
                           style={{ width: '100%', height: 'auto' }}
                           src={d.url}
                         />

@@ -6,14 +6,21 @@ import ProductIntro from '../modules/ProductIntro';
 import TextTranslator from '../modules/TextTranslator';
 import ImageCarousel from '../modules/ImageCarousel';
 import PCBase from './PCBase';
+import { Module } from '../common/Module';
+import { Spin } from 'antd';
+import { getModule } from '../common/DataApi';
 
-const WZSB = () => {
+const WZSB = (props: { data: Module }) => {
+  const data = props.data;
+
   return <PCBase kind="wzsb" content={content} />;
 
   function content() {
     return (
       <div style={{ width: '100%', padding: '90px 160px 70px 70px' }}>
-        <ProductIntro />
+        {data?.poductIntroduction && (
+          <ProductIntro data={data.poductIntroduction} />
+        )}
         <ImageTranslator style={{ marginTop: 100 }} />
         <ImageCarousel
           style={{ marginTop: 100 }}
@@ -24,9 +31,9 @@ const WZSB = () => {
   }
 };
 
-WZSB.getInitialProps = () => {
-  // fetch wzsb
-  return {};
+WZSB.getInitialProps = async () => {
+  const data = await getModule('wzsb');
+  return { data };
 };
 
 export default WZSB;

@@ -4,14 +4,21 @@ import ProductIntro from '../modules/ProductIntro';
 import TextTranslator from '../modules/TextTranslator';
 import ImageCarousel from '../modules/ImageCarousel';
 import PCBase from './PCBase';
+import { Module } from '../common/Module';
+import { Spin } from 'antd';
+import { getModule } from '../common/DataApi';
 
-const YYSB = () => {
+const YYSB = (props: { data: Module }) => {
+  const data = props.data;
+
   return <PCBase kind="yysb" content={content} />;
 
   function content() {
     return (
       <div style={{ width: '100%', padding: '90px 160px 70px 70px' }}>
-        <ProductIntro />
+        {data?.poductIntroduction && (
+          <ProductIntro data={data.poductIntroduction} />
+        )}
         <AudioTranslator style={{ marginTop: 100 }} />
         <ImageCarousel
           style={{ marginTop: 100 }}
@@ -22,9 +29,9 @@ const YYSB = () => {
   }
 };
 
-YYSB.getInitialProps = () => {
-  // fetch yysb
-  return {};
+YYSB.getInitialProps = async () => {
+  const data = await getModule('yysb');
+  return { data };
 };
 
 export default YYSB;
