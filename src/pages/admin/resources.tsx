@@ -155,7 +155,8 @@ export default () => {
         }}
         name="img"
       >
-        {imgList.length >= 8 ? null : uploadButton}
+        {uploadButton}
+        {/* {imgList.length >= 8 ? null : uploadButton} */}
       </Upload>
       <Modal
         visible={previewVisible}

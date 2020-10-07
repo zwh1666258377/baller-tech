@@ -1,4 +1,6 @@
+import { Spin } from 'antd';
 import React, { CSSProperties } from 'react';
+import { Module } from '../common/Module';
 import ImageCarousel from '../modules/ImageCarousel';
 import ImageDisplay from '../modules/ImageDisplay';
 import MTitle from '../parts/MTitle';
@@ -6,9 +8,14 @@ import PCBase from './PCBase';
 
 interface Props {
   style?: CSSProperties;
+  data: Module;
 }
 
 const LJWM = (props: Props) => {
+  const data = props.data;
+  if (!data) {
+    return <Spin></Spin>;
+  }
   const intro = `北京大牛儿科技发展有限公司（Baller Tech）位于北京经济技术开发区，
   是一家专业从事智能视觉、智能语音和智能语义的高科技公司，于2020年获得中关村高新技术企业认证，在图像文字识别、图像目标检测、视频目标检测、语音识别、语音合成、机器翻译等方向，有多款成熟产品。
   Baller Tech面向智能视觉、智能语音和智能语义这三大核心技术方向，组建了专业的科研、工程、产品和项目团队，倡导“专业、务实、高效、创新”的企业精神。优美的工作环境以及良好

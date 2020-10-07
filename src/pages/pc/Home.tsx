@@ -5,6 +5,7 @@ import BTFooter from '../parts/BTFooter';
 import { Motion, spring } from 'react-motion';
 import MTitle from '../parts/MTitle';
 import { Link } from 'umi';
+import ImageCarousel from '../modules/ImageCarousel';
 
 const Home = () => {
   const springConfig = {
@@ -43,10 +44,14 @@ const Home = () => {
             left: 0,
             bottom: 0,
             right: 0,
+            height: '100%',
           }}
         >
           <div>
-            <img src={'/api/get/file?id=5f7975ffaf9a795f27dd23f4'} />
+            <img
+              style={{ height: '100vh' }}
+              src={'/api/get/file?id=5f7975ffaf9a795f27dd23f4'}
+            />
           </div>
         </Carousel>
       </div>
@@ -170,6 +175,10 @@ const Home = () => {
 
 Baller Tech面向智能视觉、智能语音和智能语义这三大核心技术方向，组建了专业的科研、工程、产品和项目团队，倡导“专业、务实、高效、创新”的企业精神。优美的工作环境以及良好	的激励机制，吸引了一批年轻、有学识、具有实干精神的人才。高素质、高水平、高效率的人才是大牛儿科技在当今激烈的市场中立于不败之地的保障。随着人工智能时代的到来，Baller Tech将不断创新发展，让您的生活因智能而美好！`}
               </div>
+              <ImageCarousel
+                style={{ marginTop: 60 }}
+                pageSize={{ normal: 5 }}
+              />
             </div>
           </div>
         </div>
