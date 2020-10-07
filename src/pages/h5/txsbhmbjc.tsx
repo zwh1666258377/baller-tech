@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Typography } from 'antd';
-import TextTranslator from '../modules/TextTranslator';
+import VideoDisplay from '../modules/VideoDisplay';
 import MTitle from '../parts/MTitle';
 
 const { Content } = Layout;
@@ -21,7 +21,7 @@ const Index = () => {
         </div>
       </div>
       <Content style={{ padding: '0px 15px' }}>
-        <TextTranslator h5 style={{ marginBottom: '64px' }} />
+        <VideoDisplay h5 style={{ marginBottom: '64px' }} />
         <MTitle
           style={{ marginBottom: '20px' }}
           label={{ cn: '产品介绍', en: 'Product introduction' }}

@@ -2,6 +2,7 @@ import React from 'react';
 import { Layout, Typography } from 'antd';
 import TextTranslator from '../modules/TextTranslator';
 import MTitle from '../parts/MTitle';
+import ImageTranslator from '../modules/ImageTranslator';
 
 const { Content } = Layout;
 const { Paragraph } = Typography;
@@ -21,7 +22,7 @@ const Index = () => {
         </div>
       </div>
       <Content style={{ padding: '0px 15px' }}>
-        <TextTranslator h5 style={{ marginBottom: '64px' }} />
+        <ImageTranslator h5 style={{ marginBottom: '64px' }} />
         <MTitle
           style={{ marginBottom: '20px' }}
           label={{ cn: '产品介绍', en: 'Product introduction' }}
