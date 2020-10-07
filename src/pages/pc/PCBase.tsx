@@ -26,7 +26,7 @@ const PCBase = (props: Props) => {
         <BTSider
           kind={props.kind}
           onTabChange={kind => {
-            h.push(`/d/${kind}`);
+            h.push(`/${kind}`);
           }}
         />
       </div>
