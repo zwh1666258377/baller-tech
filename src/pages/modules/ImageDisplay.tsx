@@ -1,4 +1,4 @@
-import { Col, Row } from 'antd';
+import { Col, Image, Row } from 'antd';
 import React, { CSSProperties } from 'react';
 import MTitle from '../parts/MTitle';
 
@@ -33,7 +33,7 @@ const ImageDisplay = (props: Props) => {
         <Row gutter={[110, 55]}>
           {imgList.map(a => (
             <Col key={a.label} sm={24} xl={12}>
-              <img
+              <Image
                 style={{ width: '100%', height: 'auto' }}
                 src={a.url}
                 alt={a.label}

@@ -7,14 +7,21 @@ import TextTranslator from '../modules/TextTranslator';
 import ImageCarousel from '../modules/ImageCarousel';
 import VideoDisplay from '../modules/VideoDisplay';
 import PCBase from './PCBase';
+import { Module } from '../common/Module';
+import { Spin } from 'antd';
+import { getModule } from '../common/DataApi';
 
-const TXSBMBJC = () => {
+const TXSBMBJC = (props: { data: Module }) => {
+  const data = props.data;
+
   return <PCBase kind="txsbmbjc" content={content} />;
 
   function content() {
     return (
       <div style={{ width: '100%', padding: '90px 160px 70px 70px' }}>
-        <ProductIntro />
+        {data?.poductIntroduction && (
+          <ProductIntro data={data.poductIntroduction} />
+        )}
         <VideoDisplay style={{ marginTop: 100 }} />
         <ImageCarousel
           style={{ marginTop: 100 }}
@@ -25,9 +32,9 @@ const TXSBMBJC = () => {
   }
 };
 
-TXSBMBJC.getInitialProps = () => {
-  // fetch TXSBMBJC
-  return {};
+TXSBMBJC.getInitialProps = async () => {
+  const data = await getModule('txsb');
+  return { data };
 };
 
 export default TXSBMBJC;
