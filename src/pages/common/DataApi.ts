@@ -1,5 +1,5 @@
 export const getModule = async (kind: string) => {
-  return fetch('/api/get-module', {
+  return fetch('http://localhost:8080/api/get-module', {
     method: 'POST',
     body: JSON.stringify({
       kind,
