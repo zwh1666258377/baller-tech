@@ -23,21 +23,30 @@ interface Module {
       cn: string;
       en: string;
     };
-    imgUrls: string[];
+    imgUrls: Array<{
+      url: string;
+      name: string;
+    }>;
   };
   partne: {
     title: {
       cn: string;
       en: string;
     };
-    imgUrls: string[];
+    imgUrls: Array<{
+      url: string;
+      name: string;
+    }>;
   };
   contact: {
     title: {
       cn: string;
       en: string;
     };
-    imgUrls: string[];
+    imgUrls: Array<{
+      url: string;
+      name: string;
+    }>;
   };
   poductIntroduction: {
     title: {
@@ -56,7 +65,10 @@ interface Module {
       cn: string;
       en: string;
     };
-    imgUrls: string[];
+    imgUrls: Array<{
+      url: string;
+      name: string;
+    }>;
   };
 }
 
@@ -74,42 +86,74 @@ const moduleSchema = new Schema({
   },
   honor: {
     type: {
+      display: Types.Boolean,
       title: {
         cn: Types.String,
         en: Types.String,
       },
-      imgUrls: [Types.String],
+      imgUrls: [
+        {
+          url: Types.String,
+          name: Types.String,
+        },
+      ],
+    },
+    default: {
+      display: true,
     },
   },
   contact: {
     type: {
+      display: Types.Boolean,
       title: {
         cn: Types.String,
         en: Types.String,
       },
-      imgUrls: [Types.String],
+      imgUrls: [
+        {
+          url: Types.String,
+          name: Types.String,
+        },
+      ],
+    },
+    default: {
+      display: true,
     },
   },
   partne: {
     type: {
+      display: Types.Boolean,
       title: {
         cn: Types.String,
         en: Types.String,
       },
-      imgUrls: [Types.String],
+      imgUrls: [
+        {
+          url: Types.String,
+          name: Types.String,
+        },
+      ],
+    },
+    default: {
+      display: true,
     },
   },
   companyIntroduction: {
     type: {
+      display: Types.Boolean,
       title: {
         cn: Types.String,
         en: Types.String,
       },
       content: Types.String,
     },
+    default: {
+      display: true,
+    },
   },
   poductIntroduction: {
     type: {
+      display: Types.Boolean,
       title: {
         cn: Types.String,
         en: Types.String,
@@ -121,12 +165,22 @@ const moduleSchema = new Schema({
         url: Types.String,
       },
     },
+    default: {
+      display: true,
+    },
   },
   usageScenarios: {
     type: {
-      imgUrls: [Types.String],
+      display: Types.Boolean,
+      imgUrls: [
+        {
+          url: Types.String,
+          name: Types.String,
+        },
+      ],
     },
     default: {
+      display: true,
       imgUrls: [],
     },
   },

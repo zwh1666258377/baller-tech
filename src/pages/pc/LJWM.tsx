@@ -65,7 +65,7 @@ const LJWM = (props: Props) => {
 };
 
 LJWM.getInitialProps = () => {
-  return {};
+  return { data: {} };
 };
 
 export default LJWM;
