@@ -177,21 +177,23 @@ const Index = () => {
         <Form.Item name="company-content" label="内容">
           <Input />
         </Form.Item>
-        {contactImgUrls?.map(({ url, name }, idx) => {
-          return (
-            <div key={idx} style={{ textAlign: 'center' }}>
-              <Text type="success">url:{url},</Text>
-              <Text type="success">name:{name}</Text>
-              <DeleteOutlined
-                onClick={() => {
-                  setContactImgUrls((urls = []) => {
-                    return urls?.filter(i => i.url !== url);
-                  });
-                }}
-              />
-            </div>
-          );
-        })}
+        {contactImgUrls
+          ?.filter(i => !!i)
+          ?.map(({ url, name }, idx) => {
+            return (
+              <div key={idx} style={{ textAlign: 'center' }}>
+                <Text type="success">url:{url},</Text>
+                <Text type="success">name:{name}</Text>
+                <DeleteOutlined
+                  onClick={() => {
+                    setContactImgUrls((urls = []) => {
+                      return urls?.filter(i => !!i?.url && i?.url !== url);
+                    });
+                  }}
+                />
+              </div>
+            );
+          })}
         <div style={{ border: '1px solid red' }}>
           <Form.Item name="contact-img-url" label="展示图片链接">
             <Input />

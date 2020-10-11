@@ -160,21 +160,23 @@ const Index = () => {
         <Form.Item name="usage-scenarios-name-en" label="英文Title">
           <Input />
         </Form.Item>
-        {usageScenariosImgUrls?.map(({ url, name }, idx) => {
-          return (
-            <div key={idx} style={{ textAlign: 'center' }}>
-              <Text type="success">url:{url},</Text>
-              <Text type="success">name:{name}</Text>
-              <DeleteOutlined
-                onClick={() => {
-                  setUsageScenariosImgUrls((urls = []) => {
-                    return urls?.filter(i => i.url !== url);
-                  });
-                }}
-              />
-            </div>
-          );
-        })}
+        {usageScenariosImgUrls
+          ?.filter(i => !!i)
+          ?.map(({ url, name }, idx) => {
+            return (
+              <div key={idx} style={{ textAlign: 'center' }}>
+                <Text type="success">url:{url},</Text>
+                <Text type="success">name:{name}</Text>
+                <DeleteOutlined
+                  onClick={() => {
+                    setUsageScenariosImgUrls((urls = []) => {
+                      return urls?.filter(i => !!i?.url && i?.url !== url);
+                    });
+                  }}
+                />
+              </div>
+            );
+          })}
         <div style={{ border: '1px solid red' }}>
           <Form.Item name="usage-scenarios-img-url" label="展示图片链接">
             <Input />
@@ -191,14 +193,15 @@ const Index = () => {
                 'usage-scenarios-img-name',
               );
 
-              if (!currentInputUrl || !currentInputName) {
-                message.warn('链接或名称不得为空');
+              if (!currentInputUrl) {
+                message.warn('链接不得为空');
                 return;
               }
               setUsageScenariosImgUrls((urls = []) => {
                 return [
                   ...urls,
-                  { name: currentInputName, url: currentInputUrl },
+                  { name: currentInputName || '-', url: currentInputUrl },
+                  ,
                 ];
               });
               form.setFieldsValue({

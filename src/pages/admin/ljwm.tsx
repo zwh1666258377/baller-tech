@@ -169,21 +169,23 @@ const Index = () => {
             }}
           />
         </Form.Item>
-        {honor?.map(({ url, name }, idx) => {
-          return (
-            <div key={idx} style={{ textAlign: 'center' }}>
-              <Text type="success">url:{url},</Text>
-              <Text type="success">name:{name}</Text>
-              <DeleteOutlined
-                onClick={() => {
-                  setHonor((urls = []) => {
-                    return urls?.filter(i => i.url !== url);
-                  });
-                }}
-              />
-            </div>
-          );
-        })}
+        {honor
+          ?.filter(i => !!i)
+          ?.map(({ url, name }, idx) => {
+            return (
+              <div key={idx} style={{ textAlign: 'center' }}>
+                <Text type="success">url:{url},</Text>
+                <Text type="success">name:{name}</Text>
+                <DeleteOutlined
+                  onClick={() => {
+                    setHonor((urls = []) => {
+                      return urls?.filter(i => !!i?.url && i?.url !== url);
+                    });
+                  }}
+                />
+              </div>
+            );
+          })}
         <div style={{ border: '1px solid red' }}>
           <Form.Item name="honor-img-url" label="展示图片链接">
             <Input />
@@ -226,21 +228,23 @@ const Index = () => {
             }}
           />
         </Form.Item>
-        {partne?.map(({ url, name }, idx) => {
-          return (
-            <div key={idx} style={{ textAlign: 'center' }}>
-              <Text type="success">url:{url},</Text>
-              <Text type="success">name:{name}</Text>
-              <DeleteOutlined
-                onClick={() => {
-                  setPartne((urls = []) => {
-                    return urls?.filter(i => i.url !== url);
-                  });
-                }}
-              />
-            </div>
-          );
-        })}
+        {partne
+          ?.filter(i => !!i)
+          ?.map(({ url, name }, idx) => {
+            return (
+              <div key={idx} style={{ textAlign: 'center' }}>
+                <Text type="success">url:{url},</Text>
+                <Text type="success">name:{name}</Text>
+                <DeleteOutlined
+                  onClick={() => {
+                    setPartne((urls = []) => {
+                      return urls?.filter(i => !!i?.url && i?.url !== url);
+                    });
+                  }}
+                />
+              </div>
+            );
+          })}
         <div style={{ border: '1px solid red' }}>
           <Form.Item name="partne-img-url" label="展示图片链接">
             <Input />
@@ -284,21 +288,23 @@ const Index = () => {
             }}
           />
         </Form.Item>
-        {contact?.map(({ url, name }, idx) => {
-          return (
-            <div key={idx} style={{ textAlign: 'center' }}>
-              <Text type="success">url:{url},</Text>
-              <Text type="success">name:{name}</Text>
-              <DeleteOutlined
-                onClick={() => {
-                  setContact((urls = []) => {
-                    return urls?.filter(i => i.url !== url);
-                  });
-                }}
-              />
-            </div>
-          );
-        })}
+        {contact
+          ?.filter(i => !!i)
+          ?.map(({ url, name }, idx) => {
+            return (
+              <div key={idx} style={{ textAlign: 'center' }}>
+                <Text type="success">url:{url},</Text>
+                <Text type="success">name:{name}</Text>
+                <DeleteOutlined
+                  onClick={() => {
+                    setContact((urls = []) => {
+                      return urls?.filter(i => !!i?.url && i?.url !== url);
+                    });
+                  }}
+                />
+              </div>
+            );
+          })}
         <div style={{ border: '1px solid red' }}>
           <Form.Item name="contact-img-url" label="展示图片链接">
             <Input />
