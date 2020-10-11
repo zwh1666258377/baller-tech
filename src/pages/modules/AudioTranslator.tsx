@@ -1,4 +1,5 @@
-import { Select, Upload } from 'antd';
+/// <reference path = "../../../types/index.d.ts" />
+import { message, Select, Upload } from 'antd';
 import { UploadFile } from 'antd/lib/upload/interface';
 import React, { CSSProperties, useRef } from 'react';
 import { DynamicRec } from '../common/DynamicRec';
@@ -40,6 +41,35 @@ const AudioTranslator = (props: Props) => {
   const [recording, setRecording] = React.useState<boolean>(false);
   const btnContainer = useRef<any>();
   const { width } = useSize(btnContainer.current);
+
+  React.useEffect(() => {
+    if (!!rec) {
+      rec['onProcess'] = (
+        buffers,
+        powerLevel,
+        bufferDuration,
+        bufferSampleRate,
+      ) => {
+        // 音频转换数据，即发送到后端的数据
+        var recordTransformData = Recorder.SampleData(
+          buffers,
+          bufferSampleRate,
+          16000,
+          {
+            index: recordTransformData ? recordTransformData.index : 0,
+            offset: recordTransformData ? recordTransformData.offset : 0.0,
+          },
+        );
+        console.log(recordTransformData.data);
+
+        // 限制录音1分钟，若超出给出友好提示
+        if (bufferDuration / 1000 >= 60) {
+          message.error('您已录制超过最大时长: 1分钟。马上为您分析数据~');
+          rec?.stop();
+        }
+      };
+    }
+  }, [rec]);
 
   if (props?.h5) {
     return (
