@@ -68,7 +68,7 @@ const Home = (props: { data: Website }) => {
           left: 45,
         }}
       >
-        <img src={data.icon} style={{ width: '100%', height: '100%' }} />
+        <img src={data?.icon} style={{ width: '100%', height: '100%' }} />
       </div>
       <div>
         <div
@@ -156,7 +156,7 @@ const Home = (props: { data: Website }) => {
             <div>
               <MTitle
                 style={{ fontSize: 32 }}
-                label={data.contact.name}
+                label={data?.contact?.name}
                 color="#FFF"
               ></MTitle>
               <div

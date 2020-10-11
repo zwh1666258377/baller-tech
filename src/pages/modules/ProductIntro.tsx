@@ -34,7 +34,7 @@ const ProductIntro = (props: Props) => {
               maxHeight: 240,
             }}
             src={data.imgUrl}
-            alt={data.title.cn}
+            alt={data.title?.cn}
           />
         </div>
         <div
@@ -72,7 +72,7 @@ const ProductIntro = (props: Props) => {
               }}
               onClick={() => open(data.button.url)}
             >
-              {data.button.text}
+              {data.button?.text}
             </div>
           </div>
         </div>
