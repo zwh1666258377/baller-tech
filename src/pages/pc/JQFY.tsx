@@ -5,7 +5,7 @@ import ImageCarousel from '../modules/ImageCarousel';
 import PCBase from './PCBase';
 import { getModule } from '../common/DataApi';
 import { Spin } from 'antd';
-import { Module } from '../common/Module';
+import { Module } from '../common/Defs';
 
 const JQFY = (props: { data: Module }) => {
   const data = props.data;
@@ -20,6 +20,7 @@ const JQFY = (props: { data: Module }) => {
         )}
         <TextTranslator style={{ marginTop: 100 }} />
         <ImageCarousel
+          imgs={[]}
           style={{ marginTop: 100 }}
           label={{ cn: '应用场景', en: 'Usage Scenarios' }}
         />

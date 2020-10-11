@@ -5,7 +5,11 @@ const filterList = [
   '/api/img/list',
   '/api/jqfy',
   '/api/yysb',
+  '/api/yyhc',
+  '/api/wzsb',
+  '/api/txsb',
   '/static',
+  '/api/get-website',
 ];
 
 export function WhiteList(url: string): boolean {

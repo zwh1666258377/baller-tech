@@ -31,3 +31,26 @@ export interface Module {
     imgUrls: string[];
   };
 }
+
+export interface Website {
+  kind: string;
+  icon: string;
+  companyName: {
+    cn: string;
+    en: string;
+  };
+  info: string[];
+  icp: string;
+  slogan: {
+    main: string;
+    sub: string;
+  };
+  contact: {
+    name: {
+      cn: string;
+      en: string;
+    };
+    content: string;
+    imgUrls: string[];
+  };
+}

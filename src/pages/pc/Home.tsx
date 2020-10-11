@@ -6,10 +6,14 @@ import { Motion, spring } from 'react-motion';
 import MTitle from '../parts/MTitle';
 import { Link } from 'umi';
 import ImageCarousel from '../modules/ImageCarousel';
+import { getWebsite } from '../common/DataApi';
+import { Website } from '../common/Defs';
+import { btnImg, website } from '../common/Source';
 
-const Home = () => {
+const Home = (props: { data: Website }) => {
+  const data = props.data;
   const springConfig = {
-    stiffness: 100,
+    stiffness: 130,
     damping: 30,
   };
 
@@ -49,8 +53,8 @@ const Home = () => {
         >
           <div>
             <img
-              style={{ height: '100vh' }}
-              src={'/api/get/file?id=5f7975ffaf9a795f27dd23f4'}
+              style={{ height: '100vh', width: '100%' }}
+              src={website.defaultbg}
             />
           </div>
         </Carousel>
@@ -64,10 +68,7 @@ const Home = () => {
           left: 45,
         }}
       >
-        <img
-          src="/api/get/file?id=5f79753aaf9a795f27dd23f3"
-          style={{ width: '100%', height: '100%' }}
-        />
+        <img src={data.icon} style={{ width: '100%', height: '100%' }} />
       </div>
       <div>
         <div
@@ -75,7 +76,7 @@ const Home = () => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            width: 1280,
+            width: 1400,
             margin: 'auto',
           }}
         >
@@ -86,7 +87,8 @@ const Home = () => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
-              minWidth: 1400,
+              width: 1240,
+              margin: 'auto',
             }}
           >
             <div style={{ marginBottom: 80, color: '#FFF' }}>
@@ -103,7 +105,7 @@ const Home = () => {
                         opacity: o,
                       }}
                     >
-                      大牛儿科技 | 智能生活
+                      {data.slogan.main}
                     </div>
                     <div
                       style={{
@@ -112,7 +114,7 @@ const Home = () => {
                         opacity: o,
                       }}
                     >
-                      10年服务经验积累，9种安全保障，8种服务场景，优质服务值得您信赖
+                      {data.slogan.sub}
                     </div>
                   </>
                 )}
@@ -121,28 +123,25 @@ const Home = () => {
             <div style={{ display: 'flex' }}>
               <ImgLabel
                 style={{ marginRight: 20 }}
-                url="/api/get/file?id=5f7973d3af9a795f27dd23ee"
+                url={btnImg.jqfy}
                 to="jqfy"
               />
               <ImgLabel
                 style={{ marginRight: 20 }}
-                url="/api/get/file?id=5f7973e0af9a795f27dd23f2"
+                url={btnImg.yysb}
                 to="yysb"
               />
-              <ImgLabel
-                url="/api/get/file?id=5f7973deaf9a795f27dd23f1"
-                to="yyhc"
-              />
+              <ImgLabel url={btnImg.yyhc} to="yyhc" />
             </div>
             <div style={{ marginTop: 20, display: 'flex' }}>
               <ImgLabel
                 style={{ marginRight: 20 }}
-                url="/api/get/file?id=5f7973dcaf9a795f27dd23f0"
+                url={btnImg.wzsb}
                 to="wzsb"
               />
               <ImgLabel
                 style={{ width: 820 }}
-                url="/api/get/file?id=5f7973d8af9a795f27dd23ef"
+                url={btnImg.txsb}
                 to="txsbmbjc"
               />
             </div>
@@ -157,7 +156,7 @@ const Home = () => {
             <div>
               <MTitle
                 style={{ fontSize: 32 }}
-                label={{ cn: '联系我们', en: 'Contact Us' }}
+                label={data.contact.name}
                 color="#FFF"
               ></MTitle>
               <div
@@ -169,13 +168,10 @@ const Home = () => {
                   color: '#FFF',
                 }}
               >
-                {`北京大牛儿科技发展有限公司（Baller Tech）位于北京经济技术开发区，
-是一家专业从事智能视觉、智能语音和智能语义的高科技公司，于2020年获得中关村高新技术企业认证，在图像文字识别、图像目标检测、视频目标检测、语音识别	、语音合成、机器翻译等方向，有多款成熟产品。
-
-
-Baller Tech面向智能视觉、智能语音和智能语义这三大核心技术方向，组建了专业的科研、工程、产品和项目团队，倡导“专业、务实、高效、创新”的企业精神。优美的工作环境以及良好	的激励机制，吸引了一批年轻、有学识、具有实干精神的人才。高素质、高水平、高效率的人才是大牛儿科技在当今激烈的市场中立于不败之地的保障。随着人工智能时代的到来，Baller Tech将不断创新发展，让您的生活因智能而美好！`}
+                {data.contact.content}
               </div>
               <ImageCarousel
+                imgs={[]}
                 style={{ marginTop: 60 }}
                 pageSize={{ normal: 5 }}
               />
@@ -188,6 +184,11 @@ Baller Tech面向智能视觉、智能语音和智能语义这三大核心技术
   );
 };
 
+Home.getInitialProps = async () => {
+  const data = await getWebsite();
+  return { data };
+};
+
 export default Home;
 
 const ImgLabel = (props: {
@@ -195,8 +196,6 @@ const ImgLabel = (props: {
   to: string;
   url: string;
 }) => {
-  const [shadow, setShadow] = React.useState({});
-
   return (
     <Link to={props.to}>
       <div
@@ -208,7 +207,6 @@ const ImgLabel = (props: {
           backgroundColor: Colors.btColor,
           width: 400,
           height: 130,
-          ...shadow,
           ...props.style,
         }}
       >
