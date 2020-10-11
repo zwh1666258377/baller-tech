@@ -23,21 +23,30 @@ interface Module {
       cn: string;
       en: string;
     };
-    imgUrls: string[];
+    imgUrls: Array<{
+      url: string;
+      name: string;
+    }>;
   };
   partne: {
     title: {
       cn: string;
       en: string;
     };
-    imgUrls: string[];
+    imgUrls: Array<{
+      url: string;
+      name: string;
+    }>;
   };
   contact: {
     title: {
       cn: string;
       en: string;
     };
-    imgUrls: string[];
+    imgUrls: Array<{
+      url: string;
+      name: string;
+    }>;
   };
   poductIntroduction: {
     title: {
@@ -56,7 +65,10 @@ interface Module {
       cn: string;
       en: string;
     };
-    imgUrls: string[];
+    imgUrls: Array<{
+      url: string;
+      name: string;
+    }>;
   };
 }
 
@@ -78,7 +90,12 @@ const moduleSchema = new Schema({
         cn: Types.String,
         en: Types.String,
       },
-      imgUrls: [Types.String],
+      imgUrls: [
+        {
+          url: Types.String,
+          name: Types.String,
+        },
+      ],
     },
   },
   contact: {
@@ -87,7 +104,12 @@ const moduleSchema = new Schema({
         cn: Types.String,
         en: Types.String,
       },
-      imgUrls: [Types.String],
+      imgUrls: [
+        {
+          url: Types.String,
+          name: Types.String,
+        },
+      ],
     },
   },
   partne: {
@@ -96,7 +118,12 @@ const moduleSchema = new Schema({
         cn: Types.String,
         en: Types.String,
       },
-      imgUrls: [Types.String],
+      imgUrls: [
+        {
+          url: Types.String,
+          name: Types.String,
+        },
+      ],
     },
   },
   companyIntroduction: {
@@ -124,7 +151,12 @@ const moduleSchema = new Schema({
   },
   usageScenarios: {
     type: {
-      imgUrls: [Types.String],
+      imgUrls: [
+        {
+          url: Types.String,
+          name: Types.String,
+        },
+      ],
     },
     default: {
       imgUrls: [],

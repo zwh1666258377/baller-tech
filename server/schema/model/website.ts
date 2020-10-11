@@ -22,7 +22,10 @@ interface Website {
       en: string;
     };
     content: string;
-    imgUrls: string[];
+    imgUrls: Array<{
+      url: string;
+      name: string;
+    }>;
   };
 }
 
@@ -58,7 +61,12 @@ const websiteSchema = new Schema({
         en: Types.String,
       },
       content: Types.String,
-      imgUrls: [Types.String],
+      imgUrls: [
+        {
+          url: Types.String,
+          name: Types.String,
+        },
+      ],
     },
   },
 });

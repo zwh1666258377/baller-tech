@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Button, Form, Input, notification, Spin, Typography } from 'antd';
+import {
+  Button,
+  Form,
+  Input,
+  message,
+  notification,
+  Spin,
+  Typography,
+} from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { DeleteOutlined } from '@ant-design/icons';
 
@@ -7,9 +15,24 @@ const { Title, Text } = Typography;
 
 const Index = () => {
   const [form] = Form.useForm();
-  const [honor, setHonor] = React.useState<string[]>([]);
-  const [partne, setPartne] = React.useState<string[]>([]);
-  const [contact, setContact] = React.useState<string[]>([]);
+  const [honor, setHonor] = React.useState<
+    Array<{
+      url: string;
+      name: string;
+    }>
+  >([]);
+  const [partne, setPartne] = React.useState<
+    Array<{
+      url: string;
+      name: string;
+    }>
+  >([]);
+  const [contact, setContact] = React.useState<
+    Array<{
+      url: string;
+      name: string;
+    }>
+  >([]);
   const [loading, setLoading] = React.useState(true);
 
   const submit = value => {
@@ -121,135 +144,153 @@ const Index = () => {
         </Form.Item>
 
         <Title level={3}>荣誉资质</Title>
-        {honor?.map((url, idx) => {
+        {honor?.map(({ url, name }, idx) => {
           return (
             <div key={idx} style={{ textAlign: 'center' }}>
-              <Text key={idx} type="success">
-                {url}
-              </Text>
+              <Text type="success">url:{url},</Text>
+              <Text type="success">name:{name}</Text>
               <DeleteOutlined
                 onClick={() => {
                   setHonor((urls = []) => {
-                    return urls?.filter(i => i !== url);
+                    return urls?.filter(i => i.url !== url);
                   });
                 }}
               />
             </div>
           );
         })}
-        <div>
-          <Form.Item name="honor-img-urls" label="展示图片链接">
-            <Input
-              suffix={
-                <Button
-                  onClick={() => {
-                    const currentInputUrl = form.getFieldValue(
-                      'honor-img-urls',
-                    );
-                    if (!currentInputUrl) {
-                      return;
-                    }
-                    setHonor((urls = []) => {
-                      return [...urls, currentInputUrl];
-                    });
-                    form.setFieldsValue({
-                      'honor-img-urls': '',
-                    });
-                  }}
-                >
-                  增加
-                </Button>
-              }
-            />
+        <div style={{ border: '1px solid red' }}>
+          <Form.Item name="honor-img-url" label="展示图片链接">
+            <Input />
           </Form.Item>
+          <Form.Item name="honor-img-name" label="展示图片名">
+            <Input />
+          </Form.Item>
+          <Button
+            onClick={() => {
+              const currentInputUrl = form.getFieldValue('honor-img-url');
+              const currentInputName = form.getFieldValue('honor-img-name');
+
+              if (!currentInputUrl || !currentInputName) {
+                message.warn('链接或名称不得为空');
+                return;
+              }
+              setHonor((urls = []) => {
+                return [
+                  ...urls,
+                  { name: currentInputName, url: currentInputUrl },
+                ];
+              });
+
+              form.setFieldsValue({
+                'honor-img-url': '',
+                'honor-img-name': '',
+              });
+            }}
+          >
+            增加
+          </Button>
         </div>
 
         <Title level={3}>合作伙伴</Title>
-        {partne?.map((url, idx) => {
+        {partne?.map(({ url, name }, idx) => {
           return (
             <div key={idx} style={{ textAlign: 'center' }}>
-              <Text key={idx} type="success">
-                {url}
-              </Text>
+              <Text type="success">url:{url},</Text>
+              <Text type="success">name:{name}</Text>
               <DeleteOutlined
                 onClick={() => {
                   setPartne((urls = []) => {
-                    return urls?.filter(i => i !== url);
+                    return urls?.filter(i => i.url !== url);
                   });
                 }}
               />
             </div>
           );
         })}
-        <div>
-          <Form.Item name="partne-img-urls" label="展示图片链接">
-            <Input
-              suffix={
-                <Button
-                  onClick={() => {
-                    const currentInputUrl = form.getFieldValue(
-                      'partne-img-urls',
-                    );
-                    if (!currentInputUrl) {
-                      return;
-                    }
-                    setPartne((urls = []) => {
-                      return [...urls, currentInputUrl];
-                    });
-                    form.setFieldsValue({
-                      'partne-img-urls': '',
-                    });
-                  }}
-                >
-                  增加
-                </Button>
-              }
-            />
+        <div style={{ border: '1px solid red' }}>
+          <Form.Item name="partne-img-url" label="展示图片链接">
+            <Input />
           </Form.Item>
+          <Form.Item name="partne-img-name" label="展示图片名">
+            <Input />
+          </Form.Item>
+          <Button
+            onClick={() => {
+              const currentInputUrl = form.getFieldValue('partne-img-url');
+              const currentInputName = form.getFieldValue('partne-img-name');
+
+              if (!currentInputUrl || !currentInputName) {
+                message.warn('链接或名称不得为空');
+                return;
+              }
+
+              setPartne((urls = []) => {
+                return [
+                  ...urls,
+                  { name: currentInputName, url: currentInputUrl },
+                ];
+              });
+
+              form.setFieldsValue({
+                'partne-img-url': '',
+                'partne-img-name': '',
+              });
+            }}
+          >
+            增加
+          </Button>
         </div>
 
         <Title level={3}>联系我们</Title>
-        {contact?.map((url, idx) => {
+        {contact?.map(({ url, name }, idx) => {
           return (
             <div key={idx} style={{ textAlign: 'center' }}>
-              <Text key={idx} type="success">
-                {url}
-              </Text>
+              <Text type="success">url:{url},</Text>
+              <Text type="success">name:{name}</Text>
               <DeleteOutlined
                 onClick={() => {
                   setContact((urls = []) => {
-                    return urls?.filter(i => i !== url);
+                    return urls?.filter(i => i.url !== url);
                   });
                 }}
               />
             </div>
           );
         })}
-        <div>
-          <Form.Item name="contact-img-urls" label="展示图片链接">
-            <Input
-              suffix={
-                <Button
-                  onClick={() => {
-                    const currentInputUrl = form.getFieldValue(
-                      'contact-img-urls',
-                    );
-                    if (!currentInputUrl) {
-                      return;
-                    }
-                    setContact((urls = []) => {
-                      return [...urls, currentInputUrl];
-                    });
-                    form.setFieldsValue({
-                      'contact-img-urls': '',
-                    });
-                  }}
-                >
-                  增加
-                </Button>
-              }
-            />
+        <div style={{ border: '1px solid red' }}>
+          <Form.Item name="contact-img-url" label="展示图片链接">
+            <Input />
           </Form.Item>
+          <Form.Item name="contact-img-name" label="展示图片名">
+            <Input />
+          </Form.Item>
+          <Button
+            onClick={() => {
+              const currentInputUrl = form.getFieldValue('contact-img-url');
+
+              const currentInputName = form.getFieldValue('contact-img-name');
+
+              if (!currentInputUrl || !currentInputName) {
+                message.warn('链接或名称不得为空');
+                return;
+              }
+
+              setContact((urls = []) => {
+                return [
+                  ...urls,
+                  { name: currentInputName, url: currentInputUrl },
+                ];
+              });
+
+              form.setFieldsValue({
+                'contact-img-url': '',
+                'contact-img-name': '',
+              });
+            }}
+          >
+            增加
+          </Button>
         </div>
 
         <div style={{ textAlign: 'center' }}>

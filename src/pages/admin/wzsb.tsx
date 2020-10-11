@@ -1,5 +1,13 @@
 import * as React from 'react';
-import { Button, Form, Input, notification, Spin, Typography } from 'antd';
+import {
+  Button,
+  Form,
+  Input,
+  message,
+  notification,
+  Spin,
+  Typography,
+} from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { DeleteOutlined } from '@ant-design/icons';
 
@@ -8,7 +16,10 @@ const { Title, Text } = Typography;
 const Index = () => {
   const [form] = Form.useForm();
   const [usageScenariosImgUrls, setUsageScenariosImgUrls] = React.useState<
-    string[]
+    Array<{
+      url: string;
+      name: string;
+    }>
   >([]);
   const [loading, setLoading] = React.useState(true);
 
@@ -128,47 +139,54 @@ const Index = () => {
         <Form.Item name="usage-scenarios-name-en" label="英文Title">
           <Input />
         </Form.Item>
-        {usageScenariosImgUrls?.map((url, idx) => {
+        {usageScenariosImgUrls?.map(({ url, name }, idx) => {
           return (
             <div key={idx} style={{ textAlign: 'center' }}>
-              <Text key={idx} type="success">
-                {url}
-              </Text>
+              <Text type="success">url:{url},</Text>
+              <Text type="success">name:{name}</Text>
               <DeleteOutlined
                 onClick={() => {
                   setUsageScenariosImgUrls((urls = []) => {
-                    return urls?.filter(i => i !== url);
+                    return urls?.filter(i => i.url !== url);
                   });
                 }}
               />
             </div>
           );
         })}
-        <div>
-          <Form.Item name="usage-scenarios-img-urls" label="展示图片链接">
-            <Input
-              suffix={
-                <Button
-                  onClick={() => {
-                    const currentInputUrl = form.getFieldValue(
-                      'usage-scenarios-img-urls',
-                    );
-                    if (!currentInputUrl) {
-                      return;
-                    }
-                    setUsageScenariosImgUrls((urls = []) => {
-                      return [...urls, currentInputUrl];
-                    });
-                    form.setFieldsValue({
-                      'usage-scenarios-img-urls': '',
-                    });
-                  }}
-                >
-                  增加
-                </Button>
-              }
-            />
+        <div style={{ border: '1px solid red' }}>
+          <Form.Item name="usage-scenarios-img-url" label="展示图片链接">
+            <Input />
           </Form.Item>
+          <Form.Item name="usage-scenarios-img-name" label="展示图片名">
+            <Input />
+          </Form.Item>
+          <Button
+            onClick={() => {
+              const currentInputUrl = form.getFieldValue(
+                'usage-scenarios-img-url',
+              );
+              const currentInputName = form.getFieldValue(
+                'usage-scenarios-img-name',
+              );
+              if (!currentInputUrl || !currentInputName) {
+                message.warn('链接或名称不得为空');
+                return;
+              }
+              setUsageScenariosImgUrls((urls = []) => {
+                return [
+                  ...urls,
+                  { name: currentInputName, url: currentInputUrl },
+                ];
+              });
+              form.setFieldsValue({
+                'usage-scenarios-img-url': '',
+                'usage-scenarios-img-name': '',
+              });
+            }}
+          >
+            增加
+          </Button>
         </div>
 
         <div style={{ textAlign: 'center' }}>
