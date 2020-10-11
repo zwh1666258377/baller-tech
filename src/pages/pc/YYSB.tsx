@@ -1,37 +1,45 @@
 import React from 'react';
 import AudioTranslator from '../modules/AudioTranslator';
 import ProductIntro from '../modules/ProductIntro';
-import TextTranslator from '../modules/TextTranslator';
 import ImageCarousel from '../modules/ImageCarousel';
 import PCBase from './PCBase';
-import { Module } from '../common/Defs';
-import { Spin } from 'antd';
-import { getModule } from '../common/DataApi';
+import { PageProps } from '../common/Defs';
+import { getModule, getWebsite } from '../common/DataApi';
 
-const YYSB = (props: { data: Module }) => {
-  const data = props.data;
+const YYSB = (props: PageProps) => {
+  const module = props.data?.module;
+  const website = props.data?.website;
 
-  return <PCBase kind="yysb" content={content} />;
+  return <PCBase kind="yysb" content={content} website={website} />;
 
   function content() {
     return (
       <div style={{ width: '100%', padding: '90px 160px 70px 70px' }}>
-        {data?.poductIntroduction && (
-          <ProductIntro data={data.poductIntroduction} />
+        {module?.poductIntroduction && (
+          <ProductIntro data={module.poductIntroduction} />
         )}
         <AudioTranslator style={{ marginTop: 100 }} />
-        <ImageCarousel
-          style={{ marginTop: 100 }}
-          label={{ cn: '应用场景', en: 'Usage Scenarios' }}
-        />
+        {module?.usageScenarios?.display && (
+          <ImageCarousel
+            imgs={module?.usageScenarios?.imgUrls}
+            style={{ marginTop: 100 }}
+            label={
+              module?.usageScenarios?.title || {
+                cn: '应用场景',
+                en: 'Usage Scenarios',
+              }
+            }
+          />
+        )}
       </div>
     );
   }
 };
 
 YYSB.getInitialProps = async () => {
-  const data = await getModule('yysb');
-  return { data };
+  const module = await getModule('yysb');
+  const website = await getWebsite();
+  return { data: { module, website } };
 };
 
 export default YYSB;

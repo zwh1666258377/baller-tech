@@ -6,12 +6,13 @@ import { Motion, spring } from 'react-motion';
 import MTitle from '../parts/MTitle';
 import { Link } from 'umi';
 import ImageCarousel from '../modules/ImageCarousel';
-import { getWebsite } from '../common/DataApi';
-import { Website } from '../common/Defs';
-import { btnImg, website } from '../common/Source';
+import { getModule, getWebsite } from '../common/DataApi';
+import { PageProps } from '../common/Defs';
+import { btnImg, homeDefault } from '../common/Source';
 
-const Home = (props: { data: Website }) => {
-  const data = props.data;
+const Home = (props: PageProps) => {
+  const module = props.data?.module;
+  const website = props.data?.website;
   const springConfig = {
     stiffness: 130,
     damping: 30,
@@ -53,8 +54,9 @@ const Home = (props: { data: Website }) => {
         >
           <div>
             <img
+              onDragStart={() => false}
               style={{ height: '100vh', width: '100%' }}
-              src={website.defaultbg}
+              src={homeDefault.defaultbg}
             />
           </div>
         </Carousel>
@@ -68,7 +70,7 @@ const Home = (props: { data: Website }) => {
           left: 45,
         }}
       >
-        <img src={data?.icon} style={{ width: '100%', height: '100%' }} />
+        <img src={website?.icon} style={{ width: '100%', height: '100%' }} />
       </div>
       <div>
         <div
@@ -105,7 +107,7 @@ const Home = (props: { data: Website }) => {
                         opacity: o,
                       }}
                     >
-                      {data.slogan.main}
+                      {website?.slogan.main}
                     </div>
                     <div
                       style={{
@@ -114,7 +116,7 @@ const Home = (props: { data: Website }) => {
                         opacity: o,
                       }}
                     >
-                      {data.slogan.sub}
+                      {website?.slogan.sub}
                     </div>
                   </>
                 )}
@@ -139,11 +141,7 @@ const Home = (props: { data: Website }) => {
                 url={btnImg.wzsb}
                 to="wzsb"
               />
-              <ImgLabel
-                style={{ width: 820 }}
-                url={btnImg.txsb}
-                to="txsbmbjc"
-              />
+              <ImgLabel style={{ width: 820 }} url={btnImg.txsb} to="txsb" />
             </div>
           </div>
           <div
@@ -151,42 +149,45 @@ const Home = (props: { data: Website }) => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
+              width: 1240,
+              margin: 'auto',
             }}
           >
             <div>
               <MTitle
                 style={{ fontSize: 32 }}
-                label={data?.contact?.name}
+                label={website?.contact?.name}
                 color="#FFF"
               ></MTitle>
               <div
                 style={{
                   marginTop: 68,
                   whiteSpace: 'pre-line',
-                  lineHeight: 1.7,
+                  lineHeight: 2,
                   fontSize: 20,
                   color: '#FFF',
                 }}
               >
-                {data.contact.content}
+                {website?.contact.content}
               </div>
               <ImageCarousel
-                imgs={[]}
+                imgs={module?.partne?.imgUrls}
                 style={{ marginTop: 60 }}
                 pageSize={{ normal: 5 }}
               />
             </div>
           </div>
         </div>
-        <BTFooter style={{ marginTop: 80 }} />
+        <BTFooter data={website} style={{ minWidth: 1400, marginTop: 80 }} />
       </div>
     </div>
   );
 };
 
 Home.getInitialProps = async () => {
-  const data = await getWebsite();
-  return { data };
+  const module = await getModule('ljwm');
+  const website = await getWebsite();
+  return { data: { module, website } };
 };
 
 export default Home;

@@ -1,12 +1,12 @@
 export const btnImg = {
-  jqfy: '/api/get/file?id=5f82b293661d5e0f4ab9f51c',
-  yysb: '/api/get/file?id=5f82b28c661d5e0f4ab9f51a',
-  yyhc: '/api/get/file?id=5f82b284661d5e0f4ab9f519',
-  wzsb: '/api/get/file?id=5f82b280661d5e0f4ab9f518',
-  txsb: '/api/get/file?id=5f82b28f661d5e0f4ab9f51b',
+  jqfy: '/api/get/file?id=5f82d1d4434b8a7ce5724eba',
+  yysb: '/api/get/file?id=5f82d1e7434b8a7ce5724ebb',
+  yyhc: '/api/get/file?id=5f82d1eb434b8a7ce5724ebc',
+  wzsb: '/api/get/file?id=5f82d1f2434b8a7ce5724ebd',
+  txsb: '/api/get/file?id=5f82d1f5434b8a7ce5724ebe',
 };
 
-export const website = {
-  logo: '/api/get/file?id=5f82b35d661d5e0f4ab9f51e',
-  defaultbg: '/api/get/file?id=5f82b2fc661d5e0f4ab9f51d',
+export const homeDefault = {
+  logo: '/api/get/file?id=5f82d1bf434b8a7ce5724eb8',
+  defaultbg: '/api/get/file?id=5f82d1c8434b8a7ce5724eb9',
 };

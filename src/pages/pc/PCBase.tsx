@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'umi';
+import { Website } from '../common/Defs';
 import { Colors } from '../common/Styles';
 import BTFooter from '../parts/BTFooter';
 import BTSider from '../parts/BTSider';
@@ -7,11 +7,10 @@ import BTSider from '../parts/BTSider';
 interface Props {
   kind: string;
   content: () => React.ReactNode;
+  website: Website;
 }
 
 const PCBase = (props: Props) => {
-  const h = useHistory();
-
   return (
     <div style={{ minWidth: 1200, display: 'flex', flexDirection: 'row' }}>
       <div
@@ -23,16 +22,11 @@ const PCBase = (props: Props) => {
           minWidth: 210,
         }}
       >
-        <BTSider
-          kind={props.kind}
-          onTabChange={kind => {
-            h.push(`/${kind}`);
-          }}
-        />
+        <BTSider kind={props.kind} icon={props.website?.icon} />
       </div>
       <div style={{ width: '80%', overflow: 'auto', height: '100vh' }}>
         {props.content()}
-        <BTFooter />
+        <BTFooter data={props.website} />
       </div>
     </div>
   );

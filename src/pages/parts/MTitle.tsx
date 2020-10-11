@@ -11,6 +11,9 @@ interface Props {
 }
 
 const MTitle = ({ style = {}, label, color }: Props) => {
+  if (!label?.cn) {
+    return null;
+  }
   return (
     <div style={{ fontSize: 22, ...style }}>
       <span

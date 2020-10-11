@@ -2,9 +2,14 @@ import { Carousel, Col, Image, Row } from 'antd';
 import React, { CSSProperties } from 'react';
 import MTitle from '../parts/MTitle';
 
-const imgList = (imgs: string[], num: number) => {
+interface Item {
+  url: string;
+  name: string;
+}
+
+const imgList = (imgs: Item[], num: number) => {
   const data = Array.from(imgs);
-  const list: string[][] = [];
+  const list: Item[][] = [];
   while (data.length > 0) {
     list.push(data.splice(0, num));
   }
@@ -12,7 +17,7 @@ const imgList = (imgs: string[], num: number) => {
 };
 
 interface Props {
-  imgs?: string[];
+  imgs: Item[];
   style?: CSSProperties;
   label?: { cn: string; en: string };
   pageSize?: { normal?: number; small?: number };
@@ -23,25 +28,24 @@ const ImageCarousel = (props: Props) => {
   if (!props.imgs || props.imgs.length === 0) {
     return null;
   }
-
   const pageSize = props.pageSize?.normal || 3;
   const list = imgList(props.imgs, pageSize);
-
+  const autoplay = props.autoplay === undefined ? true : props.autoplay;
   return (
     <div style={props.style}>
       {props.label && (
-        <MTitle style={{ marginBottom: 58 }} label={props.label} />
+        <MTitle style={{ marginBottom: 52 }} label={props.label} />
       )}
       <div>
-        <Carousel autoplay={props.autoplay} autoplaySpeed={5000}>
+        <Carousel autoplay={autoplay} autoplaySpeed={5000}>
           {list.map((l, i) => {
             return (
               <div key={i}>
                 <Row>
                   <div style={{ display: 'flex' }}>
-                    {l.map((url, i) => (
+                    {l.map((item, i) => (
                       <div
-                        key={url}
+                        key={item.url + i}
                         style={{
                           width: `${100 / pageSize}%`,
                           marginRight: i != l.length - 1 ? 20 : 0,
@@ -49,7 +53,7 @@ const ImageCarousel = (props: Props) => {
                       >
                         <Image
                           style={{ width: '100%', height: 'auto' }}
-                          src={url}
+                          src={item.url}
                         />
                       </div>
                     ))}

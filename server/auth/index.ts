@@ -8,6 +8,7 @@ const filterList = [
   '/api/yyhc',
   '/api/wzsb',
   '/api/txsb',
+  '/api/ljwm',
   '/static',
   '/api/get-website',
 ];

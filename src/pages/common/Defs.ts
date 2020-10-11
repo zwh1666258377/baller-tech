@@ -1,3 +1,9 @@
+export interface PageProps {
+  data: {
+    module: Module;
+    website: Website;
+  };
+}
 export type KindsType =
   | 'jqfy'
   | 'yysb'
@@ -11,7 +17,49 @@ export interface Module {
     cn: string;
     en: string;
   };
+  companyIntroduction: {
+    display: boolean;
+    title: {
+      cn: string;
+      en: string;
+    };
+    content: string;
+  };
+  honor: {
+    display: boolean;
+    title: {
+      cn: string;
+      en: string;
+    };
+    imgUrls: Array<{
+      url: string;
+      name: string;
+    }>;
+  };
+  partne: {
+    display: boolean;
+    title: {
+      cn: string;
+      en: string;
+    };
+    imgUrls: Array<{
+      url: string;
+      name: string;
+    }>;
+  };
+  contact: {
+    display: boolean;
+    title: {
+      cn: string;
+      en: string;
+    };
+    imgUrls: Array<{
+      url: string;
+      name: string;
+    }>;
+  };
   poductIntroduction: {
+    display: boolean;
     title: {
       cn: string;
       en: string;
@@ -24,11 +72,15 @@ export interface Module {
     };
   };
   usageScenarios: {
+    display: boolean;
     title: {
       cn: string;
       en: string;
     };
-    imgUrls: string[];
+    imgUrls: Array<{
+      url: string;
+      name: string;
+    }>;
   };
 }
 

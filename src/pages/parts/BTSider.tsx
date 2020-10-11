@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'umi';
-import { Colors } from '../common/Styles';
 
 interface Props {
   kind: string;
-  onTabChange: (kind: string) => void;
+  icon: string;
 }
 
 const BTSider = (props: Props) => {
@@ -35,7 +34,7 @@ const BTSider = (props: Props) => {
         <Link to="/">
           <img
             style={{ width: '100%', minWidth: 200, height: 'auto' }}
-            src={'/api/get/file?id=5f79753aaf9a795f27dd23f3'}
+            src={props.icon}
             alt=""
           />
         </Link>
@@ -51,38 +50,36 @@ const BTSider = (props: Props) => {
           {tabs?.map(t => {
             const active = props.kind === t.kind;
             return (
-              <div
-                key={t.kind}
-                style={{
-                  cursor: 'pointer',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  margin: '10px 0',
-                }}
-                onClick={() => {
-                  props.onTabChange && props.onTabChange(t.kind);
-                }}
-              >
+              <Link key={t.kind} to={t.kind}>
                 <div
                   style={{
-                    fontSize: active ? 20 : 18,
-                    padding: 20,
-                    color: active ? '#FFF' : '#A4CCF7',
+                    cursor: 'pointer',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    margin: '10px 0',
                   }}
                 >
-                  {t.label}
+                  <div
+                    style={{
+                      fontSize: active ? 20 : 18,
+                      padding: 20,
+                      color: active ? '#FFF' : '#A4CCF7',
+                    }}
+                  >
+                    {t.label}
+                  </div>
+                  <div
+                    style={{
+                      height: 50,
+                      width: 6,
+                      backgroundColor: '#FFF',
+                      opacity: active ? 1 : 0,
+                      marginRight: 2,
+                    }}
+                  />
                 </div>
-                <div
-                  style={{
-                    height: 50,
-                    width: 6,
-                    backgroundColor: '#FFF',
-                    opacity: active ? 1 : 0,
-                    marginRight: 2,
-                  }}
-                />
-              </div>
+              </Link>
             );
           })}
         </div>
@@ -113,7 +110,7 @@ async function fetchDashboard() {
     },
     {
       label: '图像识别和目标检测',
-      kind: 'txsbmbjc',
+      kind: 'txsb',
     },
     {
       label: '了解我们',

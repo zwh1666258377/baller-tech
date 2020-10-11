@@ -175,7 +175,7 @@ const Index = () => {
         </Form.Item>
 
         <Form.Item name="company-content" label="内容">
-          <Input />
+          <Input.TextArea autoSize={{ minRows: 5 }} />
         </Form.Item>
         {contactImgUrls
           ?.filter(i => !!i)

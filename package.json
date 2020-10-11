@@ -1,6 +1,7 @@
 {
   "private": true,
   "scripts": {
+    "docker": "cd docker && docker-compose up -d && cd .. && yarn server",
     "start": "HTTPS=1 umi dev",
     "build": "umi build",
     "server": "nodemon",
@@ -23,17 +24,6 @@
   "dependencies": {
     "@ant-design/icons": "^4.2.2",
     "@ant-design/pro-layout": "^5.0.12",
-    "@types/cookie-parser": "^1.4.2",
-    "@types/express-session": "^1.17.0",
-    "@types/http-errors": "^1.8.0",
-    "@types/md5": "^2.2.0",
-    "@types/mongodb": "^3.5.27",
-    "@types/mongoose": "^5.7.36",
-    "@types/morgan": "^1.9.1",
-    "@types/node": "^11.11.3",
-    "@types/request": "^2.48.5",
-    "@types/socket.io": "^2.1.11",
-    "@types/socket.io-client": "^1.4.34",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.2.20",
     "ahooks": "^2.6.1",
@@ -81,6 +71,18 @@
     "yorkie": "^2.0.0"
   },
   "devDependencies": {
-    "@types/react-motion": "^0.0.29"
+    "@types/cors": "^2.8.8",
+    "@types/react-motion": "^0.0.29",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/express-session": "^1.17.0",
+    "@types/http-errors": "^1.8.0",
+    "@types/md5": "^2.2.0",
+    "@types/mongodb": "^3.5.27",
+    "@types/mongoose": "^5.7.36",
+    "@types/morgan": "^1.9.1",
+    "@types/node": "^11.11.3",
+    "@types/request": "^2.48.5",
+    "@types/socket.io": "^2.1.11",
+    "@types/socket.io-client": "^1.4.34"
   }
 }
