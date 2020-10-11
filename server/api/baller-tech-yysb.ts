@@ -12,8 +12,8 @@ const upload = multer({ dest: resolve('static/baller-tech/') });
 export function ballerTechYYSB(app: ReturnType<typeof express>) {
   app.post('/api/yysb', upload.any(), async (req, res) => {
     const { language } = req.body;
+    console.log(language);
     const file = req.files[0];
-
     if (!language) {
       res.json({
         status: 'error',
@@ -39,23 +39,6 @@ export function ballerTechYYSB(app: ReturnType<typeof express>) {
         data: result,
       });
     });
-    // let data = '';
-    // const readerStream = fs.createReadStream(file.path);
-    // readerStream.setEncoding('UTF8');
-    // readerStream.on('data', chunk => (data += chunk));
-    // readerStream.on('end', function () {
-    //   const formData = {
-    //     my_field: file.fieldname,
-    //     my_file: fs.createReadStream(file.path),
-    //   };
-
-    //   postTranslate({ language, formData }).then(result => {
-    //     res.json({
-    //       status: 'ok',
-    //       data: result
-    //     });
-    //   });
-    // });
   });
 }
 

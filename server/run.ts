@@ -6,22 +6,13 @@
 
 import app from './app';
 import http from 'http';
-
-/**
- * Get port from environment and store in Express.
- */
+import { initSocket } from './socket';
 
 const HTTP_PORT = normalizePort('8080');
+const httpServer = http.createServer(app);
+initSocket(httpServer);
 
 app.set('port', HTTP_PORT);
-
-/**
- * Create HTTP server.
- */
-
-const httpServer = http.createServer(app);
-
-// http
 httpServer.on('error', err => onError(err, HTTP_PORT));
 httpServer.listen(HTTP_PORT, () => {
   console.log(

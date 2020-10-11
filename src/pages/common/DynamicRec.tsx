@@ -1,8 +1,14 @@
 import * as React from 'react';
 
+type OnProcess =
+  | ((buffers, powerLevel, bufferDuration, bufferSampleRate) => void)
+  | undefined;
+
 export const DynamicRec: any = ({ recRef }: { recRef: (ref: any) => void }) => {
   class Rec {
     rec;
+
+    onProcess: OnProcess;
 
     open = success => {
       // @ts-ignore
@@ -10,6 +16,16 @@ export const DynamicRec: any = ({ recRef }: { recRef: (ref: any) => void }) => {
         type: 'mp3',
         sampleRate: 16000,
         bitRate: 16,
+        onProcess: (buffers, powerLevel, bufferDuration, bufferSampleRate) => {
+          if (!!this.onProcess) {
+            this.onProcess(
+              buffers,
+              powerLevel,
+              bufferDuration,
+              bufferSampleRate,
+            );
+          }
+        },
       });
       this.rec?.open(
         () => {
