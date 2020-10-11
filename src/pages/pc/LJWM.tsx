@@ -1,6 +1,6 @@
 import { Spin } from 'antd';
 import React, { CSSProperties } from 'react';
-import { Module } from '../common/Module';
+import { Module } from '../common/Defs';
 import ImageCarousel from '../modules/ImageCarousel';
 import ImageDisplay from '../modules/ImageDisplay';
 import MTitle from '../parts/MTitle';

@@ -2,52 +2,9 @@ import { Carousel, Col, Image, Row } from 'antd';
 import React, { CSSProperties } from 'react';
 import MTitle from '../parts/MTitle';
 
-const res = [
-  {
-    key: '1',
-    url:
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601626973766&di=cbfeaaa0d43bc1fcd855db59f93a2539&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201205%2F15%2F152011zser9o5oa9ee9xx6.jpg',
-  },
-  {
-    key: '2',
-    url:
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601626973766&di=cbfeaaa0d43bc1fcd855db59f93a2539&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201205%2F15%2F152011zser9o5oa9ee9xx6.jpg',
-  },
-  {
-    key: '3',
-    url:
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601626973766&di=cbfeaaa0d43bc1fcd855db59f93a2539&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201205%2F15%2F152011zser9o5oa9ee9xx6.jpg',
-  },
-  {
-    key: '4',
-    url:
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601626973766&di=cbfeaaa0d43bc1fcd855db59f93a2539&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201205%2F15%2F152011zser9o5oa9ee9xx6.jpg',
-  },
-  {
-    key: '5',
-    url:
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601626973766&di=cbfeaaa0d43bc1fcd855db59f93a2539&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201205%2F15%2F152011zser9o5oa9ee9xx6.jpg',
-  },
-  {
-    key: '6',
-    url:
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601626973766&di=cbfeaaa0d43bc1fcd855db59f93a2539&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201205%2F15%2F152011zser9o5oa9ee9xx6.jpg',
-  },
-  {
-    key: '7',
-    url:
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601626973766&di=cbfeaaa0d43bc1fcd855db59f93a2539&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201205%2F15%2F152011zser9o5oa9ee9xx6.jpg',
-  },
-  {
-    key: '8',
-    url:
-      'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601626973766&di=cbfeaaa0d43bc1fcd855db59f93a2539&imgtype=0&src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201205%2F15%2F152011zser9o5oa9ee9xx6.jpg',
-  },
-];
-
-const imgList = (num: number) => {
-  const data = Array.from(res);
-  const list: { url: string; key: string }[][] = [];
+const imgList = (imgs: string[], num: number) => {
+  const data = Array.from(imgs);
+  const list: string[][] = [];
   while (data.length > 0) {
     list.push(data.splice(0, num));
   }
@@ -55,6 +12,7 @@ const imgList = (num: number) => {
 };
 
 interface Props {
+  imgs?: string[];
   style?: CSSProperties;
   label?: { cn: string; en: string };
   pageSize?: { normal?: number; small?: number };
@@ -62,8 +20,12 @@ interface Props {
 }
 
 const ImageCarousel = (props: Props) => {
+  if (!props.imgs || props.imgs.length === 0) {
+    return null;
+  }
+
   const pageSize = props.pageSize?.normal || 3;
-  const list = imgList(pageSize);
+  const list = imgList(props.imgs, pageSize);
 
   return (
     <div style={props.style}>
@@ -77,9 +39,9 @@ const ImageCarousel = (props: Props) => {
               <div key={i}>
                 <Row>
                   <div style={{ display: 'flex' }}>
-                    {l.map((d, i) => (
+                    {l.map((url, i) => (
                       <div
-                        key={d.key}
+                        key={url}
                         style={{
                           width: `${100 / pageSize}%`,
                           marginRight: i != l.length - 1 ? 20 : 0,
@@ -87,7 +49,7 @@ const ImageCarousel = (props: Props) => {
                       >
                         <Image
                           style={{ width: '100%', height: 'auto' }}
-                          src={d.url}
+                          src={url}
                         />
                       </div>
                     ))}

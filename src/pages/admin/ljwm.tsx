@@ -108,7 +108,7 @@ const Index = () => {
         <Form.Item name="name-en" label="栏目英文名">
           <Input />
         </Form.Item>
-        <Title level={3}>产品介绍</Title>
+        <Title level={3}>公司简介</Title>
         <Form.Item name="poduct-introduction-name-cn" label="中文Title">
           <Input />
         </Form.Item>

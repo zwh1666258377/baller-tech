@@ -7,7 +7,7 @@ import TextTranslator from '../modules/TextTranslator';
 import ImageCarousel from '../modules/ImageCarousel';
 import VideoDisplay from '../modules/VideoDisplay';
 import PCBase from './PCBase';
-import { Module } from '../common/Module';
+import { Module } from '../common/Defs';
 import { Spin } from 'antd';
 import { getModule } from '../common/DataApi';
 

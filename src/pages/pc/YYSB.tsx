@@ -4,7 +4,7 @@ import ProductIntro from '../modules/ProductIntro';
 import TextTranslator from '../modules/TextTranslator';
 import ImageCarousel from '../modules/ImageCarousel';
 import PCBase from './PCBase';
-import { Module } from '../common/Module';
+import { Module } from '../common/Defs';
 import { Spin } from 'antd';
 import { getModule } from '../common/DataApi';
 
