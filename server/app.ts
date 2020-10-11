@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import express from 'express';
 import createError from 'http-errors';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import { sha1 } from 'utility';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
@@ -38,7 +39,8 @@ class App {
     // connect db
     this.connectDb();
     // 设置允许跨域
-    setAccessControlAllowHeaders(this.app);
+    // setAccessControlAllowHeaders(this.app);
+    this.app.use(cors());
     // set middle ware
     this.setMiddleWares();
     // set routes
