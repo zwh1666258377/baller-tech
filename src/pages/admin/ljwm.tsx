@@ -6,6 +6,7 @@ import {
   message,
   notification,
   Spin,
+  Switch,
   Typography,
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
@@ -44,6 +45,7 @@ const Index = () => {
         en: value['name-en'],
       },
       poductIntroduction: {
+        display: value['poduct-introduction-display'],
         title: {
           cn: value['poduct-introduction-name-cn'],
           en: value['poduct-introduction-name-en'],
@@ -51,6 +53,7 @@ const Index = () => {
         content: value['poduct-introduction-content'],
       },
       honor: {
+        display: value['honor-display'],
         title: {
           cn: value['honor-name-cn'],
           en: value['honor-name-en'],
@@ -58,6 +61,7 @@ const Index = () => {
         imgUrls: honor,
       },
       partne: {
+        display: value['partne-display'],
         title: {
           cn: value['usage-scenarios-name-cn'],
           en: value['usage-scenarios-name-en'],
@@ -65,6 +69,7 @@ const Index = () => {
         imgUrls: partne,
       },
       contact: {
+        display: value['contact-display'],
         title: {
           cn: value['usage-scenarios-name-cn'],
           en: value['usage-scenarios-name-en'],
@@ -108,6 +113,10 @@ const Index = () => {
           'poduct-introduction-name-cn': r?.poductIntroduction?.title?.cn,
           'poduct-introduction-name-en': r?.poductIntroduction?.title?.cn,
           'poduct-introduction-content': r?.poductIntroduction?.content,
+          'poduct-introduction-display': r?.poductIntroduction?.display,
+          'honor-display': r?.honor?.display,
+          'partne-display': r?.partne?.display,
+          'contact-display': r?.contact?.display,
         });
 
         setHonor(r?.honor?.imgUrls);
@@ -132,6 +141,14 @@ const Index = () => {
           <Input />
         </Form.Item>
         <Title level={3}>产品介绍</Title>
+        <Form.Item name="poduct-introduction-display" label="展示">
+          <Switch
+            checked={form.getFieldValue('poduct-introduction-display')}
+            onChange={v => {
+              form.setFieldsValue({ 'poduct-introduction-display': v });
+            }}
+          />
+        </Form.Item>
         <Form.Item name="poduct-introduction-name-cn" label="中文Title">
           <Input />
         </Form.Item>
@@ -144,6 +161,14 @@ const Index = () => {
         </Form.Item>
 
         <Title level={3}>荣誉资质</Title>
+        <Form.Item name="honor-display" label="展示">
+          <Switch
+            checked={form.getFieldValue('honor-display')}
+            onChange={v => {
+              form.setFieldsValue({ 'honor-display': v });
+            }}
+          />
+        </Form.Item>
         {honor?.map(({ url, name }, idx) => {
           return (
             <div key={idx} style={{ textAlign: 'center' }}>
@@ -193,6 +218,14 @@ const Index = () => {
         </div>
 
         <Title level={3}>合作伙伴</Title>
+        <Form.Item name="partne-display" label="展示">
+          <Switch
+            checked={form.getFieldValue('partne-display')}
+            onChange={v => {
+              form.setFieldsValue({ 'partne-display': v });
+            }}
+          />
+        </Form.Item>
         {partne?.map(({ url, name }, idx) => {
           return (
             <div key={idx} style={{ textAlign: 'center' }}>
@@ -243,6 +276,14 @@ const Index = () => {
         </div>
 
         <Title level={3}>联系我们</Title>
+        <Form.Item name="contact-display" label="展示">
+          <Switch
+            checked={form.getFieldValue('contact-display')}
+            onChange={v => {
+              form.setFieldsValue({ 'contact-display': v });
+            }}
+          />
+        </Form.Item>
         {contact?.map(({ url, name }, idx) => {
           return (
             <div key={idx} style={{ textAlign: 'center' }}>

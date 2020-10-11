@@ -86,6 +86,7 @@ const moduleSchema = new Schema({
   },
   honor: {
     type: {
+      display: Types.Boolean,
       title: {
         cn: Types.String,
         en: Types.String,
@@ -96,10 +97,14 @@ const moduleSchema = new Schema({
           name: Types.String,
         },
       ],
+    },
+    default: {
+      display: true,
     },
   },
   contact: {
     type: {
+      display: Types.Boolean,
       title: {
         cn: Types.String,
         en: Types.String,
@@ -110,10 +115,14 @@ const moduleSchema = new Schema({
           name: Types.String,
         },
       ],
+    },
+    default: {
+      display: true,
     },
   },
   partne: {
     type: {
+      display: Types.Boolean,
       title: {
         cn: Types.String,
         en: Types.String,
@@ -125,18 +134,26 @@ const moduleSchema = new Schema({
         },
       ],
     },
+    default: {
+      display: true,
+    },
   },
   companyIntroduction: {
     type: {
+      display: Types.Boolean,
       title: {
         cn: Types.String,
         en: Types.String,
       },
       content: Types.String,
     },
+    default: {
+      display: true,
+    },
   },
   poductIntroduction: {
     type: {
+      display: Types.Boolean,
       title: {
         cn: Types.String,
         en: Types.String,
@@ -148,9 +165,13 @@ const moduleSchema = new Schema({
         url: Types.String,
       },
     },
+    default: {
+      display: true,
+    },
   },
   usageScenarios: {
     type: {
+      display: Types.Boolean,
       imgUrls: [
         {
           url: Types.String,
@@ -159,6 +180,7 @@ const moduleSchema = new Schema({
       ],
     },
     default: {
+      display: true,
       imgUrls: [],
     },
   },

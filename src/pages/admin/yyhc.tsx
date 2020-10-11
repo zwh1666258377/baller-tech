@@ -6,6 +6,7 @@ import {
   message,
   notification,
   Spin,
+  Switch,
   Typography,
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
@@ -32,6 +33,7 @@ const Index = () => {
         en: value['name-en'],
       },
       poductIntroduction: {
+        display: value['poduct-introduction-display'],
         title: {
           cn: value['poduct-introduction-name-cn'],
           en: value['poduct-introduction-name-en'],
@@ -44,6 +46,7 @@ const Index = () => {
         },
       },
       usageScenarios: {
+        display: value['usage-scenarios-display'],
         title: {
           cn: value['usage-scenarios-name-cn'],
           en: value['usage-scenarios-name-en'],
@@ -84,6 +87,7 @@ const Index = () => {
         form.setFieldsValue({
           'name-cn': r?.name?.cn,
           'name-en': r?.name?.en,
+          'poduct-introduction-display': r?.poductIntroduction?.display,
           'poduct-introduction-name-cn': r?.poductIntroduction?.title?.cn,
           'poduct-introduction-name-en': r?.poductIntroduction?.title?.cn,
           'poduct-introduction-img-url': r?.poductIntroduction?.imgUrl,
@@ -91,6 +95,7 @@ const Index = () => {
           'poduct-introduction-button-text':
             r?.poductIntroduction?.button?.text,
           'poduct-introduction-button-link': r?.poductIntroduction?.button?.url,
+          'usage-scenarios-display': r?.usageScenarios?.display,
           'usage-scenarios-name-cn': r?.usageScenarios?.title?.cn,
           'usage-scenarios-name-en': r?.usageScenarios?.title?.en,
         });
@@ -114,6 +119,14 @@ const Index = () => {
           <Input />
         </Form.Item>
         <Title level={3}>产品介绍</Title>
+        <Form.Item name="poduct-introduction-display" label="展示">
+          <Switch
+            checked={form.getFieldValue('poduct-introduction-display')}
+            onChange={v => {
+              form.setFieldsValue({ 'poduct-introduction-display': v });
+            }}
+          />
+        </Form.Item>
         <Form.Item name="poduct-introduction-name-cn" label="中文Title">
           <Input />
         </Form.Item>
@@ -133,6 +146,14 @@ const Index = () => {
           <Input />
         </Form.Item>
         <Title level={3}>使用场景</Title>
+        <Form.Item name="usage-scenarios-display" label="展示">
+          <Switch
+            checked={form.getFieldValue('usage-scenarios-display')}
+            onChange={v => {
+              form.setFieldsValue({ 'usage-scenarios-display': v });
+            }}
+          />
+        </Form.Item>
         <Form.Item name="usage-scenarios-name-cn" label="中文Title">
           <Input />
         </Form.Item>
