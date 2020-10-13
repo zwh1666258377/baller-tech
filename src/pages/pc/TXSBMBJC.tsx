@@ -18,17 +18,12 @@ const TXSBMBJC = (props: PageProps) => {
         {module?.poductIntroduction && (
           <ProductIntro data={module.poductIntroduction} />
         )}
-        <VideoDisplay style={{ marginTop: 100 }} />
+        <VideoDisplay style={{ marginTop: 98 }} />
         {module?.usageScenarios?.display && (
           <ImageCarousel
             imgs={module?.usageScenarios?.imgUrls}
-            style={{ marginTop: 100 }}
-            label={
-              module?.usageScenarios?.title || {
-                cn: '应用场景',
-                en: 'Usage Scenarios',
-              }
-            }
+            style={{ marginTop: 98 }}
+            label={module?.usageScenarios?.title}
           />
         )}
       </div>

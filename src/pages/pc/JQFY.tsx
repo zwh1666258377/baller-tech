@@ -18,17 +18,12 @@ const JQFY = (props: PageProps) => {
         {module?.poductIntroduction?.display && (
           <ProductIntro data={module?.poductIntroduction} />
         )}
-        <TextTranslator style={{ marginTop: 100 }} />
+        <TextTranslator style={{ marginTop: 98 }} />
         {module?.usageScenarios?.display && (
           <ImageCarousel
             imgs={module?.usageScenarios?.imgUrls}
-            style={{ marginTop: 100 }}
-            label={
-              module?.usageScenarios?.title || {
-                cn: '应用场景',
-                en: '应用场景',
-              }
-            }
+            style={{ marginTop: 98 }}
+            label={module?.usageScenarios?.title}
           />
         )}
       </div>

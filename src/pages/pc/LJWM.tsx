@@ -29,25 +29,25 @@ const LJWM = (props: PageProps) => {
         </div>
         {module?.honor?.display && (
           <ImageCarousel
-            style={{ marginTop: 100 }}
+            style={{ marginTop: 98 }}
             imgs={module?.honor?.imgUrls}
-            label={module?.honor?.title || { cn: '应用场景', en: '应用场景' }}
+            label={module?.honor?.title}
             pageSize={{ normal: 5, small: 3 }}
           />
         )}
         {module?.partne?.display && (
           <ImageCarousel
-            style={{ marginTop: 100 }}
+            style={{ marginTop: 98 }}
             imgs={module?.partne?.imgUrls}
-            label={module?.partne?.title || { cn: '应用场景', en: '应用场景' }}
+            label={module?.partne?.title}
             pageSize={{ normal: 5, small: 3 }}
           />
         )}
         {module?.contact?.display && (
           <ImageCarousel
-            style={{ marginTop: 100 }}
+            style={{ marginTop: 98 }}
             imgs={module?.contact?.imgUrls}
-            label={module?.honor?.title || { cn: '应用场景', en: '应用场景' }}
+            label={module?.honor?.title}
             pageSize={{ normal: 2, small: 2 }}
           />
         )}

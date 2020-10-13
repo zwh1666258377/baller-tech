@@ -39,7 +39,7 @@ const BTSider = (props: Props) => {
           />
         </Link>
       </div>
-      <div style={{ marginTop: 100, width: '100%' }}>
+      <div style={{ marginTop: 65, width: '100%' }}>
         <div
           style={{
             display: 'flex',

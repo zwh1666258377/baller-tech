@@ -25,6 +25,7 @@ const Index = () => {
   const [loading, setLoading] = React.useState(true);
 
   const submit = value => {
+    console.log('----', value);
     setLoading(true);
     const data = {
       kind: 'jqfy',
@@ -120,9 +121,13 @@ const Index = () => {
           <Input />
         </Form.Item>
         <Title level={3}>产品介绍</Title>
-        <Form.Item name="poduct-introduction-display" label="展示">
+        <Form.Item
+          name="poduct-introduction-display"
+          label="展示"
+          valuePropName="checked"
+        >
           <Switch
-            checked={form.getFieldValue('poduct-introduction-display')}
+            defaultChecked={form.getFieldValue('poduct-introduction-display')}
             onChange={v => {
               form.setFieldsValue({ 'poduct-introduction-display': v });
             }}
@@ -147,9 +152,13 @@ const Index = () => {
           <Input />
         </Form.Item>
         <Title level={3}>使用场景</Title>
-        <Form.Item name="usage-scenarios-display" label="展示">
+        <Form.Item
+          name="usage-scenarios-display"
+          label="展示"
+          valuePropName="checked"
+        >
           <Switch
-            checked={form.getFieldValue('usage-scenarios-display')}
+            defaultChecked={form.getFieldValue('usage-scenarios-display')}
             onChange={v => {
               form.setFieldsValue({ 'usage-scenarios-display': v });
             }}

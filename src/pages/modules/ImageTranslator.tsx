@@ -256,7 +256,6 @@ const ImageTranslator = (props: Props) => {
             maxHeight: 250,
             overflow: 'auto',
             flex: 1,
-            padding: 10,
             color: '#888',
             border: '1px solid #BBB',
             margin: '0px 20px',

@@ -141,9 +141,13 @@ const Index = () => {
           <Input />
         </Form.Item>
         <Title level={3}>公司简介</Title>
-        <Form.Item name="poduct-introduction-display" label="展示">
+        <Form.Item
+          name="poduct-introduction-display"
+          label="展示"
+          valuePropName="checked"
+        >
           <Switch
-            checked={form.getFieldValue('poduct-introduction-display')}
+            defaultChecked={form.getFieldValue('poduct-introduction-display')}
             onChange={v => {
               form.setFieldsValue({ 'poduct-introduction-display': v });
             }}
@@ -161,9 +165,9 @@ const Index = () => {
         </Form.Item>
 
         <Title level={3}>荣誉资质</Title>
-        <Form.Item name="honor-display" label="展示">
+        <Form.Item name="honor-display" label="展示" valuePropName="checked">
           <Switch
-            checked={form.getFieldValue('honor-display')}
+            defaultChecked={form.getFieldValue('honor-display')}
             onChange={v => {
               form.setFieldsValue({ 'honor-display': v });
             }}
@@ -220,9 +224,9 @@ const Index = () => {
         </div>
 
         <Title level={3}>合作伙伴</Title>
-        <Form.Item name="partne-display" label="展示">
+        <Form.Item name="partne-display" label="展示" valuePropName="checked">
           <Switch
-            checked={form.getFieldValue('partne-display')}
+            defaultChecked={form.getFieldValue('partne-display')}
             onChange={v => {
               form.setFieldsValue({ 'partne-display': v });
             }}
@@ -280,9 +284,9 @@ const Index = () => {
         </div>
 
         <Title level={3}>联系我们</Title>
-        <Form.Item name="contact-display" label="展示">
+        <Form.Item name="contact-display" label="展示" valuePropName="checked">
           <Switch
-            checked={form.getFieldValue('contact-display')}
+            defaultChecked={form.getFieldValue('contact-display')}
             onChange={v => {
               form.setFieldsValue({ 'contact-display': v });
             }}
