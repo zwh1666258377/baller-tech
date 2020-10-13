@@ -20,6 +20,7 @@ const LJWM = (props: PageProps) => {
         <div
           style={{
             marginTop: 52,
+            marginBottom: 98,
             whiteSpace: 'pre-line',
             color: '#333',
             fontSize: 18,
@@ -29,7 +30,7 @@ const LJWM = (props: PageProps) => {
         </div>
         {module?.honor?.display && (
           <ImageCarousel
-            style={{ marginTop: 98 }}
+            style={{ marginBottom: 98 }}
             imgs={module?.honor?.imgUrls}
             label={module?.honor?.title}
             pageSize={{ normal: 5, small: 3 }}
@@ -37,7 +38,7 @@ const LJWM = (props: PageProps) => {
         )}
         {module?.partne?.display && (
           <ImageCarousel
-            style={{ marginTop: 98 }}
+            style={{ marginBottom: 98 }}
             imgs={module?.partne?.imgUrls}
             label={module?.partne?.title}
             pageSize={{ normal: 5, small: 3 }}
@@ -45,7 +46,7 @@ const LJWM = (props: PageProps) => {
         )}
         {module?.contact?.display && (
           <ImageCarousel
-            style={{ marginTop: 98 }}
+            style={{ marginBottom: 98 }}
             imgs={module?.contact?.imgUrls}
             label={module?.honor?.title}
             pageSize={{ normal: 2, small: 2 }}

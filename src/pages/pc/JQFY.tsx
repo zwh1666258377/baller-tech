@@ -16,13 +16,16 @@ const JQFY = (props: PageProps) => {
     return (
       <div style={{ width: '100%', padding: '90px 160px 70px 70px' }}>
         {module?.poductIntroduction?.display && (
-          <ProductIntro data={module?.poductIntroduction} />
+          <ProductIntro
+            style={{ marginBottom: 98 }}
+            data={module?.poductIntroduction}
+          />
         )}
-        <TextTranslator style={{ marginTop: 98 }} />
+        <TextTranslator style={{ marginBottom: 98 }} />
         {module?.usageScenarios?.display && (
           <ImageCarousel
             imgs={module?.usageScenarios?.imgUrls}
-            style={{ marginTop: 98 }}
+            style={{ marginBottom: 98 }}
             label={module?.usageScenarios?.title}
           />
         )}
