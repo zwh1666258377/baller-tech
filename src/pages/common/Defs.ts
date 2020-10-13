@@ -71,6 +71,17 @@ export interface Module {
       url: string;
     };
   };
+  productExperience: {
+    display: boolean;
+  };
+  productShow: {
+    display: boolean;
+    kind: string;
+    items: Array<{
+      url: string;
+      name: string;
+    }>;
+  };
   usageScenarios: {
     display: boolean;
     title: {

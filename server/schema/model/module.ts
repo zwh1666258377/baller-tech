@@ -60,6 +60,17 @@ interface Module {
       url: string;
     };
   };
+  productExperience: {
+    display: boolean;
+  };
+  productShow: {
+    display: boolean;
+    kind: string;
+    items: Array<{
+      url: string;
+      name: string;
+    }>;
+  };
   usageScenarios: {
     title: {
       cn: string;
@@ -167,6 +178,25 @@ const moduleSchema = new Schema({
     },
     default: {
       display: true,
+    },
+  },
+  productExperience: {
+    type: {
+      display: Types.Boolean,
+    },
+    default: {
+      display: true,
+    },
+  },
+  productShow: {
+    type: {
+      display: Types.Boolean,
+      kind: Types.String,
+      items: [{ url: Types.String, name: Types.String }],
+    },
+    default: {
+      display: true,
+      items: [],
     },
   },
   usageScenarios: {
