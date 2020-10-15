@@ -74,7 +74,7 @@ export interface Module {
   productExperience: {
     display: boolean;
   };
-  productShow: {
+  productDisplay: {
     display: boolean;
     kind: string;
     items: Array<{

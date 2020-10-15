@@ -1,10 +1,10 @@
 import React from 'react';
-import AudioDisplay from '../modules/AudioDisplay';
 import ProductIntro from '../modules/ProductIntro';
 import ImageCarousel from '../modules/ImageCarousel';
 import PCBase from './PCBase';
 import { PageProps } from '../common/Defs';
 import { getModule, getWebsite } from '../common/DataApi';
+import ProductDisplay from '../modules/ProductDisplay';
 
 const YYHC = (props: PageProps) => {
   const module = props.data?.module;
@@ -21,7 +21,13 @@ const YYHC = (props: PageProps) => {
             data={module.poductIntroduction}
           />
         )}
-        <AudioDisplay style={{ marginBottom: 98 }} />
+        {module?.productDisplay?.display && (
+          <ProductDisplay
+            style={{ marginBottom: 98 }}
+            kind={module.productDisplay.kind}
+            items={module.productDisplay.items}
+          />
+        )}
         {module?.usageScenarios?.display && (
           <ImageCarousel
             imgs={module?.usageScenarios?.imgUrls}

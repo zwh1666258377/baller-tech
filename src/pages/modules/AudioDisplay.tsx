@@ -1,40 +1,31 @@
 import { Col, Row } from 'antd';
 import React, { CSSProperties } from 'react';
+import { Module } from '../common/Defs';
 import MTitle from '../parts/MTitle';
-
-const audioList = [
-  { label: '蒙古语样音1', url: '' },
-  { label: '蒙古语样音2', url: '' },
-  { label: '蒙古语样音3', url: '' },
-  { label: '蒙古语样音4', url: '' },
-  { label: '蒙古语样音5', url: '' },
-  { label: '蒙古语样音6', url: '' },
-  { label: '蒙古语样音7', url: '' },
-  { label: '蒙古语样音8', url: '' },
-  { label: '蒙古语样音9', url: '' },
-  { label: '蒙古语样音10', url: '' },
-  { label: '蒙古语样音11', url: '' },
-];
 
 interface Props {
   style?: CSSProperties;
   h5?: boolean;
+  label: { cn: string; en: string };
+  items: { url: string; name: string }[];
 }
 
 const AudioDisplay = (props: Props) => {
   if (!!props.h5) {
     return (
       <div style={props.style}>
-        <MTitle label={{ cn: '产品展示', en: 'Product Display' }} />
+        <MTitle label={props.label} />
         <div style={{ marginTop: 24 }}>
           <Row gutter={[30, 30]}>
-            {audioList.map(a => (
-              <Col key={a.label} span={24}>
-                <div style={{ marginLeft: 16, marginBottom: 8 }}>{a.label}</div>
+            {props.items?.map(item => (
+              <Col key={item.url} span={24}>
+                <div style={{ marginLeft: 16, marginBottom: 8 }}>
+                  {item.name}
+                </div>
                 <audio
                   controls
                   style={{ width: '100%', borderRadius: 0 }}
-                  src={a.url}
+                  src={item.url}
                 />
               </Col>
             ))}
@@ -45,16 +36,16 @@ const AudioDisplay = (props: Props) => {
   }
   return (
     <div style={props.style}>
-      <MTitle label={{ cn: '产品展示', en: 'Product Display' }} />
+      <MTitle label={props.label} />
       <div style={{ marginTop: 52 }}>
         <Row gutter={[30, 30]}>
-          {audioList.map(a => (
-            <Col key={a.label} sm={12} xl={8}>
-              <div style={{ marginLeft: 16 }}>{a.label}</div>
+          {props.items?.map(item => (
+            <Col key={item.url} sm={12} xl={8}>
+              {item.name && <div style={{ marginLeft: 16 }}>{item.name}</div>}
               <audio
                 controls
                 style={{ width: '100%', borderRadius: 0 }}
-                src={a.url}
+                src={item.url}
               />
             </Col>
           ))}

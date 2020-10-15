@@ -1,10 +1,13 @@
 import * as React from 'react';
 import {
   Button,
+  Col,
   Form,
   Input,
   message,
   notification,
+  Row,
+  Select,
   Spin,
   Switch,
   Typography,
@@ -21,6 +24,9 @@ const Index = () => {
       url: string;
       name: string;
     }>
+  >([]);
+  const [productDisplayItems, setProductDisplayItems] = React.useState<
+    { url: string; name: string }[]
   >([]);
   const [loading, setLoading] = React.useState(true);
 
@@ -95,11 +101,16 @@ const Index = () => {
           'poduct-introduction-button-text':
             r?.poductIntroduction?.button?.text,
           'poduct-introduction-button-link': r?.poductIntroduction?.button?.url,
+          'product-experience-display': r?.productExperience?.display,
+          'product-display-display': r?.productDisplay?.display,
+          'product-display-kind': r?.productDisplay?.kind,
+          'product-show-items': r?.productDisplay?.items,
           'usage-scenarios-display': r?.usageScenarios?.display,
           'usage-scenarios-name-cn': r?.usageScenarios?.title?.cn,
           'usage-scenarios-name-en': r?.usageScenarios?.title?.en,
         });
         setUsageScenariosImgUrls(r?.usageScenarios?.imgUrls);
+        setProductDisplayItems(r?.productDisplay?.items);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -149,6 +160,107 @@ const Index = () => {
         <Form.Item name="poduct-introduction-button-link" label="按钮链接">
           <Input />
         </Form.Item>
+        <Title level={3}>产品展示</Title>
+        <Form.Item
+          name="product-display-display"
+          label="展示"
+          valuePropName="checked"
+        >
+          <Switch
+            onChange={v => {
+              form.setFieldsValue({ 'product-display-display': v });
+            }}
+          />
+        </Form.Item>
+        <Form.Item name="product-display-kind" label="类型">
+          <Select
+            onChange={v => {
+              form.setFieldsValue({ 'product-display-kind': v });
+            }}
+          >
+            <Select.Option key="image" value="image">
+              图片
+            </Select.Option>
+            <Select.Option key="audio" value="audio">
+              音频
+            </Select.Option>
+            <Select.Option key="video" value="video">
+              视频
+            </Select.Option>
+          </Select>
+        </Form.Item>
+        <div style={{ border: '1px solid red' }}>
+          {productDisplayItems
+            ?.filter(i => !!i)
+            ?.map(({ url, name }, idx) => {
+              return (
+                <Row key={idx}>
+                  <Col push={3}>
+                    <Text type="success">url:{url},</Text>
+                    <Text type="success">name:{name}</Text>
+                    <DeleteOutlined
+                      onClick={() => {
+                        setProductDisplayItems((urls = []) => {
+                          return urls?.filter((_, i) => i !== idx);
+                        });
+                      }}
+                    />
+                  </Col>
+                </Row>
+              );
+            })}
+          <Form.Item name="product-show-url" label="链接">
+            <Input />
+          </Form.Item>
+          <Form.Item name="product-show-name" label="展示名">
+            <Input />
+          </Form.Item>
+          <Row>
+            <Col push={3}>
+              <Button
+                onClick={() => {
+                  const currentInputUrl = form.getFieldValue(
+                    'product-show-url',
+                  );
+                  const currentInputName = form.getFieldValue(
+                    'product-show-name',
+                  );
+
+                  if (!currentInputUrl) {
+                    message.warn('链接不得为空');
+                    return;
+                  }
+
+                  setProductDisplayItems((items = []) => {
+                    return [
+                      ...items,
+                      { url: currentInputUrl, name: currentInputName },
+                    ];
+                  });
+                  form.setFieldsValue({
+                    'product-show-url': '',
+                    'product-show-name': '',
+                  });
+                }}
+              >
+                增加
+              </Button>
+            </Col>
+          </Row>
+        </div>
+        <Title level={3}>产品体验</Title>
+        <Form.Item
+          name="product-experience-display"
+          label="展示"
+          valuePropName="checked"
+        >
+          <Switch
+            defaultChecked={form.getFieldValue('product-experience-display')}
+            onChange={v => {
+              form.setFieldsValue({ 'product-experience-display': v });
+            }}
+          />
+        </Form.Item>
         <Title level={3}>使用场景</Title>
         <Form.Item
           name="usage-scenarios-display"
@@ -178,7 +290,7 @@ const Index = () => {
                 <DeleteOutlined
                   onClick={() => {
                     setUsageScenariosImgUrls((urls = []) => {
-                      return urls?.filter(i => !!i?.url && i?.url !== url);
+                      return urls?.filter((_, i) => i !== idx);
                     });
                   }}
                 />
@@ -189,7 +301,7 @@ const Index = () => {
           <Form.Item name="usage-scenarios-img-url" label="展示图片链接">
             <Input />
           </Form.Item>
-          <Form.Item name="usage-scenarios-img-name" label="展示图片链接">
+          <Form.Item name="usage-scenarios-img-name" label="展示图片名">
             <Input />
           </Form.Item>
           <Button
@@ -209,7 +321,6 @@ const Index = () => {
                 return [
                   ...urls,
                   { name: currentInputName || '-', url: currentInputUrl },
-                  ,
                 ];
               });
               form.setFieldsValue({

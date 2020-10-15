@@ -63,7 +63,7 @@ interface Module {
   productExperience: {
     display: boolean;
   };
-  productShow: {
+  productDisplay: {
     display: boolean;
     kind: string;
     items: Array<{
@@ -188,7 +188,7 @@ const moduleSchema = new Schema({
       display: true,
     },
   },
-  productShow: {
+  productDisplay: {
     type: {
       display: Types.Boolean,
       kind: Types.String,

@@ -5,6 +5,7 @@ import ImageCarousel from '../modules/ImageCarousel';
 import PCBase from './PCBase';
 import { PageProps } from '../common/Defs';
 import { getModule, getWebsite } from '../common/DataApi';
+import ProductDisplay from '../modules/ProductDisplay';
 
 const YYSB = (props: PageProps) => {
   const module = props.data?.module;
@@ -21,7 +22,16 @@ const YYSB = (props: PageProps) => {
             data={module.poductIntroduction}
           />
         )}
-        <AudioTranslator style={{ marginBottom: 98 }} />
+        {module?.productDisplay?.display && (
+          <ProductDisplay
+            style={{ marginBottom: 98 }}
+            kind={module.productDisplay.kind}
+            items={module.productDisplay.items}
+          />
+        )}
+        {module?.productExperience?.display && (
+          <AudioTranslator style={{ marginBottom: 98 }} />
+        )}
         {module?.usageScenarios?.display && (
           <ImageCarousel
             imgs={module?.usageScenarios?.imgUrls}

@@ -25,7 +25,7 @@ const Index = () => {
       name: string;
     }>
   >([]);
-  const [productShowItems, setProductShowItems] = React.useState<
+  const [productDisplayItems, setProductDisplayItems] = React.useState<
     { url: string; name: string }[]
   >([]);
   const [loading, setLoading] = React.useState(true);
@@ -55,10 +55,10 @@ const Index = () => {
       productExperience: {
         display: value['product-experience-display'],
       },
-      productShow: {
-        display: value['product-show-display'],
-        kind: value['product-show-kind'],
-        items: productShowItems,
+      productDisplay: {
+        display: value['product-display-display'],
+        kind: value['product-display-kind'],
+        items: productDisplayItems,
       },
       usageScenarios: {
         display: value['usage-scenarios-display'],
@@ -111,16 +111,16 @@ const Index = () => {
             r?.poductIntroduction?.button?.text,
           'poduct-introduction-button-link': r?.poductIntroduction?.button?.url,
           'product-experience-display': r?.productExperience?.display,
-          'product-show-display': r?.productShow?.display,
-          'product-show-kind': r?.productShow?.kind,
-          'product-show-items': r?.productShow?.items,
+          'product-display-display': r?.productDisplay?.display,
+          'product-display-kind': r?.productDisplay?.kind,
+          'product-show-items': r?.productDisplay?.items,
           'usage-scenarios-display': r?.usageScenarios?.display,
           'usage-scenarios-name-cn': r?.usageScenarios?.title?.cn,
           'usage-scenarios-name-en': r?.usageScenarios?.title?.en,
         });
         console.log(r);
         setUsageScenariosImgUrls(r?.usageScenarios?.imgUrls);
-        setProductShowItems(r?.productShow?.items);
+        setProductDisplayItems(r?.productDisplay?.items);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -172,20 +172,20 @@ const Index = () => {
         </Form.Item>
         <Title level={3}>产品展示</Title>
         <Form.Item
-          name="product-show-display"
+          name="product-display-display"
           label="展示"
           valuePropName="checked"
         >
           <Switch
             onChange={v => {
-              form.setFieldsValue({ 'product-show-display': v });
+              form.setFieldsValue({ 'product-display-display': v });
             }}
           />
         </Form.Item>
-        <Form.Item name="product-show-kind" label="类型">
+        <Form.Item name="product-display-kind" label="类型">
           <Select
             onChange={v => {
-              form.setFieldsValue({ 'product-show-kind': v });
+              form.setFieldsValue({ 'product-display-kind': v });
             }}
           >
             <Select.Option key="image" value="image">
@@ -200,7 +200,7 @@ const Index = () => {
           </Select>
         </Form.Item>
         <div style={{ border: '1px solid red' }}>
-          {productShowItems
+          {productDisplayItems
             ?.filter(i => !!i)
             ?.map(({ url, name }, idx) => {
               return (
@@ -210,8 +210,8 @@ const Index = () => {
                     <Text type="success">name:{name}</Text>
                     <DeleteOutlined
                       onClick={() => {
-                        setProductShowItems((urls = []) => {
-                          return urls?.filter(i => !!i?.url && i?.url !== url);
+                        setProductDisplayItems((urls = []) => {
+                          return urls?.filter((_, i) => i !== idx);
                         });
                       }}
                     />
@@ -241,7 +241,7 @@ const Index = () => {
                     return;
                   }
 
-                  setProductShowItems((items = []) => {
+                  setProductDisplayItems((items = []) => {
                     return [
                       ...items,
                       { url: currentInputUrl, name: currentInputName },
@@ -300,7 +300,7 @@ const Index = () => {
                 <DeleteOutlined
                   onClick={() => {
                     setUsageScenariosImgUrls((urls = []) => {
-                      return urls?.filter(i => !!i?.url && i?.url !== url);
+                      return urls?.filter((_, i) => i !== idx);
                     });
                   }}
                 />

@@ -5,8 +5,9 @@ import VideoDisplay from '../modules/VideoDisplay';
 import PCBase from './PCBase';
 import { PageProps } from '../common/Defs';
 import { getModule, getWebsite } from '../common/DataApi';
+import ProductDisplay from '../modules/ProductDisplay';
 
-const TXSBMBJC = (props: PageProps) => {
+const TXSB = (props: PageProps) => {
   const module = props.data?.module;
   const website = props.data?.website;
 
@@ -21,7 +22,13 @@ const TXSBMBJC = (props: PageProps) => {
             data={module.poductIntroduction}
           />
         )}
-        <VideoDisplay style={{ marginBottom: 98 }} />
+        {module?.productDisplay?.display && (
+          <ProductDisplay
+            style={{ marginBottom: 98 }}
+            kind={module.productDisplay.kind}
+            items={module.productDisplay.items}
+          />
+        )}
         {module?.usageScenarios?.display && (
           <ImageCarousel
             imgs={module?.usageScenarios?.imgUrls}
@@ -34,10 +41,10 @@ const TXSBMBJC = (props: PageProps) => {
   }
 };
 
-TXSBMBJC.getInitialProps = async () => {
+TXSB.getInitialProps = async () => {
   const module = await getModule('txsb');
   const website = await getWebsite();
   return { data: { module, website } };
 };
 
-export default TXSBMBJC;
+export default TXSB;

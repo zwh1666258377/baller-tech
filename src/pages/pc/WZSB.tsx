@@ -5,6 +5,7 @@ import ImageCarousel from '../modules/ImageCarousel';
 import PCBase from './PCBase';
 import { PageProps } from '../common/Defs';
 import { getModule, getWebsite } from '../common/DataApi';
+import ProductDisplay from '../modules/ProductDisplay';
 
 const WZSB = (props: PageProps) => {
   const module = props.data?.module;
@@ -21,7 +22,16 @@ const WZSB = (props: PageProps) => {
             data={module.poductIntroduction}
           />
         )}
-        <ImageTranslator style={{ marginBottom: 98 }} />
+        {module?.productDisplay?.display && (
+          <ProductDisplay
+            style={{ marginBottom: 98 }}
+            kind={module.productDisplay.kind}
+            items={module.productDisplay.items}
+          />
+        )}
+        {module?.productExperience?.display && (
+          <ImageTranslator style={{ marginBottom: 98 }} />
+        )}
         {module?.usageScenarios?.display && (
           <ImageCarousel
             imgs={module?.usageScenarios?.imgUrls}

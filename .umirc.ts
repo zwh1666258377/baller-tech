@@ -81,7 +81,7 @@ export default defineConfig({
         { path: '/yysb', component: '@/pages/pc/YYSB' },
         { path: '/yyhc', component: '@/pages/pc/YYHC' },
         { path: '/wzsb', component: '@/pages/pc/WZSB' },
-        { path: '/txsb', component: '@/pages/pc/TXSBMBJC' },
+        { path: '/txsb', component: '@/pages/pc/TXSB' },
         { path: '/ljwm', component: '@/pages/pc/LJWM' },
         { path: '/', component: '@/pages/pc/Home' },
       ],

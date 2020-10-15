@@ -13,6 +13,11 @@ const imgList = (imgs: Item[], num: number) => {
   while (data.length > 0) {
     list.push(data.splice(0, num));
   }
+  if (num - list[list.length - 1].length > 0) {
+    for (let i = 0; i < num - list[list.length - 1].length; i++) {
+      list[list.length - 1].push({ url: '', name: '' });
+    }
+  }
   return list;
 };
 
@@ -48,13 +53,17 @@ const ImageCarousel = (props: Props) => {
                         key={item.url + i}
                         style={{
                           width: `${100 / pageSize}%`,
-                          marginRight: i != l.length - 1 ? 20 : 0,
+                          marginRight: (i + 1) % 3 !== 0 ? 20 : 0,
                         }}
                       >
-                        <Image
-                          style={{ width: '100%', height: 'auto' }}
-                          src={item.url}
-                        />
+                        {item.url ? (
+                          <Image
+                            style={{ width: '100%', height: 'auto' }}
+                            src={item.url}
+                          />
+                        ) : (
+                          <div style={{ width: '100%', height: 'auto' }} />
+                        )}
                       </div>
                     ))}
                   </div>
