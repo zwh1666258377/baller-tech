@@ -53,7 +53,7 @@ const ImageCarousel = (props: Props) => {
                         key={item.url + i}
                         style={{
                           width: `${100 / pageSize}%`,
-                          marginRight: (i + 1) % 3 !== 0 ? 20 : 0,
+                          marginRight: (i + 1) % pageSize !== 0 ? 20 : 0,
                         }}
                       >
                         {item.url ? (
