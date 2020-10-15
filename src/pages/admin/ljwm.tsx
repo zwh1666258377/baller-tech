@@ -63,16 +63,16 @@ const Index = () => {
       partne: {
         display: value['partne-display'],
         title: {
-          cn: value['usage-scenarios-name-cn'],
-          en: value['usage-scenarios-name-en'],
+          cn: value['partne-name-cn'],
+          en: value['partne-name-en'],
         },
         imgUrls: partne,
       },
       contact: {
         display: value['contact-display'],
         title: {
-          cn: value['usage-scenarios-name-cn'],
-          en: value['usage-scenarios-name-en'],
+          cn: value['contact-name-cn'],
+          en: value['contact-name-en'],
         },
         imgUrls: contact,
       },
@@ -115,8 +115,14 @@ const Index = () => {
           'poduct-introduction-content': r?.poductIntroduction?.content,
           'poduct-introduction-display': r?.poductIntroduction?.display,
           'honor-display': r?.honor?.display,
+          'honor-name-cn': r?.honor?.title?.cn,
+          'honor-name-en': r?.honor?.title?.en,
           'partne-display': r?.partne?.display,
+          'partne-name-cn': r?.partne?.title?.cn,
+          'partne-name-en': r?.partne?.title?.en,
           'contact-display': r?.contact?.display,
+          'contact-name-cn': r?.contact?.title?.cn,
+          'contact-name-en': r?.contact?.title?.en,
         });
 
         setHonor(r?.honor?.imgUrls);
@@ -172,6 +178,12 @@ const Index = () => {
               form.setFieldsValue({ 'honor-display': v });
             }}
           />
+        </Form.Item>
+        <Form.Item name="honor-name-cn" label="中文Title">
+          <Input />
+        </Form.Item>
+        <Form.Item name="honor-name-en" label="英文Title">
+          <Input />
         </Form.Item>
         {honor
           ?.filter(i => !!i)
@@ -232,6 +244,12 @@ const Index = () => {
             }}
           />
         </Form.Item>
+        <Form.Item name="partne-name-cn" label="中文Title">
+          <Input />
+        </Form.Item>
+        <Form.Item name="partne-name-en" label="英文Title">
+          <Input />
+        </Form.Item>
         {partne
           ?.filter(i => !!i)
           ?.map(({ url, name }, idx) => {
@@ -291,6 +309,12 @@ const Index = () => {
               form.setFieldsValue({ 'contact-display': v });
             }}
           />
+        </Form.Item>
+        <Form.Item name="contact-name-cn" label="中文Title">
+          <Input />
+        </Form.Item>
+        <Form.Item name="contact-name-en" label="英文Title">
+          <Input />
         </Form.Item>
         {contact
           ?.filter(i => !!i)

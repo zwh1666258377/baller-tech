@@ -26,7 +26,6 @@ const PCBase = (props: Props) => {
       </div>
       <div style={{ width: '80%', overflow: 'auto', height: '100vh' }}>
         {props.content()}
-        <BTFooter data={props.website} />
       </div>
     </div>
   );
