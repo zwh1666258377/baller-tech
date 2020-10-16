@@ -93,6 +93,16 @@ export interface Module {
       name: string;
     }>;
   };
+  textTranslationRules: Array<{
+    from: {
+      key: string;
+      label: string;
+    };
+    to: {
+      key: string;
+      label: string;
+    };
+  }>;
 }
 
 export interface Website {

@@ -81,6 +81,16 @@ interface Module {
       name: string;
     }>;
   };
+  textTranslationRules: Array<{
+    from: {
+      key: string;
+      label: string;
+    };
+    to: {
+      key: string;
+      label: string;
+    };
+  }>;
 }
 
 const moduleSchema = new Schema({
@@ -213,6 +223,15 @@ const moduleSchema = new Schema({
       display: true,
       imgUrls: [],
     },
+  },
+  textTranslationRules: {
+    type: [
+      {
+        from: { key: Types.String, label: Types.String },
+        to: { key: Types.String, label: Types.String },
+      },
+    ],
+    default: [],
   },
 });
 

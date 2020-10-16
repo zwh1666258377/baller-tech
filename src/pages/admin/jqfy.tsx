@@ -10,6 +10,7 @@ import {
   Select,
   Spin,
   Switch,
+  Tag,
   Typography,
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
@@ -29,6 +30,12 @@ const Index = () => {
     { url: string; name: string }[]
   >([]);
   const [loading, setLoading] = React.useState(true);
+  const [translationRules, setTranslationRules] = React.useState<
+    Array<{
+      from: { key: string; label: string };
+      to: { key: string; label: string };
+    }>
+  >([]);
 
   const submit = value => {
     console.log(value);
@@ -139,6 +146,20 @@ const Index = () => {
         <Form.Item name="name-en" label="栏目英文名">
           <Input />
         </Form.Item>
+        {productIntroduction()}
+        {productDisplay()}
+        {productExperience()}
+        {usageScenarios()}
+        <div style={{ textAlign: 'center' }}>
+          <Button htmlType="submit">提交</Button>
+        </div>
+      </Form>
+    </Spin>
+  );
+
+  function productIntroduction() {
+    return (
+      <>
         <Title level={3}>产品介绍</Title>
         <Form.Item
           name="poduct-introduction-display"
@@ -170,6 +191,13 @@ const Index = () => {
         <Form.Item name="poduct-introduction-button-link" label="按钮链接">
           <Input />
         </Form.Item>
+      </>
+    );
+  }
+
+  function productDisplay() {
+    return (
+      <>
         <Title level={3}>产品展示</Title>
         <Form.Item
           name="product-display-display"
@@ -258,6 +286,13 @@ const Index = () => {
             </Col>
           </Row>
         </div>
+      </>
+    );
+  }
+
+  function productExperience() {
+    return (
+      <>
         <Title level={3}>产品体验</Title>
         <Form.Item
           name="product-experience-display"
@@ -271,6 +306,93 @@ const Index = () => {
             }}
           />
         </Form.Item>
+        <Form.Item label="可翻译语种">
+          <Form.Item
+            style={{ display: 'inline-block', marginBottom: 0 }}
+            label="源语种"
+          >
+            <Form.Item
+              name="text-translation-from-label"
+              style={{ display: 'inline-block', marginRight: 8 }}
+            >
+              <Input placeholder="源语种名称" />
+            </Form.Item>
+            <Form.Item
+              name="text-translation-from-key"
+              style={{ display: 'inline-block', marginRight: 8 }}
+            >
+              <Input placeholder="源语种key" />
+            </Form.Item>
+          </Form.Item>
+          <Form.Item
+            style={{ display: 'inline-block', marginBottom: 0 }}
+            label="目标语种"
+          >
+            <Form.Item
+              name="text-translation-to-label"
+              style={{ display: 'inline-block', marginRight: 8 }}
+            >
+              <Input placeholder="目标语种名称" />
+            </Form.Item>
+            <Form.Item
+              name="text-translation-to-key"
+              style={{ display: 'inline-block', marginRight: 8 }}
+            >
+              <Input placeholder="目标语种key" />
+            </Form.Item>
+          </Form.Item>
+          <Button
+            style={{ marginBottom: 24 }}
+            onClick={() => {
+              const fromLabel = form.getFieldValue(
+                'text-translation-from-label',
+              );
+              const fromKey = form.getFieldValue('text-translation-from-key');
+              const toLabel = form.getFieldValue('text-translation-to-label');
+              const toKey = form.getFieldValue('text-translation-to-key');
+              const rule = {
+                from: { label: fromLabel, key: fromKey },
+                to: { label: toLabel, key: toKey },
+              };
+              setTranslationRules([rule, ...translationRules]);
+            }}
+          >
+            增加
+          </Button>
+          {translationRules?.length > 0 && (
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+              {translationRules.map((r, i) => {
+                return (
+                  <Tag
+                    closable
+                    key={i}
+                    style={{ margin: '0 8px 8px 0' }}
+                    onClose={() =>
+                      setTranslationRules(
+                        translationRules.filter((_, ri) => ri !== i),
+                      )
+                    }
+                  >
+                    {i}
+                    <div
+                      style={{ display: 'inline-block', marginRight: 8 }}
+                    >{`${r.from.label}-${r.to.label}`}</div>
+                    <div
+                      style={{ display: 'inline-block', marginRight: 8 }}
+                    >{`${r.from.key}-${r.to.key}`}</div>
+                  </Tag>
+                );
+              })}
+            </div>
+          )}
+        </Form.Item>
+      </>
+    );
+  }
+
+  function usageScenarios() {
+    return (
+      <>
         <Title level={3}>使用场景</Title>
         <Form.Item
           name="usage-scenarios-display"
@@ -345,13 +467,9 @@ const Index = () => {
             增加
           </Button>
         </div>
-
-        <div style={{ textAlign: 'center' }}>
-          <Button htmlType="submit">提交</Button>
-        </div>
-      </Form>
-    </Spin>
-  );
+      </>
+    );
+  }
 };
 
 Index.getInitialProps = () => {};
