@@ -28,12 +28,9 @@ export function ballerTechWZSB(app: ReturnType<typeof express>) {
       });
     }
 
-    const formData = {
-      my_field: file.fieldname,
-      my_file: fs.createReadStream(file.path),
-    };
+    const data = fs.readFileSync(file.path);
 
-    postTranslate({ language, formData }).then(result => {
+    postTranslate({ language, data }).then(result => {
       fs.unlinkSync(file.path);
       res.json({
         status: 'ok',
@@ -65,7 +62,7 @@ function generateBase64Params(obj) {
 }
 
 function postTranslate(args) {
-  const { formData, language } = args;
+  const { data, language } = args;
 
   return new Promise(resolve => {
     const date = getGMTdate();
@@ -86,7 +83,7 @@ function postTranslate(args) {
           'B-Param': BParam,
           'B-CheckSum': md5(`${app_key}${date}${BParam}`),
         },
-        formData,
+        body: data,
       },
       function(error, response, body) {
         if (!error && response.statusCode == 200) {
