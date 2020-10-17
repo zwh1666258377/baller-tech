@@ -9,8 +9,8 @@ import fs from 'fs';
 
 const upload = multer({ dest: resolve('static/baller-tech/') });
 
-export function ballerTechTXSB(app: ReturnType<typeof express>) {
-  app.post('/api/txsb', upload.any(), async (req, res) => {
+export function ballerTechWZSB(app: ReturnType<typeof express>) {
+  app.post('/api/wzsb', upload.any(), async (req, res) => {
     const { language } = req.body;
 
     const file = req.files[0];

@@ -26,7 +26,7 @@ import { getWebsite } from './api/get-website';
 import { updateWebsite } from './api/update-website';
 import { ballerTechJQFY } from './api/baller-tech-jqfy';
 import { ballerTechYYSB } from './api/baller-tech-yysb';
-import { ballerTechTXSB } from './api/baller-tech-txsb';
+import { ballerTechWZSB } from './api/baller-tech-wzsb';
 
 dotenv.config('../.env' as any);
 
@@ -145,7 +145,7 @@ class App {
     // Baller Tech API
     ballerTechJQFY(this.app);
     ballerTechYYSB(this.app);
-    ballerTechTXSB(this.app);
+    ballerTechWZSB(this.app);
   };
 
   connectDb = () => {
