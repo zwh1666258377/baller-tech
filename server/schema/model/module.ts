@@ -91,6 +91,14 @@ interface Module {
       label: string;
     };
   }>;
+  audioTranslationRules: Array<{
+    key: string;
+    label: string;
+  }>;
+  imageTranslationRules: Array<{
+    key: string;
+    label: string;
+  }>;
 }
 
 const moduleSchema = new Schema({
@@ -231,6 +239,14 @@ const moduleSchema = new Schema({
         to: { key: Types.String, label: Types.String },
       },
     ],
+    default: [],
+  },
+  audioTranslationRules: {
+    type: [{ key: Types.String, label: Types.String }],
+    default: [],
+  },
+  imageTranslationRules: {
+    type: [{ key: Types.String, label: Types.String }],
     default: [],
   },
 });

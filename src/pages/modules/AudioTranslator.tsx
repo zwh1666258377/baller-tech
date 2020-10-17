@@ -9,38 +9,25 @@ import MTitle from '../parts/MTitle';
 
 const Option = Select.Option;
 
-// 彝语	iii	采样率：16000hz 采样点大小：16bits	audio/L16;rate=16000
-// 哈语	kaz	采样率：16000hz 采样点大小：16bits	audio/L16;rate=16000
-// 蒙语	mon	采样率：16000hz 采样点大小：16bits	audio/L16;rate=16000
-// 藏语（安多）	tib_ad	采样率：16000hz 采样点大小：16bits	audio/L16;rate=16000
-// 藏语（康巴）	tib_kb	采样率：16000hz 采样点大小：16bits	audio/L16;rate=16000
-// 藏语（卫藏）	tib_wz	采样率：16000hz 采样点大小：16bits	audio/L16;rate=16000
-// 维语	uig	采样率：16000hz 采样点大小：16bits	audio/L16;rate=16000
-
-const opts = [
-  { key: 'iii', label: '彝语' },
-  { key: 'kaz', label: '哈语' },
-  { key: 'mon', label: '蒙语' },
-  { key: 'tib_ad', label: '藏语（安多）' },
-  { key: 'tib_kb', label: '藏语（康巴）' },
-  { key: 'tib_wz', label: '藏语（卫藏）' },
-  { key: 'uig', label: '维语' },
-];
-
 interface Props {
   style?: CSSProperties;
   h5?: boolean;
+  rules: Array<{
+    key: string;
+    label: string;
+  }>;
 }
 
 const AudioTranslator = (props: Props) => {
   const [rec, setRec] = React.useState<any>();
   const [fileList, setFileList] = React.useState<UploadFile[]>([]);
-  const [lan, setLan] = React.useState(opts[0].key);
+  const [lan, setLan] = React.useState<string>();
   const [audioSrc, setAudioSrc] = React.useState<string>();
   const [audioBlob, setAudioBlob] = React.useState<Blob>();
   const [recording, setRecording] = React.useState<boolean>(false);
   const btnContainer = useRef<any>();
   const { width } = useSize(btnContainer.current);
+  const opts = props.rules || [];
 
   React.useEffect(() => {
     if (!!rec) {
@@ -88,6 +75,7 @@ const AudioTranslator = (props: Props) => {
             size="large"
             style={{ marginTop: 8, width: '100%' }}
             value={lan}
+            placeholder="请选择要识别的语言"
             onSelect={val => {
               setLan(val);
             }}
@@ -239,6 +227,7 @@ const AudioTranslator = (props: Props) => {
             size="large"
             style={{ width: 300, marginTop: 8, marginRight: 40 }}
             value={lan}
+            placeholder="请选择要识别的语言"
             onSelect={val => {
               setLan(val);
             }}

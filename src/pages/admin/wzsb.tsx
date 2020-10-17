@@ -10,6 +10,7 @@ import {
   Select,
   Spin,
   Switch,
+  Tag,
   Typography,
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
@@ -29,6 +30,9 @@ const Index = () => {
     { url: string; name: string }[]
   >([]);
   const [loading, setLoading] = React.useState(true);
+  const [supportedLan, setSupportedLan] = React.useState<
+    { key: string; label: string }[]
+  >([]);
 
   const submit = value => {
     setLoading(true);
@@ -67,6 +71,7 @@ const Index = () => {
         },
         imgUrls: usageScenariosImgUrls,
       },
+      imageTranslationRules: supportedLan,
     };
 
     fetch('/api/update-module', {
@@ -119,6 +124,7 @@ const Index = () => {
         });
         setUsageScenariosImgUrls(r?.usageScenarios?.imgUrls);
         setProductDisplayItems(r?.productDisplay?.items);
+        setSupportedLan(r?.imageTranslationRules);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -256,19 +262,7 @@ const Index = () => {
             </Col>
           </Row>
         </div>
-        <Title level={3}>产品体验</Title>
-        <Form.Item
-          name="product-experience-display"
-          label="展示"
-          valuePropName="checked"
-        >
-          <Switch
-            defaultChecked={form.getFieldValue('product-experience-display')}
-            onChange={v => {
-              form.setFieldsValue({ 'product-experience-display': v });
-            }}
-          />
-        </Form.Item>
+        {productExperience()}
         <Title level={3}>使用场景</Title>
         <Form.Item
           name="usage-scenarios-display"
@@ -346,6 +340,70 @@ const Index = () => {
       </Form>
     </Spin>
   );
+
+  function productExperience() {
+    return (
+      <>
+        <Title level={3}>产品体验</Title>
+        <Form.Item
+          name="product-experience-display"
+          label="展示"
+          valuePropName="checked"
+        >
+          <Switch
+            defaultChecked={form.getFieldValue('product-experience-display')}
+            onChange={v => {
+              form.setFieldsValue({ 'product-experience-display': v });
+            }}
+          />
+        </Form.Item>
+        <Form.Item label="可识别语种">
+          <Form.Item
+            name="image-translation-lan-label"
+            style={{ display: 'inline-block', marginRight: 8 }}
+          >
+            <Input placeholder="语种名称" />
+          </Form.Item>
+          <Form.Item
+            name="image-translation-lan-key"
+            style={{ display: 'inline-block', marginRight: 8 }}
+          >
+            <Input placeholder="语种key" />
+          </Form.Item>
+          <Button
+            style={{ marginBottom: 24 }}
+            onClick={() => {
+              const label = form.getFieldValue('image-translation-lan-label');
+              const key = form.getFieldValue('image-translation-lan-key');
+              const rule = { label, key };
+              setSupportedLan([...supportedLan, rule]);
+            }}
+          >
+            增加
+          </Button>
+          {supportedLan?.length > 0 && (
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+              {supportedLan.map((r, i) => {
+                return (
+                  <Tag
+                    key={i}
+                    style={{ margin: '0 8px 8px 0' }}
+                    onClick={() => {
+                      setSupportedLan(supportedLan.filter((_, ri) => ri !== i));
+                    }}
+                  >
+                    <div
+                      style={{ display: 'inline-block', marginRight: 8 }}
+                    >{`${r.label} ${r.key}`}</div>
+                  </Tag>
+                );
+              })}
+            </div>
+          )}
+        </Form.Item>
+      </>
+    );
+  }
 };
 
 Index.getInitialProps = () => {};

@@ -1,84 +1,128 @@
 import React from 'react';
-import { Layout, Typography } from 'antd';
+import { Layout, Spin, Typography } from 'antd';
 import TextTranslator from '../modules/TextTranslator';
 import MTitle from '../parts/MTitle';
+import { getModule } from '../common/DataApi';
+import { PageProps } from '../common/Defs';
 
 const { Content } = Layout;
 const { Paragraph } = Typography;
 
-const Index = () => {
+const Index = (props: PageProps) => {
+  const module = props.data?.module;
+
+  if (!props.data) {
+    return <Spin></Spin>;
+  }
+
   return (
     <div style={{ paddingBottom: '75px' }}>
       <div style={{ padding: '21px 16px' }}>
         <div
           style={{
             height: '150px',
-            border: '1px solid red',
             borderRadius: '10px 10px',
+            background: `no-repeat center/100% url(${module?.poductIntroduction?.imgUrl})`,
           }}
-        >
-          111
-        </div>
+        ></div>
       </div>
       <Content style={{ padding: '0px 15px' }}>
-        <TextTranslator h5 style={{ marginBottom: '64px' }} />
-        <MTitle
-          style={{ marginBottom: '20px' }}
-          label={{ cn: '产品介绍', en: 'Product introduction' }}
-        />
-        <Paragraph
-          style={{
-            color: '#666666',
-            lineHeight: '29px',
-            fontSize: '16px',
-          }}
-        >
-          In the process of internal desktop applications development, many
-          different design specs and implementations would be involved, which
-          might cause designers and developers difficulties and duplication and
-          reduce the efficiency of development.
-        </Paragraph>
-        <div
-          style={{
-            width: '90%',
-            backgroundColor: '#FFCB52',
-            borderRadius: '40px',
-            color: '#fff',
-            textAlign: 'center',
-            height: '50px',
-            lineHeight: '50px',
-            fontSize: '18px',
-            fontWeight: 500,
-            margin: '10px auto 40px',
-          }}
-        >
-          产品链接
-        </div>
-        <MTitle
-          style={{ marginBottom: '20px' }}
-          label={{ cn: '应用场景', en: 'Product introduction' }}
-        />
-        <section>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              height: '98px',
-              marginBottom: '19px',
-            }}
-          >
+        {module?.productExperience?.display && (
+          <TextTranslator
+            h5
+            style={{ marginBottom: '64px' }}
+            rules={module?.textTranslationRules}
+          />
+        )}
+        {module?.poductIntroduction?.display && (
+          <>
+            <MTitle
+              style={{ marginBottom: '20px' }}
+              label={module?.poductIntroduction?.title}
+            />
+            <Paragraph
+              style={{
+                color: '#666666',
+                lineHeight: '29px',
+                fontSize: '16px',
+              }}
+            >
+              {module?.poductIntroduction?.content}
+            </Paragraph>
             <div
-              style={{ flex: 1, maxWidth: '48%', border: '1px solid red' }}
-            ></div>
-            <div
-              style={{ flex: 1, maxWidth: '48%', border: '1px solid red' }}
-            ></div>
-          </div>
-          <div style={{ height: '202px', border: '1px solid red' }}></div>
-        </section>
+              style={{
+                width: '90%',
+                backgroundColor: '#FFCB52',
+                borderRadius: '40px',
+                color: '#fff',
+                textAlign: 'center',
+                height: '50px',
+                lineHeight: '50px',
+                fontSize: '18px',
+                fontWeight: 500,
+                margin: '10px auto 40px',
+              }}
+              onClick={() =>
+                window.open(module?.poductIntroduction?.button?.url)
+              }
+            >
+              {module?.poductIntroduction?.button?.text}
+            </div>
+          </>
+        )}
+        {module?.usageScenarios?.display && (
+          <>
+            <MTitle
+              style={{ marginBottom: '20px' }}
+              label={module?.usageScenarios?.title}
+            />
+            <section>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  height: '98px',
+                  marginBottom: '19px',
+                }}
+              >
+                {module?.usageScenarios?.imgUrls?.length > 0 && (
+                  <div
+                    style={{
+                      flex: 1,
+                      maxWidth: '48%',
+                      background: `no-repeat center/100% url(${module?.usageScenarios?.imgUrls[0].url})`,
+                    }}
+                  ></div>
+                )}
+                {module?.usageScenarios?.imgUrls?.length > 1 && (
+                  <div
+                    style={{
+                      flex: 1,
+                      maxWidth: '48%',
+                      background: `no-repeat center/100% url(${module?.usageScenarios?.imgUrls[1].url})`,
+                    }}
+                  ></div>
+                )}
+              </div>
+              {module?.usageScenarios?.imgUrls?.length > 2 && (
+                <div
+                  style={{
+                    height: '202px',
+                    background: `no-repeat center/100% url(${module?.usageScenarios?.imgUrls[2].url})`,
+                  }}
+                ></div>
+              )}
+            </section>
+          </>
+        )}
       </Content>
     </div>
   );
+};
+
+Index.getInitialProps = async () => {
+  const module = await getModule('jqfy');
+  return { data: { module } };
 };
 
 export default Index;

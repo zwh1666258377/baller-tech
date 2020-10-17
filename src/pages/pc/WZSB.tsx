@@ -29,7 +29,10 @@ const WZSB = (props: PageProps) => {
             />
           )}
           {module?.productExperience?.display && (
-            <ImageTranslator style={{ marginBottom: 98 }} />
+            <ImageTranslator
+              style={{ marginBottom: 98 }}
+              rules={module.imageTranslationRules}
+            />
           )}
           {module?.productDisplay?.display && (
             <ProductDisplay

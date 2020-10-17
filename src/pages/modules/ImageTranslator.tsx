@@ -1,5 +1,5 @@
 import { Select, Upload } from 'antd';
-import { UploadFile } from 'antd/lib/upload/interface';
+import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface';
 import React, { CSSProperties, useRef } from 'react';
 import { Colors, Styles } from '../common/Styles';
 import MTitle from '../parts/MTitle';
@@ -7,26 +7,15 @@ import { useSize } from 'ahooks';
 
 const Option = Select.Option;
 
-const opts = [
-  { key: 'chs', label: '简体中文' },
-  { key: 'cht', label: '繁体中文' },
-  { key: 'tib', label: '藏文' },
-  { key: 'mon', label: '蒙文(传统)' },
-  { key: 'mon_o', label: '蒙文(西里尔)' },
-  { key: 'uig', label: '维文' },
-  { key: 'iii', label: '彝文' },
-  { key: 'zha', label: '壮文' },
-  { key: 'kor', label: '韩文' },
-  { key: 'kaz', label: '哈萨克文' },
-];
-
 interface Props {
   style?: CSSProperties;
   h5?: boolean;
+  rules: Array<{ key: string; label: string }>;
 }
 
 const ImageTranslator = (props: Props) => {
-  const [lan, setLan] = React.useState(opts[0].key);
+  const opts = props.rules || [];
+  const [lan, setLan] = React.useState<string>();
   const [fileList, setFileList] = React.useState<UploadFile[]>([]);
   const [preview, setPreview] = React.useState<string>();
   const [output, setOutput] = React.useState<string>();
@@ -45,6 +34,7 @@ const ImageTranslator = (props: Props) => {
             size="large"
             style={{ width: '100%' }}
             value={lan}
+            placeholder="请选择要识别的语言"
             onSelect={val => {
               setLan(val);
             }}
@@ -105,13 +95,7 @@ const ImageTranslator = (props: Props) => {
               action=""
               fileList={fileList}
               showUploadList={false}
-              onChange={info => {
-                const file = info.file;
-                if (file.originFileObj) {
-                  setFileList([file]);
-                  getBase64(file.originFileObj).then(data => setPreview(data));
-                }
-              }}
+              onChange={selectLocalFile}
             >
               <div
                 style={{
@@ -145,10 +129,7 @@ const ImageTranslator = (props: Props) => {
                 border: '1px solid #BBB',
                 fontSize: '16px',
               }}
-              onClick={() => {
-                setFileList([]);
-                setPreview(undefined);
-              }}
+              onClick={clear}
             >
               清除
             </div>
@@ -167,6 +148,7 @@ const ImageTranslator = (props: Props) => {
             size="large"
             style={{ width: '100%' }}
             value={lan}
+            placeholder="请选择要识别的语言"
             onSelect={val => {
               setLan(val);
             }}
@@ -188,13 +170,7 @@ const ImageTranslator = (props: Props) => {
             action=""
             fileList={fileList}
             showUploadList={false}
-            onChange={info => {
-              const file = info.file;
-              if (file.originFileObj) {
-                setFileList([file]);
-                getBase64(file.originFileObj).then(data => setPreview(data));
-              }
-            }}
+            onChange={selectLocalFile}
           >
             <div
               style={{
@@ -224,10 +200,7 @@ const ImageTranslator = (props: Props) => {
               color: '#333',
               border: '1px solid #BBB',
             }}
-            onClick={() => {
-              setFileList([]);
-              setPreview(undefined);
-            }}
+            onClick={clear}
           >
             清除
           </div>
@@ -270,6 +243,19 @@ const ImageTranslator = (props: Props) => {
       </div>
     </div>
   );
+
+  function selectLocalFile(info: UploadChangeParam<UploadFile<any>>) {
+    const file = info.file;
+    if (file.originFileObj) {
+      setFileList([file]);
+      getBase64(file.originFileObj).then(data => setPreview(data));
+    }
+  }
+
+  function clear() {
+    setFileList([]);
+    setPreview(undefined);
+  }
 
   function getBase64(file: Blob) {
     return new Promise<string>((resolve, reject) => {

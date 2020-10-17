@@ -29,7 +29,10 @@ const YYSB = (props: PageProps) => {
             />
           )}
           {module?.productExperience?.display && (
-            <AudioTranslator style={{ marginBottom: 98 }} />
+            <AudioTranslator
+              style={{ marginBottom: 98 }}
+              rules={module.audioTranslationRules}
+            />
           )}
           {module?.productDisplay?.display && (
             <ProductDisplay

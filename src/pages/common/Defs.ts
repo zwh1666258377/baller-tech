@@ -103,6 +103,14 @@ export interface Module {
       label: string;
     };
   }>;
+  audioTranslationRules: Array<{
+    key: string;
+    label: string;
+  }>;
+  imageTranslationRules: Array<{
+    key: string;
+    label: string;
+  }>;
 }
 
 export interface Website {

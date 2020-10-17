@@ -23,7 +23,7 @@ interface Props {
 const TextTranslator = (props: Props) => {
   const opts: { key: string; label: string }[] = [];
   const allowKeys: string[] = [];
-  props.rules.forEach(r => {
+  props.rules?.forEach(r => {
     if (!opts.find(o => o.key === r.from.key)) {
       opts.push(r.from);
     }

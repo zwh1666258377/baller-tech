@@ -146,8 +146,8 @@ const Index = () => {
           <Input />
         </Form.Item>
         {productIntroduction()}
-        {productDisplay()}
         {productExperience()}
+        {productDisplay()}
         {usageScenarios()}
         <div style={{ textAlign: 'center' }}>
           <Button htmlType="submit">提交</Button>
@@ -190,101 +190,6 @@ const Index = () => {
         <Form.Item name="poduct-introduction-button-link" label="按钮链接">
           <Input />
         </Form.Item>
-      </>
-    );
-  }
-
-  function productDisplay() {
-    return (
-      <>
-        <Title level={3}>产品展示</Title>
-        <Form.Item
-          name="product-display-display"
-          label="展示"
-          valuePropName="checked"
-        >
-          <Switch
-            onChange={v => {
-              form.setFieldsValue({ 'product-display-display': v });
-            }}
-          />
-        </Form.Item>
-        <Form.Item name="product-display-kind" label="类型">
-          <Select
-            onChange={v => {
-              form.setFieldsValue({ 'product-display-kind': v });
-            }}
-          >
-            <Select.Option key="image" value="image">
-              图片
-            </Select.Option>
-            <Select.Option key="audio" value="audio">
-              音频
-            </Select.Option>
-            <Select.Option key="video" value="video">
-              视频
-            </Select.Option>
-          </Select>
-        </Form.Item>
-        <div style={{ border: '1px solid red' }}>
-          {productDisplayItems
-            ?.filter(i => !!i)
-            ?.map(({ url, name }, idx) => {
-              return (
-                <Row key={idx}>
-                  <Col push={3}>
-                    <Text type="success">url:{url},</Text>
-                    <Text type="success">name:{name}</Text>
-                    <DeleteOutlined
-                      onClick={() => {
-                        setProductDisplayItems((urls = []) => {
-                          return urls?.filter((_, i) => i !== idx);
-                        });
-                      }}
-                    />
-                  </Col>
-                </Row>
-              );
-            })}
-          <Form.Item name="product-show-url" label="链接">
-            <Input />
-          </Form.Item>
-          <Form.Item name="product-show-name" label="展示名">
-            <Input />
-          </Form.Item>
-          <Row>
-            <Col push={3}>
-              <Button
-                onClick={() => {
-                  const currentInputUrl = form.getFieldValue(
-                    'product-show-url',
-                  );
-                  const currentInputName = form.getFieldValue(
-                    'product-show-name',
-                  );
-
-                  if (!currentInputUrl) {
-                    message.warn('链接不得为空');
-                    return;
-                  }
-
-                  setProductDisplayItems((items = []) => {
-                    return [
-                      ...items,
-                      { url: currentInputUrl, name: currentInputName },
-                    ];
-                  });
-                  form.setFieldsValue({
-                    'product-show-url': '',
-                    'product-show-name': '',
-                  });
-                }}
-              >
-                增加
-              </Button>
-            </Col>
-          </Row>
-        </div>
       </>
     );
   }
@@ -383,6 +288,101 @@ const Index = () => {
             </div>
           )}
         </Form.Item>
+      </>
+    );
+  }
+
+  function productDisplay() {
+    return (
+      <>
+        <Title level={3}>产品展示</Title>
+        <Form.Item
+          name="product-display-display"
+          label="展示"
+          valuePropName="checked"
+        >
+          <Switch
+            onChange={v => {
+              form.setFieldsValue({ 'product-display-display': v });
+            }}
+          />
+        </Form.Item>
+        <Form.Item name="product-display-kind" label="类型">
+          <Select
+            onChange={v => {
+              form.setFieldsValue({ 'product-display-kind': v });
+            }}
+          >
+            <Select.Option key="image" value="image">
+              图片
+            </Select.Option>
+            <Select.Option key="audio" value="audio">
+              音频
+            </Select.Option>
+            <Select.Option key="video" value="video">
+              视频
+            </Select.Option>
+          </Select>
+        </Form.Item>
+        <div style={{ border: '1px solid red' }}>
+          {productDisplayItems
+            ?.filter(i => !!i)
+            ?.map(({ url, name }, idx) => {
+              return (
+                <Row key={idx}>
+                  <Col push={3}>
+                    <Text type="success">url:{url},</Text>
+                    <Text type="success">name:{name}</Text>
+                    <DeleteOutlined
+                      onClick={() => {
+                        setProductDisplayItems((urls = []) => {
+                          return urls?.filter((_, i) => i !== idx);
+                        });
+                      }}
+                    />
+                  </Col>
+                </Row>
+              );
+            })}
+          <Form.Item name="product-show-url" label="链接">
+            <Input />
+          </Form.Item>
+          <Form.Item name="product-show-name" label="展示名">
+            <Input />
+          </Form.Item>
+          <Row>
+            <Col push={3}>
+              <Button
+                onClick={() => {
+                  const currentInputUrl = form.getFieldValue(
+                    'product-show-url',
+                  );
+                  const currentInputName = form.getFieldValue(
+                    'product-show-name',
+                  );
+
+                  if (!currentInputUrl) {
+                    message.warn('链接不得为空');
+                    return;
+                  }
+
+                  setProductDisplayItems((items = []) => {
+                    return [
+                      ...items,
+                      { url: currentInputUrl, name: currentInputName },
+                    ];
+                  });
+                  form.setFieldsValue({
+                    'product-show-url': '',
+                    'product-show-name': '',
+                  });
+                }}
+              >
+                增加
+              </Button>
+            </Col>
+          </Row>
+        </div>
       </>
     );
   }
