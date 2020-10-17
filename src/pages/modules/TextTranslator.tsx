@@ -314,7 +314,7 @@ const TextTranslator = (props: Props) => {
   );
 
   function onClickTranslate() {
-    if (!checkCallTimesLimit(3)) {
+    if (!checkCallTimesLimit(10)) {
       message.warn('体验次数超出');
       return;
     }
