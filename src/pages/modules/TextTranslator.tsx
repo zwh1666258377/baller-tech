@@ -1,3 +1,4 @@
+import { errorTip } from '@/lib/error-tip';
 import { message, Select, Spin } from 'antd';
 import React, { CSSProperties } from 'react';
 import { Colors, h5Styles, Styles } from '../common/Styles';
@@ -160,6 +161,10 @@ const TextTranslator = (props: Props) => {
                     width: '48%',
                   }}
                   onClick={() => {
+                    if (!inputVal) {
+                      message.error('翻译内容不得为空');
+                      return;
+                    }
                     if (!allowKeys.includes(uploadKey)) {
                       alert('暂时不支持' + uploadKey);
                       return;
@@ -247,6 +252,10 @@ const TextTranslator = (props: Props) => {
                   padding: '8px 50px',
                 }}
                 onClick={() => {
+                  if (!inputVal) {
+                    message.error('翻译内容不得为空');
+                    return;
+                  }
                   if (!allowKeys.includes(uploadKey)) {
                     alert('暂时不支持' + uploadKey);
                     return;
@@ -332,13 +341,15 @@ const TextTranslator = (props: Props) => {
       }),
     })
       .then(r => r.json())
+      .then(errorTip)
       .finally(() => setLoading(false));
+
     if (data?.status === 'error') {
       message.error(data?.msg);
       return '';
     }
 
-    return JSON.parse(data?.data)?.data;
+    return data?.data?.data;
   }
 };
 

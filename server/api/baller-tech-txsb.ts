@@ -3,27 +3,42 @@ import md5 from 'md5';
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { app_id, app_key } from '../lib/baller-tech-env';
+import multer from 'multer';
+import { resolve } from 'path';
+import fs from 'fs';
 
-export function ballerTechJQFY(app: ReturnType<typeof express>) {
-  app.post('/api/jqfy', async (req, res) => {
-    const { str, language } = req.body;
-    if (!str) {
-      res.json({
-        status: 'error',
-        msg: '翻译内容不得为空',
-      });
-    }
+const upload = multer({ dest: resolve('static/baller-tech/') });
+
+export function ballerTechTXSB(app: ReturnType<typeof express>) {
+  app.post('/api/txsb', upload.any(), async (req, res) => {
+    const { language } = req.body;
+
+    const file = req.files[0];
     if (!language) {
       res.json({
         status: 'error',
         msg: '目标语言不得为空',
       });
     }
-    const result = (await postTranslate({ str, language })) as string;
 
-    res.json({
-      status: 'ok',
-      data: JSON.parse(result),
+    if (!file) {
+      res.json({
+        status: 'error',
+        msg: '语音文件不得为空',
+      });
+    }
+
+    const formData = {
+      my_field: file.fieldname,
+      my_file: fs.createReadStream(file.path),
+    };
+
+    postTranslate({ language, formData }).then(result => {
+      fs.unlinkSync(file.path);
+      res.json({
+        status: 'ok',
+        data: result,
+      });
     });
   });
 }
@@ -50,17 +65,19 @@ function generateBase64Params(obj) {
 }
 
 function postTranslate(args) {
-  const { str, language } = args;
+  const { formData, language } = args;
 
   return new Promise(resolve => {
     const date = getGMTdate();
     const BParam = generateBase64Params({
       request_id: uuidv4(),
       language,
+      image_mode: 'multi_row',
     });
+
     request(
       {
-        url: 'http://api.baller-tech.com/v1/service/v1/mt',
+        url: 'http://api.baller-tech.com/v1/service/v1/ocr',
         method: 'POST',
         headers: {
           'content-type': 'application/octet-stream',
@@ -69,13 +86,14 @@ function postTranslate(args) {
           'B-Param': BParam,
           'B-CheckSum': md5(`${app_key}${date}${BParam}`),
         },
-        body: JSON.stringify(str),
+        formData,
       },
       function(error, response, body) {
         if (!error && response.statusCode == 200) {
           const res = JSON.parse(body);
           if (!!res && res.code == 0) {
-            const timer = setTimeout(() => {
+            let val = '';
+            const timer = setInterval(() => {
               const { request_id } = res;
               const date = getGMTdate();
               const BParam = generateBase64Params({
@@ -84,7 +102,7 @@ function postTranslate(args) {
 
               request(
                 {
-                  url: 'http://api.baller-tech.com/v1/service/v1/mt',
+                  url: 'http://api.baller-tech.com/v1/service/v1/ocr',
                   headers: {
                     'B-AppId': app_id,
                     'B-CurTime': date,
@@ -94,12 +112,22 @@ function postTranslate(args) {
                 },
                 function(error, response, body) {
                   if (!error && response.statusCode == 200) {
-                    resolve(unescape(body.replace(/\\u/g, '%u')));
+                    console.log(body, 'body');
+                    JSON.parse(body)
+                      ?.data?.sort((a, b) => a?.order - b?.order)
+                      ?.forEach(item => {
+                        if (item?.result) {
+                          val += unescape(item?.result.replace(/\\u/g, '%u'));
+                        }
+                      });
+                    if (JSON.parse(body)?.is_end === 1) {
+                      clearInterval(timer);
+                      resolve(val);
+                    }
                   }
-                  clearTimeout(timer);
                 },
               );
-            }, 1000);
+            }, 40);
           } else {
             resolve(body);
           }

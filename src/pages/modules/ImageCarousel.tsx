@@ -50,16 +50,16 @@ const ImageCarousel = (props: Props) => {
                   <div style={{ display: 'flex' }}>
                     {l.map((item, i) => (
                       <div
-                        key={item.url + i}
+                        key={item?.url + i}
                         style={{
                           width: `${100 / pageSize}%`,
                           marginRight: (i + 1) % pageSize !== 0 ? 20 : 0,
                         }}
                       >
-                        {item.url ? (
+                        {item?.url ? (
                           <Image
                             style={{ width: '100%', height: 'auto' }}
-                            src={item.url}
+                            src={item?.url}
                           />
                         ) : (
                           <div style={{ width: '100%', height: 'auto' }} />
