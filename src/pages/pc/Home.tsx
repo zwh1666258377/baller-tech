@@ -115,6 +115,7 @@ const Home = (props: PageProps) => {
                     </div>
                     <div
                       style={{
+                        marginTop: 10,
                         fontSize: 20,
                         transform: `translate(${-x}%)`,
                         opacity: o,
@@ -182,7 +183,7 @@ const Home = (props: PageProps) => {
             </div>
           </div>
         </div>
-        <BTFooter data={website} style={{ minWidth: 1400, marginTop: 80 }} />
+        <BTFooter data={website} style={{ width: '100%', marginTop: 80 }} />
       </div>
     </div>
   );

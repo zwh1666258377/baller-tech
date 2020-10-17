@@ -117,7 +117,7 @@ const Index = () => {
           'product-experience-display': r?.productExperience?.display,
           'product-display-display': r?.productDisplay?.display,
           'product-display-kind': r?.productDisplay?.kind,
-          'product-show-items': r?.productDisplay?.items,
+          'product-display-items': r?.productDisplay?.items,
           'usage-scenarios-display': r?.usageScenarios?.display,
           'usage-scenarios-name-cn': r?.usageScenarios?.title?.cn,
           'usage-scenarios-name-en': r?.usageScenarios?.title?.en,
@@ -174,6 +174,7 @@ const Index = () => {
         <Form.Item name="poduct-introduction-button-link" label="按钮链接">
           <Input />
         </Form.Item>
+        {productExperience()}
         <Title level={3}>产品展示</Title>
         <Form.Item
           name="product-display-display"
@@ -223,10 +224,10 @@ const Index = () => {
                 </Row>
               );
             })}
-          <Form.Item name="product-show-url" label="链接">
+          <Form.Item name="product-display-url" label="链接">
             <Input />
           </Form.Item>
-          <Form.Item name="product-show-name" label="展示名">
+          <Form.Item name="product-display-name" label="展示名">
             <Input />
           </Form.Item>
           <Row>
@@ -234,10 +235,10 @@ const Index = () => {
               <Button
                 onClick={() => {
                   const currentInputUrl = form.getFieldValue(
-                    'product-show-url',
+                    'product-display-url',
                   );
                   const currentInputName = form.getFieldValue(
-                    'product-show-name',
+                    'product-display-name',
                   );
 
                   if (!currentInputUrl) {
@@ -252,8 +253,8 @@ const Index = () => {
                     ];
                   });
                   form.setFieldsValue({
-                    'product-show-url': '',
-                    'product-show-name': '',
+                    'product-display-url': '',
+                    'product-display-name': '',
                   });
                 }}
               >
@@ -262,7 +263,6 @@ const Index = () => {
             </Col>
           </Row>
         </div>
-        {productExperience()}
         <Title level={3}>使用场景</Title>
         <Form.Item
           name="usage-scenarios-display"
