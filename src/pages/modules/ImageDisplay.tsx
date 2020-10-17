@@ -14,8 +14,8 @@ const ImageDisplay = (props: Props) => {
       <MTitle label={props.label} />
       <div style={{ marginTop: 52 }}>
         <Row gutter={[110, 55]}>
-          {props.items?.map(item => (
-            <Col key={item.url} span={12}>
+          {props.items?.map((item, i) => (
+            <Col key={item.url + i} span={12}>
               <Image
                 style={{ width: '100%', height: 'auto' }}
                 src={item.url}

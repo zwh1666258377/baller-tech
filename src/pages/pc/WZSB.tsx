@@ -28,15 +28,15 @@ const WZSB = (props: PageProps) => {
               data={module.poductIntroduction}
             />
           )}
+          {module?.productExperience?.display && (
+            <ImageTranslator style={{ marginBottom: 98 }} />
+          )}
           {module?.productDisplay?.display && (
             <ProductDisplay
               style={{ marginBottom: 98 }}
               kind={module.productDisplay.kind}
               items={module.productDisplay.items}
             />
-          )}
-          {module?.productExperience?.display && (
-            <ImageTranslator style={{ marginBottom: 98 }} />
           )}
           {module?.usageScenarios?.display && (
             <ImageCarousel
