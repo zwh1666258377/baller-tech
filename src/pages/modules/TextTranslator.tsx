@@ -315,15 +315,10 @@ const TextTranslator = (props: Props) => {
 
   function onClickTranslate() {
     if (!checkCallTimesLimit(10)) {
-      message.warn('体验次数超出');
+      Modal.info({
+        title: props?.data?.callTimesLimitTip,
+      });
       return;
-    }
-    const times = setCallTimesLimit();
-    if (!!times && times % 2 === 0) {
-      props?.data?.callTimesLimitTip &&
-        Modal.info({
-          title: props?.data?.callTimesLimitTip,
-        });
     }
     if (!inputVal) {
       message.error('翻译内容不得为空');
@@ -339,7 +334,17 @@ const TextTranslator = (props: Props) => {
       message.error(`暂时不支持${from?.label}翻译为${to?.label}`);
       return;
     }
-    fetchTranslation().then(v => setOutputVal(v));
+    fetchTranslation()
+      .then(v => setOutputVal(v))
+      .finally(() => {
+        const times = setCallTimesLimit();
+        if (!!times && times % 2 === 0) {
+          props?.data?.callTimesLimitTip &&
+            Modal.info({
+              title: props?.data?.callTimesLimitTip,
+            });
+        }
+      });
   }
 
   async function fetchTranslation() {

@@ -213,6 +213,7 @@ const ImageTranslator = (props: Props) => {
             color: '#888',
             border: '1px solid #BBB',
             margin: '0px 20px',
+            padding: '5px 8px',
           }}
         >
           {!preview ? (
@@ -232,6 +233,7 @@ const ImageTranslator = (props: Props) => {
             color: '#888',
             border: '1px solid #BBB',
             margin: '0px 20px',
+            padding: '5px 8px',
           }}
         >
           {!output ? (

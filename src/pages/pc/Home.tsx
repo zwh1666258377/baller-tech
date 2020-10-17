@@ -53,11 +53,15 @@ const Home = (props: PageProps) => {
           }}
         >
           <div>
-            <img
-              onDragStart={() => false}
-              style={{ height: '100vh', width: '100%' }}
-              src={homeDefault.defaultbg}
-            />
+            <div
+              style={{
+                width: '100%',
+                height: '100vh',
+                backgroundImage: `url(${homeDefault.defaultbg})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            ></div>
           </div>
         </Carousel>
       </div>
@@ -111,6 +115,7 @@ const Home = (props: PageProps) => {
                     </div>
                     <div
                       style={{
+                        marginTop: 10,
                         fontSize: 20,
                         transform: `translate(${-x}%)`,
                         opacity: o,
@@ -178,7 +183,7 @@ const Home = (props: PageProps) => {
             </div>
           </div>
         </div>
-        <BTFooter data={website} style={{ minWidth: 1400, marginTop: 80 }} />
+        <BTFooter data={website} style={{ width: '100%', marginTop: 80 }} />
       </div>
     </div>
   );

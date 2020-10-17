@@ -20,11 +20,18 @@ const BTFooter = (props: Props) => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
+        alignItems: 'center',
         ...props.style,
       }}
     >
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <div style={{ textAlign: 'left', color: '#FFF' }}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          maxWidth: 1400,
+        }}
+      >
+        <div style={{ textAlign: 'left', color: '#FFF', marginRight: 36 }}>
           {data?.companyName.cn && (
             <div
               style={{ fontSize: 20, marginBottom: 12, whiteSpace: 'nowrap' }}
@@ -47,13 +54,13 @@ const BTFooter = (props: Props) => {
               { label: '语音翻译', url: '/yyhc' },
               { label: '文字识别', url: '/wzsb' },
               { label: '图像识别和目标检测', url: '/txsb' },
-            ].map(d => (
+            ].map((d, i) => (
               <Link
                 to={d.url}
                 key={d.label}
                 style={{
                   color: '#FFF',
-                  marginRight: 110,
+                  marginRight: i === 4 ? 0 : 110,
                   whiteSpace: 'nowrap',
                 }}
               >
@@ -69,13 +76,13 @@ const BTFooter = (props: Props) => {
               { label: '关于我们', url: '/ljwm' },
               { label: '荣誉资质', url: '/ljwm' },
               { label: '联系我们', url: '/ljwm' },
-            ].map(d => (
+            ].map((d, i) => (
               <Link
                 to={d.url}
                 key={d.label}
                 style={{
                   color: '#FFF',
-                  marginRight: 110,
+                  marginRight: i === 2 ? 0 : 110,
                   whiteSpace: 'nowrap',
                 }}
               >
