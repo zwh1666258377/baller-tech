@@ -64,7 +64,7 @@ export const errorTip = (data: Data): any => {
   const code = data?.data?.code;
   const message = data?.data?.message;
 
-  if (code !== 0) {
+  if (code && code !== 0) {
     notification.error({
       message: errorMapping[code!] || code,
       description: message,
