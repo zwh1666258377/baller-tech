@@ -28,15 +28,15 @@ const YYSB = (props: PageProps) => {
               data={module.poductIntroduction}
             />
           )}
+          {module?.productExperience?.display && (
+            <AudioTranslator style={{ marginBottom: 98 }} />
+          )}
           {module?.productDisplay?.display && (
             <ProductDisplay
               style={{ marginBottom: 98 }}
               kind={module.productDisplay.kind}
               items={module.productDisplay.items}
             />
-          )}
-          {module?.productExperience?.display && (
-            <AudioTranslator style={{ marginBottom: 98 }} />
           )}
           {module?.usageScenarios?.display && (
             <ImageCarousel

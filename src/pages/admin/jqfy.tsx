@@ -37,8 +37,7 @@ const Index = () => {
     }>
   >([]);
 
-  const submit = value => {
-    console.log(value);
+  const submit = (value: any) => {
     setLoading(true);
     const data = {
       kind: 'jqfy',
@@ -75,8 +74,8 @@ const Index = () => {
         },
         imgUrls: usageScenariosImgUrls,
       },
+      textTranslationRules: translationRules,
     };
-
     fetch('/api/update-module', {
       method: 'POST',
       body: JSON.stringify(data),
@@ -125,9 +124,9 @@ const Index = () => {
           'usage-scenarios-name-cn': r?.usageScenarios?.title?.cn,
           'usage-scenarios-name-en': r?.usageScenarios?.title?.en,
         });
-        console.log(r);
         setUsageScenariosImgUrls(r?.usageScenarios?.imgUrls);
         setProductDisplayItems(r?.productDisplay?.items);
+        setTranslationRules(r?.textTranslationRules);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -354,7 +353,7 @@ const Index = () => {
                 from: { label: fromLabel, key: fromKey },
                 to: { label: toLabel, key: toKey },
               };
-              setTranslationRules([rule, ...translationRules]);
+              setTranslationRules([...translationRules, rule]);
             }}
           >
             增加
@@ -364,16 +363,14 @@ const Index = () => {
               {translationRules.map((r, i) => {
                 return (
                   <Tag
-                    closable
                     key={i}
                     style={{ margin: '0 8px 8px 0' }}
-                    onClose={() =>
+                    onClick={() => {
                       setTranslationRules(
                         translationRules.filter((_, ri) => ri !== i),
-                      )
-                    }
+                      );
+                    }}
                   >
-                    {i}
                     <div
                       style={{ display: 'inline-block', marginRight: 8 }}
                     >{`${r.from.label}-${r.to.label}`}</div>

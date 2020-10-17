@@ -6,44 +6,40 @@ import MTitle from '../parts/MTitle';
 
 const Option = Select.Option;
 
-const rules = [
-  {
-    from: {
-      key: 'chs',
-      label: '中文',
-    },
-    to: {
-      key: 'tib',
-      label: '藏文',
-    },
-  },
-];
-
-const opts: { key: string; label: string }[] = [];
-const allowKeys: string[] = [];
-rules.forEach(r => {
-  if (!opts.find(o => o.key === r.from.key)) {
-    opts.push(r.from);
-  }
-  if (!opts.find(o => o.key === r.to.key)) {
-    opts.push(r.to);
-  }
-  const key = `${r.from.key}-${r.to.key}`;
-  if (!allowKeys.includes(key)) {
-    allowKeys.push(key);
-  }
-});
-
 interface Props {
   style?: CSSProperties;
   h5?: boolean;
+  rules: Array<{
+    from: {
+      key: string;
+      label: string;
+    };
+    to: {
+      key: string;
+      label: string;
+    };
+  }>;
 }
 
 const TextTranslator = (props: Props) => {
+  const opts: { key: string; label: string }[] = [];
+  const allowKeys: string[] = [];
+  props.rules.forEach(r => {
+    if (!opts.find(o => o.key === r.from.key)) {
+      opts.push(r.from);
+    }
+    if (!opts.find(o => o.key === r.to.key)) {
+      opts.push(r.to);
+    }
+    const key = `${r.from.key}-${r.to.key}`;
+    if (!allowKeys.includes(key)) {
+      allowKeys.push(key);
+    }
+  });
   const [inputVal, setInputVal] = React.useState<string>();
   const [outputVal, setOutputVal] = React.useState<string>();
-  const [fromVal, setFromVal] = React.useState<string>(rules[0].from.key);
-  const [toVal, setToVal] = React.useState<string>(rules[0].to.key);
+  const [fromVal, setFromVal] = React.useState<string>();
+  const [toVal, setToVal] = React.useState<string>();
   const [loading, setLoading] = React.useState<boolean>(false);
   const uploadKey = React.useMemo(() => `${fromVal}-${toVal}`, [
     fromVal,
@@ -70,6 +66,7 @@ const TextTranslator = (props: Props) => {
                 size="large"
                 style={{ width: 200 }}
                 value={fromVal}
+                placeholder="请选择语种"
                 onSelect={val => {
                   setFromVal(val);
                 }}
@@ -84,6 +81,7 @@ const TextTranslator = (props: Props) => {
                 size="large"
                 style={{ width: 200, marginLeft: 34 }}
                 value={toVal}
+                placeholder="请选择语种"
                 onSelect={val => {
                   setToVal(val);
                 }}
@@ -160,17 +158,7 @@ const TextTranslator = (props: Props) => {
                     padding: '8px 0',
                     width: '48%',
                   }}
-                  onClick={() => {
-                    if (!inputVal) {
-                      message.error('翻译内容不得为空');
-                      return;
-                    }
-                    if (!allowKeys.includes(uploadKey)) {
-                      alert('暂时不支持' + uploadKey);
-                      return;
-                    }
-                    fetchTranslation().then(v => setOutputVal(v));
-                  }}
+                  onClick={onClickTranslate}
                 >
                   翻译
                 </div>
@@ -217,6 +205,7 @@ const TextTranslator = (props: Props) => {
               size="large"
               style={{ width: 200 }}
               value={fromVal}
+              placeholder="请选择语种"
               onSelect={val => {
                 setFromVal(val);
               }}
@@ -231,6 +220,7 @@ const TextTranslator = (props: Props) => {
               size="large"
               style={{ width: 200, marginLeft: 34 }}
               value={toVal}
+              placeholder="请选择语种"
               onSelect={val => {
                 setToVal(val);
               }}
@@ -251,17 +241,7 @@ const TextTranslator = (props: Props) => {
                   borderRadius: 25,
                   padding: '8px 50px',
                 }}
-                onClick={() => {
-                  if (!inputVal) {
-                    message.error('翻译内容不得为空');
-                    return;
-                  }
-                  if (!allowKeys.includes(uploadKey)) {
-                    alert('暂时不支持' + uploadKey);
-                    return;
-                  }
-                  fetchTranslation().then(v => setOutputVal(v));
-                }}
+                onClick={onClickTranslate}
               >
                 翻译
               </div>
@@ -327,6 +307,24 @@ const TextTranslator = (props: Props) => {
       </div>
     </Spin>
   );
+
+  function onClickTranslate() {
+    if (!inputVal) {
+      message.error('翻译内容不得为空');
+      return;
+    }
+    if (fromVal === toVal) {
+      message.warn(`请选择不同语种`);
+      return;
+    }
+    if (!allowKeys.includes(uploadKey)) {
+      const from = opts.find(o => o.key === fromVal);
+      const to = opts.find(o => o.key === toVal);
+      message.error(`暂时不支持${from?.label}翻译为${to?.label}`);
+      return;
+    }
+    fetchTranslation().then(v => setOutputVal(v));
+  }
 
   async function fetchTranslation() {
     setLoading(true);
