@@ -53,11 +53,15 @@ const Home = (props: PageProps) => {
           }}
         >
           <div>
-            <img
-              onDragStart={() => false}
-              style={{ height: '100vh', width: '100%' }}
-              src={homeDefault.defaultbg}
-            />
+            <div
+              style={{
+                width: '100%',
+                height: '100vh',
+                backgroundImage: `url(${homeDefault.defaultbg})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            ></div>
           </div>
         </Carousel>
       </div>
