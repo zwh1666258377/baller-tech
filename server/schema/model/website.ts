@@ -4,6 +4,11 @@ const Schema = mongoose.Schema;
 const Types = Schema.Types;
 
 interface Website {
+  callTimesLimitTip: string;
+  carousels: {
+    h5: string[];
+    pc: string[];
+  };
   kind: string;
   icon: string;
   companyName: {
@@ -30,6 +35,15 @@ interface Website {
 }
 
 const websiteSchema = new Schema({
+  carousels: {
+    type: {
+      h5: [Types.String],
+      pc: [Types.String],
+    },
+  },
+  callTimesLimitTip: {
+    type: Types.String,
+  },
   kind: {
     type: Types.String,
   },

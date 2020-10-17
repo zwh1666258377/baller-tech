@@ -114,6 +114,11 @@ export interface Module {
 }
 
 export interface Website {
+  callTimesLimitTip: string;
+  carousels: {
+    h5: string[];
+    pc: string[];
+  };
   kind: string;
   icon: string;
   companyName: {

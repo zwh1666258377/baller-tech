@@ -10,7 +10,6 @@ import { resolve } from 'path';
 import { WhiteList } from './auth';
 import session from 'express-session';
 import connectMongo from 'connect-mongo';
-import { setAccessControlAllowHeaders } from './lib/access-control-allow-origin';
 import path from 'path';
 import { updateModule } from './api/update-module';
 import { getModule } from './api/get-module';
@@ -27,6 +26,7 @@ import { getWebsite } from './api/get-website';
 import { updateWebsite } from './api/update-website';
 import { ballerTechJQFY } from './api/baller-tech-jqfy';
 import { ballerTechYYSB } from './api/baller-tech-yysb';
+import { ballerTechWZSB } from './api/baller-tech-wzsb';
 
 dotenv.config('../.env' as any);
 
@@ -145,6 +145,7 @@ class App {
     // Baller Tech API
     ballerTechJQFY(this.app);
     ballerTechYYSB(this.app);
+    ballerTechWZSB(this.app);
   };
 
   connectDb = () => {

@@ -116,16 +116,12 @@ function postTranslate(args) {
                 },
                 function(error, response, body) {
                   if (!error && response.statusCode == 200) {
+                    val += unescape(
+                      JSON.parse(body)?.data.replace(/\\u/g, '%u'),
+                    );
                     if (JSON.parse(body)?.is_end === 1) {
-                      val += unescape(
-                        JSON.parse(body)?.data.replace(/\\u/g, '%u'),
-                      );
                       clearInterval(timer);
                       resolve(val);
-                    } else {
-                      val += unescape(
-                        JSON.parse(body)?.data.replace(/\\u/g, '%u'),
-                      );
                     }
                   }
                 },
