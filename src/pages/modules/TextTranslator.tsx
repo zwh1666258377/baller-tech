@@ -1,6 +1,6 @@
 import { callTimesLimit } from '@/lib/call-times-limit';
 import { errorTip } from '@/lib/error-tip';
-import { message, Select, Spin } from 'antd';
+import { message, Select, Spin, Modal } from 'antd';
 import React, { CSSProperties } from 'react';
 import { Website } from '../common/Defs';
 import { Colors, h5Styles, Styles } from '../common/Styles';
@@ -319,9 +319,11 @@ const TextTranslator = (props: Props) => {
       return;
     }
     const times = setCallTimesLimit();
-    if (times % 2 === 0) {
+    if (!!times && times % 2 === 0) {
       props?.data?.callTimesLimitTip &&
-        message.warn(props?.data?.callTimesLimitTip);
+        Modal.info({
+          title: props?.data?.callTimesLimitTip,
+        });
     }
     if (!inputVal) {
       message.error('翻译内容不得为空');
