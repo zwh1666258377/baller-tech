@@ -147,7 +147,7 @@ const Index = () => {
                 <DeleteOutlined
                   onClick={() => {
                     setInfo((urls = []) => {
-                      return urls?.filter(item => item !== i);
+                      return urls?.filter((_, i) => idx !== i);
                     });
                   }}
                 />
@@ -189,7 +189,7 @@ const Index = () => {
                 <DeleteOutlined
                   onClick={() => {
                     setCarouselsH5((urls = []) => {
-                      return urls?.filter(item => item !== i);
+                      return urls?.filter((_, i) => idx !== i);
                     });
                   }}
                 />
@@ -233,7 +233,7 @@ const Index = () => {
                 <DeleteOutlined
                   onClick={() => {
                     setCarouselsPC((urls = []) => {
-                      return urls?.filter(item => item !== i);
+                      return urls?.filter((_, i) => idx !== i);
                     });
                   }}
                 />
@@ -288,7 +288,7 @@ const Index = () => {
                 <DeleteOutlined
                   onClick={() => {
                     setContactImgUrls((urls = []) => {
-                      return urls?.filter(i => !!i?.url && i?.url !== url);
+                      return urls?.filter((_, i) => idx !== i);
                     });
                   }}
                 />

@@ -331,7 +331,9 @@ const TextTranslator = (props: Props) => {
     if (!allowKeys.includes(uploadKey)) {
       const from = opts.find(o => o.key === fromVal);
       const to = opts.find(o => o.key === toVal);
-      message.error(`暂时不支持${from?.label}翻译为${to?.label}`);
+      Modal.info({
+        content: `暂时不支持${from?.label}翻译为${to?.label}`,
+      });
       return;
     }
     fetchTranslation()

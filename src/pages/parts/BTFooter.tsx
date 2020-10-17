@@ -16,7 +16,7 @@ const BTFooter = (props: Props) => {
         color: '#FFF',
         textAlign: 'center',
         backgroundColor: Colors.btFooterBackground,
-        padding: '60px 60px 10px',
+        padding: '60px 60px 4px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
@@ -92,7 +92,7 @@ const BTFooter = (props: Props) => {
           </div>
         </div>
       </div>
-      <div style={{ marginTop: 60, color: '#C2C7CC' }}>{data?.icp}</div>
+      <div style={{ marginTop: 120, color: '#C2C7CC' }}>{data?.icp}</div>
     </div>
   );
 };
