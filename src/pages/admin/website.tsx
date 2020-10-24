@@ -3,7 +3,7 @@ import {
   Button,
   Form,
   Input,
-  message,
+  Modal,
   notification,
   Spin,
   Typography,
@@ -307,7 +307,7 @@ const Index = () => {
               const currentInputUrl = form.getFieldValue('contact-img-url');
               const currentInputName = form.getFieldValue('contact-img-name');
               if (!currentInputUrl || !currentInputName) {
-                message.warn('链接或名称不得为空');
+                Modal.error({ content: '链接或名称不得为空' });
                 return;
               }
               setContactImgUrls((urls = []) => {

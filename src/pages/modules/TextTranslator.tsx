@@ -1,10 +1,11 @@
 import { callTimesLimit } from '@/lib/call-times-limit';
 import { errorTip } from '@/lib/error-tip';
-import { message, Select, Spin, Modal } from 'antd';
+import { Select, Spin, Modal } from 'antd';
 import React, { CSSProperties } from 'react';
 import { Website } from '../common/Defs';
 import { Colors, h5Styles, Styles } from '../common/Styles';
 import MTitle from '../parts/MTitle';
+import TextEditor from './TextEditor';
 
 const Option = Select.Option;
 
@@ -46,6 +47,7 @@ const TextTranslator = (props: Props) => {
   const [fromVal, setFromVal] = React.useState<string>();
   const [toVal, setToVal] = React.useState<string>();
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [clearSignal, setClearSignal] = React.useState(0);
   const uploadKey = React.useMemo(() => `${fromVal}-${toVal}`, [
     fromVal,
     toVal,
@@ -105,45 +107,18 @@ const TextTranslator = (props: Props) => {
                 flexDirection: 'column',
               }}
             >
-              <div
-                style={{
-                  flex: 1,
-                  height: 128,
-                  border: '1px solid #BBB',
-                }}
-              >
-                <textarea
-                  style={{
-                    fontSize: 16,
-                    padding: 8,
-                    width: '100%',
-                    height: '100%',
-                    resize: 'none',
-                    border: 'none',
-                  }}
-                  placeholder="输入要翻译的文字"
-                  value={inputVal}
-                  onChange={t => {
-                    setInputVal(t.target.value);
-                  }}
-                />
-              </div>
-              <div
-                style={{
-                  flex: 1,
-                  height: 128,
-                  border: '1px solid #BBB',
-                  fontSize: 16,
-                  padding: 8,
-                  marginTop: '16px',
-                }}
-              >
-                <div style={{ flex: 1, height: 128 }}>
-                  {outputVal || (
-                    <span style={{ color: '#878787' }}>翻译结果</span>
-                  )}
-                </div>
-              </div>
+              <TextEditor
+                style={{ height: 168 }}
+                contentEditable={true}
+                lang={fromVal}
+                onChangeText={setInputVal}
+                clearSignal={clearSignal}
+              ></TextEditor>
+              <TextEditor style={{ height: 168, marginTop: 16 }} lang={toVal}>
+                {outputVal || (
+                  <span style={{ color: '#878787' }}>翻译结果</span>
+                )}
+              </TextEditor>
               <div
                 style={{
                   display: 'flex',
@@ -179,10 +154,7 @@ const TextTranslator = (props: Props) => {
                     textAlign: 'center',
                     border: '1px solid #BBB',
                   }}
-                  onClick={() => {
-                    setInputVal('');
-                    setOutputVal('');
-                  }}
+                  onClick={clear}
                 >
                   清除
                 </div>
@@ -261,52 +233,23 @@ const TextTranslator = (props: Props) => {
                   padding: '8px 50px',
                   border: '1px solid #BBB',
                 }}
-                onClick={() => {
-                  setInputVal('');
-                  setOutputVal('');
-                }}
+                onClick={clear}
               >
                 清除
               </div>
             </div>
           </div>
           <div style={{ marginTop: 48, display: 'flex' }}>
-            <div
-              style={{
-                marginRight: 10,
-                flex: 1,
-                height: 168,
-                border: '1px solid #BBB',
-              }}
-            >
-              <textarea
-                style={{
-                  fontSize: 16,
-                  padding: 8,
-                  width: '100%',
-                  height: '100%',
-                  resize: 'none',
-                  border: 'none',
-                }}
-                placeholder="输入要翻译的文字"
-                value={inputVal}
-                onChange={t => {
-                  setInputVal(t.target.value);
-                }}
-              />
-            </div>
-            <div
-              style={{
-                fontSize: 16,
-                padding: 8,
-                marginLeft: 10,
-                flex: 1,
-                height: 168,
-                border: '1px solid #BBB',
-              }}
-            >
+            <TextEditor
+              style={{ height: 168, marginRight: 10 }}
+              contentEditable={true}
+              lang={fromVal}
+              onChangeText={setInputVal}
+              clearSignal={clearSignal}
+            ></TextEditor>
+            <TextEditor style={{ height: 168, marginLeft: 10 }} lang={toVal}>
               {outputVal || <span style={{ color: '#878787' }}>翻译结果</span>}
-            </div>
+            </TextEditor>
           </div>
         </div>
       </div>
@@ -320,12 +263,16 @@ const TextTranslator = (props: Props) => {
       });
       return;
     }
-    if (!inputVal) {
-      message.error('翻译内容不得为空');
+    if (!fromVal && !toVal) {
+      Modal.warn({ content: '请选择要翻译的语种' });
       return;
     }
     if (fromVal === toVal) {
-      message.warn(`请选择不同语种`);
+      Modal.warn({ content: '请选择不同语种' });
+      return;
+    }
+    if (!inputVal) {
+      Modal.warn({ content: '翻译内容不得为空' });
       return;
     }
     if (!allowKeys.includes(uploadKey)) {
@@ -349,6 +296,12 @@ const TextTranslator = (props: Props) => {
       });
   }
 
+  function clear() {
+    setInputVal('');
+    setOutputVal('');
+    setClearSignal(clearSignal + 1);
+  }
+
   async function fetchTranslation() {
     setLoading(true);
     const data = await fetch('/api/jqfy', {
@@ -366,7 +319,7 @@ const TextTranslator = (props: Props) => {
       .finally(() => setLoading(false));
 
     if (data?.status === 'error') {
-      message.error(data?.msg);
+      Modal.error(data?.msg);
       return '';
     }
 

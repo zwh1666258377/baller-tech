@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button, Modal } from 'antd';
 import { useHistory } from 'umi';
 import { siders } from './index';
 
@@ -26,9 +26,9 @@ const Index = () => {
       .then(r => r.json())
       .then(r => {
         if (r?.status === 'error') {
-          message.error(r?.msg);
+          Modal.error({ content: r?.msg });
         } else if (r?.status === 'ok') {
-          message.success(r?.msg);
+          Modal.error({ content: r?.msg });
           history.push(`/admin/${siders[0]?.key}`);
         }
       });

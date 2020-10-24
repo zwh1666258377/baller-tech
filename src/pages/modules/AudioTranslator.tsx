@@ -1,5 +1,5 @@
 /// <reference path = "../../../types/index.d.ts" />
-import { message, Select, Spin, Upload } from 'antd';
+import { Modal, Select, Spin, Upload } from 'antd';
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface';
 import React, { CSSProperties, useRef } from 'react';
 import { DynamicRec } from '../common/DynamicRec';
@@ -7,6 +7,7 @@ import { Colors, h5Styles, Styles } from '../common/Styles';
 import { useSize } from 'ahooks';
 import MTitle from '../parts/MTitle';
 import { errorTip } from '../../lib/error-tip';
+import TextEditor from './TextEditor';
 
 const Option = Select.Option;
 
@@ -21,10 +22,8 @@ interface Props {
 
 const AudioTranslator = (props: Props) => {
   const [rec, setRec] = React.useState<any>();
-  const [fileList, setFileList] = React.useState<UploadFile[]>([]);
-  const [lan, setLan] = React.useState<string>();
+  const [lang, setLang] = React.useState<string>();
   const [audioSrc, setAudioSrc] = React.useState<string>();
-  const [audioBlob, setAudioBlob] = React.useState<Blob>();
   const [recording, setRecording] = React.useState<boolean>(false);
   const [result, setResult] = React.useState<string>();
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -54,7 +53,9 @@ const AudioTranslator = (props: Props) => {
 
         // 限制录音1分钟，若超出给出友好提示
         if (bufferDuration / 1000 >= 60) {
-          message.error('您已录制超过最大时长: 1分钟。马上为您分析数据~');
+          Modal.info({
+            content: '您已录制超过最大时长: 1分钟。马上为您分析数据~',
+          });
           rec?.stop();
         }
       };
@@ -78,10 +79,10 @@ const AudioTranslator = (props: Props) => {
             <Select
               size="large"
               style={{ marginTop: 8, width: '100%' }}
-              value={lan}
+              value={lang}
               placeholder="请选择要识别的语言"
               onSelect={val => {
-                setLan(val);
+                setLang(val);
               }}
             >
               {opts.map(o => (
@@ -90,29 +91,13 @@ const AudioTranslator = (props: Props) => {
                 </Option>
               ))}
             </Select>
-            {audioSrc && (
-              <audio
-                controls
-                style={{ marginTop: 10, outline: 'none' }}
-                src={audioSrc}
-              />
-            )}
-            <div
-              style={{
-                height: 160,
-                overflow: 'auto',
-                padding: 10,
-                color: '#888',
-                border: '1px solid #BBB',
-                marginTop: 30,
-              }}
-            >
-              {result ? (
-                <div style={{ color: '#333' }}>{result}</div>
-              ) : (
-                '上传的音频格式仅支持（MP3、wav）'
+            <TextEditor style={{ height: 160, marginTop: 30 }} lang={lang}>
+              {result || (
+                <span style={{ color: '#878787' }}>
+                  上传的音频格式仅支持（MP3、wav）
+                </span>
               )}
-            </div>
+            </TextEditor>
             <div
               ref={r => (btnContainer.current = r)}
               style={{ marginTop: '28px' }}
@@ -137,50 +122,28 @@ const AudioTranslator = (props: Props) => {
                   >
                     {!recording ? '录音识别' : '停止录音'}
                   </div>
-                  {audioSrc ? (
+                  <Upload
+                    accept=".mp3,.wav"
+                    action=""
+                    fileList={[]}
+                    showUploadList={{ showRemoveIcon: false }}
+                    onChange={onUploadChange}
+                  >
                     <div
                       style={{
                         fontSize: 16,
                         color: '#FFF',
                         backgroundColor: Colors.btColor,
-                        cursor: 'pointer',
                         borderRadius: 25,
                         padding: '8px 0',
-                        width: width / 2 - 10,
                         textAlign: 'center',
                         marginTop: 8,
-                        marginRight: 20,
-                      }}
-                      onClick={() => {
-                        alert('上传刚录的音频');
+                        width: width / 2 - 10,
                       }}
                     >
                       上传音频
                     </div>
-                  ) : (
-                    <Upload
-                      accept=".mp3,.wav"
-                      action=""
-                      fileList={fileList}
-                      showUploadList={{ showRemoveIcon: false }}
-                      onChange={onUploadChange}
-                    >
-                      <div
-                        style={{
-                          fontSize: 16,
-                          color: '#FFF',
-                          backgroundColor: Colors.btColor,
-                          borderRadius: 25,
-                          padding: '8px 0',
-                          textAlign: 'center',
-                          marginTop: 8,
-                          width: width / 2 - 10,
-                        }}
-                      >
-                        上传音频
-                      </div>
-                    </Upload>
-                  )}
+                  </Upload>
                 </>
               )}
             </div>
@@ -230,10 +193,10 @@ const AudioTranslator = (props: Props) => {
             <Select
               size="large"
               style={{ width: 300, marginTop: 8, marginRight: 40 }}
-              value={lan}
+              value={lang}
               placeholder="请选择要识别的语言"
               onSelect={val => {
-                setLan(val);
+                setLang(val);
               }}
             >
               {opts.map(o => (
@@ -257,7 +220,13 @@ const AudioTranslator = (props: Props) => {
             >
               {!recording ? '录音识别' : '停止录音'}
             </div>
-            {audioSrc ? (
+            <Upload
+              accept=".mp3,.wav"
+              action=""
+              fileList={[]}
+              showUploadList={{ showRemoveIcon: false }}
+              onChange={onUploadChange}
+            >
               <div
                 style={{
                   fontSize: 16,
@@ -269,36 +238,10 @@ const AudioTranslator = (props: Props) => {
                   marginTop: 8,
                   marginRight: 20,
                 }}
-                onClick={() => {
-                  alert('上传刚录的音频');
-                }}
               >
                 上传音频
               </div>
-            ) : (
-              <Upload
-                accept=".mp3,.wav"
-                action=""
-                fileList={fileList}
-                showUploadList={{ showRemoveIcon: false }}
-                onChange={onUploadChange}
-              >
-                <div
-                  style={{
-                    fontSize: 16,
-                    color: '#FFF',
-                    backgroundColor: Colors.btColor,
-                    cursor: 'pointer',
-                    borderRadius: 25,
-                    padding: '8px 50px',
-                    marginTop: 8,
-                    marginRight: 20,
-                  }}
-                >
-                  上传音频
-                </div>
-              </Upload>
-            )}
+            </Upload>
             <div
               style={{
                 fontSize: 16,
@@ -323,22 +266,13 @@ const AudioTranslator = (props: Props) => {
               src={audioSrc}
             />
           )}
-          <div
-            style={{
-              height: 160,
-              overflow: 'auto',
-              padding: 10,
-              color: '#888',
-              border: '1px solid #BBB',
-              marginTop: 30,
-            }}
-          >
-            {result ? (
-              <div style={{ color: '#333' }}>{result}</div>
-            ) : (
-              '上传的音频格式仅支持（MP3、wav）'
+          <TextEditor style={{ height: 160, marginTop: 30 }} lang={lang}>
+            {result || (
+              <span style={{ color: '#878787' }}>
+                上传的音频格式仅支持（MP3、wav）
+              </span>
             )}
-          </div>
+          </TextEditor>
         </div>
       </Spin>
     </div>
@@ -351,9 +285,8 @@ const AudioTranslator = (props: Props) => {
         setRecording(true);
       });
     } else {
-      rec?.stop(blob => {
-        setAudioBlob(blob);
-        setAudioSrc((window.URL || webkitURL).createObjectURL(blob));
+      rec?.stop((blob: any) => {
+        uploadRecord(blob);
         setRecording(false);
       });
     }
@@ -366,14 +299,14 @@ const AudioTranslator = (props: Props) => {
   }
 
   function uploadRecord(file: any) {
-    if (!lan) {
-      message.warn('请选择要识别的语言');
+    if (!lang) {
+      Modal.warn({ content: '请选择要识别的语言' });
       return;
     }
     setLoading(true);
     let formdata = new FormData();
     formdata.append('file', file);
-    formdata.append('language', lan);
+    formdata.append('language', lang);
     fetch('/api/yysb', {
       method: 'POST',
       headers: {},
@@ -395,7 +328,6 @@ const AudioTranslator = (props: Props) => {
   function clear() {
     rec?.stop();
     setResult('');
-    setAudioBlob(undefined);
     setAudioSrc(undefined);
   }
 };

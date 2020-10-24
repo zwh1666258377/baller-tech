@@ -1,10 +1,11 @@
-import { message, Select, Spin, Upload } from 'antd';
+import { Modal, Select, Spin, Upload } from 'antd';
 import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface';
 import React, { CSSProperties, useRef } from 'react';
 import { Colors, Styles } from '../common/Styles';
 import MTitle from '../parts/MTitle';
 import { useSize } from 'ahooks';
 import { errorTip } from '../../lib/error-tip';
+import TextEditor from './TextEditor';
 
 const Option = Select.Option;
 
@@ -16,10 +17,10 @@ interface Props {
 
 const ImageTranslator = (props: Props) => {
   const opts = props.rules || [];
-  const [lan, setLan] = React.useState<string>();
+  const [lang, setLang] = React.useState<string>();
   const [fileList, setFileList] = React.useState<UploadFile[]>([]);
   const [preview, setPreview] = React.useState<string>();
-  const [output, setOutput] = React.useState<string>();
+  const [output, setOutput] = React.useState<string[]>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
   const btnContainer = useRef<any>();
   const { width } = useSize(btnContainer.current);
@@ -36,10 +37,10 @@ const ImageTranslator = (props: Props) => {
             <Select
               size="large"
               style={{ width: '100%' }}
-              value={lan}
+              value={lang}
               placeholder="请选择要识别的语言"
               onSelect={val => {
-                setLan(val);
+                setLang(val);
               }}
             >
               {opts.map(o => (
@@ -68,24 +69,13 @@ const ImageTranslator = (props: Props) => {
                 />
               )}
             </div>
-            {output && (
-              <div
-                style={{
-                  marginTop: 15,
-                  overflow: 'auto',
-                  color: '#888',
-                  padding: 10,
-                  border: '1px solid #BBB',
-                  height: 150,
-                }}
-              >
-                {!output ? (
-                  '识别内容显示区'
-                ) : (
-                  <div style={{ color: '#333' }}>{output}</div>
-                )}
-              </div>
-            )}
+            <TextEditor style={{ height: 150, marginTop: 15 }} lang={lang}>
+              {output.length > 0 ? (
+                output.map((s, i) => <div key={i}>{s}</div>)
+              ) : (
+                <span style={{ color: '#878787' }}>识别内容显示区</span>
+              )}
+            </TextEditor>
             <div
               style={{
                 marginTop: 30,
@@ -152,10 +142,10 @@ const ImageTranslator = (props: Props) => {
             <Select
               size="large"
               style={{ width: '100%' }}
-              value={lan}
+              value={lang}
               placeholder="请选择要识别的语言"
               onSelect={val => {
-                setLan(val);
+                setLang(val);
               }}
             >
               {opts.map(o => (
@@ -217,7 +207,7 @@ const ImageTranslator = (props: Props) => {
               flex: 1,
               color: '#888',
               border: '1px solid #BBB',
-              margin: '0px 20px',
+              marginRight: 10,
               padding: '5px 8px',
             }}
           >
@@ -230,23 +220,13 @@ const ImageTranslator = (props: Props) => {
               />
             )}
           </div>
-          <div
-            style={{
-              maxHeight: 250,
-              overflow: 'auto',
-              flex: 1,
-              color: '#888',
-              border: '1px solid #BBB',
-              margin: '0px 20px',
-              padding: '5px 8px',
-            }}
-          >
-            {!output ? (
-              '识别内容显示区'
+          <TextEditor style={{ height: 250, marginLeft: 10 }} lang={lang}>
+            {output.length > 0 ? (
+              output.map((s, i) => <div key={i}>{s}</div>)
             ) : (
-              <div style={{ color: '#333' }}>{output}</div>
+              <span style={{ color: '#878787' }}>识别内容显示区</span>
             )}
-          </div>
+          </TextEditor>
         </div>
       </Spin>
     </div>
@@ -265,14 +245,14 @@ const ImageTranslator = (props: Props) => {
   }
 
   function uploadImage(file: any) {
-    if (!lan) {
-      message.warn('请选择要识别的语言');
+    if (!lang) {
+      Modal.warn({ content: '请选择要识别的语言' });
       return;
     }
     setLoading(true);
     let formdata = new FormData();
     formdata.append('file', file);
-    formdata.append('language', lan);
+    formdata.append('language', lang);
     fetch('/api/wzsb', {
       method: 'POST',
       headers: {},
@@ -295,7 +275,7 @@ const ImageTranslator = (props: Props) => {
     setFileList([]);
     setPreview(undefined);
     setLoading(false);
-    setOutput('');
+    setOutput([]);
   }
 
   function getBase64(file: Blob) {

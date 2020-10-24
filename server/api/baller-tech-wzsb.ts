@@ -89,7 +89,7 @@ function postTranslate(args) {
         if (!error && response.statusCode == 200) {
           const res = JSON.parse(body);
           if (!!res && res.code == 0) {
-            let val = '';
+            const val: string[] = [];
             const timer = setInterval(() => {
               const { request_id } = res;
               const date = getGMTdate();
@@ -114,7 +114,9 @@ function postTranslate(args) {
                       ?.data?.sort((a, b) => a?.order - b?.order)
                       ?.forEach(item => {
                         if (item?.result) {
-                          val += unescape(item?.result.replace(/\\u/g, '%u'));
+                          val.push(
+                            unescape(item?.result.replace(/\\u/g, '%u')),
+                          );
                         }
                       });
                     if (JSON.parse(body)?.is_end === 1) {

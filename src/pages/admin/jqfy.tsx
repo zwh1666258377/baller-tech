@@ -4,7 +4,6 @@ import {
   Col,
   Form,
   Input,
-  message,
   notification,
   Row,
   Select,
@@ -12,6 +11,7 @@ import {
   Switch,
   Tag,
   Typography,
+  Modal,
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { DeleteOutlined } from '@ant-design/icons';
@@ -362,7 +362,7 @@ const Index = () => {
                   );
 
                   if (!currentInputUrl) {
-                    message.warn('链接不得为空');
+                    Modal.error({ content: '链接不得为空' });
                     return;
                   }
 
@@ -444,7 +444,7 @@ const Index = () => {
               );
 
               if (!currentInputUrl || !currentInputName) {
-                message.warn('链接或名称不得为空');
+                Modal.error({ content: '链接或名称不得为空' });
                 return;
               }
 

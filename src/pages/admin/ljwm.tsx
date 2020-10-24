@@ -3,7 +3,7 @@ import {
   Button,
   Form,
   Input,
-  message,
+  Modal,
   notification,
   Spin,
   Switch,
@@ -215,7 +215,7 @@ const Index = () => {
               const currentInputName = form.getFieldValue('honor-img-name');
 
               if (!currentInputUrl || !currentInputName) {
-                message.warn('链接或名称不得为空');
+                Modal.error({ content: '链接或名称不得为空' });
                 return;
               }
               setHonor((urls = []) => {
@@ -280,7 +280,7 @@ const Index = () => {
               const currentInputName = form.getFieldValue('partne-img-name');
 
               if (!currentInputUrl || !currentInputName) {
-                message.warn('链接或名称不得为空');
+                Modal.error({ content: '链接或名称不得为空' });
                 return;
               }
 
@@ -347,7 +347,7 @@ const Index = () => {
               const currentInputName = form.getFieldValue('contact-img-name');
 
               if (!currentInputUrl || !currentInputName) {
-                message.warn('链接或名称不得为空');
+                Modal.error({ content: '链接或名称不得为空' });
                 return;
               }
 

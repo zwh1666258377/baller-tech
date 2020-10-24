@@ -4,7 +4,7 @@ import {
   Col,
   Form,
   Input,
-  message,
+  Modal,
   notification,
   Row,
   Select,
@@ -242,7 +242,7 @@ const Index = () => {
                   );
 
                   if (!currentInputUrl) {
-                    message.warn('链接不得为空');
+                    Modal.error({ content: '链接不得为空' });
                     return;
                   }
 
@@ -316,7 +316,7 @@ const Index = () => {
               );
 
               if (!currentInputUrl || !currentInputName) {
-                message.warn('链接或名称不得为空');
+                Modal.error({ content: '链接或名称不得为空' });
                 return;
               }
               setUsageScenariosImgUrls((urls = []) => {
