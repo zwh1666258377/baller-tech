@@ -1,6 +1,6 @@
 /// <reference path = "../../../types/index.d.ts" />
 import { Modal, Select, Spin, Upload } from 'antd';
-import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface';
+import { UploadChangeParam } from 'antd/lib/upload/interface';
 import React, { CSSProperties, useRef } from 'react';
 import { DynamicRec } from '../common/DynamicRec';
 import { Colors, h5Styles, Styles } from '../common/Styles';
@@ -192,7 +192,7 @@ const AudioTranslator = (props: Props) => {
           >
             <Select
               size="large"
-              style={{ width: 300, marginTop: 8, marginRight: 40 }}
+              style={{ width: 200, marginTop: 8, marginRight: 40 }}
               value={lang}
               placeholder="请选择要识别的语言"
               onSelect={val => {
