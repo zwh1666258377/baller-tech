@@ -127,6 +127,8 @@ export interface Website {
   };
   info: string[];
   icp: string;
+  icpUrl: string;
+  copyright: string;
   slogan: {
     main: string;
     sub: string;

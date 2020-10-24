@@ -37,6 +37,8 @@ const Index = () => {
       },
       info: info,
       icp: value['icp'],
+      icpUrl: value['icp-url'],
+      copyright: value['copyright'],
       slogan: {
         main: value['company-slogan-main'],
         sub: value['company-slogan-sub'],
@@ -89,7 +91,9 @@ const Index = () => {
           icon: r?.icon,
           'company-name-cn': r?.companyName?.cn,
           'company-name-en': r?.companyName?.en,
+          copyright: r?.copyright,
           icp: r?.icp,
+          'icp-url': r?.icpUrl,
           'company-slogan-main': r?.slogan?.main,
           'company-slogan-sub': r?.slogan?.sub,
           'contact-name-cn': r?.contact?.name?.cn,
@@ -117,7 +121,13 @@ const Index = () => {
         <Form.Item name="icon" label="网站logo">
           <Input />
         </Form.Item>
+        <Form.Item name="copyright" label="网站版权描述">
+          <Input />
+        </Form.Item>
         <Form.Item name="icp" label="网站ICP">
+          <Input />
+        </Form.Item>
+        <Form.Item name="icp-url" label="网站ICP链接">
           <Input />
         </Form.Item>
         <Form.Item name="company-name-cn" label="公司中文名">

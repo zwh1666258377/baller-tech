@@ -17,6 +17,8 @@ interface Website {
   };
   info: string[];
   icp: string;
+  icpUrl: string;
+  copyright: string;
   slogan: {
     main: string;
     sub: string;
@@ -60,6 +62,12 @@ const websiteSchema = new Schema({
     type: [Types.String],
   },
   icp: {
+    type: Types.String,
+  },
+  icpUrl: {
+    type: Types.String,
+  },
+  copyright: {
     type: Types.String,
   },
   slogan: {

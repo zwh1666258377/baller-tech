@@ -92,7 +92,12 @@ const BTFooter = (props: Props) => {
           </div>
         </div>
       </div>
-      <div style={{ marginTop: 120, color: '#C2C7CC' }}>{data?.icp}</div>
+      <div style={{ marginTop: 120, color: '#C2C7CC' }}>
+        <span>{`${data?.copyright} `}</span>
+        <a href={data?.icpUrl} target="__blank">
+          <span>{data?.icp}</span>
+        </a>
+      </div>
     </div>
   );
 };
