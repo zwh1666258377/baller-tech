@@ -7,26 +7,13 @@ interface Item {
   name: string;
 }
 
-const imgList = (imgs: Item[], num: number) => {
-  const data = Array.from(imgs);
-  const list: Item[][] = [];
-  while (data.length > 0) {
-    list.push(data.splice(0, num));
-  }
-  if (num - list[list.length - 1].length > 0) {
-    for (let i = 0; i < num - list[list.length - 1].length; i++) {
-      list[list.length - 1].push({ url: '', name: '' });
-    }
-  }
-  return list;
-};
-
 interface Props {
   imgs: Item[];
   style?: CSSProperties;
   label?: { cn: string; en: string };
-  pageSize?: { normal?: number; small?: number };
+  pageSize?: { normal?: number; line?: number };
   autoplay?: boolean;
+  h5?: boolean;
 }
 
 const ImageCarousel = (props: Props) => {
@@ -34,26 +21,31 @@ const ImageCarousel = (props: Props) => {
     return null;
   }
   const pageSize = props.pageSize?.normal || 3;
+  const line = props.pageSize?.line || 1;
   const list = imgList(props.imgs, pageSize);
   const autoplay = props.autoplay === undefined ? true : props.autoplay;
   return (
     <div style={props.style}>
       {props.label && (
-        <MTitle style={{ marginBottom: 52 }} label={props.label} />
+        <MTitle
+          style={{ marginBottom: props.h5 ? 20 : 52 }}
+          label={props.label}
+        />
       )}
       <div>
         <Carousel autoplay={autoplay} autoplaySpeed={5000}>
           {list.map((l, i) => {
-            return (
-              <div key={i}>
-                <Row>
+            const renderRow = (data: Item[], i: number) => {
+              return (
+                <Row key={i}>
                   <div style={{ display: 'flex' }}>
-                    {l.map((item, i) => (
+                    {data.map((item, i) => (
                       <div
                         key={item?.url + i}
                         style={{
-                          width: `${100 / pageSize}%`,
-                          marginRight: (i + 1) % pageSize !== 0 ? 20 : 0,
+                          width: `${100 / (pageSize / line)}%`,
+                          marginRight:
+                            (i + 1) % (pageSize / line) !== 0 ? 10 : 0,
                         }}
                       >
                         {item?.url ? (
@@ -62,19 +54,53 @@ const ImageCarousel = (props: Props) => {
                             src={item?.url}
                           />
                         ) : (
-                          <div style={{ width: '100%', height: 'auto' }} />
+                          <div
+                            style={{
+                              width: '100%',
+                              height: 'auto',
+                              color: '#000',
+                            }}
+                          ></div>
                         )}
                       </div>
                     ))}
                   </div>
                 </Row>
-              </div>
-            );
+              );
+            };
+
+            let dataList = [l];
+            if (line !== 0) {
+              dataList = imgList(l, pageSize / line);
+            }
+
+            return <div key={i}>{dataList.map(renderRow)}</div>;
           })}
         </Carousel>
       </div>
     </div>
   );
+
+  function imgList(imgs: Item[], num: number) {
+    const data = Array.from(imgs);
+    const list: Item[][] = [];
+    while (data.length > 0) {
+      list.push(data.splice(0, num));
+    }
+    if (list.length > 0 && list[list.length - 1].length < num) {
+      const last = list.pop() || [];
+      const newLast: Item[] = [];
+      for (let i = 0; i < pageSize; i++) {
+        if (i < last?.length) {
+          newLast.push(last[i]);
+        } else {
+          newLast.push({ url: '', name: '' });
+        }
+      }
+      list.push(newLast);
+    }
+    return list;
+  }
 };
 
 export default ImageCarousel;

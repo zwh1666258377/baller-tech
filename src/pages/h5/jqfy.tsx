@@ -2,14 +2,16 @@ import React from 'react';
 import { Layout, Spin, Typography } from 'antd';
 import TextTranslator from '../modules/TextTranslator';
 import MTitle from '../parts/MTitle';
-import { getModule } from '../common/DataApi';
+import { getModule, getWebsite } from '../common/DataApi';
 import { PageProps } from '../common/Defs';
+import ProductDisplay from '../modules/ProductDisplay';
 
 const { Content } = Layout;
 const { Paragraph } = Typography;
 
 const Index = (props: PageProps) => {
   const module = props.data?.module;
+  const website = props.data?.website;
 
   if (!props.data) {
     return <Spin></Spin>;
@@ -30,8 +32,17 @@ const Index = (props: PageProps) => {
         {module?.productExperience?.display && (
           <TextTranslator
             h5
+            data={website}
             style={{ marginBottom: '64px' }}
             rules={module?.textTranslationRules}
+          />
+        )}
+        {module?.productDisplay?.display && (
+          <ProductDisplay
+            h5
+            style={{ marginBottom: 98 }}
+            kind={module.productDisplay.kind}
+            items={module.productDisplay.items}
           />
         )}
         {module?.poductIntroduction?.display && (
@@ -122,7 +133,8 @@ const Index = (props: PageProps) => {
 
 Index.getInitialProps = async () => {
   const module = await getModule('jqfy');
-  return { data: { module } };
+  const website = await getWebsite();
+  return { data: { module, website } };
 };
 
 export default Index;

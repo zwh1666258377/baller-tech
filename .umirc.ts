@@ -67,7 +67,7 @@ export default defineConfig({
         { path: '/m/yysb', component: '@/pages/h5/yysb' },
         { path: '/m/yyhc', component: '@/pages/h5/yyhc' },
         { path: '/m/wzsb', component: '@/pages/h5/wzsb' },
-        { path: '/m/txsbhmbjc', component: '@/pages/h5/txsbhmbjc' },
+        { path: '/m/txsb', component: '@/pages/h5/txsb' },
         { path: '/m/ljwm', component: '@/pages/h5/ljwm' },
         { path: '/m', component: '@/pages/h5/home' },
       ],

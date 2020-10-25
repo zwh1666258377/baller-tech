@@ -1,6 +1,10 @@
 import React from 'react';
 import { configResponsive, useResponsive } from 'ahooks';
 import { Link, useHistory, useLocation } from 'umi';
+import { Colors } from '../common/Styles';
+import { getWebsite } from '../common/DataApi';
+import { PageProps } from '../common/Defs';
+import { CloseOutlined, MenuOutlined } from '@ant-design/icons';
 
 configResponsive({
   isPC: 750,
@@ -24,7 +28,7 @@ const routes = [
     name: '文字识别',
   },
   {
-    path: '/m/txsbhmbjc',
+    path: '/m/txsb',
     name: '图像识别和目标检测',
   },
   {
@@ -33,7 +37,11 @@ const routes = [
   },
 ];
 
-export default ({ children }) => {
+interface Props {
+  children: any;
+}
+const Layout = (props: Props & PageProps) => {
+  const website = props.data?.website;
   const isPC = useResponsive()?.isPC;
   const { push } = useHistory();
   const { pathname } = useLocation();
@@ -55,12 +63,27 @@ export default ({ children }) => {
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
+          backgroundColor: Colors.nav,
         }}
       >
-        <div onClick={() => push('/')}>logo</div>
-        <div onClick={() => setShow(!show)}>btn</div>
+        <img
+          src={website?.icon}
+          style={{ height: '120%' }}
+          onClick={() => push('/')}
+        />
+        {!show ? (
+          <MenuOutlined
+            style={{ fontSize: 30, color: '#FFF' }}
+            onClick={() => setShow(!show)}
+          />
+        ) : (
+          <CloseOutlined
+            style={{ fontSize: 30, color: '#FFF' }}
+            onClick={() => setShow(!show)}
+          />
+        )}
       </div>
-      {show ? (
+      {show && (
         <div
           style={{
             paddingTop: '40px',
@@ -70,6 +93,12 @@ export default ({ children }) => {
             flexDirection: 'column',
             alignItems: 'center',
             fontSize: '20px',
+            position: 'absolute',
+            bottom: 0,
+            top: 98,
+            left: 0,
+            right: 0,
+            zIndex: 99,
           }}
         >
           {routes.map(({ path, name }, idx) => {
@@ -101,45 +130,55 @@ export default ({ children }) => {
             );
           })}
         </div>
-      ) : (
-        <>
-          {children}
+      )}
+      <>
+        {props.children}
+        <div
+          style={{
+            backgroundColor: '#041a2f',
+            padding: '18px 23px 0px',
+            color: '#fff',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+          }}
+        >
+          <section>
+            {website?.companyName?.cn && (
+              <div style={{ fontSize: 16, marginBottom: 16 }}>
+                {`${website?.companyName?.cn}（${website?.companyName?.en}）`}
+              </div>
+            )}
+            {website?.info?.map((info, i) => (
+              <div key={info + i} style={{ fontSize: 12, marginBottom: 6 }}>
+                {info}
+              </div>
+            ))}
+          </section>
           <div
             style={{
-              backgroundColor: '#041a2f',
-              padding: '18px 23px 0px',
-              color: '#fff',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
+              textAlign: 'center',
+              padding: '29px 0 16px',
+              color: '#C2C7CC',
             }}
           >
-            <section>
-              <div
-                style={{
-                  fontSize: '16px',
-                  marginBottom: '16px',
-                  fontWeight: 500,
-                }}
-              >
-                北京大牛儿科技发展有限公司（Baller Tech）
-              </div>
-              <div style={{ fontSize: '12px', marginBottom: '6px' }}>
-                地址：北京市朝阳区三元桥时间国际8号楼
-              </div>
-              <div style={{ fontSize: '12px', marginBottom: '6px' }}>
-                电话：010-00000000
-              </div>
-              <div style={{ fontSize: '12px', marginBottom: '6px' }}>
-                邮箱：support@modao.cc
-              </div>
-            </section>
-            <div style={{ textAlign: 'center', padding: '29px 0 16px' }}>
-              京备
-            </div>
+            <a
+              style={{ color: '#fff' }}
+              href={website?.icpUrl}
+              target="__blank"
+            >
+              <span>{website?.icp}</span>
+            </a>
           </div>
-        </>
-      )}
+        </div>
+      </>
     </div>
   );
 };
+
+Layout.getInitialProps = async () => {
+  const website = await getWebsite();
+  return { data: { website } };
+};
+
+export default Layout;

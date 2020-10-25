@@ -1,9 +1,8 @@
 import React from 'react';
 import { Layout, Spin, Typography } from 'antd';
-import AudioTranslator from '../modules/AudioTranslator';
 import MTitle from '../parts/MTitle';
-import { PageProps } from '../common/Defs';
 import { getModule, getWebsite } from '../common/DataApi';
+import { PageProps } from '../common/Defs';
 import ProductDisplay from '../modules/ProductDisplay';
 
 const { Content } = Layout;
@@ -28,13 +27,6 @@ const Index = (props: PageProps) => {
         ></div>
       </div>
       <Content style={{ padding: '0px 15px' }}>
-        {module?.productExperience?.display && (
-          <AudioTranslator
-            h5
-            style={{ marginBottom: '40px' }}
-            rules={module?.audioTranslationRules}
-          />
-        )}
         {module?.productDisplay?.display && (
           <ProductDisplay
             h5
@@ -130,7 +122,7 @@ const Index = (props: PageProps) => {
 };
 
 Index.getInitialProps = async () => {
-  const module = await getModule('yysb');
+  const module = await getModule('txsb');
   const website = await getWebsite();
   return { data: { module, website } };
 };
