@@ -27,6 +27,7 @@ import { updateWebsite } from './api/update-website';
 import { ballerTechJQFY } from './api/baller-tech-jqfy';
 import { ballerTechYYSB } from './api/baller-tech-yysb';
 import { ballerTechWZSB } from './api/baller-tech-wzsb';
+import { bt } from './router/bt';
 
 dotenv.config('../.env' as any);
 
@@ -141,6 +142,8 @@ class App {
 
     getWebsite(this.app);
     updateWebsite(this.app);
+
+    bt(this.app);
 
     // Baller Tech API
     ballerTechJQFY(this.app);
