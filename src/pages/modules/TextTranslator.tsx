@@ -42,8 +42,8 @@ const TextTranslator = (props: Props) => {
       allowKeys.push(key);
     }
   });
-  const [inputVal, setInputVal] = React.useState<string>();
-  const [outputVal, setOutputVal] = React.useState<string>();
+  const [inputVal, setInputVal] = React.useState<string>('');
+  const [outputVal, setOutputVal] = React.useState<string>('');
   const [fromVal, setFromVal] = React.useState<string>();
   const [toVal, setToVal] = React.useState<string>();
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -52,6 +52,7 @@ const TextTranslator = (props: Props) => {
     fromVal,
     toVal,
   ]);
+  const inputLimit = 200;
 
   if (props?.h5) {
     return (
@@ -113,6 +114,7 @@ const TextTranslator = (props: Props) => {
                 lang={fromVal}
                 onChangeText={setInputVal}
                 clearSignal={clearSignal}
+                maxLength={200}
               ></TextEditor>
               <TextEditor style={{ height: 168, marginTop: 16 }} lang={toVal}>
                 {outputVal || (
@@ -241,13 +243,17 @@ const TextTranslator = (props: Props) => {
           </div>
           <div style={{ marginTop: 48, display: 'flex' }}>
             <TextEditor
-              style={{ height: 168, marginRight: 10 }}
+              style={{ height: 168, marginRight: 10, width: '50%' }}
               contentEditable={true}
               lang={fromVal}
               onChangeText={setInputVal}
               clearSignal={clearSignal}
+              maxLength={inputLimit}
             ></TextEditor>
-            <TextEditor style={{ height: 168, marginLeft: 10 }} lang={toVal}>
+            <TextEditor
+              style={{ height: 168, marginLeft: 10, width: '50%' }}
+              lang={toVal}
+            >
               {outputVal || <span style={{ color: '#878787' }}>翻译结果</span>}
             </TextEditor>
           </div>
@@ -273,6 +279,10 @@ const TextTranslator = (props: Props) => {
     }
     if (!inputVal) {
       Modal.warn({ content: '翻译内容不得为空' });
+      return;
+    }
+    if (inputVal.length > inputLimit) {
+      Modal.error({ content: '不得超过输入限制' });
       return;
     }
     if (!allowKeys.includes(uploadKey)) {

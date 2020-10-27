@@ -1,11 +1,11 @@
 import { Modal, Select, Spin, Upload } from 'antd';
-import { UploadChangeParam, UploadFile } from 'antd/lib/upload/interface';
+import { RcFile, UploadFile } from 'antd/lib/upload/interface';
 import React, { CSSProperties, useRef } from 'react';
 import { Colors, Styles } from '../common/Styles';
 import MTitle from '../parts/MTitle';
-import { useSize } from 'ahooks';
 import { errorTip } from '../../lib/error-tip';
 import TextEditor from './TextEditor';
+import { FilePdfOutlined } from '@ant-design/icons';
 
 const Option = Select.Option;
 
@@ -23,7 +23,6 @@ const ImageTranslator = (props: Props) => {
   const [output, setOutput] = React.useState<string[]>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
   const btnContainer = useRef<any>();
-  const { width } = useSize(btnContainer.current);
 
   if (props?.h5) {
     return (
@@ -60,14 +59,7 @@ const ImageTranslator = (props: Props) => {
                 fontSize: '16px',
               }}
             >
-              {!preview ? (
-                '请上传图片格式为 jpg、jpeg、bmp、png、gif、tif、tiff 的图片'
-              ) : (
-                <img
-                  src={preview}
-                  style={{ width: '100%', objectFit: 'contain' }}
-                />
-              )}
+              {renderPreview()}
             </div>
             <TextEditor style={{ height: 150, marginTop: 15 }} lang={lang}>
               {output.length > 0 ? (
@@ -84,11 +76,11 @@ const ImageTranslator = (props: Props) => {
               }}
             >
               <Upload
-                accept=".jpg,.jpeg,.bmp,.png,.gif,.tif,.tiff"
+                accept=".jpg,.jpeg,.bmp,.png,.gif,.tif,.tiff,.pdf"
                 action=""
                 fileList={fileList}
                 showUploadList={false}
-                onChange={selectLocalFile}
+                beforeUpload={selectLocalFile}
               >
                 <div
                   style={{
@@ -161,11 +153,11 @@ const ImageTranslator = (props: Props) => {
               }}
             />
             <Upload
-              accept=".jpg,.jpeg,.bmp,.png,.gif,.tif,.tiff"
+              accept=".jpg,.jpeg,.bmp,.png,.gif,.tif,.tiff,.pdf"
               action=""
               fileList={fileList}
               showUploadList={false}
-              onChange={selectLocalFile}
+              beforeUpload={selectLocalFile}
             >
               <div
                 style={{
@@ -204,23 +196,19 @@ const ImageTranslator = (props: Props) => {
             style={{
               maxHeight: 250,
               overflow: 'auto',
-              flex: 1,
               color: '#888',
               border: '1px solid #BBB',
               marginRight: 10,
               padding: '5px 8px',
+              width: '50%',
             }}
           >
-            {!preview ? (
-              '请上传图片格式为 jpg、jpeg、bmp、png、gif、tif、tiff 的图片'
-            ) : (
-              <img
-                src={preview}
-                style={{ width: '100%', objectFit: 'contain' }}
-              />
-            )}
+            {renderPreview()}
           </div>
-          <TextEditor style={{ height: 250, marginLeft: 10 }} lang={lang}>
+          <TextEditor
+            style={{ height: 250, marginLeft: 10, width: '50%' }}
+            lang={lang}
+          >
             {output.length > 0 ? (
               output.map((s, i) => <div key={i}>{s}</div>)
             ) : (
@@ -232,21 +220,48 @@ const ImageTranslator = (props: Props) => {
     </div>
   );
 
-  function selectLocalFile(info: UploadChangeParam<UploadFile<any>>) {
-    if (info.event?.percent !== 100) {
-      return;
+  function renderPreview() {
+    const file = fileList[0];
+    if (!file) {
+      return '请上传图片格式为 jpg、jpeg、bmp、png、gif、tif、tiff、pdf 的图片';
     }
-    const file = info.file;
-    if (file.originFileObj) {
+    if (file.type?.toLowerCase().includes('pdf')) {
+      return (
+        <span>
+          <FilePdfOutlined />
+          {file.name}
+        </span>
+      );
+    }
+    return (
+      <img src={preview} style={{ width: '100%', objectFit: 'contain' }} />
+    );
+  }
+
+  function selectLocalFile(file: RcFile): boolean {
+    if (!lang) {
+      Modal.warn({ content: '请选择要识别的语言' });
+      return false;
+    }
+    if (file.size > 1048576) {
+      Modal.warn({ content: '文件大小不得超过1MB' });
+      return false;
+    }
+    if (isPDF(file.type)) {
       setFileList([file]);
-      getBase64(file.originFileObj).then(data => setPreview(data));
-      uploadImage(file.originFileObj);
+      uploadImage(file);
+      return false;
     }
+    if (file) {
+      setFileList([file]);
+      getBase64(file).then(data => setPreview(data));
+      uploadImage(file);
+    }
+    return false;
   }
 
   function uploadImage(file: any) {
     if (!lang) {
-      Modal.warn({ content: '请选择要识别的语言' });
       return;
     }
     setLoading(true);
@@ -285,6 +300,10 @@ const ImageTranslator = (props: Props) => {
       reader.onload = () => resolve(reader.result as string);
       reader.onerror = error => reject(error);
     });
+  }
+
+  function isPDF(type = '') {
+    return type.toLowerCase().includes('pdf');
   }
 };
 

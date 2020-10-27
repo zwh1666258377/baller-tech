@@ -9,6 +9,7 @@ interface Props {
   placeholder?: string;
   onChangeText?: (val: string) => void;
   clearSignal?: number;
+  maxLength?: number;
 }
 
 let id = 0;
@@ -18,7 +19,9 @@ function getId() {
 
 const TextEditor = (props: Props) => {
   const editorRef = React.useRef<HTMLDivElement>(null);
+  const maxLength = props.maxLength || -1;
   const [id, setId] = React.useState(0);
+  const [val, setVal] = React.useState('');
 
   React.useEffect(() => {
     setId(getId());
@@ -47,12 +50,11 @@ const TextEditor = (props: Props) => {
 
   if (!props.contentEditable) {
     return (
-      <div style={{ flex: 1 }}>
+      <div style={{ position: 'relative', wordBreak: 'break-all', ...style }}>
         <div
           ref={editorRef}
           id={`${editorID}_display`}
           className="text_editor_display"
-          style={style}
         >
           {props.children}
         </div>
@@ -61,15 +63,31 @@ const TextEditor = (props: Props) => {
   }
 
   return (
-    <div style={{ flex: 1 }}>
+    <div style={{ position: 'relative', wordBreak: 'break-all', ...style }}>
       <div
         contentEditable
         ref={editorRef}
         id={editorID}
         className="text_editor"
-        onInput={e => onInput(e.currentTarget.innerText)}
-        style={style}
+        onInput={e => {
+          const val = e.currentTarget.innerText;
+          setVal(val);
+          onInput(val);
+        }}
       ></div>
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 4,
+          right: 10,
+          opacity: maxLength > 0 ? 1 : 0,
+        }}
+      >
+        <span style={{ color: val.length > maxLength ? 'red' : undefined }}>
+          {val.length}
+        </span>
+        /{maxLength}
+      </div>
     </div>
   );
 

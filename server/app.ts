@@ -143,12 +143,12 @@ class App {
     getWebsite(this.app);
     updateWebsite(this.app);
 
-    bt(this.app);
-
     // Baller Tech API
     ballerTechJQFY(this.app);
     ballerTechYYSB(this.app);
     ballerTechWZSB(this.app);
+
+    bt(this.app);
   };
 
   connectDb = () => {
