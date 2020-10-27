@@ -35,6 +35,7 @@ const Index = (props: PageProps) => {
             data={website}
             style={{ marginBottom: '64px' }}
             rules={module?.textTranslationRules}
+            langRules={module.langRegRules}
           />
         )}
         {module?.productDisplay?.display && (

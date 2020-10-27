@@ -99,6 +99,11 @@ interface Module {
     key: string;
     label: string;
   }>;
+  langRegRules: Array<{
+    label: string;
+    key: string;
+    reg: string;
+  }>;
 }
 
 const moduleSchema = new Schema({
@@ -247,6 +252,10 @@ const moduleSchema = new Schema({
   },
   imageTranslationRules: {
     type: [{ key: Types.String, label: Types.String }],
+    default: [],
+  },
+  langRegRules: {
+    type: [{ label: Types.String, key: Types.String, reg: Types.String }],
     default: [],
   },
 });

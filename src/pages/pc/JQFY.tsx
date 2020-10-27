@@ -32,6 +32,7 @@ const JQFY = (props: PageProps) => {
             data={website}
             style={{ marginBottom: 98 }}
             rules={module.textTranslationRules}
+            langRules={module.langRegRules}
           />
         )}
         {module?.productDisplay?.display && (

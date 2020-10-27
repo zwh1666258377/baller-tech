@@ -7,6 +7,7 @@ import { Colors, h5Styles, Styles } from '../common/Styles';
 import MTitle from '../parts/MTitle';
 import TextEditor from './TextEditor';
 
+type Result = { status: 'ok' } | { status: 'error'; msg: string };
 const Option = Select.Option;
 
 const { checkCallTimesLimit, setCallTimesLimit } = callTimesLimit('text');
@@ -24,6 +25,11 @@ interface Props {
       key: string;
       label: string;
     };
+  }>;
+  langRules: Array<{
+    label: string;
+    key: string;
+    reg: string;
   }>;
 }
 
@@ -281,6 +287,11 @@ const TextTranslator = (props: Props) => {
       Modal.warn({ content: '翻译内容不得为空' });
       return;
     }
+    const res = validateInput(fromVal, inputVal);
+    if (res.status === 'error') {
+      Modal.warn({ content: res.msg });
+      return;
+    }
     if (inputVal.length > inputLimit) {
       Modal.error({ content: '不得超过输入限制' });
       return;
@@ -334,6 +345,21 @@ const TextTranslator = (props: Props) => {
     }
 
     return data?.data?.data;
+  }
+
+  function validateInput(key = '', val = ''): Result {
+    const langRules = props.langRules || [];
+    const rule = langRules.find(r => r.key === key);
+    if (!rule) {
+      return { status: 'ok' };
+    }
+    const regexp = new RegExp(rule.reg, 'u');
+    const ok = regexp.test(val);
+    if (ok) {
+      return { status: 'ok' };
+    } else {
+      return { status: 'error', msg: `请输入${rule.label}` };
+    }
   }
 };
 

@@ -15,6 +15,7 @@ import {
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { DeleteOutlined } from '@ant-design/icons';
+import { BTTag } from '../parts/BTTag';
 
 const { Title, Text } = Typography;
 
@@ -34,6 +35,13 @@ const Index = () => {
     Array<{
       from: { key: string; label: string };
       to: { key: string; label: string };
+    }>
+  >([]);
+  const [langRegRules, setLangRegRules] = React.useState<
+    Array<{
+      label: string;
+      key: string;
+      reg: string;
     }>
   >([]);
 
@@ -75,6 +83,7 @@ const Index = () => {
         imgUrls: usageScenariosImgUrls,
       },
       textTranslationRules: translationRules,
+      langRegRules,
     };
     fetch('/api/update-module', {
       method: 'POST',
@@ -127,6 +136,7 @@ const Index = () => {
         setUsageScenariosImgUrls(r?.usageScenarios?.imgUrls);
         setProductDisplayItems(r?.productDisplay?.items);
         setTranslationRules(r?.textTranslationRules);
+        setLangRegRules(r?.langRegRules);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -267,22 +277,65 @@ const Index = () => {
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
               {translationRules.map((r, i) => {
                 return (
-                  <Tag
+                  <BTTag
                     key={i}
                     style={{ margin: '0 8px 8px 0' }}
-                    onClick={() => {
+                    title={`${r.from.label}-${r.to.label} ${r.from.key}-${r.to.key}`}
+                    content={`${r.from.key}-${r.to.key}`}
+                    onDelete={() => {
                       setTranslationRules(
                         translationRules.filter((_, ri) => ri !== i),
                       );
                     }}
-                  >
-                    <div
-                      style={{ display: 'inline-block', marginRight: 8 }}
-                    >{`${r.from.label}-${r.to.label}`}</div>
-                    <div
-                      style={{ display: 'inline-block', marginRight: 8 }}
-                    >{`${r.from.key}-${r.to.key}`}</div>
-                  </Tag>
+                  />
+                );
+              })}
+            </div>
+          )}
+        </Form.Item>
+        <Form.Item label="语种校验正则表达式">
+          <Form.Item
+            name="lang-label"
+            style={{ display: 'inline-block', marginRight: 8 }}
+          >
+            <Input placeholder="语种名称" />
+          </Form.Item>
+          <Form.Item
+            name="lang-key"
+            style={{ display: 'inline-block', marginRight: 8 }}
+          >
+            <Input placeholder="语种key" />
+          </Form.Item>
+          <Form.Item
+            name="lang-reg"
+            style={{ display: 'inline-block', marginRight: 8 }}
+          >
+            <Input placeholder="正则表达式" />
+          </Form.Item>
+          <Button
+            style={{ marginBottom: 24 }}
+            onClick={() => {
+              const label = form.getFieldValue('lang-label');
+              const key = form.getFieldValue('lang-key');
+              const reg = form.getFieldValue('lang-reg');
+              setLangRegRules([...langRegRules, { label, key, reg }]);
+            }}
+          >
+            增加
+          </Button>
+          {langRegRules?.length > 0 && (
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+              {langRegRules.map((r, i) => {
+                return (
+                  <BTTag
+                    key={i}
+                    style={{ margin: '0 8px 8px 0' }}
+                    title={`${r.label} ${r.key}`}
+                    content={`${r.reg}`}
+                    onDelete={() => {
+                      setLangRegRules(langRegRules.filter((_, ri) => ri !== i));
+                    }}
+                  />
                 );
               })}
             </div>

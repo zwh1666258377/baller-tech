@@ -105,6 +105,11 @@ export interface Module {
     key: string;
     label: string;
   }>;
+  langRegRules: Array<{
+    label: string;
+    key: string;
+    reg: string;
+  }>;
 }
 
 export interface Website {
