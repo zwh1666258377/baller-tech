@@ -3,6 +3,7 @@ import { defineConfig } from 'umi';
 export default defineConfig({
   ssr: {},
   targets: false,
+  publicPath: '/dist/',
   autoprefixer: false,
   nodeModulesTransform: {
     type: 'none',

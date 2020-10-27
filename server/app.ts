@@ -70,8 +70,8 @@ class App {
   };
 
   setStatic = () => {
-    // 后端静态文件目录
     this.app.use('/static', express.static(path.resolve('static')));
+    this.app.use('/dist', express.static(path.resolve('dist')));
   };
 
   setMiddleWares = () => {
