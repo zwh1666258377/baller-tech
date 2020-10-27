@@ -8,7 +8,7 @@ import app from './app';
 import http from 'http';
 // import { initSocket } from './socket';
 
-const HTTP_PORT = normalizePort('8080');
+const HTTP_PORT = normalizePort('8000');
 const httpServer = http.createServer(app);
 // initSocket(httpServer);
 

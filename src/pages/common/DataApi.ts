@@ -1,5 +1,5 @@
-const baseURL = 'http://localhost:8080';
-// const baseURL = 'http://192.168.31.23:8080';
+const baseURL = 'http://localhost:8000';
+// const baseURL = 'http://192.168.31.23:8000';
 
 export const getModule = async (kind: string) => {
   try {
