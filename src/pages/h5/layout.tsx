@@ -163,7 +163,7 @@ const Layout = (props: Props & PageProps) => {
             }}
           >
             <a
-              style={{ color: '#fff' }}
+              style={{ color: '#C2C7CC' }}
               href={website?.icpUrl}
               target="__blank"
             >
