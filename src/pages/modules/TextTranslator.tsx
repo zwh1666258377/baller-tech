@@ -114,7 +114,7 @@ const TextTranslator = (props: Props) => {
                 lang={fromVal}
                 onChangeText={setInputVal}
                 clearSignal={clearSignal}
-                maxLength={200}
+                maxLength={inputLimit}
               ></TextEditor>
               <TextEditor style={{ height: 168, marginTop: 16 }} lang={toVal}>
                 {outputVal || (
