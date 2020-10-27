@@ -2,63 +2,58 @@ import React from 'react';
 import ImageTranslator from '../modules/ImageTranslator';
 import ProductIntro from '../modules/ProductIntro';
 import ImageCarousel from '../modules/ImageCarousel';
-import PCBase from './PCBase';
 import { PageProps } from '../common/Defs';
-import { getModule, getWebsite } from '../common/DataApi';
+import { getModule } from '../common/DataApi';
 import ProductDisplay from '../modules/ProductDisplay';
 import { Spin } from 'antd';
-import BTFooter from '../parts/BTFooter';
 
 const WZSB = (props: PageProps) => {
   const module = props.data?.module;
-  const website = props.data?.website;
 
-  return <PCBase kind="wzsb" content={content} website={website} />;
-
-  function content() {
-    if (!props.data) {
-      return <Spin></Spin>;
-    }
+  if (!props.data) {
     return (
-      <>
-        <div style={{ width: '100%', padding: '90px 160px 70px 70px' }}>
-          {module?.poductIntroduction && (
-            <ProductIntro
-              style={{ marginBottom: 98 }}
-              data={module.poductIntroduction}
-            />
-          )}
-          {module?.productExperience?.display && (
-            <ImageTranslator
-              style={{ marginBottom: 98 }}
-              rules={module.imageTranslationRules}
-            />
-          )}
-          {module?.productDisplay?.display && (
-            <ProductDisplay
-              style={{ marginBottom: 98 }}
-              kind={module.productDisplay.kind}
-              items={module.productDisplay.items}
-            />
-          )}
-          {module?.usageScenarios?.display && (
-            <ImageCarousel
-              imgs={module?.usageScenarios?.imgUrls}
-              style={{ marginBottom: 98 }}
-              label={module?.usageScenarios?.title}
-            />
-          )}
-        </div>
-        <BTFooter data={website} />
-      </>
+      <div style={{ minHeight: '100vh' }}>
+        <Spin></Spin>
+      </div>
     );
   }
+  return (
+    <>
+      <div style={{ width: '100%', padding: '90px 160px 70px 70px' }}>
+        {module?.poductIntroduction && (
+          <ProductIntro
+            style={{ marginBottom: 98 }}
+            data={module.poductIntroduction}
+          />
+        )}
+        {module?.productExperience?.display && (
+          <ImageTranslator
+            style={{ marginBottom: 98 }}
+            rules={module.imageTranslationRules}
+          />
+        )}
+        {module?.productDisplay?.display && (
+          <ProductDisplay
+            style={{ marginBottom: 98 }}
+            kind={module.productDisplay.kind}
+            items={module.productDisplay.items}
+          />
+        )}
+        {module?.usageScenarios?.display && (
+          <ImageCarousel
+            imgs={module?.usageScenarios?.imgUrls}
+            style={{ marginBottom: 98 }}
+            label={module?.usageScenarios?.title}
+          />
+        )}
+      </div>
+    </>
+  );
 };
 
 WZSB.getInitialProps = async () => {
   const module = await getModule('wzsb');
-  const website = await getWebsite();
-  return { data: { module, website } };
+  return { data: { module } };
 };
 
 export default WZSB;
