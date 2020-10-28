@@ -28,7 +28,7 @@ const Index = () => {
         if (r?.status === 'error') {
           Modal.error({ content: r?.msg });
         } else if (r?.status === 'ok') {
-          Modal.error({ content: r?.msg });
+          Modal.success({ content: r?.msg });
           history.push(`/admin/${siders[0]?.key}`);
         }
       });

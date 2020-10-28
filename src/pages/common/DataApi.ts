@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:8080';
+const baseURL = isDev ? 'http://localhost:8080' : '';
 
 export const getModule = async (kind: string) => {
   return fetch(baseURL + '/api/get-module', {

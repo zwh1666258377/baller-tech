@@ -3,6 +3,9 @@ import { defineConfig } from 'umi';
 export default defineConfig({
   ssr: {},
   targets: false,
+  define: {
+    isDev: process.env['NODE_ENV'] === 'development',
+  },
   autoprefixer: false,
   nodeModulesTransform: {
     type: 'none',
