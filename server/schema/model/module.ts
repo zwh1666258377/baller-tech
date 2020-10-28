@@ -3,7 +3,7 @@ import mongoose, { Document } from 'mongoose';
 const Schema = mongoose.Schema;
 const Types = Schema.Types;
 
-type KindsType = 'jqfy' | 'yysb' | 'txsbhmbjc' | 'yyhc' | 'wzsb' | 'ljwm';
+type KindsType = 'jqfy' | 'yysb' | 'txsb' | 'yyhc' | 'wzsb' | 'ljwm';
 
 interface Module {
   kind: KindsType;
@@ -98,6 +98,11 @@ interface Module {
   imageTranslationRules: Array<{
     key: string;
     label: string;
+  }>;
+  langRegRules: Array<{
+    label: string;
+    key: string;
+    reg: string;
   }>;
 }
 
@@ -247,6 +252,10 @@ const moduleSchema = new Schema({
   },
   imageTranslationRules: {
     type: [{ key: Types.String, label: Types.String }],
+    default: [],
+  },
+  langRegRules: {
+    type: [{ label: Types.String, key: Types.String, reg: Types.String }],
     default: [],
   },
 });

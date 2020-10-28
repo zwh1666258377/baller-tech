@@ -4,13 +4,7 @@ export interface PageProps {
     website: Website;
   };
 }
-export type KindsType =
-  | 'jqfy'
-  | 'yysb'
-  | 'txsbhmbjc'
-  | 'yyhc'
-  | 'wzsb'
-  | 'ljwm';
+export type KindsType = 'jqfy' | 'yysb' | 'txsb' | 'yyhc' | 'wzsb' | 'ljwm';
 export interface Module {
   kind: KindsType;
   name: {
@@ -110,6 +104,11 @@ export interface Module {
   imageTranslationRules: Array<{
     key: string;
     label: string;
+  }>;
+  langRegRules: Array<{
+    label: string;
+    key: string;
+    reg: string;
   }>;
 }
 

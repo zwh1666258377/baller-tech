@@ -27,6 +27,7 @@ import { updateWebsite } from './api/update-website';
 import { ballerTechJQFY } from './api/baller-tech-jqfy';
 import { ballerTechYYSB } from './api/baller-tech-yysb';
 import { ballerTechWZSB } from './api/baller-tech-wzsb';
+import { bt } from './router/bt';
 
 dotenv.config('../.env' as any);
 
@@ -69,8 +70,8 @@ class App {
   };
 
   setStatic = () => {
-    // 后端静态文件目录
     this.app.use('/static', express.static(path.resolve('static')));
+    this.app.use('/dist', express.static(path.resolve('dist')));
   };
 
   setMiddleWares = () => {
@@ -146,6 +147,8 @@ class App {
     ballerTechJQFY(this.app);
     ballerTechYYSB(this.app);
     ballerTechWZSB(this.app);
+
+    bt(this.app);
   };
 
   connectDb = () => {

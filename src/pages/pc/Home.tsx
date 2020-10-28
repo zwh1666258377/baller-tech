@@ -57,6 +57,7 @@ const Home = (props: PageProps) => {
               style={{
                 width: '100%',
                 height: '100vh',
+                // TODO: 从接口读背景图
                 backgroundImage: `url(${homeDefault.defaultbg})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',

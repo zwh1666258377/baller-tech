@@ -41,7 +41,11 @@ const AudioDisplay = (props: Props) => {
         <Row gutter={[30, 30]}>
           {props.items?.map(item => (
             <Col key={item.url} sm={12} xl={8}>
-              {item.name && <div style={{ marginLeft: 16 }}>{item.name}</div>}
+              {item.name && (
+                <div style={{ marginLeft: 16, marginBottom: 8 }}>
+                  {item.name}
+                </div>
+              )}
               <audio
                 controls
                 style={{ width: '100%', borderRadius: 0 }}

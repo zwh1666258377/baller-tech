@@ -1,0 +1,15 @@
+{
+  "name": "baller-tech",
+  "script": "./server/dist/run.js",
+  "exec_interpreter": "./node_modules/.bin/babel-node",
+  "exec_mode": "fork",
+  "error_file": "./logs/error.log",
+  "out_file": "./logs/console.log",
+  "pid_file": "./logs/pid_file.pid",
+  "log_date_format": "YYYY-MM-DD HH:mm:ss",
+  "combine_logs": true,
+  "merge_logs": true,
+  "env": {
+    "NODE_ENV": "qa"
+  }
+}

@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'umi';
 
 interface Props {
-  kind: string;
   icon: string;
 }
 
@@ -48,7 +47,7 @@ const BTSider = (props: Props) => {
           }}
         >
           {tabs?.map(t => {
-            const active = props.kind === t.kind;
+            const active = window.location.pathname.includes(t.kind);
             return (
               <Link key={t.kind} to={t.kind}>
                 <div

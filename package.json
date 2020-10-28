@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "docker": "cd docker && docker-compose up -d && cd .. && yarn server",
-    "start": "cross-env NODE_ENV=development HTTPS=1 umi dev",
+    "start": "cross-env NODE_ENV=development HTTPS=1 PORT=8080 umi dev",
     "build": "umi build",
     "server": "nodemon",
     "postinstall": "umi generate tmp",

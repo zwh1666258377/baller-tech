@@ -7,6 +7,7 @@ import { Colors, h5Styles, Styles } from '../common/Styles';
 import MTitle from '../parts/MTitle';
 import TextEditor from './TextEditor';
 
+type Result = { status: 'ok' } | { status: 'error'; msg: string };
 const Option = Select.Option;
 
 const { checkCallTimesLimit, setCallTimesLimit } = callTimesLimit('text');
@@ -25,6 +26,11 @@ interface Props {
       label: string;
     };
   }>;
+  langRules: Array<{
+    label: string;
+    key: string;
+    reg: string;
+  }>;
 }
 
 const TextTranslator = (props: Props) => {
@@ -42,8 +48,8 @@ const TextTranslator = (props: Props) => {
       allowKeys.push(key);
     }
   });
-  const [inputVal, setInputVal] = React.useState<string>();
-  const [outputVal, setOutputVal] = React.useState<string>();
+  const [inputVal, setInputVal] = React.useState<string>('');
+  const [outputVal, setOutputVal] = React.useState<string>('');
   const [fromVal, setFromVal] = React.useState<string>();
   const [toVal, setToVal] = React.useState<string>();
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -52,6 +58,7 @@ const TextTranslator = (props: Props) => {
     fromVal,
     toVal,
   ]);
+  const inputLimit = 200;
 
   if (props?.h5) {
     return (
@@ -113,6 +120,7 @@ const TextTranslator = (props: Props) => {
                 lang={fromVal}
                 onChangeText={setInputVal}
                 clearSignal={clearSignal}
+                maxLength={inputLimit}
               ></TextEditor>
               <TextEditor style={{ height: 168, marginTop: 16 }} lang={toVal}>
                 {outputVal || (
@@ -241,13 +249,17 @@ const TextTranslator = (props: Props) => {
           </div>
           <div style={{ marginTop: 48, display: 'flex' }}>
             <TextEditor
-              style={{ height: 168, marginRight: 10 }}
+              style={{ height: 168, marginRight: 10, width: '50%' }}
               contentEditable={true}
               lang={fromVal}
               onChangeText={setInputVal}
               clearSignal={clearSignal}
+              maxLength={inputLimit}
             ></TextEditor>
-            <TextEditor style={{ height: 168, marginLeft: 10 }} lang={toVal}>
+            <TextEditor
+              style={{ height: 168, marginLeft: 10, width: '50%' }}
+              lang={toVal}
+            >
               {outputVal || <span style={{ color: '#878787' }}>翻译结果</span>}
             </TextEditor>
           </div>
@@ -273,6 +285,15 @@ const TextTranslator = (props: Props) => {
     }
     if (!inputVal) {
       Modal.warn({ content: '翻译内容不得为空' });
+      return;
+    }
+    const res = validateInput(fromVal, inputVal);
+    if (res.status === 'error') {
+      Modal.warn({ content: res.msg });
+      return;
+    }
+    if (inputVal.length > inputLimit) {
+      Modal.error({ content: '不得超过输入限制' });
       return;
     }
     if (!allowKeys.includes(uploadKey)) {
@@ -324,6 +345,21 @@ const TextTranslator = (props: Props) => {
     }
 
     return data?.data?.data;
+  }
+
+  function validateInput(key = '', val = ''): Result {
+    const langRules = props.langRules || [];
+    const rule = langRules.find(r => r.key === key);
+    if (!rule) {
+      return { status: 'ok' };
+    }
+    const regexp = new RegExp(rule.reg, 'u');
+    const ok = regexp.test(val);
+    if (ok) {
+      return { status: 'ok' };
+    } else {
+      return { status: 'error', msg: `请输入${rule.label}` };
+    }
   }
 };
 

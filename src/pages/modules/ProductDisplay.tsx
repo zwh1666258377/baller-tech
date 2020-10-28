@@ -5,6 +5,7 @@ import VideoDisplay from './VideoDisplay';
 
 interface Props {
   style?: CSSProperties;
+  h5?: boolean;
   kind: string;
   items: { url: string; name: string }[];
 }
@@ -20,11 +21,21 @@ const ProductDisplay = (props: Props) => {
       );
     case 'audio':
       return (
-        <AudioDisplay style={props.style} label={label} items={props.items} />
+        <AudioDisplay
+          h5={props.h5}
+          style={props.style}
+          label={label}
+          items={props.items}
+        />
       );
     case 'video':
       return (
-        <VideoDisplay style={props.style} label={label} items={props.items} />
+        <VideoDisplay
+          h5={props.h5}
+          style={props.style}
+          label={label}
+          items={props.items}
+        />
       );
     default:
       return null;

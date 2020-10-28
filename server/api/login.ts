@@ -25,7 +25,7 @@ export function login(app: ReturnType<typeof express>) {
 
       res.json({
         status: 'ok',
-        msg: '登陆成功',
+        msg: '登录成功',
       });
     }
   });

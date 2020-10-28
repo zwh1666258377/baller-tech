@@ -1,6 +1,6 @@
 /// <reference path = "../../../types/index.d.ts" />
 import { Modal, Select, Spin, Upload } from 'antd';
-import { UploadChangeParam } from 'antd/lib/upload/interface';
+import { RcFile } from 'antd/lib/upload/interface';
 import React, { CSSProperties, useRef } from 'react';
 import { DynamicRec } from '../common/DynamicRec';
 import { Colors, h5Styles, Styles } from '../common/Styles';
@@ -49,7 +49,6 @@ const AudioTranslator = (props: Props) => {
             offset: recordTransformData ? recordTransformData.offset : 0.0,
           },
         );
-        console.log(recordTransformData.data);
 
         // 限制录音1分钟，若超出给出友好提示
         if (bufferDuration / 1000 >= 60) {
@@ -127,7 +126,7 @@ const AudioTranslator = (props: Props) => {
                     action=""
                     fileList={[]}
                     showUploadList={{ showRemoveIcon: false }}
-                    onChange={onUploadChange}
+                    beforeUpload={onUploadChange}
                   >
                     <div
                       style={{
@@ -225,7 +224,7 @@ const AudioTranslator = (props: Props) => {
               action=""
               fileList={[]}
               showUploadList={{ showRemoveIcon: false }}
-              onChange={onUploadChange}
+              beforeUpload={onUploadChange}
             >
               <div
                 style={{
@@ -292,15 +291,18 @@ const AudioTranslator = (props: Props) => {
     }
   }
 
-  function onUploadChange(info: UploadChangeParam) {
-    if (info.event?.percent == 100) {
-      uploadRecord(info.file.originFileObj);
-    }
+  function onUploadChange(file: RcFile): boolean {
+    uploadRecord(file);
+    return false;
   }
 
-  function uploadRecord(file: any) {
+  function uploadRecord(file: RcFile) {
     if (!lang) {
       Modal.warn({ content: '请选择要识别的语言' });
+      return;
+    }
+    if (file.size > 1048576) {
+      Modal.warn({ content: '文件大小不得超过1MB' });
       return;
     }
     setLoading(true);
