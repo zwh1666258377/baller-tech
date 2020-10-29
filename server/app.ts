@@ -179,7 +179,7 @@ class App {
           account: user.account,
           password: sha1(user.password),
         });
-        console.log(process.env['NODE_ENV']);
+
         console.log('User init successed!');
         console.log(`Account:${user.account}`);
         console.log(`Password:${user.password}`);
