@@ -236,19 +236,21 @@ const Index = () => {
             增加
           </Button>
         </Form.Item>
-        <Form.Item label={' '} colon={false}>
-          <TagList
-            items={productDisplayItems?.map(r => ({
-              title: r.name,
-              content: r.url,
-            }))}
-            onDelete={idx =>
-              setProductDisplayItems((urls = []) => {
-                return urls?.filter((_, i) => i !== idx);
-              })
-            }
-          ></TagList>
-        </Form.Item>
+        {productDisplayItems?.length > 0 && (
+          <Form.Item label={' '} colon={false}>
+            <TagList
+              items={productDisplayItems?.map(r => ({
+                title: r.name,
+                content: r.url,
+              }))}
+              onDelete={idx =>
+                setProductDisplayItems((urls = []) => {
+                  return urls?.filter((_, i) => i !== idx);
+                })
+              }
+            ></TagList>
+          </Form.Item>
+        )}
         <Title level={3}>使用场景</Title>
         <Form.Item
           name="usage-scenarios-display"
@@ -302,19 +304,21 @@ const Index = () => {
             增加
           </Button>
         </Form.Item>
-        <Form.Item label={' '} colon={false}>
-          <TagList
-            items={usageScenariosImgUrls?.map(r => ({
-              title: r.name,
-              content: r.url,
-            }))}
-            onDelete={idx =>
-              setUsageScenariosImgUrls((urls = []) => {
-                return urls?.filter((_, i) => i !== idx);
-              })
-            }
-          ></TagList>
-        </Form.Item>
+        {usageScenariosImgUrls?.length > 0 && (
+          <Form.Item label={' '} colon={false}>
+            <TagList
+              items={usageScenariosImgUrls?.map(r => ({
+                title: r.name,
+                content: r.url,
+              }))}
+              onDelete={idx =>
+                setUsageScenariosImgUrls((urls = []) => {
+                  return urls?.filter((_, i) => i !== idx);
+                })
+              }
+            ></TagList>
+          </Form.Item>
+        )}
 
         <div style={{ textAlign: 'right', position: 'sticky', bottom: 20 }}>
           <Button type="primary" htmlType="submit">
@@ -365,17 +369,19 @@ const Index = () => {
           >
             增加
           </Button>
-          <Form.Item label={' '} colon={false}>
-            <TagList
-              items={supportedLan?.map(r => ({
-                title: `${r.label} ${r.key}`,
-                content: `${r.label} ${r.key}`,
-              }))}
-              onDelete={idx =>
-                setSupportedLan(supportedLan.filter((_, ri) => ri !== idx))
-              }
-            ></TagList>
-          </Form.Item>
+          {supportedLan?.length > 0 && (
+            <Form.Item label={' '} colon={false}>
+              <TagList
+                items={supportedLan?.map(r => ({
+                  title: `${r.label} ${r.key}`,
+                  content: `${r.label} ${r.key}`,
+                }))}
+                onDelete={idx =>
+                  setSupportedLan(supportedLan.filter((_, ri) => ri !== idx))
+                }
+              ></TagList>
+            </Form.Item>
+          )}
         </Form.Item>
       </>
     );

@@ -8,7 +8,7 @@ import { Link } from 'umi';
 import ImageCarousel from '../modules/ImageCarousel';
 import { getModule, getWebsite } from '../common/DataApi';
 import { PageProps } from '../common/Defs';
-import { btnImg, homeDefault } from '../common/Source';
+import { btnImg } from '../common/Source';
 
 const Home = (props: PageProps) => {
   const module = props.data?.module;

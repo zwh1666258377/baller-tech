@@ -220,7 +220,7 @@ const Index = () => {
             }}
           />
         </Form.Item>
-        <Form.Item label="可翻译语种">
+        <Form.Item style={{ marginBottom: 0 }} label="可翻译语种">
           <Form.Item
             style={{ display: 'inline-block', marginBottom: 0 }}
             label="源语种"
@@ -279,19 +279,21 @@ const Index = () => {
             </Button>
           </Form.Item>
         </Form.Item>
-        <Form.Item label=" " colon={false}>
-          <TagList
-            items={translationRules?.map(r => ({
-              title: `${r.from.label}-${r.to.label} ${r.from.key}-${r.to.key}`,
-              content: `${r.from.key}-${r.to.key}`,
-            }))}
-            onDelete={idx =>
-              setTranslationRules(
-                translationRules.filter((_, ri) => ri !== idx),
-              )
-            }
-          ></TagList>
-        </Form.Item>
+        {translationRules?.length > 0 && (
+          <Form.Item label=" " colon={false}>
+            <TagList
+              items={translationRules?.map(r => ({
+                title: `${r.from.label}-${r.to.label} ${r.from.key}-${r.to.key}`,
+                content: `${r.from.key}-${r.to.key}`,
+              }))}
+              onDelete={idx =>
+                setTranslationRules(
+                  translationRules.filter((_, ri) => ri !== idx),
+                )
+              }
+            ></TagList>
+          </Form.Item>
+        )}
         <Form.Item label="语种校验正则表达式">
           <Form.Item
             name="lang-key"
@@ -322,20 +324,22 @@ const Index = () => {
           >
             增加
           </Button>
-          <TagList
-            items={langRegRules?.map(r => ({
-              title: r.key,
-              content: (
-                <>
-                  <div>{`${r.reg}`}</div>
-                  <div>{`${r.label}`}</div>
-                </>
-              ),
-            }))}
-            onDelete={idx =>
-              setLangRegRules(langRegRules.filter((_, ri) => ri !== idx))
-            }
-          ></TagList>
+          {langRegRules?.length > 0 && (
+            <TagList
+              items={langRegRules?.map(r => ({
+                title: r.key,
+                content: (
+                  <>
+                    <div>{`${r.reg}`}</div>
+                    <div>{`${r.label}`}</div>
+                  </>
+                ),
+              }))}
+              onDelete={idx =>
+                setLangRegRules(langRegRules.filter((_, ri) => ri !== idx))
+              }
+            ></TagList>
+          )}
         </Form.Item>
       </>
     );
@@ -407,19 +411,21 @@ const Index = () => {
             增加
           </Button>
         </Form.Item>
-        <Form.Item label={' '} colon={false}>
-          <TagList
-            items={productDisplayItems?.map(r => ({
-              title: r.name,
-              content: r.url,
-            }))}
-            onDelete={idx =>
-              setProductDisplayItems((urls = []) =>
-                urls.filter((_, i) => i !== idx),
-              )
-            }
-          ></TagList>
-        </Form.Item>
+        {productDisplayItems?.length > 0 && (
+          <Form.Item label={' '} colon={false}>
+            <TagList
+              items={productDisplayItems?.map(r => ({
+                title: r.name,
+                content: r.url,
+              }))}
+              onDelete={idx =>
+                setProductDisplayItems((urls = []) =>
+                  urls.filter((_, i) => i !== idx),
+                )
+              }
+            ></TagList>
+          </Form.Item>
+        )}
       </>
     );
   }
@@ -484,19 +490,21 @@ const Index = () => {
             增加
           </Button>
         </Form.Item>
-        <Form.Item label={' '} colon={false}>
-          <TagList
-            items={usageScenariosImgUrls?.map(r => ({
-              title: r.name || r.url,
-              content: r.url,
-            }))}
-            onDelete={idx =>
-              setUsageScenariosImgUrls((urls = []) =>
-                urls?.filter((_, i) => i !== idx),
-              )
-            }
-          ></TagList>
-        </Form.Item>
+        {usageScenariosImgUrls?.length > 0 && (
+          <Form.Item label={' '} colon={false}>
+            <TagList
+              items={usageScenariosImgUrls?.map(r => ({
+                title: r.name || r.url,
+                content: r.url,
+              }))}
+              onDelete={idx =>
+                setUsageScenariosImgUrls((urls = []) =>
+                  urls?.filter((_, i) => i !== idx),
+                )
+              }
+            ></TagList>
+          </Form.Item>
+        )}
       </>
     );
   }

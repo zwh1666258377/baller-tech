@@ -271,7 +271,7 @@ const TextTranslator = (props: Props) => {
 
   function onClickTranslate() {
     if (!checkCallTimesLimit(10)) {
-      Modal.info({
+      Modal.warn({
         title: props?.data?.callTimesLimitTip,
       });
       return;
@@ -300,7 +300,7 @@ const TextTranslator = (props: Props) => {
     if (!allowKeys.includes(uploadKey)) {
       const from = opts.find(o => o.key === fromVal);
       const to = opts.find(o => o.key === toVal);
-      Modal.info({
+      Modal.warn({
         content: `暂时不支持${from?.label}翻译为${to?.label}`,
       });
       return;
@@ -311,7 +311,7 @@ const TextTranslator = (props: Props) => {
         const times = setCallTimesLimit();
         if (!!times && times % 2 === 0) {
           props?.data?.callTimesLimitTip &&
-            Modal.info({
+            Modal.warn({
               title: props?.data?.callTimesLimitTip,
             });
         }
