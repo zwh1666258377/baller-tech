@@ -14,8 +14,6 @@ import {
   Modal,
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import { DeleteOutlined } from '@ant-design/icons';
-import { BTTag } from '../parts/BTTag';
 import { TagList } from '../modules/TagList';
 
 const { Title, Text } = Typography;
@@ -134,10 +132,10 @@ const Index = () => {
           'usage-scenarios-name-cn': r?.usageScenarios?.title?.cn,
           'usage-scenarios-name-en': r?.usageScenarios?.title?.en,
         });
-        setUsageScenariosImgUrls(r?.usageScenarios?.imgUrls);
-        setProductDisplayItems(r?.productDisplay?.items);
-        setTranslationRules(r?.textTranslationRules);
-        setLangRegRules(r?.langRegRules);
+        setUsageScenariosImgUrls(r?.usageScenarios?.imgUrls || []);
+        setProductDisplayItems(r?.productDisplay?.items || []);
+        setTranslationRules(r?.textTranslationRules || []);
+        setLangRegRules(r?.langRegRules || []);
       })
       .finally(() => setLoading(false));
   }, []);
@@ -258,24 +256,28 @@ const Index = () => {
               <Input placeholder="目标语种key" />
             </Form.Item>
           </Form.Item>
-          <Button
-            style={{ marginBottom: 24 }}
-            onClick={() => {
-              const fromLabel = form.getFieldValue(
-                'text-translation-from-label',
-              );
-              const fromKey = form.getFieldValue('text-translation-from-key');
-              const toLabel = form.getFieldValue('text-translation-to-label');
-              const toKey = form.getFieldValue('text-translation-to-key');
-              const rule = {
-                from: { label: fromLabel, key: fromKey },
-                to: { label: toLabel, key: toKey },
-              };
-              setTranslationRules([...translationRules, rule]);
-            }}
-          >
-            增加
-          </Button>
+          <Form.Item style={{ padding: 0 }} label=" " colon={false}>
+            <Button
+              style={{ marginBottom: 24 }}
+              onClick={() => {
+                const fromLabel = form.getFieldValue(
+                  'text-translation-from-label',
+                );
+                const fromKey = form.getFieldValue('text-translation-from-key');
+                const toLabel = form.getFieldValue('text-translation-to-label');
+                const toKey = form.getFieldValue('text-translation-to-key');
+                const rule = {
+                  from: { label: fromLabel, key: fromKey },
+                  to: { label: toLabel, key: toKey },
+                };
+                setTranslationRules([...translationRules, rule]);
+              }}
+            >
+              增加
+            </Button>
+          </Form.Item>
+        </Form.Item>
+        <Form.Item label=" " colon={false}>
           <TagList
             items={translationRules?.map(r => ({
               title: `${r.from.label}-${r.to.label} ${r.from.key}-${r.to.key}`,

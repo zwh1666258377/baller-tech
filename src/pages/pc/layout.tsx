@@ -1,6 +1,6 @@
 import React from 'react';
 import { configResponsive, useResponsive } from 'ahooks';
-import { IGetInitialProps, useHistory } from 'umi';
+import { useHistory } from 'umi';
 import { Colors } from '../common/Styles';
 import BTSider from '../parts/BTSider';
 import { getWebsite } from '../common/DataApi';

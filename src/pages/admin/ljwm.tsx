@@ -126,9 +126,9 @@ const Index = () => {
           'contact-name-en': r?.contact?.title?.en,
         });
 
-        setHonor(r?.honor?.imgUrls);
-        setPartne(r?.partne?.imgUrls);
-        setContact(r?.contact?.imgUrls);
+        setHonor(r?.honor?.imgUrls || []);
+        setPartne(r?.partne?.imgUrls || []);
+        setContact(r?.contact?.imgUrl || []);
       })
       .finally(() => setLoading(false));
   }, []);

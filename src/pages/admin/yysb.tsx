@@ -123,9 +123,9 @@ const Index = () => {
           'usage-scenarios-name-cn': r?.usageScenarios?.title?.cn,
           'usage-scenarios-name-en': r?.usageScenarios?.title?.en,
         });
-        setUsageScenariosImgUrls(r?.usageScenarios?.imgUrls);
-        setProductDisplayItems(r?.productDisplay?.items);
-        setSupportedLan(r?.audioTranslationRules);
+        setUsageScenariosImgUrls(r?.usageScenarios?.imgUrls || []);
+        setProductDisplayItems(r?.productDisplay?.items || []);
+        setSupportedLan(r?.audioTranslationRules || []);
       })
       .finally(() => setLoading(false));
   }, []);

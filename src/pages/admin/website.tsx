@@ -101,10 +101,10 @@ const Index = () => {
           'call-times-limit-tip': r?.callTimesLimitTip,
         });
 
-        setInfo(r?.info);
-        setCarouselsH5(r?.carousels?.h5);
-        setCarouselsPC(r?.carousels?.pc);
-        setContactImgUrls(r?.contact?.imgUrls);
+        setInfo(r?.info || []);
+        setCarouselsH5(r?.carousels?.h5 || []);
+        setCarouselsPC(r?.carousels?.pc || []);
+        setContactImgUrls(r?.contact?.imgUrls || []);
       })
       .finally(() => setLoading(false));
   }, []);
