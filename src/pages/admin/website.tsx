@@ -8,8 +8,7 @@ import {
   Spin,
   Typography,
 } from 'antd';
-import TextArea from 'antd/lib/input/TextArea';
-import { DeleteOutlined } from '@ant-design/icons';
+import { TagList } from '../modules/TagList';
 
 const { Title, Text } = Typography;
 
@@ -148,22 +147,6 @@ const Index = () => {
 
         <div>
           {/* ===================== */}
-          {info?.map((i, idx) => {
-            return (
-              <div key={idx} style={{ textAlign: 'center' }}>
-                <Text key={idx} type="success">
-                  {i}
-                </Text>
-                <DeleteOutlined
-                  onClick={() => {
-                    setInfo((urls = []) => {
-                      return urls?.filter((_, i) => idx !== i);
-                    });
-                  }}
-                />
-              </div>
-            );
-          })}
           <Form.Item name="website-info" label="网站信息项">
             <Input
               suffix={
@@ -186,26 +169,23 @@ const Index = () => {
               }
             />
           </Form.Item>
+          <Form.Item label={' '} colon={false}>
+            <TagList
+              items={info?.map(s => ({
+                title: s,
+                content: s,
+              }))}
+              onDelete={idx =>
+                setInfo((urls = []) => {
+                  return urls?.filter((_, i) => idx !== i);
+                })
+              }
+            ></TagList>
+          </Form.Item>
         </div>
 
         <div>
           {/* ===================== */}
-          {carouselsH5?.map((i, idx) => {
-            return (
-              <div key={idx} style={{ textAlign: 'center' }}>
-                <Text key={idx} type="success">
-                  {i}
-                </Text>
-                <DeleteOutlined
-                  onClick={() => {
-                    setCarouselsH5((urls = []) => {
-                      return urls?.filter((_, i) => idx !== i);
-                    });
-                  }}
-                />
-              </div>
-            );
-          })}
           <Form.Item name="website-CarouselsH5" label="网站H5轮播图">
             <Input
               suffix={
@@ -230,26 +210,23 @@ const Index = () => {
               }
             />
           </Form.Item>
+          <Form.Item label={' '} colon={false}>
+            <TagList
+              items={carouselsH5?.map(s => ({
+                title: s,
+                content: s,
+              }))}
+              onDelete={idx =>
+                setCarouselsH5((urls = []) => {
+                  return urls?.filter((_, i) => idx !== i);
+                })
+              }
+            ></TagList>
+          </Form.Item>
         </div>
 
         <div>
           {/* ===================== */}
-          {carouselsPC?.map((i, idx) => {
-            return (
-              <div key={idx} style={{ textAlign: 'center' }}>
-                <Text key={idx} type="success">
-                  {i}
-                </Text>
-                <DeleteOutlined
-                  onClick={() => {
-                    setCarouselsPC((urls = []) => {
-                      return urls?.filter((_, i) => idx !== i);
-                    });
-                  }}
-                />
-              </div>
-            );
-          })}
           <Form.Item name="website-CarouselsPC" label="网站PC轮播图">
             <Input
               suffix={
@@ -274,6 +251,19 @@ const Index = () => {
               }
             />
           </Form.Item>
+          <Form.Item label={' '} colon={false}>
+            <TagList
+              items={carouselsPC?.map(s => ({
+                title: s,
+                content: s,
+              }))}
+              onDelete={idx =>
+                setCarouselsPC((urls = []) => {
+                  return urls?.filter((_, i) => idx !== i);
+                })
+              }
+            ></TagList>
+          </Form.Item>
         </div>
 
         <Title level={3}>联系我们</Title>
@@ -288,23 +278,6 @@ const Index = () => {
         <Form.Item name="company-content" label="内容">
           <Input.TextArea autoSize={{ minRows: 5 }} />
         </Form.Item>
-        {contactImgUrls
-          ?.filter(i => !!i)
-          ?.map(({ url, name }, idx) => {
-            return (
-              <div key={idx} style={{ textAlign: 'center' }}>
-                <Text type="success">url:{url},</Text>
-                <Text type="success">name:{name}</Text>
-                <DeleteOutlined
-                  onClick={() => {
-                    setContactImgUrls((urls = []) => {
-                      return urls?.filter((_, i) => idx !== i);
-                    });
-                  }}
-                />
-              </div>
-            );
-          })}
         <div>
           <Form.Item name="contact-img-url" label="展示图片链接">
             <Input />
@@ -334,9 +307,24 @@ const Index = () => {
           >
             增加
           </Button>
+          <Form.Item label={' '} colon={false}>
+            <TagList
+              items={contactImgUrls?.map(r => ({
+                title: r.name,
+                content: r.url,
+              }))}
+              onDelete={idx =>
+                setContactImgUrls((urls = []) => {
+                  return urls?.filter((_, i) => idx !== i);
+                })
+              }
+            ></TagList>
+          </Form.Item>
         </div>
-        <div style={{ textAlign: 'center' }}>
-          <Button htmlType="submit">提交</Button>
+        <div style={{ textAlign: 'right', position: 'sticky', bottom: 20 }}>
+          <Button type="primary" htmlType="submit">
+            提交
+          </Button>
         </div>
       </Form>
     </Spin>

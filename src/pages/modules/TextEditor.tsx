@@ -77,9 +77,7 @@ const TextEditor = (props: Props) => {
       ></div>
       <div
         style={{
-          position: 'absolute',
-          bottom: 4,
-          right: 10,
+          ...styles.lengthTip,
           opacity: maxLength > 0 ? 1 : 0,
         }}
       >
@@ -106,6 +104,7 @@ const TextEditor = (props: Props) => {
 const styles: {
   myct: CSSProperties;
   wy: CSSProperties;
+  lengthTip: CSSProperties;
 } = {
   myct: {
     writingMode: 'vertical-lr',
@@ -116,6 +115,12 @@ const styles: {
     writingMode: 'vertical-rl',
     WebkitWritingMode: 'vertical-rl',
     msWritingMode: 'vertical-rl',
+  },
+  lengthTip: {
+    position: 'absolute',
+    bottom: 4,
+    right: 10,
+    writingMode: 'initial',
   },
 };
 

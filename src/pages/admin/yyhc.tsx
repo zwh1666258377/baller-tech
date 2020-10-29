@@ -14,6 +14,7 @@ import {
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { DeleteOutlined } from '@ant-design/icons';
+import { TagList } from '../modules/TagList';
 
 const { Title, Text } = Typography;
 
@@ -210,65 +211,53 @@ const Index = () => {
             </Select.Option>
           </Select>
         </Form.Item>
-        <div style={{ border: '1px solid red' }}>
-          {productDisplayItems
-            ?.filter(i => !!i)
-            ?.map(({ url, name }, idx) => {
-              return (
-                <Row key={idx}>
-                  <Col push={3}>
-                    <Text type="success">url:{url},</Text>
-                    <Text type="success">name:{name}</Text>
-                    <DeleteOutlined
-                      onClick={() => {
-                        setProductDisplayItems((urls = []) => {
-                          return urls?.filter((_, i) => i !== idx);
-                        });
-                      }}
-                    />
-                  </Col>
-                </Row>
+        <Form.Item name="product-display-url" label="链接">
+          <Input />
+        </Form.Item>
+        <Form.Item name="product-display-name" label="展示名">
+          <Input />
+        </Form.Item>
+        <Form.Item label={' '} colon={false}>
+          <Button
+            onClick={() => {
+              const currentInputUrl = form.getFieldValue('product-display-url');
+              const currentInputName = form.getFieldValue(
+                'product-display-name',
               );
-            })}
-          <Form.Item name="product-display-url" label="链接">
-            <Input />
-          </Form.Item>
-          <Form.Item name="product-display-name" label="展示名">
-            <Input />
-          </Form.Item>
-          <Row>
-            <Col push={3}>
-              <Button
-                onClick={() => {
-                  const currentInputUrl = form.getFieldValue(
-                    'product-display-url',
-                  );
-                  const currentInputName = form.getFieldValue(
-                    'product-display-name',
-                  );
 
-                  if (!currentInputUrl) {
-                    Modal.error({ content: '链接不得为空' });
-                    return;
-                  }
+              if (!currentInputUrl || !currentInputName) {
+                Modal.error({ content: '链接或名称不得为空' });
+                return;
+              }
 
-                  setProductDisplayItems((items = []) => {
-                    return [
-                      ...items,
-                      { url: currentInputUrl, name: currentInputName },
-                    ];
-                  });
-                  form.setFieldsValue({
-                    'product-display-url': '',
-                    'product-display-name': '',
-                  });
-                }}
-              >
-                增加
-              </Button>
-            </Col>
-          </Row>
-        </div>
+              setProductDisplayItems((items = []) => {
+                return [
+                  ...items,
+                  { url: currentInputUrl, name: currentInputName },
+                ];
+              });
+              form.setFieldsValue({
+                'product-display-url': '',
+                'product-display-name': '',
+              });
+            }}
+          >
+            增加
+          </Button>
+        </Form.Item>
+        <Form.Item label={' '} colon={false}>
+          <TagList
+            items={productDisplayItems?.map(r => ({
+              title: r.name,
+              content: r.url,
+            }))}
+            onDelete={idx =>
+              setProductDisplayItems((urls = []) => {
+                return urls?.filter((_, i) => i !== idx);
+              })
+            }
+          ></TagList>
+        </Form.Item>
         <Title level={3}>使用场景</Title>
         <Form.Item
           name="usage-scenarios-display"
@@ -288,30 +277,13 @@ const Index = () => {
         <Form.Item name="usage-scenarios-name-en" label="英文Title">
           <Input />
         </Form.Item>
-        {usageScenariosImgUrls
-          ?.filter(i => !!i)
-          ?.map(({ url, name }, idx) => {
-            return (
-              <div key={idx} style={{ textAlign: 'center' }}>
-                <Text type="success">url:{url},</Text>
-                <Text type="success">name:{name}</Text>
-                <DeleteOutlined
-                  onClick={() => {
-                    setUsageScenariosImgUrls((urls = []) => {
-                      return urls?.filter((_, i) => i !== idx);
-                    });
-                  }}
-                />
-              </div>
-            );
-          })}
-        <div style={{ border: '1px solid red' }}>
-          <Form.Item name="usage-scenarios-img-url" label="展示图片链接">
-            <Input />
-          </Form.Item>
-          <Form.Item name="usage-scenarios-img-name" label="展示图片名">
-            <Input />
-          </Form.Item>
+        <Form.Item name="usage-scenarios-img-url" label="展示图片链接">
+          <Input />
+        </Form.Item>
+        <Form.Item name="usage-scenarios-img-name" label="展示图片名">
+          <Input />
+        </Form.Item>
+        <Form.Item label={' '} colon={false}>
           <Button
             onClick={() => {
               const currentInputUrl = form.getFieldValue(
@@ -338,10 +310,25 @@ const Index = () => {
           >
             增加
           </Button>
-        </div>
+        </Form.Item>
+        <Form.Item label={' '} colon={false}>
+          <TagList
+            items={usageScenariosImgUrls?.map(r => ({
+              title: r.name,
+              content: r.url,
+            }))}
+            onDelete={idx =>
+              setUsageScenariosImgUrls((urls = []) => {
+                return urls?.filter((_, i) => i !== idx);
+              })
+            }
+          ></TagList>
+        </Form.Item>
 
-        <div style={{ textAlign: 'center' }}>
-          <Button htmlType="submit">提交</Button>
+        <div style={{ textAlign: 'right', position: 'sticky', bottom: 20 }}>
+          <Button type="primary" htmlType="submit">
+            提交
+          </Button>
         </div>
       </Form>
     </Spin>

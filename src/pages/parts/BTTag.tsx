@@ -5,7 +5,7 @@ import React, { CSSProperties } from 'react';
 interface Props {
   style?: CSSProperties;
   title: string;
-  content: string;
+  content: React.ReactNode;
   onDelete?: () => void;
 }
 export const BTTag = (props: Props) => {

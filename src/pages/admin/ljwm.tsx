@@ -11,6 +11,7 @@ import {
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { DeleteOutlined } from '@ant-design/icons';
+import { TagList } from '../modules/TagList';
 
 const { Title, Text } = Typography;
 
@@ -185,30 +186,13 @@ const Index = () => {
         <Form.Item name="honor-name-en" label="英文Title">
           <Input />
         </Form.Item>
-        {honor
-          ?.filter(i => !!i)
-          ?.map(({ url, name }, idx) => {
-            return (
-              <div key={idx} style={{ textAlign: 'center' }}>
-                <Text type="success">url:{url},</Text>
-                <Text type="success">name:{name}</Text>
-                <DeleteOutlined
-                  onClick={() => {
-                    setHonor((urls = []) => {
-                      return urls?.filter(i => !!i?.url && i?.url !== url);
-                    });
-                  }}
-                />
-              </div>
-            );
-          })}
-        <div style={{ border: '1px solid red' }}>
-          <Form.Item name="honor-img-url" label="展示图片链接">
-            <Input />
-          </Form.Item>
-          <Form.Item name="honor-img-name" label="展示图片名">
-            <Input />
-          </Form.Item>
+        <Form.Item name="honor-img-url" label="展示图片链接">
+          <Input />
+        </Form.Item>
+        <Form.Item name="honor-img-name" label="展示图片名">
+          <Input />
+        </Form.Item>
+        <Form.Item label={' '} colon={false}>
           <Button
             onClick={() => {
               const currentInputUrl = form.getFieldValue('honor-img-url');
@@ -233,7 +217,20 @@ const Index = () => {
           >
             增加
           </Button>
-        </div>
+        </Form.Item>
+        <Form.Item label={' '} colon={false}>
+          <TagList
+            items={honor?.map(r => ({
+              title: r.name,
+              content: r.url,
+            }))}
+            onDelete={idx =>
+              setHonor((urls = []) => {
+                return urls?.filter((_, i) => i !== idx);
+              })
+            }
+          ></TagList>
+        </Form.Item>
 
         <Title level={3}>合作伙伴</Title>
         <Form.Item name="partne-display" label="展示" valuePropName="checked">
@@ -250,30 +247,13 @@ const Index = () => {
         <Form.Item name="partne-name-en" label="英文Title">
           <Input />
         </Form.Item>
-        {partne
-          ?.filter(i => !!i)
-          ?.map(({ url, name }, idx) => {
-            return (
-              <div key={idx} style={{ textAlign: 'center' }}>
-                <Text type="success">url:{url},</Text>
-                <Text type="success">name:{name}</Text>
-                <DeleteOutlined
-                  onClick={() => {
-                    setPartne((urls = []) => {
-                      return urls?.filter(i => !!i?.url && i?.url !== url);
-                    });
-                  }}
-                />
-              </div>
-            );
-          })}
-        <div style={{ border: '1px solid red' }}>
-          <Form.Item name="partne-img-url" label="展示图片链接">
-            <Input />
-          </Form.Item>
-          <Form.Item name="partne-img-name" label="展示图片名">
-            <Input />
-          </Form.Item>
+        <Form.Item name="partne-img-url" label="展示图片链接">
+          <Input />
+        </Form.Item>
+        <Form.Item name="partne-img-name" label="展示图片名">
+          <Input />
+        </Form.Item>
+        <Form.Item label={' '} colon={false}>
           <Button
             onClick={() => {
               const currentInputUrl = form.getFieldValue('partne-img-url');
@@ -299,7 +279,20 @@ const Index = () => {
           >
             增加
           </Button>
-        </div>
+        </Form.Item>
+        <Form.Item label={' '} colon={false}>
+          <TagList
+            items={partne?.map(r => ({
+              title: r.name,
+              content: r.url,
+            }))}
+            onDelete={idx =>
+              setPartne((urls = []) => {
+                return urls?.filter((_, i) => i !== idx);
+              })
+            }
+          ></TagList>
+        </Form.Item>
 
         <Title level={3}>联系我们</Title>
         <Form.Item name="contact-display" label="展示" valuePropName="checked">
@@ -316,30 +309,13 @@ const Index = () => {
         <Form.Item name="contact-name-en" label="英文Title">
           <Input />
         </Form.Item>
-        {contact
-          ?.filter(i => !!i)
-          ?.map(({ url, name }, idx) => {
-            return (
-              <div key={idx} style={{ textAlign: 'center' }}>
-                <Text type="success">url:{url},</Text>
-                <Text type="success">name:{name}</Text>
-                <DeleteOutlined
-                  onClick={() => {
-                    setContact((urls = []) => {
-                      return urls?.filter(i => !!i?.url && i?.url !== url);
-                    });
-                  }}
-                />
-              </div>
-            );
-          })}
-        <div style={{ border: '1px solid red' }}>
-          <Form.Item name="contact-img-url" label="展示图片链接">
-            <Input />
-          </Form.Item>
-          <Form.Item name="contact-img-name" label="展示图片名">
-            <Input />
-          </Form.Item>
+        <Form.Item name="contact-img-url" label="展示图片链接">
+          <Input />
+        </Form.Item>
+        <Form.Item name="contact-img-name" label="展示图片名">
+          <Input />
+        </Form.Item>
+        <Form.Item label={' '} colon={false}>
           <Button
             onClick={() => {
               const currentInputUrl = form.getFieldValue('contact-img-url');
@@ -366,10 +342,25 @@ const Index = () => {
           >
             增加
           </Button>
-        </div>
+        </Form.Item>
+        <Form.Item label={' '} colon={false}>
+          <TagList
+            items={contact?.map(r => ({
+              title: r.name,
+              content: r.url,
+            }))}
+            onDelete={idx =>
+              setContact((urls = []) => {
+                return urls?.filter((_, i) => i !== idx);
+              })
+            }
+          ></TagList>
+        </Form.Item>
 
-        <div style={{ textAlign: 'center' }}>
-          <Button htmlType="submit">提交</Button>
+        <div style={{ textAlign: 'right', position: 'sticky', bottom: 20 }}>
+          <Button type="primary" htmlType="submit">
+            提交
+          </Button>
         </div>
       </Form>
     </Spin>
