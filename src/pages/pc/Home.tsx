@@ -52,18 +52,19 @@ const Home = (props: PageProps) => {
             height: '100%',
           }}
         >
-          <div>
-            <div
-              style={{
-                width: '100%',
-                height: '100vh',
-                // TODO: 从接口读背景图
-                backgroundImage: `url(${homeDefault.defaultbg})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-              }}
-            ></div>
-          </div>
+          {website?.carousels?.pc?.map((url, i) => (
+            <div key={i}>
+              <div
+                style={{
+                  width: '100%',
+                  height: '100vh',
+                  backgroundImage: `url(${url})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              ></div>
+            </div>
+          ))}
         </Carousel>
       </div>
       <div
