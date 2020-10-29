@@ -32,11 +32,11 @@ const BTFooter = (props: Props) => {
         }}
       >
         <div style={{ textAlign: 'left', color: '#FFF', marginRight: 36 }}>
-          {data?.companyName.cn && (
+          {data?.companyName?.cn && (
             <div
               style={{ fontSize: 20, marginBottom: 12, whiteSpace: 'nowrap' }}
             >
-              {`${data?.companyName.cn}（${data?.companyName.en}）`}
+              {`${data?.companyName?.cn}（${data?.companyName?.en}）`}
             </div>
           )}
           {data?.info.map((info, i) => (
