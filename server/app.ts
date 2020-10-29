@@ -29,6 +29,7 @@ import { ballerTechYYSB } from './api/baller-tech-yysb';
 import { ballerTechWZSB } from './api/baller-tech-wzsb';
 import { bt } from './router/bt';
 
+const isDev = process.env['NODE_ENV'] === 'development';
 dotenv.config('../.env' as any);
 
 const MongoStore = connectMongo(session);
@@ -148,7 +149,7 @@ class App {
     ballerTechYYSB(this.app);
     ballerTechWZSB(this.app);
 
-    bt(this.app);
+    !isDev && bt(this.app);
   };
 
   connectDb = () => {
@@ -178,7 +179,7 @@ class App {
           account: user.account,
           password: sha1(user.password),
         });
-
+        console.log(process.env['NODE_ENV']);
         console.log('User init successed!');
         console.log(`Account:${user.account}`);
         console.log(`Password:${user.password}`);

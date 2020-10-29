@@ -78,16 +78,19 @@ export default defineConfig({
     },
     {
       path: '/',
+      component: '@/pages/pc/Home',
+    },
+    {
+      path: '/',
       component: '@/pages/pc/layout',
       routes: [
-        { path: '/test', component: '@/pages/test' },
+        // { path: '/test', component: '@/pages/test' },
         { path: '/jqfy', component: '@/pages/pc/JQFY' },
         { path: '/yysb', component: '@/pages/pc/YYSB' },
         { path: '/yyhc', component: '@/pages/pc/YYHC' },
         { path: '/wzsb', component: '@/pages/pc/WZSB' },
         { path: '/txsb', component: '@/pages/pc/TXSB' },
         { path: '/ljwm', component: '@/pages/pc/LJWM' },
-        { path: '/', component: '@/pages/pc/Home' },
       ],
     },
   ],

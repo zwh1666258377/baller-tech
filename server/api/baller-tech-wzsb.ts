@@ -109,7 +109,6 @@ function postTranslate(args) {
                 },
                 function(error, response, body) {
                   if (!error && response.statusCode == 200) {
-                    console.log(body, 'body');
                     JSON.parse(body)
                       ?.data?.sort((a, b) => a?.order - b?.order)
                       ?.forEach(item => {

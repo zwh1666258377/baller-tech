@@ -1,0 +1,6 @@
+{
+  "watch": ["./server/**/*"],
+  "ext": "ts",
+  "ignore": ["./dist", "./server/dist", "./node_modules"],
+  "exec": "grunt clean_logs && grunt clean_dist && tsc --build server/tsconfig.json && cross-env NODE_ENV=production npx babel-node ./server/dist/run.js"
+}

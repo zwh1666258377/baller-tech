@@ -5,6 +5,7 @@
     "start": "cross-env NODE_ENV=development HTTPS=1 PORT=8080 umi dev",
     "build": "umi build",
     "server": "nodemon",
+    "server-prod": "nodemon --config nodemon.prod.json",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",
