@@ -14,7 +14,7 @@ import {
   Typography,
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import { DeleteOutlined } from '@ant-design/icons';
+import fetch from 'node-fetch';
 import { TagList } from '../modules/TagList';
 
 const { Title, Text } = Typography;

@@ -15,6 +15,7 @@ import {
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { TagList } from '../modules/TagList';
+import fetch from 'node-fetch';
 
 const { Title, Text } = Typography;
 
