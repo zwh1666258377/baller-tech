@@ -10,6 +10,6 @@
   "combine_logs": true,
   "merge_logs": true,
   "env": {
-    "NODE_ENV": "qa"
+    "NODE_ENV": "production"
   }
 }
