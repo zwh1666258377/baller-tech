@@ -285,28 +285,30 @@ const Index = () => {
           <Form.Item name="contact-img-name" label="展示图片名">
             <Input />
           </Form.Item>
-          <Button
-            onClick={() => {
-              const currentInputUrl = form.getFieldValue('contact-img-url');
-              const currentInputName = form.getFieldValue('contact-img-name');
-              if (!currentInputUrl || !currentInputName) {
-                Modal.error({ content: '链接或名称不得为空' });
-                return;
-              }
-              setContactImgUrls((urls = []) => {
-                return [
-                  ...urls,
-                  { name: currentInputName, url: currentInputUrl },
-                ];
-              });
-              form.setFieldsValue({
-                'contact-img-url': '',
-                'contact-img-name': '',
-              });
-            }}
-          >
-            增加
-          </Button>
+          <Form.Item label={' '} colon={false}>
+            <Button
+              onClick={() => {
+                const currentInputUrl = form.getFieldValue('contact-img-url');
+                const currentInputName = form.getFieldValue('contact-img-name');
+                if (!currentInputUrl || !currentInputName) {
+                  Modal.error({ content: '链接或名称不得为空' });
+                  return;
+                }
+                setContactImgUrls((urls = []) => {
+                  return [
+                    ...urls,
+                    { name: currentInputName, url: currentInputUrl },
+                  ];
+                });
+                form.setFieldsValue({
+                  'contact-img-url': '',
+                  'contact-img-name': '',
+                });
+              }}
+            >
+              增加
+            </Button>
+          </Form.Item>
           <Form.Item label={' '} colon={false}>
             <TagList
               items={contactImgUrls?.map(r => ({
