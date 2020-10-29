@@ -6,14 +6,15 @@ import { app_id, app_key } from '../lib/baller-tech-env';
 import multer from 'multer';
 import { resolve } from 'path';
 import fs from 'fs';
+import filesize from 'filesize';
 
 const upload = multer({ dest: resolve('static/baller-tech/') });
 
 export function ballerTechWZSB(app: ReturnType<typeof express>) {
   app.post('/api/wzsb', upload.any(), async (req, res) => {
     const { language } = req.body;
-
     const file = req.files[0];
+
     if (!language) {
       res.json({
         status: 'error',
@@ -28,9 +29,19 @@ export function ballerTechWZSB(app: ReturnType<typeof express>) {
       });
     }
 
+    const size = filesize(file['size'], { output: 'object' })?.['value'];
+
+    if (!size || size / 1024 > 10) {
+      res.json({
+        status: 'error',
+        msg: '文件不得大于10mb',
+      });
+    }
+
+    const isPdf = String(file['mimetype']).endsWith('/pdf');
     const data = fs.readFileSync(file.path);
 
-    postTranslate({ language, data }).then(result => {
+    postTranslate({ language, data, isPdf }).then(result => {
       fs.unlinkSync(file.path);
       res.json({
         status: 'ok',
@@ -62,15 +73,21 @@ function generateBase64Params(obj) {
 }
 
 function postTranslate(args) {
-  const { data, language } = args;
+  const { data, language, isPdf } = args;
 
   return new Promise(resolve => {
     const date = getGMTdate();
-    const BParam = generateBase64Params({
+    const params = {
       request_id: uuidv4(),
       language,
       image_mode: 'multi_row',
-    });
+    };
+
+    if (isPdf) {
+      params['file_format'] = 'pdf';
+    }
+
+    const BParam = generateBase64Params(params);
 
     request(
       {
