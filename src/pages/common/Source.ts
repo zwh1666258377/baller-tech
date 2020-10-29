@@ -1,9 +1,9 @@
 export const btnImg = {
-  jqfy: '/api/get/file?id=5f82d1d4434b8a7ce5724eba',
-  yysb: '/api/get/file?id=5f82d1e7434b8a7ce5724ebb',
-  yyhc: '/api/get/file?id=5f82d1eb434b8a7ce5724ebc',
-  wzsb: '/api/get/file?id=5f82d1f2434b8a7ce5724ebd',
-  txsb: '/api/get/file?id=5f82d1f5434b8a7ce5724ebe',
+  jqfy: '/static/jqfy.png',
+  yysb: '/static/yysb.png',
+  yyhc: '/static/yyhc.png',
+  wzsb: '/static/wzsb.png',
+  txsb: '/static/txsb.png',
 };
 
 export const homeDefault = {
