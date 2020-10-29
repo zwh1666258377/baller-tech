@@ -9,6 +9,7 @@ import {
   Typography,
 } from 'antd';
 import { TagList } from '../modules/TagList';
+import fetch from 'node-fetch';
 
 const { Title } = Typography;
 

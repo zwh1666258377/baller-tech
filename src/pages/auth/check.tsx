@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useHistory } from 'umi';
+import fetch from 'node-fetch';
 
 export default ({ children }) => {
   const history = useHistory();

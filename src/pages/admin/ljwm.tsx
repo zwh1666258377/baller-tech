@@ -10,6 +10,7 @@ import {
   Typography,
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
+import fetch from 'node-fetch';
 import { TagList } from '../modules/TagList';
 
 const { Title } = Typography;

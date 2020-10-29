@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Form, Input, Button, Modal } from 'antd';
 import { useHistory } from 'umi';
 import { siders } from './index';
+import fetch from 'node-fetch';
 
 const layout = {
   labelCol: { span: 8 },
