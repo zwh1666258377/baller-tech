@@ -10,7 +10,7 @@ import {
 } from 'antd';
 import { TagList } from '../modules/TagList';
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const Index = () => {
   const [form] = Form.useForm();
@@ -114,7 +114,7 @@ const Index = () => {
       <Form
         form={form}
         labelCol={{ span: 3 }}
-        wrapperCol={{ span: 16 }}
+        wrapperCol={{ span: 18 }}
         onFinish={submit}
       >
         <Form.Item name="icon" label="网站logo">

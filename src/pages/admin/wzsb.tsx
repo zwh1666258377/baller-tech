@@ -1,23 +1,19 @@
 import * as React from 'react';
 import {
   Button,
-  Col,
   Form,
   Input,
   Modal,
   notification,
-  Row,
   Select,
   Spin,
   Switch,
-  Tag,
   Typography,
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import { DeleteOutlined } from '@ant-design/icons';
 import { TagList } from '../modules/TagList';
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const Index = () => {
   const [form] = Form.useForm();
@@ -135,7 +131,7 @@ const Index = () => {
       <Form
         form={form}
         labelCol={{ span: 3 }}
-        wrapperCol={{ span: 16 }}
+        wrapperCol={{ span: 18 }}
         onFinish={submit}
       >
         <Form.Item name="name-cn" label="栏目中文名">

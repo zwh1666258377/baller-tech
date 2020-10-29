@@ -1,22 +1,19 @@
 import * as React from 'react';
 import {
   Button,
-  Col,
   Form,
   Input,
   notification,
-  Row,
   Select,
   Spin,
   Switch,
-  Tag,
   Typography,
   Modal,
 } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import { TagList } from '../modules/TagList';
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const Index = () => {
   const [form] = Form.useForm();
@@ -145,7 +142,7 @@ const Index = () => {
       <Form
         form={form}
         labelCol={{ span: 3 }}
-        wrapperCol={{ span: 16 }}
+        wrapperCol={{ span: 18 }}
         onFinish={submit}
       >
         <Form.Item name="name-cn" label="栏目中文名">
@@ -213,6 +210,7 @@ const Index = () => {
           name="product-experience-display"
           label="展示"
           valuePropName="checked"
+          style={{ marginBottom: 0 }}
         >
           <Switch
             defaultChecked={form.getFieldValue('product-experience-display')}
@@ -256,9 +254,12 @@ const Index = () => {
               <Input placeholder="目标语种key" />
             </Form.Item>
           </Form.Item>
-          <Form.Item style={{ padding: 0 }} label=" " colon={false}>
+          <Form.Item
+            style={{ display: 'inline-block', marginBottom: 0 }}
+            label=" "
+            colon={false}
+          >
             <Button
-              style={{ marginBottom: 24 }}
               onClick={() => {
                 const fromLabel = form.getFieldValue(
                   'text-translation-from-label',
