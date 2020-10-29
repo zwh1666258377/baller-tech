@@ -135,108 +135,113 @@ export default () => {
 
   return (
     <Spin spinning={loading}>
-      <Title level={3}>图片</Title>
-      <Upload
-        action="/api/upload/img"
-        listType="picture-card"
-        fileList={imgList}
-        beforeUpload={f => {
-          return f?.type?.startsWith('image/');
-        }}
-        onPreview={handlePreview}
-        onChange={({ event }) => {
-          if (event?.percent == 100) {
-            reload();
-          }
-        }}
-        onRemove={removeImg}
-        iconRender={() => {
-          return <div>111</div>;
-        }}
-        name="img"
-      >
-        {uploadButton}
-        {/* {imgList.length >= 8 ? null : uploadButton} */}
-      </Upload>
-      <Modal
-        visible={previewVisible}
-        title={previewTitle}
-        footer={null}
-        onCancel={handleCancel}
-      >
-        <img alt="example" style={{ width: '100%' }} src={previewImage} />
-        <Paragraph type="warning" copyable={{ text: previewImage }}>
-          点击右侧复制：{previewImage}
-        </Paragraph>
-      </Modal>
-      <Title level={3}>音频</Title>
-      <Upload
-        action="/api/upload/mp3"
-        fileList={[]}
-        beforeUpload={f => {
-          return f?.type?.startsWith('audio/');
-        }}
-        onChange={({ event }) => {
-          if (event?.percent == 100) {
-            reload();
-          }
-        }}
-        name="mp3"
-      >
-        <Button icon={<UploadOutlined />}>Upload</Button>
-      </Upload>
-      {mp3List?.map((item, idx) => {
-        const { name, url } = item;
-        return (
-          <div key={idx}>
-            <Text>{name}</Text>
-            <Text copyable={{ text: url }} />
-            <Text type="danger">
-              <span
-                style={{ cursor: 'pointer' }}
-                onClick={() => removeMp3(item)}
-              >
-                （删除）
-              </span>
-            </Text>
-          </div>
-        );
-      })}
-
-      <Title level={3}>视频</Title>
-      <Upload
-        action="/api/upload/mp4"
-        fileList={[]}
-        beforeUpload={f => {
-          return f?.type?.startsWith('video/');
-        }}
-        onChange={({ fileList, event }) => {
-          if (event?.percent == 100) {
-            reload();
-          }
-        }}
-        onRemove={removeMp4}
-        name="mp4"
-      >
-        <Button icon={<UploadOutlined />}>Upload</Button>
-      </Upload>
-      {mp4List?.map((item, idx) => {
-        const { name, url } = item;
-        return (
-          <div key={idx}>
-            <Text>{name}</Text>
-            <Text copyable={{ text: url }} />
-            <Text type="danger">
-              <span
-                style={{ cursor: 'pointer' }}
-                onClick={() => removeMp4(item)}
-              >
-                （删除）
-              </span>
-            </Text>
-          </div>
-        );
-      })}
+      <div style={{ marginBottom: 20 }}>
+        <Title level={3}>图片</Title>
+        <Upload
+          action="/api/upload/img"
+          listType="picture-card"
+          fileList={imgList}
+          beforeUpload={f => {
+            return f?.type?.startsWith('image/');
+          }}
+          onPreview={handlePreview}
+          onChange={({ event }) => {
+            if (event?.percent == 100) {
+              reload();
+            }
+          }}
+          onRemove={removeImg}
+          iconRender={() => {
+            return <div>111</div>;
+          }}
+          name="img"
+        >
+          {uploadButton}
+          {/* {imgList.length >= 8 ? null : uploadButton} */}
+        </Upload>
+        <Modal
+          visible={previewVisible}
+          title={previewTitle}
+          footer={null}
+          onCancel={handleCancel}
+        >
+          <img alt="example" style={{ width: '100%' }} src={previewImage} />
+          <Paragraph type="warning" copyable={{ text: previewImage }}>
+            点击右侧复制：{previewImage}
+          </Paragraph>
+        </Modal>
+      </div>
+      <div style={{ marginBottom: 20 }}>
+        <Title level={3}>音频</Title>
+        <Upload
+          action="/api/upload/mp3"
+          fileList={[]}
+          beforeUpload={f => {
+            return f?.type?.startsWith('audio/');
+          }}
+          onChange={({ event }) => {
+            if (event?.percent == 100) {
+              reload();
+            }
+          }}
+          name="mp3"
+        >
+          <Button icon={<UploadOutlined />}>Upload</Button>
+        </Upload>
+        {mp3List?.map((item, idx) => {
+          const { name, url } = item;
+          return (
+            <div key={idx}>
+              <Text>{name}</Text>
+              <Text copyable={{ text: url }} />
+              <Text type="danger">
+                <span
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => removeMp3(item)}
+                >
+                  （删除）
+                </span>
+              </Text>
+            </div>
+          );
+        })}
+      </div>
+      <div style={{ marginBottom: 20 }}>
+        <Title level={3}>视频</Title>
+        <Upload
+          action="/api/upload/mp4"
+          fileList={[]}
+          beforeUpload={f => {
+            return f?.type?.startsWith('video/');
+          }}
+          onChange={({ fileList, event }) => {
+            if (event?.percent == 100) {
+              reload();
+            }
+          }}
+          onRemove={removeMp4}
+          name="mp4"
+        >
+          <Button icon={<UploadOutlined />}>Upload</Button>
+        </Upload>
+        {mp4List?.map((item, idx) => {
+          const { name, url } = item;
+          return (
+            <div key={idx}>
+              <Text>{name}</Text>
+              <Text copyable={{ text: url }} />
+              <Text type="danger">
+                <span
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => removeMp4(item)}
+                >
+                  （删除）
+                </span>
+              </Text>
+            </div>
+          );
+        })}
+      </div>
     </Spin>
   );
 };
