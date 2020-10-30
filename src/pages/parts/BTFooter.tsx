@@ -39,7 +39,7 @@ const BTFooter = (props: Props) => {
               {`${data?.companyName?.cn}（${data?.companyName?.en}）`}
             </div>
           )}
-          {data?.info.map((info, i) => (
+          {data?.info?.map((info, i) => (
             <div key={info + i} style={{ marginBottom: 4 }}>
               {info}
             </div>

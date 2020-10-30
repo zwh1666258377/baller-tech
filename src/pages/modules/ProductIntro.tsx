@@ -55,7 +55,7 @@ const ProductIntro = (props: Props) => {
               overflow: 'hidden',
             }}
           >
-            {data.content}
+            {data?.content}
           </div>
           <div>
             <div

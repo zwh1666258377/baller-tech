@@ -85,7 +85,7 @@ const TextTranslator = (props: Props) => {
                   setFromVal(val);
                 }}
               >
-                {opts.map(o => (
+                {opts?.map(o => (
                   <Option key={o.key} value={o.key}>
                     {o.label}
                   </Option>
@@ -100,7 +100,7 @@ const TextTranslator = (props: Props) => {
                   setToVal(val);
                 }}
               >
-                {opts.map(o => (
+                {opts?.map(o => (
                   <Option key={o.key} value={o.key}>
                     {o.label}
                   </Option>
@@ -195,7 +195,7 @@ const TextTranslator = (props: Props) => {
                 setFromVal(val);
               }}
             >
-              {opts.map(o => (
+              {opts?.map(o => (
                 <Option key={o.key} value={o.key}>
                   {o.label}
                 </Option>
@@ -210,7 +210,7 @@ const TextTranslator = (props: Props) => {
                 setToVal(val);
               }}
             >
-              {opts.map(o => (
+              {opts?.map(o => (
                 <Option key={o.key} value={o.key}>
                   {o.label}
                 </Option>

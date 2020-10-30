@@ -113,7 +113,7 @@ const Home = (props: PageProps) => {
                         opacity: o,
                       }}
                     >
-                      {website?.slogan.main}
+                      {website?.slogan?.main}
                     </div>
                     <div
                       style={{
@@ -123,7 +123,7 @@ const Home = (props: PageProps) => {
                         opacity: o,
                       }}
                     >
-                      {website?.slogan.sub}
+                      {website?.slogan?.sub}
                     </div>
                   </>
                 )}
@@ -175,7 +175,7 @@ const Home = (props: PageProps) => {
                   color: '#FFF',
                 }}
               >
-                {website?.contact.content}
+                {website?.contact?.content}
               </div>
               <ImageCarousel
                 imgs={module?.partne?.imgUrls}

@@ -101,7 +101,7 @@ const Layout = (props: Props & PageProps) => {
             zIndex: 99,
           }}
         >
-          {routes.map(({ path, name }, idx) => {
+          {routes?.map(({ path, name }, idx) => {
             const onSelected = pathname.includes(path);
             return (
               <Link

@@ -16,7 +16,7 @@ export const BTTag = (props: Props) => {
         Modal.confirm({
           title: props.title,
           icon: <ExclamationCircleOutlined />,
-          content: props.content,
+          content: props?.content,
           okText: '删除',
           okType: 'danger',
           cancelText: '取消',

@@ -42,7 +42,7 @@ const ImageTranslator = (props: Props) => {
                 setLang(val);
               }}
             >
-              {opts.map(o => (
+              {opts?.map(o => (
                 <Option key={o.key} value={o.key}>
                   {o.label}
                 </Option>
@@ -63,7 +63,7 @@ const ImageTranslator = (props: Props) => {
             </div>
             <TextEditor style={{ height: 150, marginTop: 15 }} lang={lang}>
               {output.length > 0 ? (
-                output.map((s, i) => <div key={i}>{s}</div>)
+                output?.map((s, i) => <div key={i}>{s}</div>)
               ) : (
                 <span style={{ color: '#878787' }}>识别内容显示区</span>
               )}
@@ -140,7 +140,7 @@ const ImageTranslator = (props: Props) => {
                 setLang(val);
               }}
             >
-              {opts.map(o => (
+              {opts?.map(o => (
                 <Option key={o.key} value={o.key}>
                   {o.label}
                 </Option>
@@ -210,7 +210,7 @@ const ImageTranslator = (props: Props) => {
             lang={lang}
           >
             {output.length > 0 ? (
-              output.map((s, i) => <div key={i}>{s}</div>)
+              output?.map((s, i) => <div key={i}>{s}</div>)
             ) : (
               <span style={{ color: '#878787' }}>识别内容显示区</span>
             )}

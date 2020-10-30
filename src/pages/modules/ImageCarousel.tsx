@@ -34,12 +34,12 @@ const ImageCarousel = (props: Props) => {
       )}
       <div>
         <Carousel autoplay={autoplay} autoplaySpeed={5000}>
-          {list.map((l, i) => {
+          {list?.map((l, i) => {
             const renderRow = (data: Item[], i: number) => {
               return (
                 <Row key={i}>
                   <div style={{ display: 'flex' }}>
-                    {data.map((item, i) => (
+                    {data?.map((item, i) => (
                       <div
                         key={item?.url + i}
                         style={{
@@ -74,7 +74,7 @@ const ImageCarousel = (props: Props) => {
               dataList = imgList(l, pageSize / line);
             }
 
-            return <div key={i}>{dataList.map(renderRow)}</div>;
+            return <div key={i}>{dataList?.map(renderRow)}</div>;
           })}
         </Carousel>
       </div>

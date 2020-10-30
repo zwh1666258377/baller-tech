@@ -70,7 +70,7 @@ const Home = (props: PageProps) => {
                 opacity: o,
               }}
             >
-              {website?.slogan.main}
+              {website?.slogan?.main}
             </div>
             <div
               style={{
@@ -81,7 +81,7 @@ const Home = (props: PageProps) => {
                 opacity: o,
               }}
             >
-              {website?.slogan.sub}
+              {website?.slogan?.sub}
             </div>
           </>
         )}

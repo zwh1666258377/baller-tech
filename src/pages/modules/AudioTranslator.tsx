@@ -84,7 +84,7 @@ const AudioTranslator = (props: Props) => {
                 setLang(val);
               }}
             >
-              {opts.map(o => (
+              {opts?.map(o => (
                 <Option key={o.key} value={o.key}>
                   {o.label}
                 </Option>
@@ -198,7 +198,7 @@ const AudioTranslator = (props: Props) => {
                 setLang(val);
               }}
             >
-              {opts.map(o => (
+              {opts?.map(o => (
                 <Option key={o.key} value={o.key}>
                   {o.label}
                 </Option>

@@ -92,7 +92,7 @@ export default ({ children }) => {
             selectedKeys={[tabKey]}
             style={{ height: '100%', borderRight: 0 }}
           >
-            {siders.map(({ key, name }) => {
+            {siders?.map(({ key, name }) => {
               return (
                 <Menu.Item key={key}>
                   <Link to={generateSiderPath(key)}>{name}</Link>
