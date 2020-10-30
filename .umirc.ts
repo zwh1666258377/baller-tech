@@ -1,10 +1,12 @@
 import { defineConfig } from 'umi';
 
+const isDev = process.env['NODE_ENV'] === 'development';
+
 export default defineConfig({
-  ssr: {},
+  ssr: isDev ? {} : false,
   targets: false,
   define: {
-    isDev: process.env['NODE_ENV'] === 'development',
+    isDev,
   },
   publicPath: '/dist/',
   autoprefixer: false,
