@@ -13,7 +13,11 @@ const Index = (props: PageProps) => {
   const module = props.data?.module;
 
   if (!props.data) {
-    return <Spin></Spin>;
+    return (
+      <div style={{ minHeight: '100vh' }}>
+        <Spin></Spin>
+      </div>
+    );
   }
 
   return (
