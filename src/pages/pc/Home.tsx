@@ -4,11 +4,20 @@ import { Colors } from '../common/Styles';
 import BTFooter from '../parts/BTFooter';
 import { Motion, spring } from 'react-motion';
 import MTitle from '../parts/MTitle';
-import { Link } from 'umi';
+import { Link, useHistory } from 'umi';
 import ImageCarousel from '../modules/ImageCarousel';
 import { getModule, getWebsite } from '../common/DataApi';
 import { PageProps } from '../common/Defs';
 import { btnImg } from '../common/Source';
+import { configResponsive, useResponsive } from 'ahooks';
+
+configResponsive({
+  isPC: 750,
+});
+
+interface Props extends PageProps {
+  children: React.ReactChildren;
+}
 
 const Home = (props: PageProps) => {
   const module = props.data?.module;
@@ -17,6 +26,13 @@ const Home = (props: PageProps) => {
     stiffness: 130,
     damping: 30,
   };
+
+  const isPC = useResponsive()?.isPC;
+  const { push } = useHistory();
+
+  React.useEffect(() => {
+    !isPC && push('/m');
+  }, [isPC]);
 
   return (
     <div
