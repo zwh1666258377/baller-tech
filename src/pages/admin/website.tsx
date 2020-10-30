@@ -10,7 +10,7 @@ import {
 } from 'antd';
 import { TagList } from '../modules/TagList';
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const Index = () => {
   const [form] = Form.useForm();
@@ -114,7 +114,7 @@ const Index = () => {
       <Form
         form={form}
         labelCol={{ span: 3 }}
-        wrapperCol={{ span: 16 }}
+        wrapperCol={{ span: 18 }}
         onFinish={submit}
       >
         <Form.Item name="icon" label="网站logo">
@@ -169,19 +169,21 @@ const Index = () => {
               }
             />
           </Form.Item>
-          <Form.Item label={' '} colon={false}>
-            <TagList
-              items={info?.map(s => ({
-                title: s,
-                content: s,
-              }))}
-              onDelete={idx =>
-                setInfo((urls = []) => {
-                  return urls?.filter((_, i) => idx !== i);
-                })
-              }
-            ></TagList>
-          </Form.Item>
+          {info?.length > 0 && (
+            <Form.Item label={' '} colon={false}>
+              <TagList
+                items={info?.map(s => ({
+                  title: s,
+                  content: s,
+                }))}
+                onDelete={idx =>
+                  setInfo((urls = []) => {
+                    return urls?.filter((_, i) => idx !== i);
+                  })
+                }
+              ></TagList>
+            </Form.Item>
+          )}
         </div>
 
         <div>
@@ -210,19 +212,21 @@ const Index = () => {
               }
             />
           </Form.Item>
-          <Form.Item label={' '} colon={false}>
-            <TagList
-              items={carouselsH5?.map(s => ({
-                title: s,
-                content: s,
-              }))}
-              onDelete={idx =>
-                setCarouselsH5((urls = []) => {
-                  return urls?.filter((_, i) => idx !== i);
-                })
-              }
-            ></TagList>
-          </Form.Item>
+          {carouselsH5?.length > 0 && (
+            <Form.Item label={' '} colon={false}>
+              <TagList
+                items={carouselsH5?.map(s => ({
+                  title: s,
+                  content: s,
+                }))}
+                onDelete={idx =>
+                  setCarouselsH5((urls = []) => {
+                    return urls?.filter((_, i) => idx !== i);
+                  })
+                }
+              ></TagList>
+            </Form.Item>
+          )}
         </div>
 
         <div>
@@ -251,19 +255,21 @@ const Index = () => {
               }
             />
           </Form.Item>
-          <Form.Item label={' '} colon={false}>
-            <TagList
-              items={carouselsPC?.map(s => ({
-                title: s,
-                content: s,
-              }))}
-              onDelete={idx =>
-                setCarouselsPC((urls = []) => {
-                  return urls?.filter((_, i) => idx !== i);
-                })
-              }
-            ></TagList>
-          </Form.Item>
+          {carouselsPC?.length > 0 && (
+            <Form.Item label={' '} colon={false}>
+              <TagList
+                items={carouselsPC?.map(s => ({
+                  title: s,
+                  content: s,
+                }))}
+                onDelete={idx =>
+                  setCarouselsPC((urls = []) => {
+                    return urls?.filter((_, i) => idx !== i);
+                  })
+                }
+              ></TagList>
+            </Form.Item>
+          )}
         </div>
 
         <Title level={3}>联系我们</Title>
@@ -309,19 +315,21 @@ const Index = () => {
               增加
             </Button>
           </Form.Item>
-          <Form.Item label={' '} colon={false}>
-            <TagList
-              items={contactImgUrls?.map(r => ({
-                title: r.name,
-                content: r.url,
-              }))}
-              onDelete={idx =>
-                setContactImgUrls((urls = []) => {
-                  return urls?.filter((_, i) => idx !== i);
-                })
-              }
-            ></TagList>
-          </Form.Item>
+          {contactImgUrls?.length > 0 && (
+            <Form.Item label={' '} colon={false}>
+              <TagList
+                items={contactImgUrls?.map(r => ({
+                  title: r.name,
+                  content: r.url,
+                }))}
+                onDelete={idx =>
+                  setContactImgUrls((urls = []) => {
+                    return urls?.filter((_, i) => idx !== i);
+                  })
+                }
+              ></TagList>
+            </Form.Item>
+          )}
         </div>
         <div style={{ textAlign: 'right', position: 'sticky', bottom: 20 }}>
           <Button type="primary" htmlType="submit">
