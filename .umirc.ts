@@ -11,6 +11,7 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
+  favicon: '/static/favicon.ico',
   proxy: {
     '/api': {
       target: 'http://localhost:8000',
