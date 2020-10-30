@@ -3,7 +3,9 @@ import { defineConfig } from 'umi';
 const isDev = process.env['NODE_ENV'] === 'development';
 
 export default defineConfig({
-  ssr: {},
+  ssr: {
+    forceInitial: true,
+  },
   targets: false,
   define: {
     isDev,
