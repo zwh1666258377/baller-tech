@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Button, Layout, Menu } from 'antd';
 import { Link, useHistory, useLocation, useParams } from 'umi';
-import fetch from 'node-fetch';
 
 const { Header, Content, Sider } = Layout;
 

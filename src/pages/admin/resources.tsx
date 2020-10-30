@@ -3,7 +3,6 @@ import * as React from 'react';
 import { Upload, Modal, Spin, Typography, Button } from 'antd';
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
 import { UploadFile } from 'antd/lib/upload/interface';
-import fetch from 'node-fetch';
 
 const { Paragraph, Title, Text } = Typography;
 

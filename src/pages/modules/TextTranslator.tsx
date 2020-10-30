@@ -6,7 +6,6 @@ import { Website } from '../common/Defs';
 import { Colors, h5Styles, Styles } from '../common/Styles';
 import MTitle from '../parts/MTitle';
 import TextEditor from './TextEditor';
-import fetch from 'node-fetch';
 
 type Result = { status: 'ok' } | { status: 'error'; msg: string };
 const Option = Select.Option;

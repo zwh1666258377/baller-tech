@@ -6,7 +6,6 @@ import MTitle from '../parts/MTitle';
 import { errorTip } from '../../lib/error-tip';
 import TextEditor from './TextEditor';
 import { FilePdfOutlined } from '@ant-design/icons';
-import fetch from 'node-fetch';
 
 const Option = Select.Option;
 

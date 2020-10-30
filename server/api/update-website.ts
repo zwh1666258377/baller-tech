@@ -7,11 +7,11 @@ export function updateWebsite(app: ReturnType<typeof express>) {
     const module = await WebsiteSchema.findOne({ kind: data?.kind });
     if (!!module) {
       WebsiteSchema.updateOne({ kind: module['kind'] }, data).then(r => {
-        res.json(r);
+        res.json(r || {});
       });
     } else {
       WebsiteSchema.create(data).then(r => {
-        res.json(r);
+        res.json(r || {});
       });
     }
   });

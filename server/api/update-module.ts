@@ -8,11 +8,11 @@ export function updateModule(app: ReturnType<typeof express>) {
 
     if (!!module) {
       ModuleSchema.updateOne({ kind: module['kind'] }, data).then(r => {
-        res.json(r);
+        res.json(r || {});
       });
     } else {
       ModuleSchema.create(data).then(r => {
-        res.json(r);
+        res.json(r || {});
       });
     }
   });

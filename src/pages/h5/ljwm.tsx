@@ -82,6 +82,7 @@ const Index = (props: PageProps) => {
 Index.getInitialProps = async () => {
   const module = await getModule('ljwm');
   const website = await getWebsite();
+
   return { data: { module, website } };
 };
 

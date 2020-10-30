@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 const baseURL = isDev ? 'http://localhost:8000' : '';
 
 export const getModule = async (kind: string) => {

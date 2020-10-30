@@ -11,7 +11,7 @@ export function uploadImg(app: ReturnType<typeof express>) {
       ...(req?.file || {}),
       kind: 'img',
     });
-    res.json(req?.file);
+    res.json(req?.file || {});
   });
 }
 
@@ -21,7 +21,7 @@ export function uploadMp3(app: ReturnType<typeof express>) {
       ...(req?.file || {}),
       kind: 'mp3',
     });
-    res.json(req?.file);
+    res.json(req?.file || {});
   });
 }
 
@@ -31,6 +31,6 @@ export function uploadMp4(app: ReturnType<typeof express>) {
       ...(req?.file || {}),
       kind: 'mp4',
     });
-    res.json(req?.file);
+    res.json(req?.file || {});
   });
 }
