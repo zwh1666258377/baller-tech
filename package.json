@@ -5,6 +5,7 @@
     "start": "cross-env NODE_ENV=development HTTPS=1 PORT=8080 umi dev",
     "build": "umi build",
     "server": "nodemon",
+    "server-prod":"grunt clean_logs && grunt clean_dist && tsc --build server/tsconfig.json && pm2 start pm2.json",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
     "test": "umi-test",

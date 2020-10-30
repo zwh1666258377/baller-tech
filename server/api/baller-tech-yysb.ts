@@ -12,7 +12,7 @@ const upload = multer({ dest: resolve('static/baller-tech/') });
 export function ballerTechYYSB(app: ReturnType<typeof express>) {
   app.post('/api/yysb', upload.any(), async (req, res) => {
     const { language } = req.body;
-    console.log(language);
+
     const file = req.files[0];
     if (!language) {
       res.json({
