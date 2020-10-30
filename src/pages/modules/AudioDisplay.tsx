@@ -1,6 +1,5 @@
 import { Col, Row } from 'antd';
 import React, { CSSProperties } from 'react';
-import { Module } from '../common/Defs';
 import MTitle from '../parts/MTitle';
 
 interface Props {

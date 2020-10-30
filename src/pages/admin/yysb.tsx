@@ -135,12 +135,12 @@ const Index = () => {
         wrapperCol={{ span: 18 }}
         onFinish={submit}
       >
-        <Form.Item name="name-cn" label="栏目中文名">
+        {/* <Form.Item name="name-cn" label="栏目中文名">
           <Input />
         </Form.Item>
         <Form.Item name="name-en" label="栏目英文名">
           <Input />
-        </Form.Item>
+        </Form.Item> */}
         <Title level={3}>产品介绍</Title>
         <Form.Item
           name="poduct-introduction-display"
