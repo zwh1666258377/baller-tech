@@ -20,7 +20,7 @@ const YYSB = (props: PageProps) => {
   return (
     <>
       <div style={{ width: '100%', padding: '90px 160px 70px 70px' }}>
-        {module?.poductIntroduction && (
+        {module?.poductIntroduction?.display && (
           <ProductIntro
             style={{ marginBottom: 98 }}
             data={module.poductIntroduction}
