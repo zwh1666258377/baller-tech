@@ -84,7 +84,6 @@ export default defineConfig({
       path: '/',
       component: '@/pages/pc/layout',
       routes: [
-        // { path: '/test', component: '@/pages/test' },
         { path: '/jqfy', component: '@/pages/pc/JQFY' },
         { path: '/yysb', component: '@/pages/pc/YYSB' },
         { path: '/yyhc', component: '@/pages/pc/YYHC' },
