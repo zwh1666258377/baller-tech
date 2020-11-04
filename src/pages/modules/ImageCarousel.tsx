@@ -1,3 +1,8 @@
+import {
+  LeftCircleOutlined,
+  LeftOutlined,
+  RightOutlined,
+} from '@ant-design/icons';
 import { Carousel, Col, Image, Row } from 'antd';
 import React, { CSSProperties } from 'react';
 import MTitle from '../parts/MTitle';
@@ -20,6 +25,9 @@ const ImageCarousel = (props: Props) => {
   if (!props.imgs || props.imgs.length === 0) {
     return null;
   }
+
+  const carousel = React.useRef<Carousel>(null);
+
   const pageSize = props.pageSize?.normal || 3;
   const line = props.pageSize?.line || 1;
   const list = imgList(props.imgs, pageSize);
@@ -32,8 +40,8 @@ const ImageCarousel = (props: Props) => {
           label={props.label}
         />
       )}
-      <div>
-        <Carousel autoplay={autoplay} autoplaySpeed={5000}>
+      <div style={{ position: 'relative' }}>
+        <Carousel ref={carousel} autoplay={autoplay} autoplaySpeed={5000}>
           {list?.map((l, i) => {
             const renderRow = (data: Item[], i: number) => {
               return (
@@ -77,6 +85,22 @@ const ImageCarousel = (props: Props) => {
             return <div key={i}>{dataList?.map(renderRow)}</div>;
           })}
         </Carousel>
+        <div
+          className="carousel_btn_prev"
+          onClick={() => {
+            carousel.current?.prev();
+          }}
+        >
+          <LeftOutlined style={{ fontSize: 38, color: '#fff' }} />
+        </div>
+        <div
+          className="carousel_btn_next"
+          onClick={() => {
+            carousel.current?.next();
+          }}
+        >
+          <RightOutlined style={{ fontSize: 38, color: '#fff' }} />
+        </div>
       </div>
     </div>
   );

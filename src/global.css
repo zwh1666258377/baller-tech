@@ -49,3 +49,21 @@
 .text_editor:focus:before {
   content: '';
 }
+
+.carousel_btn_next {
+  background-color: #00000066;
+  position: absolute;
+  right: 0;
+  top: 38%;
+  z-index: 99;
+  cursor: pointer;
+}
+
+.carousel_btn_prev {
+  background-color: #00000066;
+  position: absolute;
+  left: 0;
+  top: 38%;
+  z-index: 99;
+  cursor: pointer;
+}
