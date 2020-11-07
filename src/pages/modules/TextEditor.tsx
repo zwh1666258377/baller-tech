@@ -111,6 +111,7 @@ const styles: {
     writingMode: 'vertical-lr',
     WebkitWritingMode: 'vertical-lr',
     msWritingMode: 'vertical-lr',
+    fontFamily: 'MQG8F02',
   },
   wy: {
     textOrientation: 'sideways',
