@@ -85,3 +85,8 @@
   z-index: 99;
   cursor: pointer;
 }
+
+@font-face {
+  font-family: 'MQG8F02';
+  src: url('/static/MQG8F02.ttf');
+}
