@@ -9,6 +9,13 @@ import fs from 'fs';
 
 const upload = multer({ dest: resolve('static/baller-tech/') });
 
+const mapping = [
+  { mimetype: '/ogg', audio_format: 'ogg' },
+  { mimetype: '/mpeg', audio_format: 'mp3' },
+  { mimetype: '/wave', audio_format: 'wav' },
+  { mimetype: '/octet-stream', audio_format: 'raw' },
+];
+
 export function ballerTechYYSB(app: ReturnType<typeof express>) {
   app.post('/api/yysb', upload.any(), async (req, res) => {
     const { language } = req.body;
@@ -27,12 +34,32 @@ export function ballerTechYYSB(app: ReturnType<typeof express>) {
         msg: '语音文件不得为空',
       });
     }
+
+    let audioFormat: string | undefined = undefined;
+
+    for (const i in mapping) {
+      const { mimetype, audio_format } = mapping[i];
+
+      if (String(file?.mimetype)?.endsWith(mimetype)) {
+        audioFormat = audio_format;
+      }
+    }
+
+    if (!audioFormat) {
+      res.json({
+        status: 'error',
+        msg: `mimetype:${file?.mimetype},originalname:${file?.originalname}该文件格式不支持`,
+      });
+    }
+
     const formData = {
       my_field: file.fieldname,
       my_file: fs.createReadStream(file.path),
     };
 
-    postTranslate({ language, formData }).then(result => {
+    console.log(language, audioFormat);
+
+    postTranslate({ language, formData, audioFormat }).then(result => {
       fs.unlinkSync(file.path);
       res.json({
         status: 'ok',
@@ -64,7 +91,7 @@ function generateBase64Params(obj) {
 }
 
 function postTranslate(args) {
-  const { formData, language } = args;
+  const { formData, language, audioFormat } = args;
 
   return new Promise(resolve => {
     const date = getGMTdate();
@@ -72,7 +99,7 @@ function postTranslate(args) {
       request_id: uuidv4(),
       language,
       sample_format: 'audio/L16;rate=16000',
-      audio_format: 'mp3',
+      audio_format: audioFormat,
       input_mode: 'once',
       service_type: 'sentence',
       dynamic_correction: 'off',
@@ -123,6 +150,9 @@ function postTranslate(args) {
                       clearInterval(timer);
                       resolve(val);
                     }
+                  } else {
+                    clearInterval(timer);
+                    resolve(JSON.stringify(body));
                   }
                 },
               );

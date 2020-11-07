@@ -139,6 +139,9 @@ function postTranslate(args) {
                       clearInterval(timer);
                       resolve(val);
                     }
+                  } else {
+                    clearInterval(timer);
+                    resolve(JSON.stringify(body));
                   }
                 },
               );
