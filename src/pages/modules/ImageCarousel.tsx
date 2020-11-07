@@ -51,6 +51,8 @@ const ImageCarousel = (props: Props) => {
                       <div
                         key={item?.url + i}
                         style={{
+                          display: 'flex',
+                          alignItems: 'center',
                           width: `${100 / (pageSize / line)}%`,
                           marginRight:
                             (i + 1) % (pageSize / line) !== 0 ? 10 : 0,
@@ -85,22 +87,30 @@ const ImageCarousel = (props: Props) => {
             return <div key={i}>{dataList?.map(renderRow)}</div>;
           })}
         </Carousel>
-        <div
-          className="carousel_btn_prev"
-          onClick={() => {
-            carousel.current?.prev();
-          }}
-        >
-          <LeftOutlined style={{ fontSize: 38, color: '#fff' }} />
-        </div>
-        <div
-          className="carousel_btn_next"
-          onClick={() => {
-            carousel.current?.next();
-          }}
-        >
-          <RightOutlined style={{ fontSize: 38, color: '#fff' }} />
-        </div>
+        {list.length > 1 && (
+          <>
+            <div className="carousel_btn_prev_container">
+              <div
+                className="carousel_btn_prev"
+                onClick={() => {
+                  carousel.current?.prev();
+                }}
+              >
+                <LeftOutlined style={{ fontSize: 32, color: '#fff' }} />
+              </div>
+            </div>
+            <div className="carousel_btn_next_container">
+              <div
+                className="carousel_btn_next"
+                onClick={() => {
+                  carousel.current?.next();
+                }}
+              >
+                <RightOutlined style={{ fontSize: 32, color: '#fff' }} />
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
