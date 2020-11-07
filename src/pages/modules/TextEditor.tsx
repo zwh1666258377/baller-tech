@@ -107,14 +107,17 @@ const styles: {
   lengthTip: CSSProperties;
 } = {
   myct: {
+    textOrientation: 'sideways',
     writingMode: 'vertical-lr',
     WebkitWritingMode: 'vertical-lr',
     msWritingMode: 'vertical-lr',
   },
   wy: {
-    writingMode: 'vertical-rl',
-    WebkitWritingMode: 'vertical-rl',
-    msWritingMode: 'vertical-rl',
+    textOrientation: 'sideways',
+    writingMode: 'horizontal-tb',
+    WebkitWritingMode: 'horizontal-tb',
+    msWritingMode: 'horizontal-tb',
+    direction: 'rtl',
   },
   lengthTip: {
     position: 'absolute',
