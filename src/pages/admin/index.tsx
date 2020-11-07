@@ -37,6 +37,10 @@ export const siders = [
     key: 'resources',
     name: '资源管理',
   },
+  {
+    key: 'user',
+    name: '用户信息',
+  },
 ];
 
 const basePath = '/admin';

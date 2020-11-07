@@ -22,6 +22,7 @@ export function login(app: ReturnType<typeof express>) {
       });
     } else {
       req.session['sessionId'] = req?.session?.id;
+      req.session['uuid'] = user._id;
 
       res.json({
         status: 'ok',

@@ -82,6 +82,10 @@ export default defineConfig({
           path: '/admin/website',
           component: '@/pages/admin/website',
         },
+        {
+          path: '/admin/user',
+          component: '@/pages/admin/user',
+        },
       ],
     },
     {

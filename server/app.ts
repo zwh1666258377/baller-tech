@@ -28,6 +28,7 @@ import { ballerTechJQFY } from './api/baller-tech-jqfy';
 import { ballerTechYYSB } from './api/baller-tech-yysb';
 import { ballerTechWZSB } from './api/baller-tech-wzsb';
 import { bt } from './router/bt';
+import { uploadUser } from './api/update-user';
 
 const isDev = process.env['NODE_ENV'] === 'development';
 dotenv.config('../.env' as any);
@@ -128,6 +129,7 @@ class App {
     getFile(this.app);
     getModule(this.app);
     updateModule(this.app);
+    uploadUser(this.app);
 
     removeImg(this.app);
     removeMp3(this.app);
