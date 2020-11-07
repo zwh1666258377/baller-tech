@@ -46,7 +46,7 @@ const ImageCarousel = (props: Props) => {
             const renderRow = (data: Item[], i: number) => {
               return (
                 <Row key={i}>
-                  <div style={{ display: 'flex' }}>
+                  <div style={{ display: 'flex', width: '100%' }}>
                     {data?.map((item, i) => (
                       <div
                         key={item?.url + i}
