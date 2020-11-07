@@ -344,7 +344,7 @@ const TextTranslator = (props: Props) => {
       return '';
     }
 
-    return data?.data?.data;
+    return data?.data;
   }
 
   function validateInput(key = '', val = ''): Result {

@@ -23,7 +23,7 @@ export function ballerTechJQFY(app: ReturnType<typeof express>) {
 
     res.json({
       status: 'ok',
-      data: JSON.parse(result),
+      data: result,
     });
   });
 }
@@ -75,7 +75,8 @@ function postTranslate(args) {
         if (!error && response.statusCode == 200) {
           const res = JSON.parse(body);
           if (!!res && res.code == 0) {
-            const timer = setTimeout(() => {
+            let val = '';
+            const timer = setInterval(() => {
               const { request_id } = res;
               const date = getGMTdate();
               const BParam = generateBase64Params({
@@ -94,12 +95,17 @@ function postTranslate(args) {
                 },
                 function(error, response, body) {
                   if (!error && response.statusCode == 200) {
-                    resolve(unescape(body.replace(/\\u/g, '%u')));
+                    val += unescape(
+                      JSON.parse(body)?.data.replace(/\\u/g, '%u'),
+                    );
+                    if (JSON.parse(body)?.is_end === 1) {
+                      clearInterval(timer);
+                      resolve(val);
+                    }
                   }
-                  clearTimeout(timer);
                 },
               );
-            }, 1000);
+            }, 500);
           } else {
             resolve(body);
           }
