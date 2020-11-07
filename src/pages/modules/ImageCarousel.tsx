@@ -51,6 +51,8 @@ const ImageCarousel = (props: Props) => {
                       <div
                         key={item?.url + i}
                         style={{
+                          display: 'flex',
+                          alignItems: 'center',
                           width: `${100 / (pageSize / line)}%`,
                           marginRight:
                             (i + 1) % (pageSize / line) !== 0 ? 10 : 0,
@@ -94,7 +96,7 @@ const ImageCarousel = (props: Props) => {
                   carousel.current?.prev();
                 }}
               >
-                <LeftOutlined style={{ fontSize: 38, color: '#fff' }} />
+                <LeftOutlined style={{ fontSize: 32, color: '#fff' }} />
               </div>
             </div>
             <div className="carousel_btn_next_container">
@@ -104,7 +106,7 @@ const ImageCarousel = (props: Props) => {
                   carousel.current?.next();
                 }}
               >
-                <RightOutlined style={{ fontSize: 38, color: '#fff' }} />
+                <RightOutlined style={{ fontSize: 32, color: '#fff' }} />
               </div>
             </div>
           </>
