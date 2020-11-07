@@ -87,21 +87,25 @@ const ImageCarousel = (props: Props) => {
         </Carousel>
         {list.length > 1 && (
           <>
-            <div
-              className="carousel_btn_prev"
-              onClick={() => {
-                carousel.current?.prev();
-              }}
-            >
-              <LeftOutlined style={{ fontSize: 38, color: '#fff' }} />
+            <div className="carousel_btn_prev_container">
+              <div
+                className="carousel_btn_prev"
+                onClick={() => {
+                  carousel.current?.prev();
+                }}
+              >
+                <LeftOutlined style={{ fontSize: 38, color: '#fff' }} />
+              </div>
             </div>
-            <div
-              className="carousel_btn_next"
-              onClick={() => {
-                carousel.current?.next();
-              }}
-            >
-              <RightOutlined style={{ fontSize: 38, color: '#fff' }} />
+            <div className="carousel_btn_next_container">
+              <div
+                className="carousel_btn_next"
+                onClick={() => {
+                  carousel.current?.next();
+                }}
+              >
+                <RightOutlined style={{ fontSize: 38, color: '#fff' }} />
+              </div>
             </div>
           </>
         )}
