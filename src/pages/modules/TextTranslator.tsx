@@ -98,6 +98,7 @@ const TextTranslator = (props: Props) => {
                 placeholder="请选择语种"
                 onSelect={val => {
                   setToVal(val);
+                  setOutputVal('');
                 }}
               >
                 {opts?.map(o => (
@@ -208,6 +209,7 @@ const TextTranslator = (props: Props) => {
               placeholder="请选择语种"
               onSelect={val => {
                 setToVal(val);
+                setOutputVal('');
               }}
             >
               {opts?.map(o => (
