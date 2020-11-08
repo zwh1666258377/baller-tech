@@ -69,7 +69,7 @@ function postTranslate(args) {
           'B-Param': BParam,
           'B-CheckSum': md5(`${app_key}${date}${BParam}`),
         },
-        body: JSON.stringify(str),
+        body: str,
       },
       function(error, response, body) {
         if (!error && response.statusCode == 200) {
