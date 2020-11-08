@@ -52,14 +52,9 @@ export function ballerTechYYSB(app: ReturnType<typeof express>) {
       });
     }
 
-    const formData = {
-      my_field: file.fieldname,
-      my_file: fs.createReadStream(file.path),
-    };
+    const body = fs.createReadStream(file.path);
 
-    console.log(language, audioFormat);
-
-    postTranslate({ language, formData, audioFormat }).then(result => {
+    postTranslate({ language, body, audioFormat }).then(result => {
       fs.unlinkSync(file.path);
       res.json({
         status: 'ok',
@@ -91,7 +86,7 @@ function generateBase64Params(obj) {
 }
 
 function postTranslate(args) {
-  const { formData, language, audioFormat } = args;
+  const { body, language, audioFormat } = args;
 
   return new Promise(resolve => {
     const date = getGMTdate();
@@ -117,7 +112,7 @@ function postTranslate(args) {
           'B-Param': BParam,
           'B-CheckSum': md5(`${app_key}${date}${BParam}`),
         },
-        formData,
+        body,
       },
       function(error, response, body) {
         if (!error && response.statusCode == 200) {
