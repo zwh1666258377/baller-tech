@@ -48,7 +48,7 @@ export function ballerTechYYSB(app: ReturnType<typeof express>) {
     if (!audioFormat) {
       res.json({
         status: 'error',
-        msg: `mimetype:${file?.mimetype},originalname:${file?.originalname}该文件格式不支持`,
+        msg: `mimetype:${file?.mimetype},originalname:${file?.originalname},该文件格式不支持`,
       });
     }
 

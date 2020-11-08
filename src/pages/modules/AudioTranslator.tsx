@@ -93,7 +93,8 @@ const AudioTranslator = (props: Props) => {
             <TextEditor style={{ height: 160, marginTop: 30 }} lang={lang}>
               {result || (
                 <span style={{ color: '#878787' }}>
-                  上传的音频格式仅支持（MP3、wav）
+                  上传的音频格式仅支持（MP3、wav、pcm、ogg），其中pcm指定格式为采样率16000Hz,
+                  采样点大小16bit
                 </span>
               )}
             </TextEditor>
@@ -122,7 +123,7 @@ const AudioTranslator = (props: Props) => {
                     {!recording ? '录音识别' : '停止录音'}
                   </div>
                   <Upload
-                    accept=".mp3,.wav"
+                    accept=".mp3,.wav,.ogg,.pcm"
                     action=""
                     fileList={[]}
                     showUploadList={{ showRemoveIcon: false }}
@@ -220,7 +221,7 @@ const AudioTranslator = (props: Props) => {
               {!recording ? '录音识别' : '停止录音'}
             </div>
             <Upload
-              accept=".mp3,.wav"
+              accept=".mp3,.wav,.ogg,.pcm"
               action=""
               fileList={[]}
               showUploadList={{ showRemoveIcon: false }}
@@ -268,7 +269,8 @@ const AudioTranslator = (props: Props) => {
           <TextEditor style={{ height: 160, marginTop: 30 }} lang={lang}>
             {result || (
               <span style={{ color: '#878787' }}>
-                上传的音频格式仅支持（MP3、wav）
+                上传的音频格式仅支持（MP3、wav、pcm、ogg），其中pcm指定格式为采样率16000Hz,
+                采样点大小16bit
               </span>
             )}
           </TextEditor>
@@ -320,6 +322,8 @@ const AudioTranslator = (props: Props) => {
         if (!r?.data?.code && r?.status === 'ok') {
           setLoading(false);
           setResult(r.data);
+        } else if (r?.status === 'error') {
+          Modal.error({ content: r?.msg });
         }
       })
       .finally(() => {
