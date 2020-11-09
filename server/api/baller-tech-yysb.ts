@@ -10,10 +10,10 @@ import fs from 'fs';
 const upload = multer({ dest: resolve('static/baller-tech/') });
 
 const mapping = [
-  { mimetype: '/ogg', audio_format: 'ogg' },
-  { mimetype: '/mpeg', audio_format: 'mp3' },
-  { mimetype: '/wave', audio_format: 'wav' },
-  { mimetype: '/octet-stream', audio_format: 'raw' },
+  { mimetype: ['/ogg'], audio_format: 'ogg' },
+  { mimetype: ['/mpeg', '/mp3'], audio_format: 'mp3' },
+  { mimetype: ['/wave'], audio_format: 'wav' },
+  { mimetype: ['/octet-stream'], audio_format: 'raw' },
 ];
 
 export function ballerTechYYSB(app: ReturnType<typeof express>) {
@@ -40,7 +40,11 @@ export function ballerTechYYSB(app: ReturnType<typeof express>) {
     for (const i in mapping) {
       const { mimetype, audio_format } = mapping[i];
 
-      if (String(file?.mimetype)?.endsWith(mimetype)) {
+      const match = mimetype.find(t => {
+        return String(file?.mimetype)?.endsWith(t);
+      });
+
+      if (!!match) {
         audioFormat = audio_format;
       }
     }
