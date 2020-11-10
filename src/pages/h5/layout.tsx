@@ -87,6 +87,7 @@ const Layout = (props: Props & PageProps) => {
         <div
           style={{
             paddingTop: '40px',
+            overflowY: 'scroll',
             flex: 1,
             backgroundColor: '#041a2f',
             display: 'flex',
