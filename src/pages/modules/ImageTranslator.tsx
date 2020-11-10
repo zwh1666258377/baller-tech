@@ -40,6 +40,7 @@ const ImageTranslator = (props: Props) => {
               placeholder="请选择要识别的语言"
               onSelect={val => {
                 setLang(val);
+                clear();
               }}
             >
               {opts?.map(o => (
@@ -138,6 +139,7 @@ const ImageTranslator = (props: Props) => {
               placeholder="请选择要识别的语言"
               onSelect={val => {
                 setLang(val);
+                clear();
               }}
             >
               {opts?.map(o => (

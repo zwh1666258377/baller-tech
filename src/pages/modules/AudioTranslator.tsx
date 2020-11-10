@@ -82,6 +82,7 @@ const AudioTranslator = (props: Props) => {
               placeholder="请选择要识别的语言"
               onSelect={val => {
                 setLang(val);
+                clear();
               }}
             >
               {opts?.map(o => (
@@ -197,6 +198,7 @@ const AudioTranslator = (props: Props) => {
               placeholder="请选择要识别的语言"
               onSelect={val => {
                 setLang(val);
+                clear();
               }}
             >
               {opts?.map(o => (
