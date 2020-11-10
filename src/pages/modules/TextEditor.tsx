@@ -29,6 +29,7 @@ const TextEditor = (props: Props) => {
   React.useEffect(() => {
     if (props.contentEditable) {
       setEditorValue('');
+      setVal('');
     }
   }, [props.clearSignal]);
   React.useEffect(() => {

@@ -11,20 +11,20 @@ export default defineConfig({
     isDev,
   },
   headScripts: [
-    `/(iPad)/i.test(navigator.userAgent)&&(()=>{
-      const head=document.getElementsByTagName("head")
-      const viewport=document.createElement("meta")
-      viewport.name="viewport"
-      viewport.content="width=device-width, initial-scale=0.5, maximum-scale=1, minimum-scale=0.5, user-scalable=no"
-      head.length>0&&head[head.length-1].appendChild(viewport)
-    })();`,
-    // `/(iPhone|iPad|iPhone OS|Phone|iPod|iOS)/i.test(navigator.userAgent)&&(()=>{
+    // `/(iPad)/i.test(navigator.userAgent)&&(()=>{
     //   const head=document.getElementsByTagName("head")
     //   const viewport=document.createElement("meta")
     //   viewport.name="viewport"
-    //   viewport.content="target-densitydpi=device-dpi, width=480px, user-scalable=no"
+    //   viewport.content="width=device-width, initial-scale=0.5, maximum-scale=1, minimum-scale=0.5, user-scalable=no"
     //   head.length>0&&head[head.length-1].appendChild(viewport)
-    // })();`
+    // })();`,
+    `/(iPhone|iPad|iPhone OS|Phone|iPod|iOS)/i.test(navigator.userAgent)&&(()=>{
+      const head=document.getElementsByTagName("head")
+      const viewport=document.createElement("meta")
+      viewport.name="viewport"
+      viewport.content="target-densitydpi=device-dpi, width=480px, user-scalable=no"
+      head.length>0&&head[head.length-1].appendChild(viewport)
+    })();`,
   ],
   publicPath: '/dist/',
   autoprefixer: false,
