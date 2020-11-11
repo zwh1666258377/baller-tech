@@ -28,7 +28,8 @@ const Layout = ({ children, data }: Props) => {
     <div style={{ display: 'flex', flexDirection: 'row' }}>
       <div
         style={{
-          overflow: 'auto',
+          overflowY: 'auto',
+          overflowX: 'hidden',
           height: '100vh',
           backgroundColor: Colors.btColor,
           width: '20%',
@@ -37,7 +38,14 @@ const Layout = ({ children, data }: Props) => {
       >
         <BTSider icon={website?.icon} />
       </div>
-      <div style={{ width: '80%', overflow: 'auto', height: '100vh' }}>
+      <div
+        style={{
+          width: '80%',
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          height: '100vh',
+        }}
+      >
         {children}
         <BTFooter data={website} />
       </div>

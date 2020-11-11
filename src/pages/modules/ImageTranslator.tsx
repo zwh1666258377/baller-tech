@@ -1,7 +1,7 @@
 import { Modal, Select, Spin, Upload } from 'antd';
 import { RcFile, UploadFile } from 'antd/lib/upload/interface';
 import React, { CSSProperties, useRef } from 'react';
-import { Colors, Styles } from '../common/Styles';
+import { Colors, rem, Styles } from '../common/Styles';
 import MTitle from '../parts/MTitle';
 import { errorTip } from '../../lib/error-tip';
 import TextEditor from './TextEditor';
@@ -130,11 +130,13 @@ const ImageTranslator = (props: Props) => {
     <div style={props.style}>
       <MTitle label={{ cn: '产品体验', en: 'Product Experience' }} />
       <Spin spinning={loading}>
-        <div style={{ display: 'flex', ...Styles.shadowCard, marginTop: 52 }}>
-          <div style={{ width: 200, marginRight: 50 }}>
+        <div
+          style={{ display: 'flex', ...Styles.shadowCard, marginTop: rem(52) }}
+        >
+          <div style={{ width: rem(200), marginRight: rem(50) }}>
             <Select
               size="large"
-              style={{ width: '100%' }}
+              style={{ width: '100%', fontSize: rem(16) }}
               value={lang}
               placeholder="请选择要识别的语言"
               onSelect={val => {
@@ -150,7 +152,7 @@ const ImageTranslator = (props: Props) => {
             </Select>
             <div
               style={{
-                margin: '40px 0px',
+                margin: '0.4rem 0px',
                 borderTop: '1px dashed rgba(187, 187, 187, 100)',
               }}
             />
@@ -167,10 +169,11 @@ const ImageTranslator = (props: Props) => {
                   alignItems: 'center',
                   justifyContent: 'center',
                   cursor: 'pointer',
-                  width: 200,
-                  height: 40,
+                  width: rem(200),
+                  height: rem(40),
                   backgroundColor: Colors.btColor,
                   color: '#FFF',
+                  fontSize: rem(16),
                 }}
               >
                 上传图像
@@ -178,16 +181,17 @@ const ImageTranslator = (props: Props) => {
             </Upload>
             <div
               style={{
-                marginTop: 20,
+                marginTop: rem(20),
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 cursor: 'pointer',
                 width: '100%',
-                height: 40,
+                height: rem(40),
                 backgroundColor: '#FFF',
                 color: '#333',
                 border: '1px solid #BBB',
+                fontSize: rem(16),
               }}
               onClick={clear}
             >
@@ -196,19 +200,19 @@ const ImageTranslator = (props: Props) => {
           </div>
           <div
             style={{
-              maxHeight: 250,
+              maxHeight: rem(250),
               overflow: 'auto',
               color: '#888',
               border: '1px solid #BBB',
-              marginRight: 10,
-              padding: '5px 8px',
+              marginRight: rem(10),
+              padding: '0.05rem 0.08rem',
               width: '50%',
             }}
           >
             {renderPreview()}
           </div>
           <TextEditor
-            style={{ height: 250, marginLeft: 10, width: '50%' }}
+            style={{ height: rem(250), marginLeft: rem(10), width: '50%' }}
             lang={lang}
           >
             {output.length > 0 ? (

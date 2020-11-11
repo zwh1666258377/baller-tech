@@ -1,5 +1,6 @@
 import { Col, Row } from 'antd';
 import React, { CSSProperties } from 'react';
+import { rem } from '../common/Styles';
 import MTitle from '../parts/MTitle';
 
 interface Props {
@@ -14,7 +15,7 @@ const VideoDisplay = (props: Props) => {
     return (
       <div style={props.style}>
         <MTitle label={props.label} />
-        <div style={{ marginTop: 52 }}>
+        <div style={{ marginTop: rem(52) }}>
           <Row gutter={[100, 35]}>
             {props.items?.map(item => (
               <Col key={item.url} sm={24} xl={12}>

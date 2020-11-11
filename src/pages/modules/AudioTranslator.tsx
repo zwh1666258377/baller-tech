@@ -3,7 +3,7 @@ import { Modal, Select, Spin, Upload } from 'antd';
 import { RcFile } from 'antd/lib/upload/interface';
 import React, { CSSProperties, useRef } from 'react';
 import { DynamicRec } from '../common/DynamicRec';
-import { Colors, h5Styles, Styles } from '../common/Styles';
+import { Colors, h5Styles, rem, Styles } from '../common/Styles';
 import { useSize } from 'ahooks';
 import MTitle from '../parts/MTitle';
 import { errorTip } from '../../lib/error-tip';
@@ -181,19 +181,27 @@ const AudioTranslator = (props: Props) => {
             display: 'flex',
             flexDirection: 'column',
             ...Styles.shadowCard,
-            marginTop: 52,
+            marginTop: rem(52),
+            paddingLeft: 0,
+            paddingRight: 0,
           }}
         >
           <div
             style={{
               flexWrap: 'wrap',
               display: 'flex',
-              alignItems: 'flex-start',
+              alignItems: 'center',
+              paddingLeft: rem(60),
             }}
           >
             <Select
               size="large"
-              style={{ width: 200, marginTop: 8, marginRight: 40 }}
+              style={{
+                width: rem(200),
+                marginTop: rem(8),
+                marginRight: rem(40),
+                fontSize: rem(16),
+              }}
               value={lang}
               placeholder="请选择要识别的语言"
               onSelect={val => {
@@ -209,14 +217,14 @@ const AudioTranslator = (props: Props) => {
             </Select>
             <div
               style={{
-                fontSize: 16,
+                fontSize: rem(16),
                 color: '#FFF',
                 backgroundColor: Colors.btColor,
                 cursor: 'pointer',
-                borderRadius: 25,
-                padding: '8px 50px',
-                marginTop: 8,
-                marginRight: 20,
+                borderRadius: rem(25),
+                padding: '0.08rem 0.5rem',
+                marginTop: rem(8),
+                marginRight: rem(20),
               }}
               onClick={handleRecord}
             >
@@ -231,14 +239,14 @@ const AudioTranslator = (props: Props) => {
             >
               <div
                 style={{
-                  fontSize: 16,
+                  fontSize: rem(16),
                   color: '#FFF',
                   backgroundColor: Colors.btColor,
                   cursor: 'pointer',
-                  borderRadius: 25,
-                  padding: '8px 50px',
-                  marginTop: 8,
-                  marginRight: 20,
+                  borderRadius: rem(25),
+                  padding: '0.08rem 0.5rem',
+                  marginTop: rem(8),
+                  marginRight: rem(20),
                 }}
               >
                 上传音频
@@ -246,15 +254,15 @@ const AudioTranslator = (props: Props) => {
             </Upload>
             <div
               style={{
-                fontSize: 16,
+                fontSize: rem(16),
                 color: '#333',
                 backgroundColor: '#FFF',
                 cursor: 'pointer',
-                borderRadius: 25,
-                padding: '8px 50px',
+                borderRadius: rem(25),
+                padding: '0.08rem 0.5rem',
                 border: '1px solid #BBB',
-                marginTop: 8,
-                marginRight: 20,
+                marginTop: rem(8),
+                marginRight: rem(20),
               }}
               onClick={clear}
             >
@@ -264,11 +272,14 @@ const AudioTranslator = (props: Props) => {
           {audioSrc && (
             <audio
               controls
-              style={{ marginTop: 10, outline: 'none' }}
+              style={{ marginTop: rem(10), outline: 'none' }}
               src={audioSrc}
             />
           )}
-          <TextEditor style={{ height: 160, marginTop: 30 }} lang={lang}>
+          <TextEditor
+            style={{ height: rem(160), margin: '0 0.6rem', marginTop: rem(30) }}
+            lang={lang}
+          >
             {result || (
               <span style={{ color: '#878787' }}>
                 上传的音频格式仅支持（MP3、wav、pcm、ogg），其中pcm指定格式为采样率16000Hz,

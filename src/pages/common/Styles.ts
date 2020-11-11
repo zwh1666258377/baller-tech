@@ -1,3 +1,5 @@
+export const rem = (val: number) => `${(val / 100).toFixed(2)}rem`;
+
 export const Colors = {
   btColor: '#00214F',
   btFooterBackground: '#05173B',
@@ -10,7 +12,7 @@ export const Styles = {
     boxShadow: '0px 2px 6px 0px rgba(0, 0, 0, 0.4)',
     backgroundColor: '#FFF',
     width: '100%',
-    padding: 60,
+    padding: rem(60),
   },
 };
 

@@ -6,6 +6,7 @@ import { PageProps } from '../common/Defs';
 import { getModule } from '../common/DataApi';
 import ProductDisplay from '../modules/ProductDisplay';
 import { Spin } from 'antd';
+import { rem } from '../common/Styles';
 
 const WZSB = (props: PageProps) => {
   const module = props.data?.module;
@@ -19,22 +20,22 @@ const WZSB = (props: PageProps) => {
   }
   return (
     <>
-      <div style={{ width: '100%', padding: '90px 70px' }}>
+      <div style={{ width: '100%', padding: '0.9rem 0.7rem' }}>
         {module?.poductIntroduction?.display && (
           <ProductIntro
-            style={{ marginBottom: 98 }}
+            style={{ marginBottom: rem(98) }}
             data={module.poductIntroduction}
           />
         )}
         {module?.productExperience?.display && (
           <ImageTranslator
-            style={{ marginBottom: 98 }}
+            style={{ marginBottom: rem(98) }}
             rules={module.imageTranslationRules}
           />
         )}
         {module?.productDisplay?.display && (
           <ProductDisplay
-            style={{ marginBottom: 98 }}
+            style={{ marginBottom: rem(98) }}
             kind={module.productDisplay.kind}
             items={module.productDisplay.items}
           />
@@ -42,7 +43,7 @@ const WZSB = (props: PageProps) => {
         {module?.usageScenarios?.display && (
           <ImageCarousel
             imgs={module?.usageScenarios?.imgUrls}
-            style={{ marginBottom: 98 }}
+            style={{ marginBottom: rem(98) }}
             label={module?.usageScenarios?.title}
           />
         )}

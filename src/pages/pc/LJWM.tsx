@@ -2,6 +2,7 @@ import { Spin } from 'antd';
 import React from 'react';
 import { getModule } from '../common/DataApi';
 import { PageProps } from '../common/Defs';
+import { rem } from '../common/Styles';
 import ImageCarousel from '../modules/ImageCarousel';
 import MTitle from '../parts/MTitle';
 
@@ -17,17 +18,17 @@ const LJWM = (props: PageProps) => {
   }
   return (
     <>
-      <div style={{ width: '100%', padding: '90px 70px' }}>
+      <div style={{ width: '100%', padding: '0.9rem 0.7rem' }}>
         {module?.poductIntroduction?.display && (
           <>
             <MTitle label={module?.poductIntroduction?.title} />
             <div
               style={{
-                marginTop: 52,
-                marginBottom: 98,
+                marginTop: rem(52),
+                marginBottom: rem(98),
                 whiteSpace: 'pre-line',
                 color: '#333',
-                fontSize: 18,
+                fontSize: rem(20),
               }}
             >
               {module?.poductIntroduction?.content}
@@ -36,7 +37,7 @@ const LJWM = (props: PageProps) => {
         )}
         {module?.honor?.display && (
           <ImageCarousel
-            style={{ marginBottom: 98 }}
+            style={{ marginBottom: rem(98) }}
             imgs={module?.honor?.imgUrls}
             label={module?.honor?.title}
             pageSize={{ normal: 5 }}
@@ -44,7 +45,7 @@ const LJWM = (props: PageProps) => {
         )}
         {module?.partne?.display && (
           <ImageCarousel
-            style={{ marginBottom: 98 }}
+            style={{ marginBottom: rem(98) }}
             imgs={module?.partne?.imgUrls}
             label={module?.partne?.title}
             pageSize={{ normal: 5 }}
@@ -53,7 +54,7 @@ const LJWM = (props: PageProps) => {
         {module?.contact?.display && (
           <ImageCarousel
             autoplay={false}
-            style={{ marginBottom: 98 }}
+            style={{ marginBottom: rem(98) }}
             imgs={module?.contact?.imgUrls}
             label={module?.honor?.title}
             pageSize={{ normal: 2 }}

@@ -5,6 +5,7 @@ import {
 } from '@ant-design/icons';
 import { Carousel, Col, Image, Row } from 'antd';
 import React, { CSSProperties } from 'react';
+import { rem } from '../common/Styles';
 import MTitle from '../parts/MTitle';
 
 interface Item {
@@ -36,7 +37,7 @@ const ImageCarousel = (props: Props) => {
     <div style={props.style}>
       {props.label && (
         <MTitle
-          style={{ marginBottom: props.h5 ? 20 : 52 }}
+          style={{ marginBottom: props.h5 ? 20 : rem(52) }}
           label={props.label}
         />
       )}
@@ -45,7 +46,7 @@ const ImageCarousel = (props: Props) => {
           {list?.map((l, i) => {
             const renderRow = (data: Item[], i: number) => {
               return (
-                <Row key={i}>
+                <Row key={i} style={{ marginBottom: rem(10) }}>
                   <div style={{ display: 'flex', width: '100%' }}>
                     {data?.map((item, i) => (
                       <div
@@ -55,7 +56,7 @@ const ImageCarousel = (props: Props) => {
                           alignItems: 'center',
                           width: `${100 / (pageSize / line)}%`,
                           marginRight:
-                            (i + 1) % (pageSize / line) !== 0 ? 10 : 0,
+                            (i + 1) % (pageSize / line) !== 0 ? rem(10) : 0,
                         }}
                       >
                         {item?.url ? (
@@ -96,7 +97,7 @@ const ImageCarousel = (props: Props) => {
                   carousel.current?.prev();
                 }}
               >
-                <LeftOutlined style={{ fontSize: 32, color: '#fff' }} />
+                <LeftOutlined style={{ fontSize: rem(38), color: '#fff' }} />
               </div>
             </div>
             <div className="carousel_btn_next_container">
@@ -106,7 +107,7 @@ const ImageCarousel = (props: Props) => {
                   carousel.current?.next();
                 }}
               >
-                <RightOutlined style={{ fontSize: 32, color: '#fff' }} />
+                <RightOutlined style={{ fontSize: rem(38), color: '#fff' }} />
               </div>
             </div>
           </>

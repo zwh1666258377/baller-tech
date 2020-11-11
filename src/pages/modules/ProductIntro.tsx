@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { Colors } from '../common/Styles';
+import { Colors, rem } from '../common/Styles';
 import MTitle from '../parts/MTitle';
 
 interface Props {
@@ -19,10 +19,10 @@ const ProductIntro = (props: Props) => {
       <MTitle label={data.title} />
       <div
         style={{
-          marginTop: 52,
+          marginTop: rem(52),
           display: 'flex',
           width: 'auto',
-          maxHeight: 240,
+          maxHeight: rem(240),
         }}
       >
         <div>
@@ -31,7 +31,7 @@ const ProductIntro = (props: Props) => {
               borderRadius: 10,
               width: '',
               height: 'auto',
-              maxHeight: 240,
+              maxHeight: rem(240),
             }}
             src={data.imgUrl}
             alt={data.title?.cn}
@@ -39,7 +39,7 @@ const ProductIntro = (props: Props) => {
         </div>
         <div
           style={{
-            marginLeft: 40,
+            marginLeft: rem(40),
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
@@ -48,7 +48,7 @@ const ProductIntro = (props: Props) => {
           <div
             style={{
               color: '#333',
-              fontSize: 18,
+              fontSize: rem(20),
               textAlign: 'left',
               whiteSpace: 'pre-line',
               textOverflow: 'ellipsis',
@@ -60,13 +60,13 @@ const ProductIntro = (props: Props) => {
           <div>
             <div
               style={{
-                fontSize: 18,
+                fontSize: rem(18),
                 color: '#FFF',
                 backgroundColor: Colors.productLink,
                 cursor: 'pointer',
                 display: 'inline-block',
-                borderRadius: 25,
-                padding: '8px 50px',
+                borderRadius: rem(25),
+                padding: '0.08rem 0.5rem',
                 alignItems: 'center',
                 justifyContent: 'center',
               }}

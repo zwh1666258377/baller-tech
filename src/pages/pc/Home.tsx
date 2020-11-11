@@ -1,6 +1,6 @@
 import { Carousel } from 'antd';
 import React, { CSSProperties } from 'react';
-import { Colors } from '../common/Styles';
+import { Colors, rem } from '../common/Styles';
 import BTFooter from '../parts/BTFooter';
 import { Motion, spring } from 'react-motion';
 import MTitle from '../parts/MTitle';
@@ -85,11 +85,11 @@ const Home = (props: PageProps) => {
       </div>
       <div
         style={{
-          width: 303,
-          height: 84,
+          width: rem(303),
+          height: rem(84),
           position: 'absolute',
-          top: 41,
-          left: 45,
+          top: rem(41),
+          left: rem(45),
         }}
       >
         <img src={website?.icon} style={{ width: '100%', height: '100%' }} />
@@ -101,7 +101,7 @@ const Home = (props: PageProps) => {
             flexDirection: 'column',
             justifyContent: 'center',
             width: '100%',
-            maxWidth: 1400,
+            maxWidth: rem(1400),
             margin: 'auto',
           }}
         >
@@ -113,11 +113,11 @@ const Home = (props: PageProps) => {
               flexDirection: 'column',
               justifyContent: 'center',
               width: '85%',
-              maxWidth: 1240,
+              maxWidth: rem(1240),
               margin: '0 auto',
             }}
           >
-            <div style={{ marginBottom: 80, color: '#FFF' }}>
+            <div style={{ marginBottom: rem(80), color: '#FFF' }}>
               <Motion
                 defaultStyle={{ x: 50, o: 0 }}
                 style={{ o: spring(1), x: spring(0, springConfig) }}
@@ -135,7 +135,7 @@ const Home = (props: PageProps) => {
                     </div>
                     <div
                       style={{
-                        marginTop: 10,
+                        marginTop: rem(10),
                         fontSize: 20,
                         transform: `translate(${-x}%)`,
                         opacity: o,
@@ -149,24 +149,28 @@ const Home = (props: PageProps) => {
             </div>
             <div style={{ display: 'flex' }}>
               <ImgLabel
-                style={{ marginRight: 20 }}
+                style={{ marginRight: rem(20) }}
                 url={btnImg.jqfy}
                 to="jqfy"
               />
               <ImgLabel
-                style={{ marginRight: 20 }}
+                style={{ marginRight: rem(20) }}
                 url={btnImg.yysb}
                 to="yysb"
               />
               <ImgLabel url={btnImg.yyhc} to="yyhc" />
             </div>
-            <div style={{ marginTop: 20, display: 'flex' }}>
+            <div style={{ marginTop: rem(20), display: 'flex' }}>
               <ImgLabel
-                style={{ marginRight: 20 }}
+                style={{ marginRight: rem(20) }}
                 url={btnImg.wzsb}
                 to="wzsb"
               />
-              <ImgLabel style={{ maxWidth: 820 }} url={btnImg.txsb} to="txsb" />
+              <ImgLabel
+                style={{ maxWidth: rem(820) }}
+                url={btnImg.txsb}
+                to="txsb"
+              />
             </div>
           </div>
           <div
@@ -175,7 +179,7 @@ const Home = (props: PageProps) => {
               flexDirection: 'column',
               justifyContent: 'space-between',
               width: '85%',
-              maxWidth: 1240,
+              maxWidth: rem(1240),
               margin: 'auto',
             }}
           >
@@ -184,27 +188,30 @@ const Home = (props: PageProps) => {
                 style={{ fontSize: 32 }}
                 label={website?.contact?.name}
                 color="#FFF"
-              ></MTitle>
-              <div
-                style={{
-                  marginTop: 68,
-                  whiteSpace: 'pre-line',
-                  lineHeight: 2,
-                  fontSize: 20,
-                  color: '#FFF',
-                }}
-              >
-                {website?.contact?.content}
-              </div>
-              <ImageCarousel
-                imgs={module?.partne?.imgUrls}
-                style={{ marginTop: 60 }}
-                pageSize={{ normal: 5 }}
               />
             </div>
+            <div
+              style={{
+                marginTop: rem(68),
+                whiteSpace: 'pre-line',
+                lineHeight: 2,
+                fontSize: 20,
+                color: '#FFF',
+              }}
+            >
+              {website?.contact?.content}
+            </div>
+            <ImageCarousel
+              imgs={module?.partne?.imgUrls}
+              style={{ marginTop: rem(60) }}
+              pageSize={{ normal: 5 }}
+            />
           </div>
         </div>
-        <BTFooter data={website} style={{ width: '100%', marginTop: 80 }} />
+        <BTFooter
+          data={website}
+          style={{ width: '100%', marginTop: rem(80) }}
+        />
       </div>
     </div>
   );
@@ -232,8 +239,8 @@ const ImgLabel = (props: {
           cursor: 'pointer',
           color: '#FFF',
           backgroundColor: Colors.btColor,
-          maxWidth: 400,
-          maxHeight: 130,
+          maxWidth: rem(400),
+          maxHeight: rem(130),
           ...props.style,
         }}
       >

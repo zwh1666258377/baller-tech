@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'umi';
+import { rem } from '../common/Styles';
 
 interface Props {
   icon: string;
@@ -23,22 +24,22 @@ const BTSider = (props: Props) => {
     >
       <div
         style={{
-          height: 84,
-          marginTop: 40,
+          height: rem(84),
+          marginTop: rem(40),
           color: '#FFF',
-          marginLeft: '5%',
-          marginRight: '5%',
+          marginLeft: rem(40),
+          marginRight: rem(40),
         }}
       >
         <Link to="/">
           <img
-            style={{ width: '100%', minWidth: 200, height: 'auto' }}
+            style={{ width: rem(300), height: 'auto' }}
             src={props.icon}
             alt=""
           />
         </Link>
       </div>
-      <div style={{ marginTop: 65, width: '100%' }}>
+      <div style={{ marginTop: rem(65), width: '100%' }}>
         <div
           style={{
             display: 'flex',
@@ -61,8 +62,8 @@ const BTSider = (props: Props) => {
                 >
                   <div
                     style={{
-                      fontSize: active ? 20 : 18,
-                      padding: 20,
+                      fontSize: active ? rem(20) : rem(18),
+                      padding: rem(20),
                       color: active ? '#FFF' : '#A4CCF7',
                     }}
                   >
@@ -70,11 +71,11 @@ const BTSider = (props: Props) => {
                   </div>
                   <div
                     style={{
-                      height: 50,
-                      width: 6,
+                      height: rem(50),
+                      width: rem(6),
                       backgroundColor: '#FFF',
                       opacity: active ? 1 : 0,
-                      marginRight: 2,
+                      marginRight: rem(2),
                     }}
                   />
                 </div>

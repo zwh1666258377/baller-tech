@@ -3,7 +3,7 @@ import { errorTip } from '@/lib/error-tip';
 import { Select, Spin, Modal } from 'antd';
 import React, { CSSProperties } from 'react';
 import { Website } from '../common/Defs';
-import { Colors, h5Styles, Styles } from '../common/Styles';
+import { Colors, h5Styles, rem, Styles } from '../common/Styles';
 import MTitle from '../parts/MTitle';
 import TextEditor from './TextEditor';
 
@@ -181,19 +181,19 @@ const TextTranslator = (props: Props) => {
     <Spin spinning={loading}>
       <div style={props.style}>
         <MTitle label={{ cn: '产品体验', en: 'Product Experience' }} />
-        <div style={{ ...Styles.shadowCard, marginTop: 52 }}>
+        <div style={{ ...Styles.shadowCard, marginTop: rem(52) }}>
           <div
             style={{
               whiteSpace: 'nowrap',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              maxWidth: '800px',
+              width: rem(800),
             }}
           >
             <Select
               size="large"
-              style={{ width: 200 }}
+              style={{ width: rem(200), fontSize: rem(16) }}
               value={fromVal}
               placeholder="请选择语种"
               onSelect={val => {
@@ -210,7 +210,7 @@ const TextTranslator = (props: Props) => {
             </Select>
             <Select
               size="large"
-              style={{ width: 200 }}
+              style={{ width: rem(200), fontSize: rem(16) }}
               value={toVal}
               placeholder="请选择语种"
               onSelect={val => {
@@ -227,12 +227,12 @@ const TextTranslator = (props: Props) => {
             <div style={{ display: 'flex' }}>
               <div
                 style={{
-                  fontSize: 16,
+                  fontSize: rem(16),
                   color: '#FFF',
                   backgroundColor: Colors.btColor,
                   cursor: 'pointer',
-                  borderRadius: 25,
-                  padding: '8px 50px',
+                  borderRadius: rem(25),
+                  padding: '0.08rem 0.5rem',
                 }}
                 onClick={onClickTranslate}
               >
@@ -240,13 +240,13 @@ const TextTranslator = (props: Props) => {
               </div>
               <div
                 style={{
-                  marginLeft: 30,
-                  fontSize: 16,
+                  marginLeft: rem(30),
+                  fontSize: rem(16),
                   color: '#333',
                   backgroundColor: '#FFF',
                   cursor: 'pointer',
-                  borderRadius: 25,
-                  padding: '8px 50px',
+                  borderRadius: rem(25),
+                  padding: '0.08rem 0.5rem',
                   border: '1px solid #BBB',
                 }}
                 onClick={clear}
@@ -255,9 +255,9 @@ const TextTranslator = (props: Props) => {
               </div>
             </div>
           </div>
-          <div style={{ marginTop: 48, display: 'flex' }}>
+          <div style={{ marginTop: rem(48), display: 'flex' }}>
             <TextEditor
-              style={{ height: 168, marginRight: 10, width: '50%' }}
+              style={{ height: rem(168), marginRight: rem(10), width: '50%' }}
               contentEditable={true}
               lang={fromVal}
               onChangeText={setInputVal}
@@ -265,7 +265,7 @@ const TextTranslator = (props: Props) => {
               maxLength={inputLimit}
             ></TextEditor>
             <TextEditor
-              style={{ height: 168, marginLeft: 10, width: '50%' }}
+              style={{ height: rem(168), marginLeft: rem(10), width: '50%' }}
               lang={toVal}
             >
               {outputVal || <span style={{ color: '#878787' }}>翻译结果</span>}

@@ -1,5 +1,6 @@
 import { Col, Row } from 'antd';
 import React, { CSSProperties } from 'react';
+import { rem } from '../common/Styles';
 import MTitle from '../parts/MTitle';
 
 interface Props {
@@ -14,11 +15,11 @@ const AudioDisplay = (props: Props) => {
     return (
       <div style={props.style}>
         <MTitle label={props.label} />
-        <div style={{ marginTop: 24 }}>
+        <div style={{ marginTop: rem(24) }}>
           <Row gutter={[30, 30]}>
             {props.items?.map(item => (
               <Col key={item.url} span={24}>
-                <div style={{ marginLeft: 16, marginBottom: 8 }}>
+                <div style={{ marginLeft: rem(16), marginBottom: rem(8) }}>
                   {item.name}
                 </div>
                 <audio

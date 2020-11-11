@@ -1,4 +1,6 @@
-const baseURL = isDev ? 'http://localhost:8000' : '';
+import { isBrowser } from 'umi';
+
+const baseURL = isDev && !isBrowser() ? 'http://localhost:8000' : '';
 
 export const getModule = async (kind: string) => {
   try {
