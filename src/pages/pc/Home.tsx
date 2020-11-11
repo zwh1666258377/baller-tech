@@ -100,7 +100,8 @@ const Home = (props: PageProps) => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            width: 1400,
+            width: '100%',
+            maxWidth: 1400,
             margin: 'auto',
           }}
         >
@@ -111,8 +112,9 @@ const Home = (props: PageProps) => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
-              width: 1240,
-              margin: 'auto',
+              width: '85%',
+              maxWidth: 1240,
+              margin: '0 auto',
             }}
           >
             <div style={{ marginBottom: 80, color: '#FFF' }}>
@@ -164,7 +166,7 @@ const Home = (props: PageProps) => {
                 url={btnImg.wzsb}
                 to="wzsb"
               />
-              <ImgLabel style={{ width: 820 }} url={btnImg.txsb} to="txsb" />
+              <ImgLabel style={{ maxWidth: 820 }} url={btnImg.txsb} to="txsb" />
             </div>
           </div>
           <div
@@ -172,7 +174,8 @@ const Home = (props: PageProps) => {
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              width: 1240,
+              width: '85%',
+              maxWidth: 1240,
               margin: 'auto',
             }}
           >
@@ -229,8 +232,8 @@ const ImgLabel = (props: {
           cursor: 'pointer',
           color: '#FFF',
           backgroundColor: Colors.btColor,
-          width: 400,
-          height: 130,
+          maxWidth: 400,
+          maxHeight: 130,
           ...props.style,
         }}
       >

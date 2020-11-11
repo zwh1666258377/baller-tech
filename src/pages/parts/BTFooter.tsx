@@ -46,7 +46,7 @@ const BTFooter = (props: Props) => {
           ))}
         </div>
         <div style={{ textAlign: 'left', marginLeft: 20 }}>
-          <div style={{ fontSize: 16, color: '#E1C88E' }}>{'产品服务'}</div>
+          <div style={{ fontSize: 16, color: '#E1C88E' }}>产品服务</div>
           <div style={{ marginTop: 16 }}>
             {[
               { label: '机器翻译', url: '/jqfy' },

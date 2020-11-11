@@ -19,7 +19,7 @@ const WZSB = (props: PageProps) => {
   }
   return (
     <>
-      <div style={{ width: '100%', padding: '90px 160px 70px 70px' }}>
+      <div style={{ width: '100%', padding: '90px 70px' }}>
         {module?.poductIntroduction?.display && (
           <ProductIntro
             style={{ marginBottom: 98 }}

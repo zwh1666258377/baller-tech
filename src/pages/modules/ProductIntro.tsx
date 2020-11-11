@@ -52,7 +52,7 @@ const ProductIntro = (props: Props) => {
               textAlign: 'left',
               whiteSpace: 'pre-line',
               textOverflow: 'ellipsis',
-              overflow: 'hidden',
+              overflow: 'auto',
             }}
           >
             {data?.content}

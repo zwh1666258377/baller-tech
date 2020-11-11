@@ -25,7 +25,7 @@ const Layout = ({ children, data }: Props) => {
   }, [isPC]);
 
   return (
-    <div style={{ minWidth: 1200, display: 'flex', flexDirection: 'row' }}>
+    <div style={{ display: 'flex', flexDirection: 'row' }}>
       <div
         style={{
           overflow: 'auto',

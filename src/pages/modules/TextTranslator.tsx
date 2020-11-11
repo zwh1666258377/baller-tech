@@ -187,6 +187,8 @@ const TextTranslator = (props: Props) => {
               whiteSpace: 'nowrap',
               display: 'flex',
               alignItems: 'center',
+              justifyContent: 'space-between',
+              maxWidth: '800px',
             }}
           >
             <Select
@@ -208,7 +210,7 @@ const TextTranslator = (props: Props) => {
             </Select>
             <Select
               size="large"
-              style={{ width: 200, marginLeft: 34 }}
+              style={{ width: 200 }}
               value={toVal}
               placeholder="请选择语种"
               onSelect={val => {
@@ -222,7 +224,7 @@ const TextTranslator = (props: Props) => {
                 </Option>
               ))}
             </Select>
-            <div style={{ display: 'flex', marginLeft: 48 }}>
+            <div style={{ display: 'flex' }}>
               <div
                 style={{
                   fontSize: 16,
