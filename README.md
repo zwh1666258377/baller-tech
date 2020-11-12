@@ -1,6 +1,6 @@
 # BT!
 
-## Getting Started
+## dev
 
 Open the database
 
@@ -31,8 +31,14 @@ $ yarn server
 
 Open localhost:8000!
 
-How to deploy?
+## deploy
 
+执行服务
+```bash
+$ yarn start-server
 ```
-yarn server-prod
+
+停止服务
+```bash
+$ yarn stop-server
 ```
