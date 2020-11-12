@@ -31,3 +31,8 @@ $ yarn server
 
 Open localhost:8000!
 
+How to deploy?
+
+```
+yarn server-prod
+```
