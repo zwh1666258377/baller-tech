@@ -33,6 +33,29 @@ Open localhost:8000!
 
 ## deploy
 
+安装docker  
+安装yarn  
+安装pm2  
+```
+yarn global add pm2
+```
+查看yarn可执行文件路径
+```
+yarn global bin
+```
+加入到环境变量
+
+查看是否配置成功
+```
+pm2 -v
+```
+
+克隆项目,进入到项目目录  
+安装依赖
+```
+yarn
+```
+
 执行服务
 ```bash
 $ yarn start-server
