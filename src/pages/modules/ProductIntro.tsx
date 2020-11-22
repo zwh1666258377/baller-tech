@@ -16,7 +16,7 @@ const ProductIntro = (props: Props) => {
   const data = props.data;
   return (
     <div style={props.style}>
-      <MTitle label={data.title} />
+      <MTitle style={{ fontSize: rem(32) }} label={data.title} />
       <div
         style={{
           marginTop: rem(52),

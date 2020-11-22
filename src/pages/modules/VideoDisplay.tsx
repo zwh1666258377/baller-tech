@@ -31,7 +31,7 @@ const VideoDisplay = (props: Props) => {
   }
   return (
     <div style={props.style}>
-      <MTitle label={props.label} />
+      <MTitle style={{ fontSize: rem(32) }} label={props.label} />
       <div style={{ marginTop: 52 }}>
         <Row gutter={[100, 35]}>
           {props.items?.map(item => (

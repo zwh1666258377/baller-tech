@@ -1,4 +1,5 @@
-export const rem = (val: number) => `${(val / 100).toFixed(2)}rem`;
+export const rem = (val: number, use = true) =>
+  use ? `${(val / 100).toFixed(2)}rem` : val;
 
 export const Colors = {
   btColor: '#00214F',

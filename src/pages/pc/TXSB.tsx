@@ -10,6 +10,11 @@ import { rem } from '../common/Styles';
 const TXSB = (props: PageProps) => {
   const module = props.data?.module;
 
+  React.useEffect(
+    () => document.getElementById('bt-content-view')?.scrollTo(0, 0),
+    [],
+  );
+
   if (!props.data) {
     return (
       <div style={{ minHeight: '100vh' }}>

@@ -93,7 +93,7 @@ const AudioTranslator = (props: Props) => {
             </Select>
             <TextEditor style={{ height: 160, marginTop: 30 }} lang={lang}>
               {result || (
-                <span style={{ color: '#878787' }}>
+                <span style={{ color: '#878787', fontSize: 14 }}>
                   上传的音频格式仅支持（MP3、wav、pcm、ogg），其中pcm指定格式为采样率16000Hz,
                   采样点大小16bit
                 </span>
@@ -174,7 +174,10 @@ const AudioTranslator = (props: Props) => {
   return (
     <div style={props.style}>
       <DynamicRec recRef={rec => setRec(rec)} />
-      <MTitle label={{ cn: '产品体验', en: 'Product Experience' }} />
+      <MTitle
+        style={{ fontSize: rem(32) }}
+        label={{ cn: '产品体验', en: 'Product Experience' }}
+      />
       <Spin spinning={loading}>
         <div
           style={{
@@ -197,7 +200,7 @@ const AudioTranslator = (props: Props) => {
             <Select
               size="large"
               style={{
-                width: rem(200),
+                width: rem(250),
                 marginTop: rem(8),
                 marginRight: rem(40),
                 fontSize: rem(16),
@@ -281,7 +284,7 @@ const AudioTranslator = (props: Props) => {
             lang={lang}
           >
             {result || (
-              <span style={{ color: '#878787' }}>
+              <span style={{ color: '#878787', fontSize: 14 }}>
                 上传的音频格式仅支持（MP3、wav、pcm、ogg），其中pcm指定格式为采样率16000Hz,
                 采样点大小16bit
               </span>

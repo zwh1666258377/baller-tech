@@ -17,7 +17,12 @@ const ProductDisplay = (props: Props) => {
   switch (props.kind) {
     case 'image':
       return (
-        <ImageDisplay style={props.style} label={label} items={props.items} />
+        <ImageDisplay
+          h5={props.h5}
+          style={props.style}
+          label={label}
+          items={props.items}
+        />
       );
     case 'audio':
       return (

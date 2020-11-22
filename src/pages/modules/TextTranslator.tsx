@@ -180,51 +180,59 @@ const TextTranslator = (props: Props) => {
   return (
     <Spin spinning={loading}>
       <div style={props.style}>
-        <MTitle label={{ cn: '产品体验', en: 'Product Experience' }} />
+        <MTitle
+          style={{ fontSize: rem(32) }}
+          label={{ cn: '产品体验', en: 'Product Experience' }}
+        />
         <div style={{ ...Styles.shadowCard, marginTop: rem(52) }}>
           <div
             style={{
               whiteSpace: 'nowrap',
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'space-between',
               width: rem(800),
             }}
           >
-            <Select
-              size="large"
-              style={{ width: rem(200), fontSize: rem(16) }}
-              value={fromVal}
-              placeholder="请选择语种"
-              onSelect={val => {
-                setFromVal(val);
-                setInputVal('');
-                setClearSignal(clearSignal + 1);
-              }}
-            >
-              {opts?.map(o => (
-                <Option key={o.key} value={o.key}>
-                  {o.label}
-                </Option>
-              ))}
-            </Select>
-            <Select
-              size="large"
-              style={{ width: rem(200), fontSize: rem(16) }}
-              value={toVal}
-              placeholder="请选择语种"
-              onSelect={val => {
-                setToVal(val);
-                setOutputVal('');
-              }}
-            >
-              {opts?.map(o => (
-                <Option key={o.key} value={o.key}>
-                  {o.label}
-                </Option>
-              ))}
-            </Select>
-            <div style={{ display: 'flex' }}>
+            <div>
+              <Select
+                size="large"
+                style={{ width: rem(200), fontSize: rem(16) }}
+                value={fromVal}
+                placeholder="请选择语种"
+                onSelect={val => {
+                  setFromVal(val);
+                  setInputVal('');
+                  setClearSignal(clearSignal + 1);
+                }}
+              >
+                {opts?.map(o => (
+                  <Option key={o.key} value={o.key}>
+                    {o.label}
+                  </Option>
+                ))}
+              </Select>
+              <Select
+                size="large"
+                style={{
+                  width: rem(200),
+                  fontSize: rem(16),
+                  marginLeft: rem(12),
+                }}
+                value={toVal}
+                placeholder="请选择语种"
+                onSelect={val => {
+                  setToVal(val);
+                  setOutputVal('');
+                }}
+              >
+                {opts?.map(o => (
+                  <Option key={o.key} value={o.key}>
+                    {o.label}
+                  </Option>
+                ))}
+              </Select>
+            </div>
+            <div style={{ display: 'flex', marginLeft: rem(20) }}>
               <div
                 style={{
                   fontSize: rem(16),
@@ -240,7 +248,7 @@ const TextTranslator = (props: Props) => {
               </div>
               <div
                 style={{
-                  marginLeft: rem(30),
+                  marginLeft: rem(20),
                   fontSize: rem(16),
                   color: '#333',
                   backgroundColor: '#FFF',

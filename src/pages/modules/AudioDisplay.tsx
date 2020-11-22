@@ -11,7 +11,7 @@ interface Props {
 }
 
 const AudioDisplay = (props: Props) => {
-  if (!!props.h5) {
+  if (props.h5) {
     return (
       <div style={props.style}>
         <MTitle label={props.label} />
@@ -36,7 +36,7 @@ const AudioDisplay = (props: Props) => {
   }
   return (
     <div style={props.style}>
-      <MTitle label={props.label} />
+      <MTitle style={{ fontSize: rem(32) }} label={props.label} />
       <div style={{ marginTop: 52 }}>
         <Row gutter={[30, 30]}>
           {props.items?.map(item => (

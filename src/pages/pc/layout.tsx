@@ -39,6 +39,7 @@ const Layout = ({ children, data }: Props) => {
         <BTSider icon={website?.icon} />
       </div>
       <div
+        id="bt-content-view"
         style={{
           width: '80%',
           overflowY: 'auto',

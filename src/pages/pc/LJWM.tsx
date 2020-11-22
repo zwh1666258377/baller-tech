@@ -9,6 +9,11 @@ import MTitle from '../parts/MTitle';
 const LJWM = (props: PageProps) => {
   const module = props.data?.module;
 
+  React.useEffect(
+    () => document.getElementById('bt-content-view')?.scrollTo(0, 0),
+    [],
+  );
+
   if (!props.data) {
     return (
       <div style={{ minHeight: '100vh' }}>
@@ -21,7 +26,10 @@ const LJWM = (props: PageProps) => {
       <div style={{ width: '100%', padding: '0.9rem 0.7rem' }}>
         {module?.poductIntroduction?.display && (
           <>
-            <MTitle label={module?.poductIntroduction?.title} />
+            <MTitle
+              style={{ fontSize: rem(32) }}
+              label={module?.poductIntroduction?.title}
+            />
             <div
               style={{
                 marginTop: rem(52),

@@ -37,7 +37,10 @@ const ImageCarousel = (props: Props) => {
     <div style={props.style}>
       {props.label && (
         <MTitle
-          style={{ marginBottom: props.h5 ? 20 : rem(52) }}
+          style={{
+            fontSize: props.h5 ? 22 : rem(32),
+            marginBottom: props.h5 ? 20 : rem(52),
+          }}
           label={props.label}
         />
       )}

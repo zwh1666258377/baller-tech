@@ -10,6 +10,7 @@ import { getModule, getWebsite } from '../common/DataApi';
 import { PageProps } from '../common/Defs';
 import { btnImg } from '../common/Source';
 import { configResponsive, useResponsive } from 'ahooks';
+import { DownOutlined } from '@ant-design/icons';
 
 configResponsive({
   isPC: 750,
@@ -100,117 +101,144 @@ const Home = (props: PageProps) => {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            width: '100%',
+            alignItems: 'center',
             maxWidth: rem(1400),
             margin: 'auto',
           }}
         >
-          <div
-            style={{
-              zIndex: 99,
-              height: '100vh',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              width: '85%',
-              maxWidth: rem(1240),
-              margin: '0 auto',
-            }}
-          >
-            <div style={{ marginBottom: rem(80), color: '#FFF' }}>
-              <Motion
-                defaultStyle={{ x: 50, o: 0 }}
-                style={{ o: spring(1), x: spring(0, springConfig) }}
+          <div style={{ margin: '0 100px' }}>
+            <div
+              style={{
+                zIndex: 99,
+                height: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                maxWidth: rem(1240),
+              }}
+            >
+              <div style={{ marginBottom: rem(80), color: '#FFF' }}>
+                <Motion
+                  defaultStyle={{ x: 50, o: 0 }}
+                  style={{ o: spring(1), x: spring(0, springConfig) }}
+                >
+                  {({ x, o }) => (
+                    <>
+                      <div
+                        style={{
+                          fontSize: rem(36),
+                          transform: `translate(${x}%)`,
+                          opacity: o,
+                        }}
+                      >
+                        {website?.slogan?.main}
+                      </div>
+                      <div
+                        style={{
+                          marginTop: rem(10),
+                          fontSize: rem(20),
+                          transform: `translate(${-x}%)`,
+                          opacity: o,
+                        }}
+                      >
+                        {website?.slogan?.sub}
+                      </div>
+                    </>
+                  )}
+                </Motion>
+              </div>
+              <div style={{ display: 'flex' }}>
+                <ImgLabel
+                  style={{ marginRight: rem(20) }}
+                  url={btnImg.jqfy}
+                  to="jqfy"
+                />
+                <ImgLabel
+                  style={{ marginRight: rem(20) }}
+                  url={btnImg.yysb}
+                  to="yysb"
+                />
+                <ImgLabel url={btnImg.yyhc} to="yyhc" />
+              </div>
+              <div style={{ marginTop: rem(20), display: 'flex' }}>
+                <ImgLabel
+                  style={{ marginRight: rem(20) }}
+                  url={btnImg.wzsb}
+                  to="wzsb"
+                />
+                <ImgLabel
+                  style={{ maxWidth: rem(820) }}
+                  url={btnImg.txsb}
+                  to="txsb"
+                />
+              </div>
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: rem(48),
+                  left: 0,
+                  right: 0,
+                  textAlign: 'center',
+                }}
               >
-                {({ x, o }) => (
-                  <>
-                    <div
-                      style={{
-                        fontSize: 36,
-                        transform: `translate(${x}%)`,
-                        opacity: o,
-                      }}
-                    >
-                      {website?.slogan?.main}
-                    </div>
-                    <div
-                      style={{
-                        marginTop: rem(10),
-                        fontSize: 20,
-                        transform: `translate(${-x}%)`,
-                        opacity: o,
-                      }}
-                    >
-                      {website?.slogan?.sub}
-                    </div>
-                  </>
-                )}
-              </Motion>
-            </div>
-            <div style={{ display: 'flex' }}>
-              <ImgLabel
-                style={{ marginRight: rem(20) }}
-                url={btnImg.jqfy}
-                to="jqfy"
-              />
-              <ImgLabel
-                style={{ marginRight: rem(20) }}
-                url={btnImg.yysb}
-                to="yysb"
-              />
-              <ImgLabel url={btnImg.yyhc} to="yyhc" />
-            </div>
-            <div style={{ marginTop: rem(20), display: 'flex' }}>
-              <ImgLabel
-                style={{ marginRight: rem(20) }}
-                url={btnImg.wzsb}
-                to="wzsb"
-              />
-              <ImgLabel
-                style={{ maxWidth: rem(820) }}
-                url={btnImg.txsb}
-                to="txsb"
-              />
-            </div>
-          </div>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              width: '85%',
-              maxWidth: rem(1240),
-              margin: 'auto',
-            }}
-          >
-            <div>
-              <MTitle
-                style={{ fontSize: 32 }}
-                label={website?.contact?.name}
-                color="#FFF"
-              />
+                <DownOutlined
+                  className="bt-anim-opacity"
+                  style={{
+                    fontSize: rem(80),
+                    color: '#fff',
+                    opacity: 0.6,
+                    transform: 'scaleX(1.5) scaleY(1)',
+                  }}
+                />
+              </div>
             </div>
             <div
               style={{
-                marginTop: rem(68),
-                whiteSpace: 'pre-line',
-                lineHeight: 2,
-                fontSize: 20,
-                color: '#FFF',
+                display: 'flex',
+                flexDirection: 'column',
+                maxWidth: rem(1240),
+                minHeight: '60vh',
+                paddingTop: rem(20),
               }}
             >
-              {website?.contact?.content}
+              <div>
+                <MTitle
+                  style={{ fontSize: rem(32) }}
+                  label={website?.contact?.name}
+                  color="#FFF"
+                />
+              </div>
+              <div
+                style={{
+                  marginTop: rem(68),
+                  whiteSpace: 'pre-line',
+                  lineHeight: 2,
+                  fontSize: rem(20),
+                  color: '#FFF',
+                }}
+              >
+                {website?.contact?.content}
+              </div>
+              <ImageCarousel
+                imgs={module?.partne?.imgUrls}
+                style={{ marginTop: rem(60) }}
+                pageSize={{ normal: 5 }}
+              />
             </div>
-            <ImageCarousel
-              imgs={module?.partne?.imgUrls}
-              style={{ marginTop: rem(60) }}
-              pageSize={{ normal: 5 }}
-            />
           </div>
         </div>
         <BTFooter
+          // useRem
           data={website}
-          style={{ width: '100%', marginTop: rem(80) }}
+          style={{
+            width: '100%',
+            marginTop: rem(80),
+            padding: '0.6rem 0rem 0.04rem',
+          }}
+          innerStyle={{
+            maxWidth: rem(1240),
+            margin: 'auto',
+          }}
         />
       </div>
     </div>

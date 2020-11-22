@@ -7,12 +7,16 @@ interface Props {
   style?: CSSProperties;
   label: { cn: string; en: string };
   items: { url: string; name: string }[];
+  h5?: boolean;
 }
 
 const ImageDisplay = (props: Props) => {
   return (
     <div style={props.style}>
-      <MTitle label={props.label} />
+      <MTitle
+        style={{ fontSize: props.h5 ? 22 : rem(32) }}
+        label={props.label}
+      />
       <div style={{ marginTop: rem(52) }}>
         <Row gutter={[110, 55]}>
           {props.items?.map((item, i) => (

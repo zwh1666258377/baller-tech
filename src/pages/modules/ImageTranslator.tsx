@@ -128,7 +128,10 @@ const ImageTranslator = (props: Props) => {
 
   return (
     <div style={props.style}>
-      <MTitle label={{ cn: '产品体验', en: 'Product Experience' }} />
+      <MTitle
+        style={{ fontSize: rem(32) }}
+        label={{ cn: '产品体验', en: 'Product Experience' }}
+      />
       <Spin spinning={loading}>
         <div
           style={{ display: 'flex', ...Styles.shadowCard, marginTop: rem(52) }}

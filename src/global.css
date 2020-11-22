@@ -3,25 +3,15 @@
   padding: 0;
 }
 
-/* pc width > 1440px */
-
 html {
   font-size: 100px;
 }
 
-/* body {
-  font-size: 0.16rem;
-} */
-
-/* pc width > 1440px */
-
 @media screen and (max-width: 1440px) {
   html {
-    font-size: 85px;
+    font-size: 88px;
   }
 }
-
-/* pc width > 1200px */
 
 @media screen and (max-width: 1280px) {
   html {
@@ -41,7 +31,7 @@ html {
 
 @media screen and (max-width: 768px) {
   html {
-    font-size: 55px;
+    font-size: 40px;
   }
 }
 
@@ -49,7 +39,7 @@ html {
 
 @media screen and (max-width: 414px) {
   html {
-    font-size: 50px;
+    font-size: 30px;
   }
 }
 
@@ -57,7 +47,7 @@ html {
 
 @media screen and (max-width: 375px) and (-webkit-device-pixel-ratio: 3) {
   html {
-    font-size: 50px;
+    font-size: 30px;
   }
 }
 
@@ -65,7 +55,7 @@ html {
 
 @media screen and (max-width: 375px) and (-webkit-device-pixel-ratio: 2) {
   html {
-    font-size: 50px;
+    font-size: 30px;
   }
 }
 
@@ -73,7 +63,7 @@ html {
 
 @media screen and (max-width: 320px) {
   html {
-    font-size: 50px;
+    font-size: 30px;
   }
 }
 
@@ -168,4 +158,46 @@ html {
 @font-face {
   font-family: 'MQG8F02';
   src: url('/static/MQG8F02.ttf');
+}
+
+.bt-anim-opacity {
+  animation: 2.5s bt-opacity 0s infinite;
+  -webkit-animation: 2.5s bt-opacity 0s infinite;
+  -moz-animation: 2.5s bt-opacity 0s infinite;
+}
+
+@keyframes bt-opacity {
+  0% {
+    opacity: 0
+  }
+  50% {
+    opacity: .6;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes bt-opacity {
+  0% {
+    opacity: 0
+  }
+  50% {
+    opacity: .6;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes bt-opacity {
+  0% {
+    opacity: 0
+  }
+  50% {
+    opacity: .6;
+  }
+  100% {
+    opacity: 0;
+  }
 }

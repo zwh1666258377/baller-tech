@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import { Colors } from '../common/Styles';
+import { Colors, rem } from '../common/Styles';
 
 interface Props {
   style?: CSSProperties;
@@ -8,14 +8,15 @@ interface Props {
     en: string;
   };
   color?: string;
+  useRem?: boolean;
 }
 
-const MTitle = ({ style = {}, label, color }: Props) => {
+const MTitle = ({ style = {}, label, color, useRem = false }: Props) => {
   if (!label?.cn) {
     return null;
   }
   return (
-    <div style={{ fontSize: 22, ...style }}>
+    <div style={{ fontSize: rem(22, useRem), ...style }}>
       <span
         style={{ color: color || Colors.btColor }}
       >{`${label?.cn} / `}</span>
