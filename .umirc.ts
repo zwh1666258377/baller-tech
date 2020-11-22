@@ -22,7 +22,7 @@ export default defineConfig({
       const head=document.getElementsByTagName("head")
       const viewport=document.createElement("meta")
       viewport.name="viewport"
-      viewport.content="target-densitydpi=device-dpi, width=480px, user-scalable=no"
+      viewport.content="target-densitydpi=device-dpi, width=device-width, user-scalable=no"
       head.length>0&&head[head.length-1].appendChild(viewport)
     })();`,
   ],
