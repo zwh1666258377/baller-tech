@@ -114,8 +114,8 @@ const Home = (props: PageProps) => {
         >
           <ImgLabel
             style={{ flex: 1, marginRight: 6 }}
-            url={btnImg.yysb}
-            to="m/yysb"
+            url={btnImg.yyhc}
+            to="m/yyhc"
           />
           <ImgLabel
             style={{ flex: 1, marginLeft: 6 }}
