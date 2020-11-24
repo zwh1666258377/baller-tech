@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, Form, Input, notification, Spin } from 'antd';
+import { Button, Form, Input, message, notification, Spin } from 'antd';
 
 const Index = () => {
   const [form] = Form.useForm();
@@ -45,7 +45,12 @@ const Index = () => {
               fetch('/api/update-file-path', { method: 'POST' })
                 .then(r => r.json())
                 .then(r => {
-                  console.log(r);
+                  if (r.status === 'ok') {
+                    message.success(r.msg);
+                  }
+                  if (r.status === 'error') {
+                    message.error(r.msg);
+                  }
                 });
             }}
           >
