@@ -4,11 +4,10 @@ import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
 import { app_id, app_key } from '../lib/baller-tech-env';
 import multer from 'multer';
-import { resolve } from 'path';
 import fs from 'fs';
 import filesize from 'filesize';
 
-const upload = multer({ dest: resolve('static/baller-tech/') });
+const upload = multer({ dest: 'static/baller-tech/' });
 
 export function ballerTechWZSB(app: ReturnType<typeof express>) {
   app.post('/api/wzsb', upload.any(), async (req, res) => {
