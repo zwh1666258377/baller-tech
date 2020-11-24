@@ -29,6 +29,7 @@ import { ballerTechYYSB } from './api/baller-tech-yysb';
 import { ballerTechWZSB } from './api/baller-tech-wzsb';
 import { bt } from './router/bt';
 import { uploadUser } from './api/update-user';
+import { updateFilePath } from './api/update-file-path';
 
 const isDev = process.env['NODE_ENV'] === 'development';
 dotenv.config('../.env' as any);
@@ -145,6 +146,8 @@ class App {
 
     getWebsite(this.app);
     updateWebsite(this.app);
+
+    updateFilePath(this.app);
 
     // Baller Tech API
     ballerTechJQFY(this.app);

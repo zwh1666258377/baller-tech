@@ -39,6 +39,20 @@ const Index = () => {
         wrapperCol={{ span: 18 }}
         onFinish={submit}
       >
+        <Form.Item>
+          <Button
+            onClick={() => {
+              fetch('/api/update-file-path', { method: 'POST' })
+                .then(r => r.json())
+                .then(r => {
+                  console.log(r);
+                });
+            }}
+          >
+            修正路径
+          </Button>
+        </Form.Item>
+
         <Form.Item name="password" label="修改密码">
           <Input />
         </Form.Item>
