@@ -45,6 +45,7 @@ const LJWM = (props: PageProps) => {
         )}
         {module?.honor?.display && (
           <ImageCarousel
+            preview={false}
             style={{ marginBottom: rem(98) }}
             imgs={module?.honor?.imgUrls}
             label={module?.honor?.title}
@@ -53,6 +54,7 @@ const LJWM = (props: PageProps) => {
         )}
         {module?.partne?.display && (
           <ImageCarousel
+            preview={false}
             style={{ marginBottom: rem(98) }}
             imgs={module?.partne?.imgUrls}
             label={module?.partne?.title}

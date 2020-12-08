@@ -3,7 +3,7 @@ import {
   LeftOutlined,
   RightOutlined,
 } from '@ant-design/icons';
-import { Carousel, Col, Image, Row } from 'antd';
+import { Carousel, Image, Row } from 'antd';
 import React, { CSSProperties } from 'react';
 import { rem } from '../common/Styles';
 import MTitle from '../parts/MTitle';
@@ -20,6 +20,7 @@ interface Props {
   pageSize?: { normal?: number; line?: number };
   autoplay?: boolean;
   h5?: boolean;
+  preview?: boolean;
 }
 
 const ImageCarousel = (props: Props) => {
@@ -64,6 +65,7 @@ const ImageCarousel = (props: Props) => {
                       >
                         {item?.url ? (
                           <Image
+                            preview={props.preview}
                             style={{ width: '100%', height: 'auto' }}
                             src={item?.url}
                           />
