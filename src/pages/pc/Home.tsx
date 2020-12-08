@@ -220,6 +220,7 @@ const Home = (props: PageProps) => {
                 {website?.contact?.content}
               </div>
               <ImageCarousel
+                preview={false}
                 imgs={module?.partne?.imgUrls}
                 style={{ marginTop: rem(60) }}
                 pageSize={{ normal: 5 }}
