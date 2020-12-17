@@ -58,22 +58,24 @@ const ProductIntro = (props: Props) => {
             {data?.content}
           </div>
           <div>
-            <div
-              style={{
-                fontSize: rem(18),
-                color: '#FFF',
-                backgroundColor: Colors.productLink,
-                cursor: 'pointer',
-                display: 'inline-block',
-                borderRadius: rem(25),
-                padding: '0.08rem 0.5rem',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-              onClick={() => open(data.button.url)}
-            >
-              {data.button?.text}
-            </div>
+            {!!data.button.url && (
+              <div
+                style={{
+                  fontSize: rem(18),
+                  color: '#FFF',
+                  backgroundColor: Colors.productLink,
+                  cursor: 'pointer',
+                  display: 'inline-block',
+                  borderRadius: rem(25),
+                  padding: '0.08rem 0.5rem',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+                onClick={() => open(data.button.url)}
+              >
+                {data.button?.text}
+              </div>
+            )}
           </div>
         </div>
       </div>
