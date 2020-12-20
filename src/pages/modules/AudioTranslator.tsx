@@ -94,7 +94,7 @@ const AudioTranslator = (props: Props) => {
             <TextEditor style={{ height: 160, marginTop: 30 }} lang={lang}>
               {result || (
                 <span style={{ color: '#878787', fontSize: 14 }}>
-                  上传的音频格式仅支持（MP3、wav、pcm、ogg），其中pcm指定格式为采样率16000Hz,
+                  上传的音频格式仅支持（mp3、wav、pcm、ogg），其中pcm指定格式为采样率16000Hz,
                   采样点大小16bit
                 </span>
               )}
@@ -285,7 +285,7 @@ const AudioTranslator = (props: Props) => {
           >
             {result || (
               <span style={{ color: '#878787', fontSize: 14 }}>
-                上传的音频格式仅支持（MP3、wav、pcm、ogg），其中pcm指定格式为采样率16000Hz,
+                上传的音频格式仅支持（mp3、wav、pcm、ogg），其中pcm指定格式为采样率16000Hz,
                 采样点大小16bit
               </span>
             )}
