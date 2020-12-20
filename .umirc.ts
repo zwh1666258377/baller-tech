@@ -31,7 +31,20 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
+  title: '北京大牛儿科技 | BALLER-TECH',
   favicon: '/static/favicon.ico',
+  metas: [
+    {
+      name: 'keywords',
+      content:
+        '大牛儿科技,BALLER-TECH,手写识别,语音识别,语音合成,图像识别,视频识别,机器翻译',
+    },
+    {
+      name: 'description',
+      content:
+        '北京大牛儿科技发展有限公司位于北京经济技术开发区，是一家专业从事手写识别、语音识别、语音合成、图像识别、视频识别以及机器翻译的高科技公司。公司有四大核心技术和专业的科研团队，倡导“专业、务实、高效、创新”的企业精神，具有良好的内部机制。',
+    },
+  ],
   proxy: {
     '/api': {
       target: 'http://localhost:8000',
