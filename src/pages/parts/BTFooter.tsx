@@ -66,7 +66,7 @@ const BTFooter = (props: Props) => {
             {[
               { label: '机器翻译', url: '/mt' },
               { label: '语音识别', url: '/asr' },
-              { label: '语音翻译', url: '/tts' },
+              { label: '语音合成', url: '/tts' },
               { label: '文字识别', url: '/ocr' },
               { label: '图像识别和目标检测', url: '/od' },
             ].map((d, i) => (
