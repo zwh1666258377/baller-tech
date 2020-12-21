@@ -64,27 +64,27 @@ export default defineConfig({
       wrappers: ['@/pages/auth/check'],
       routes: [
         {
-          path: '/admin/jqfy',
+          path: '/admin/mt',
           component: '@/pages/admin/jqfy',
         },
         {
-          path: '/admin/yysb',
+          path: '/admin/asr',
           component: '@/pages/admin/yysb',
         },
         {
-          path: '/admin/yyhc',
+          path: '/admin/tts',
           component: '@/pages/admin/yyhc',
         },
         {
-          path: '/admin/wzsb',
+          path: '/admin/ocr',
           component: '@/pages/admin/wzsb',
         },
         {
-          path: '/admin/txsb',
+          path: '/admin/od',
           component: '@/pages/admin/txsb',
         },
         {
-          path: '/admin/ljwm',
+          path: '/admin/about',
           component: '@/pages/admin/ljwm',
         },
         {

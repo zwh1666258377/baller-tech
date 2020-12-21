@@ -6,7 +6,7 @@ const { Header, Content, Sider } = Layout;
 
 export const siders = [
   {
-    key: 'md',
+    key: 'mt',
     name: '机器翻译',
   },
   {
