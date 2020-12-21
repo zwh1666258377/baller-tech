@@ -12,27 +12,27 @@ configResponsive({
 
 const routes = [
   {
-    path: '/m/jqfy',
+    path: '/m/mt',
     name: '机器翻译',
   },
   {
-    path: '/m/yysb',
+    path: '/m/asr',
     name: '语音识别',
   },
   {
-    path: '/m/yyhc',
+    path: '/m/tts',
     name: '语音合成',
   },
   {
-    path: '/m/wzsb',
+    path: '/m/ocr',
     name: '文字识别',
   },
   {
-    path: '/m/txsb',
+    path: '/m/od',
     name: '图像识别和目标检测',
   },
   {
-    path: '/m/ljwm',
+    path: '/m/about',
     name: '了解我们',
   },
 ];

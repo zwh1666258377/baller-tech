@@ -151,25 +151,25 @@ const Home = (props: PageProps) => {
                 <ImgLabel
                   style={{ marginRight: rem(20) }}
                   url={btnImg.jqfy}
-                  to="jqfy"
+                  to="mt"
                 />
                 <ImgLabel
                   style={{ marginRight: rem(20) }}
                   url={btnImg.yysb}
-                  to="yysb"
+                  to="asr"
                 />
-                <ImgLabel url={btnImg.yyhc} to="yyhc" />
+                <ImgLabel url={btnImg.yyhc} to="tts" />
               </div>
               <div style={{ marginTop: rem(20), display: 'flex' }}>
                 <ImgLabel
                   style={{ marginRight: rem(20) }}
                   url={btnImg.wzsb}
-                  to="wzsb"
+                  to="ocr"
                 />
                 <ImgLabel
                   style={{ maxWidth: rem(820) }}
                   url={btnImg.txsb}
-                  to="txsb"
+                  to="od"
                 />
               </div>
               <div

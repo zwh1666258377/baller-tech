@@ -64,11 +64,11 @@ const BTFooter = (props: Props) => {
             style={{ marginTop: rem(16), display: 'flex', flexWrap: 'wrap' }}
           >
             {[
-              { label: '机器翻译', url: '/jqfy' },
-              { label: '语音识别', url: '/yysb' },
-              { label: '语音翻译', url: '/yyhc' },
-              { label: '文字识别', url: '/wzsb' },
-              { label: '图像识别和目标检测', url: '/txsb' },
+              { label: '机器翻译', url: '/mt' },
+              { label: '语音识别', url: '/asr' },
+              { label: '语音翻译', url: '/tts' },
+              { label: '文字识别', url: '/ocr' },
+              { label: '图像识别和目标检测', url: '/od' },
             ].map((d, i) => (
               <Link
                 to={d.url}
@@ -98,9 +98,9 @@ const BTFooter = (props: Props) => {
             style={{ marginTop: rem(16), display: 'flex', flexWrap: 'wrap' }}
           >
             {[
-              { label: '关于我们', url: '/ljwm' },
-              { label: '荣誉资质', url: '/ljwm' },
-              { label: '联系我们', url: '/ljwm' },
+              { label: '关于我们', url: '/about' },
+              { label: '荣誉资质', url: '/about' },
+              { label: '联系我们', url: '/about' },
             ].map((d, i) => (
               <Link
                 to={d.url}

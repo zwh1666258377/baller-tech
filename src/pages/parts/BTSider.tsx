@@ -94,27 +94,27 @@ async function fetchDashboard() {
   return [
     {
       label: '机器翻译',
-      kind: 'jqfy',
+      kind: 'mt',
     },
     {
       label: '语音识别',
-      kind: 'yysb',
+      kind: 'asr',
     },
     {
       label: '语音合成',
-      kind: 'yyhc',
+      kind: 'tts',
     },
     {
       label: '文字识别',
-      kind: 'wzsb',
+      kind: 'ocr',
     },
     {
       label: '图像识别和目标检测',
-      kind: 'txsb',
+      kind: 'od',
     },
     {
       label: '了解我们',
-      kind: 'ljwm',
+      kind: 'about',
     },
   ];
 }

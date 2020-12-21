@@ -6,27 +6,27 @@ const { Header, Content, Sider } = Layout;
 
 export const siders = [
   {
-    key: 'jqfy',
+    key: 'md',
     name: '机器翻译',
   },
   {
-    key: 'yysb',
+    key: 'asr',
     name: '语音识别',
   },
   {
-    key: 'yyhc',
+    key: 'tts',
     name: '语音合成',
   },
   {
-    key: 'wzsb',
+    key: 'ocr',
     name: '文字识别',
   },
   {
-    key: 'txsb',
+    key: 'od',
     name: '图像识别',
   },
   {
-    key: 'ljwm',
+    key: 'about',
     name: '了解我们',
   },
   {

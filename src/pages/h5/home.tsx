@@ -97,12 +97,12 @@ const Home = (props: PageProps) => {
           <ImgLabel
             style={{ flex: 1, marginRight: 6 }}
             url={btnImg.jqfy}
-            to="m/jqfy"
+            to="m/mt"
           />
           <ImgLabel
             style={{ flex: 1, marginLeft: 6 }}
             url={btnImg.yysb}
-            to="m/yysb"
+            to="m/asr"
           />
         </div>
         <div
@@ -115,16 +115,16 @@ const Home = (props: PageProps) => {
           <ImgLabel
             style={{ flex: 1, marginRight: 6 }}
             url={btnImg.yyhc}
-            to="m/yyhc"
+            to="m/tts"
           />
           <ImgLabel
             style={{ flex: 1, marginLeft: 6 }}
             url={btnImg.wzsb}
-            to="m/wzsb"
+            to="m/ocr"
           />
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <ImgLabel style={{ width: '100%' }} url={btnImg.txsb} to="m/txsb" />
+          <ImgLabel style={{ width: '100%' }} url={btnImg.txsb} to="m/od" />
         </div>
       </div>
     </div>
