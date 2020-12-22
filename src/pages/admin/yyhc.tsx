@@ -102,7 +102,7 @@ const Index = () => {
           'name-en': r?.name?.en,
           'poduct-introduction-display': r?.poductIntroduction?.display,
           'poduct-introduction-name-cn': r?.poductIntroduction?.title?.cn,
-          'poduct-introduction-name-en': r?.poductIntroduction?.title?.cn,
+          'poduct-introduction-name-en': r?.poductIntroduction?.title?.en,
           'poduct-introduction-img-url': r?.poductIntroduction?.imgUrl,
           'poduct-introduction-content': r?.poductIntroduction?.content,
           'poduct-introduction-button-text':

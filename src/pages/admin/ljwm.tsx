@@ -112,7 +112,7 @@ const Index = () => {
           'name-cn': r?.name?.cn,
           'name-en': r?.name?.en,
           'poduct-introduction-name-cn': r?.poductIntroduction?.title?.cn,
-          'poduct-introduction-name-en': r?.poductIntroduction?.title?.cn,
+          'poduct-introduction-name-en': r?.poductIntroduction?.title?.en,
           'poduct-introduction-content': r?.poductIntroduction?.content,
           'poduct-introduction-display': r?.poductIntroduction?.display,
           'honor-display': r?.honor?.display,
