@@ -13,7 +13,7 @@ const ProductDisplay = (props: Props) => {
   if (!props.items || props.items.length === 0) {
     return null;
   }
-  const label = { cn: '产品展示', en: 'Product display' };
+  const label = { cn: '产品展示', en: 'Product Display' };
   switch (props.kind) {
     case 'image':
       return (
